@@ -1,0 +1,6931 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Openwsman::XmlNode - Openwsman - WS-Management for all</title>
+
+<link href="../fonts.css" rel="stylesheet">
+<link href="../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script src="../js/jquery.js"></script>
+<script src="../js/navigation.js"></script>
+<script src="../js/search_index.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/searcher.js"></script>
+<script src="../js/darkfish.js"></script>
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link">Object
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-add">#add</a>
+    
+    <li ><a href="#method-i-add_before">#add_before</a>
+    
+    <li ><a href="#method-i-attr">#attr</a>
+    
+    <li ><a href="#method-i-attr_add">#attr_add</a>
+    
+    <li ><a href="#method-i-attr_count">#attr_count</a>
+    
+    <li ><a href="#method-i-attr_find">#attr_find</a>
+    
+    <li ><a href="#method-i-child">#child</a>
+    
+    <li ><a href="#method-i-doc">#doc</a>
+    
+    <li ><a href="#method-i-dump_file">#dump_file</a>
+    
+    <li ><a href="#method-i-each">#each</a>
+    
+    <li ><a href="#method-i-each_attr">#each_attr</a>
+    
+    <li ><a href="#method-i-epr">#epr</a>
+    
+    <li ><a href="#method-i-find">#find</a>
+    
+    <li ><a href="#method-i-get">#get</a>
+    
+    <li ><a href="#method-i-lang-3D">#lang=</a>
+    
+    <li ><a href="#method-i-name">#name</a>
+    
+    <li ><a href="#method-i-name-3D">#name=</a>
+    
+    <li ><a href="#method-i-next">#next</a>
+    
+    <li ><a href="#method-i-ns">#ns</a>
+    
+    <li ><a href="#method-i-ns-3D">#ns=</a>
+    
+    <li ><a href="#method-i-parent">#parent</a>
+    
+    <li ><a href="#method-i-prefix">#prefix</a>
+    
+    <li ><a href="#method-i-size">#size</a>
+    
+    <li ><a href="#method-i-string">#string</a>
+    
+    <li ><a href="#method-i-text">#text</a>
+    
+    <li ><a href="#method-i-text-3D">#text=</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Openwsman::XmlNode">
+  <h1 id="class-Openwsman::XmlNode" class="class">
+    class Openwsman::XmlNode
+  </h1>
+
+  <section class="description">
+    
+<p>*</p>
+<ul><li>
+<p><a href="XmlNode.html">XmlNode</a> is a node inside the XML document tree.</p>
+</li></ul>
+
+<p>*</p>
+<ul><li>
+<p>A node has</p>
+</li><li><ul><li>
+<p>a name</p>
+</li></ul>
+</li><li><ul><li>
+<p>a namespace (optional)</p>
+</li></ul>
+</li><li><ul><li>
+<p>attributes</p>
+</li></ul>
+</li><li><ul><li>
+<p>text (optional)</p>
+</li></ul>
+</li><li><ul><li>
+<p>a parent</p>
+</li></ul>
+</li><li><ul><li>
+<p>a document (root)</p>
+</li></ul>
+</li><li><ul><li>
+<p>children (empty for tail nodes)</p>
+</li></ul>
+</li></ul>
+
+<p>* */</p>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-add" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">add</span><span
+            class="method-args">(p1, p2, p3)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>add child (namespace, name, text) to node</p>
+          
+          
+
+          
+          <div class="method-source-code" id="add-source">
+            <pre>WsXmlNodeH add( const char *ns, const char *name, const char *text = NULL ) {
+    return ws_xml_add_child( $self, ns, name, text );
+  }
+
+  /*
+   * add child (namespace, name, text) before(!) node
+   */
+  WsXmlNodeH add_before( const char *ns, const char *name, const char *text = NULL ) {
+    return ws_xml_add_prev_sibling( $self, ns, name, text );
+  }
+
+
+  %alias add &quot;&lt;&lt;&quot;;
+
+  /*
+   * add node as child
+   */
+  WsXmlNodeH add(WsXmlNodeH node) {
+    ws_xml_duplicate_tree( $self, node );
+    return $self;
+  }
+  
+
+  /*
+   * iterate over children
+   *
+   * See also XmlNode#next
+   *
+   * XmlNode#each iterates over children, XmlNode#next over siblings
+   *
+   * can be limited to children with specific name (and specific namespace)
+   *
+   * for array-like constructs, e.g
+   *  &lt;Parent&gt;
+   *    &lt;Child&gt;..
+   *    &lt;Child&gt;..
+   *    &lt;Child&gt;..
+   *    &lt;OtherChild&gt;..
+   *    &lt;OtherChild&gt;..
+   *    &lt;OtherChild&gt;..
+   *
+   *   doc.Parent.each do |child|
+   *     ... iterates over all 6 children ...
+   *   end
+   *
+   * use XmlNode#next as in
+   *   node = doc.OtherChild
+   *   while node do
+   *     ... do something with node ...
+   *    node = node.next
+   *   end
+   *
+   * call-seq:
+   *  node.each { |XmlNode| ... }
+   *  node.each(&quot;name&quot;) { |XmlNode| ... }
+   *  node.each(&quot;name&quot;, &quot;namespace&quot;) { |XmlNode| ... }
+   */
+
+  void each(const char *name = NULL, const char *ns = NULL) {
+    int i = 0;
+    WsXmlNodeH node = $self;
+    int count = ws_xml_get_child_count_by_qname( node, ns, name );
+    while ( i &lt; count ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_child(node, i, ns, name), SWIGTYPE_p___WsXmlNode, 0));
+      ++i;
+    }
+  }
+
+
+
+
+
+  %alias get &quot;[]&quot;;
+
+  /*
+   * get child by index
+   *
+   * call-seq:
+   *  node.get(42) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(int i, const char *name = NULL, const char *ns = NULL) {
+    if (i &lt; 0 || i &gt;= ws_xml_get_child_count_by_qname($self,ns,name))
+      return NULL;
+    return ws_xml_get_child($self, i, ns, name);
+  }
+  
+  /*
+   * get first child by name (and namespace)
+   *
+   * call-seq:
+   *  node.get(&quot;name&quot;) -&gt; XmlNode
+   *  node.get(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(const char *name, const char *ns = NULL) {
+    return ws_xml_get_child($self, 0, ns, name);
+  }
+
+
+  /*
+   * get node attribute by index or name
+   *
+   * call-seq:
+   *  node.attr(1) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr(VALUE index = Qnil, VALUE namespace = Qnil) {
+    if (NIL_P(index)) { /* nil */
+      return ws_xml_get_node_attr( $self, 0 );
+    } else if (FIXNUM_P(index)) { /* numeric */
+      return ws_xml_get_node_attr( $self, FIX2INT(index) );      
+    } else { /* convert to string */
+      const char *ns = NULL;
+      const char *name = as_string(index);
+      if (!NIL_P(namespace)) {
+        ns = as_string(namespace);
+      }
+      return ws_xml_find_node_attr( $self, ns, name );
+    }
+  }
+
+  /*
+   * count node attribute
+   *
+   * call-seq:
+   *  node.attr_count -&gt; Integer
+   */
+  int attr_count() {
+    return ws_xml_get_node_attr_count( $self );
+  }
+  /*
+   * find node attribute by name
+   *
+   * call-seq:
+   *  node.attr_find(&quot;namespace&quot;, &quot;name&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_find( const char *ns, const char *name ) {
+    return ws_xml_find_node_attr( $self, ns, name );
+  }
+  /*
+   * add attribute to node
+   *
+   * call-seq:
+   *  node.attr_add(&quot;namespace&quot;, &quot;name&quot;, &quot;value&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_add( const char *ns, const char *name, const char *value ) {
+    return ws_xml_add_node_attr( $self, ns, name, value );
+  }
+  /*
+   * get end point reference
+   *
+   * call-seq:
+   *  node.epr(&quot;namespace&quot;, &quot;epr_node_name&quot;, Integer embedded) -&gt; EndPointReference
+   */
+  epr_t *epr( const char *ns, const char *epr_node_name, int embedded) {
+    return epr_deserialize($self, ns, epr_node_name, embedded);
+  }  
+
+
+
+  /*
+   * enumerate attributes
+   *
+   * call-seq:
+   *   node.each_attr { |XmlAttr| ... }
+   */
+  void each_attr() {
+    int i = 0;
+    while ( i &lt; ws_xml_get_node_attr_count( $self ) ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_node_attr($self, i), SWIGTYPE_p___WsXmlAttr, 0));
+      ++i;
+    }
+  }
+
+}</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-add_before" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">add_before</span><span
+            class="method-args">(p1, p2, p3)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>add child (namespace, name, text) before(!) node</p>
+          
+          
+
+          
+          <div class="method-source-code" id="add_before-source">
+            <pre>WsXmlNodeH add_before( const char *ns, const char *name, const char *text = NULL ) {
+    return ws_xml_add_prev_sibling( $self, ns, name, text );
+  }
+
+
+  %alias add &quot;&lt;&lt;&quot;;
+
+  /*
+   * add node as child
+   */
+  WsXmlNodeH add(WsXmlNodeH node) {
+    ws_xml_duplicate_tree( $self, node );
+    return $self;
+  }
+  
+
+  /*
+   * iterate over children
+   *
+   * See also XmlNode#next
+   *
+   * XmlNode#each iterates over children, XmlNode#next over siblings
+   *
+   * can be limited to children with specific name (and specific namespace)
+   *
+   * for array-like constructs, e.g
+   *  &lt;Parent&gt;
+   *    &lt;Child&gt;..
+   *    &lt;Child&gt;..
+   *    &lt;Child&gt;..
+   *    &lt;OtherChild&gt;..
+   *    &lt;OtherChild&gt;..
+   *    &lt;OtherChild&gt;..
+   *
+   *   doc.Parent.each do |child|
+   *     ... iterates over all 6 children ...
+   *   end
+   *
+   * use XmlNode#next as in
+   *   node = doc.OtherChild
+   *   while node do
+   *     ... do something with node ...
+   *    node = node.next
+   *   end
+   *
+   * call-seq:
+   *  node.each { |XmlNode| ... }
+   *  node.each(&quot;name&quot;) { |XmlNode| ... }
+   *  node.each(&quot;name&quot;, &quot;namespace&quot;) { |XmlNode| ... }
+   */
+
+  void each(const char *name = NULL, const char *ns = NULL) {
+    int i = 0;
+    WsXmlNodeH node = $self;
+    int count = ws_xml_get_child_count_by_qname( node, ns, name );
+    while ( i &lt; count ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_child(node, i, ns, name), SWIGTYPE_p___WsXmlNode, 0));
+      ++i;
+    }
+  }
+
+
+
+
+
+  %alias get &quot;[]&quot;;
+
+  /*
+   * get child by index
+   *
+   * call-seq:
+   *  node.get(42) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(int i, const char *name = NULL, const char *ns = NULL) {
+    if (i &lt; 0 || i &gt;= ws_xml_get_child_count_by_qname($self,ns,name))
+      return NULL;
+    return ws_xml_get_child($self, i, ns, name);
+  }
+  
+  /*
+   * get first child by name (and namespace)
+   *
+   * call-seq:
+   *  node.get(&quot;name&quot;) -&gt; XmlNode
+   *  node.get(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(const char *name, const char *ns = NULL) {
+    return ws_xml_get_child($self, 0, ns, name);
+  }
+
+
+  /*
+   * get node attribute by index or name
+   *
+   * call-seq:
+   *  node.attr(1) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr(VALUE index = Qnil, VALUE namespace = Qnil) {
+    if (NIL_P(index)) { /* nil */
+      return ws_xml_get_node_attr( $self, 0 );
+    } else if (FIXNUM_P(index)) { /* numeric */
+      return ws_xml_get_node_attr( $self, FIX2INT(index) );      
+    } else { /* convert to string */
+      const char *ns = NULL;
+      const char *name = as_string(index);
+      if (!NIL_P(namespace)) {
+        ns = as_string(namespace);
+      }
+      return ws_xml_find_node_attr( $self, ns, name );
+    }
+  }
+
+  /*
+   * count node attribute
+   *
+   * call-seq:
+   *  node.attr_count -&gt; Integer
+   */
+  int attr_count() {
+    return ws_xml_get_node_attr_count( $self );
+  }
+  /*
+   * find node attribute by name
+   *
+   * call-seq:
+   *  node.attr_find(&quot;namespace&quot;, &quot;name&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_find( const char *ns, const char *name ) {
+    return ws_xml_find_node_attr( $self, ns, name );
+  }
+  /*
+   * add attribute to node
+   *
+   * call-seq:
+   *  node.attr_add(&quot;namespace&quot;, &quot;name&quot;, &quot;value&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_add( const char *ns, const char *name, const char *value ) {
+    return ws_xml_add_node_attr( $self, ns, name, value );
+  }
+  /*
+   * get end point reference
+   *
+   * call-seq:
+   *  node.epr(&quot;namespace&quot;, &quot;epr_node_name&quot;, Integer embedded) -&gt; EndPointReference
+   */
+  epr_t *epr( const char *ns, const char *epr_node_name, int embedded) {
+    return epr_deserialize($self, ns, epr_node_name, embedded);
+  }  
+
+
+
+  /*
+   * enumerate attributes
+   *
+   * call-seq:
+   *   node.each_attr { |XmlAttr| ... }
+   */
+  void each_attr() {
+    int i = 0;
+    while ( i &lt; ws_xml_get_node_attr_count( $self ) ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_node_attr($self, i), SWIGTYPE_p___WsXmlAttr, 0));
+      ++i;
+    }
+  }
+
+}</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-attr" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            attr(1) &rarr; XmlAttr
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            attr(&quot;name&quot;) &rarr; XmlAttr
+          </span>
+          
+        </div>
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            attr(&quot;name&quot;, &quot;namespace&quot;) &rarr; XmlAttr
+          </span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>/*</p>
+
+<pre>* get node attribute by index or name
+*
+*</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="attr-source">
+            <pre>WsXmlAttrH attr(VALUE index = Qnil, VALUE namespace = Qnil) {
+    if (NIL_P(index)) { /* nil */
+      return ws_xml_get_node_attr( $self, 0 );
+    } else if (FIXNUM_P(index)) { /* numeric */
+      return ws_xml_get_node_attr( $self, FIX2INT(index) );      
+    } else { /* convert to string */
+      const char *ns = NULL;
+      const char *name = as_string(index);
+      if (!NIL_P(namespace)) {
+        ns = as_string(namespace);
+      }
+      return ws_xml_find_node_attr( $self, ns, name );
+    }
+  }
+
+  /*
+   * count node attribute
+   *
+   * call-seq:
+   *  node.attr_count -&gt; Integer
+   */
+  int attr_count() {
+    return ws_xml_get_node_attr_count( $self );
+  }
+  /*
+   * find node attribute by name
+   *
+   * call-seq:
+   *  node.attr_find(&quot;namespace&quot;, &quot;name&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_find( const char *ns, const char *name ) {
+    return ws_xml_find_node_attr( $self, ns, name );
+  }
+  /*
+   * add attribute to node
+   *
+   * call-seq:
+   *  node.attr_add(&quot;namespace&quot;, &quot;name&quot;, &quot;value&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_add( const char *ns, const char *name, const char *value ) {
+    return ws_xml_add_node_attr( $self, ns, name, value );
+  }
+  /*
+   * get end point reference
+   *
+   * call-seq:
+   *  node.epr(&quot;namespace&quot;, &quot;epr_node_name&quot;, Integer embedded) -&gt; EndPointReference
+   */
+  epr_t *epr( const char *ns, const char *epr_node_name, int embedded) {
+    return epr_deserialize($self, ns, epr_node_name, embedded);
+  }  
+
+
+
+  /*
+   * enumerate attributes
+   *
+   * call-seq:
+   *   node.each_attr { |XmlAttr| ... }
+   */
+  void each_attr() {
+    int i = 0;
+    while ( i &lt; ws_xml_get_node_attr_count( $self ) ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_node_attr($self, i), SWIGTYPE_p___WsXmlAttr, 0));
+      ++i;
+    }
+  }
+
+}</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-attr_add" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            attr_add(&quot;namespace&quot;, &quot;name&quot;, &quot;value&quot;) &rarr; XmlAttr
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>/*</p>
+
+<pre>* add attribute to node
+*
+*</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="attr_add-source">
+            <pre>WsXmlAttrH attr_add( const char *ns, const char *name, const char *value ) {
+    return ws_xml_add_node_attr( $self, ns, name, value );
+  }
+  /*
+   * get end point reference
+   *
+   * call-seq:
+   *  node.epr(&quot;namespace&quot;, &quot;epr_node_name&quot;, Integer embedded) -&gt; EndPointReference
+   */
+  epr_t *epr( const char *ns, const char *epr_node_name, int embedded) {
+    return epr_deserialize($self, ns, epr_node_name, embedded);
+  }  
+
+
+
+  /*
+   * enumerate attributes
+   *
+   * call-seq:
+   *   node.each_attr { |XmlAttr| ... }
+   */
+  void each_attr() {
+    int i = 0;
+    while ( i &lt; ws_xml_get_node_attr_count( $self ) ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_node_attr($self, i), SWIGTYPE_p___WsXmlAttr, 0));
+      ++i;
+    }
+  }
+
+}</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-attr_count" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            attr_count &rarr; Integer
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>/*</p>
+
+<pre>* count node attribute
+*
+*</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="attr_count-source">
+            <pre>int attr_count() {
+    return ws_xml_get_node_attr_count( $self );
+  }
+  /*
+   * find node attribute by name
+   *
+   * call-seq:
+   *  node.attr_find(&quot;namespace&quot;, &quot;name&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_find( const char *ns, const char *name ) {
+    return ws_xml_find_node_attr( $self, ns, name );
+  }
+  /*
+   * add attribute to node
+   *
+   * call-seq:
+   *  node.attr_add(&quot;namespace&quot;, &quot;name&quot;, &quot;value&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_add( const char *ns, const char *name, const char *value ) {
+    return ws_xml_add_node_attr( $self, ns, name, value );
+  }
+  /*
+   * get end point reference
+   *
+   * call-seq:
+   *  node.epr(&quot;namespace&quot;, &quot;epr_node_name&quot;, Integer embedded) -&gt; EndPointReference
+   */
+  epr_t *epr( const char *ns, const char *epr_node_name, int embedded) {
+    return epr_deserialize($self, ns, epr_node_name, embedded);
+  }  
+
+
+
+  /*
+   * enumerate attributes
+   *
+   * call-seq:
+   *   node.each_attr { |XmlAttr| ... }
+   */
+  void each_attr() {
+    int i = 0;
+    while ( i &lt; ws_xml_get_node_attr_count( $self ) ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_node_attr($self, i), SWIGTYPE_p___WsXmlAttr, 0));
+      ++i;
+    }
+  }
+
+}</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-attr_find" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            attr_find(&quot;namespace&quot;, &quot;name&quot;) &rarr; XmlAttr
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>/*</p>
+
+<pre>* find node attribute by name
+*
+*</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="attr_find-source">
+            <pre>WsXmlAttrH attr_find( const char *ns, const char *name ) {
+    return ws_xml_find_node_attr( $self, ns, name );
+  }
+  /*
+   * add attribute to node
+   *
+   * call-seq:
+   *  node.attr_add(&quot;namespace&quot;, &quot;name&quot;, &quot;value&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_add( const char *ns, const char *name, const char *value ) {
+    return ws_xml_add_node_attr( $self, ns, name, value );
+  }
+  /*
+   * get end point reference
+   *
+   * call-seq:
+   *  node.epr(&quot;namespace&quot;, &quot;epr_node_name&quot;, Integer embedded) -&gt; EndPointReference
+   */
+  epr_t *epr( const char *ns, const char *epr_node_name, int embedded) {
+    return epr_deserialize($self, ns, epr_node_name, embedded);
+  }  
+
+
+
+  /*
+   * enumerate attributes
+   *
+   * call-seq:
+   *   node.each_attr { |XmlAttr| ... }
+   */
+  void each_attr() {
+    int i = 0;
+    while ( i &lt; ws_xml_get_node_attr_count( $self ) ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_node_attr($self, i), SWIGTYPE_p___WsXmlAttr, 0));
+      ++i;
+    }
+  }
+
+}</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-child" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            child &rarr; XmlNode
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>/*</p>
+
+<pre>* get first child of node
+*
+*</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="child-source">
+            <pre>WsXmlNodeH child() {
+    return xml_parser_get_first_child($self);
+  }
+  
+  /*
+   * get name for node
+   *
+   * call-seq:
+   *  node.name -&gt; String
+   */
+  char *name() {
+    return ws_xml_get_node_local_name( $self );
+  }
+
+  %rename(&quot;name=&quot;) set_name( const char *name);
+
+
+  /*
+   * set name of node
+   *
+   * call-seq:
+   *  node.name = String
+   */
+  void set_name( const char *name ) {
+    ws_xml_set_node_name( $self, ws_xml_get_node_name_ns( $self ), name );
+  }
+  
+  /*
+   * get namespace for node
+   *
+   * call-seq:
+   *  node.ns -&gt; String
+   */
+  char *ns() {
+    return ws_xml_get_node_name_ns( $self );
+  }
+
+
+  %rename(&quot;ns=&quot;) set_ns( const char *nsuri );
+
+  /*
+   * set namespace of node
+   *
+   * call-seq:
+   *  node.ns = String
+   */
+  void set_ns( const char *ns ) {
+    ws_xml_set_ns( $self, ns, ws_xml_get_node_name_ns_prefix($self) );
+  }
+
+  /*
+   * get prefix of nodes namespace
+   *
+   * call-seq:
+   *  node.prefix -&gt; String
+   */
+  const char *prefix() {
+    return ws_xml_get_node_name_ns_prefix($self);
+  }
+
+
+  %rename(&quot;lang=&quot;) set_lang(const char *lang);
+
+  /*
+   * set language
+   *
+   * call-seq:
+   *  node.lang = String
+   */
+  void set_lang(const char *lang) {
+    ws_xml_set_node_lang($self, lang);
+  }
+
+  /*
+   * find node within tree
+   * a NULL passed as &#39;ns&#39; (namespace) is treated as wildcard
+   *
+   * call-seq:
+   *  node.find(&quot;namespace&quot;, &quot;name&quot;) -&gt; String # recursive
+   *  node.find(&quot;namespace&quot;, &quot;name&quot;, 0) -&gt; String # non-recursive
+   */
+  WsXmlNodeH find( const char *ns, const char *name, int recursive = 1) {
+    return ws_xml_find_in_tree( $self, ns, name, recursive );
+  }
+                                 
+  /*
+   * iterate over siblings
+   *
+   * finds next sibling with same namespace and name
+   *
+   * See also XmlNode#each
+   *
+   * XmlNode#each iterates over children, XmlNode#next over siblings
+   *
+   * Example:
+   *    &lt;Foo&gt;
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Other&gt;...
+   *      &lt;Other&gt;...
+   *    &lt;/Foo&gt;
+   *
+   * node = root.Foo # points to &lt;Foo&gt; node
+   *
+   *   bar = node.Bar
+   *   while bar do
+   *     bar = bar.next
+   *   end
+   *
+   * will give you four iterations (all &lt;Bar&gt; nodes)
+   *
+   *   child = node.Bar
+   *   while child do
+   *     child = child.next(1)
+   *   end
+   *
+   * will give you six iterations (all children of &lt;Foo&gt;)
+   * The latter example is equal to
+   *
+   *   node.each do |child|
+   *     ...
+   *   end
+   *
+   */
+  WsXmlNodeH next(int all = 0) {
+    WsXmlNodeH next_node = xml_parser_get_next_child($self);
+    if (next_node &amp;&amp; !all) {
+      const char *ns_uri = ws_xml_get_node_name_ns($self);
+      const char *name = ws_xml_get_node_local_name($self);
+      if (ws_xml_is_node_qname(next_node, ns_uri, name) == 0) {
+        next_node = NULL;
+      }
+    }
+    return next_node;
+  }
+                                 
+  /*
+   * count node children
+   * if name given, count children with this name
+   * if name + ns given, count children with this namespace and name
+   */
+  int size(const char *name = NULL, const char *ns = NULL) {
+    return ws_xml_get_child_count_by_qname($self, ns, name);
+  }
+  
+  /*
+   * add child (namespace, name, text) to node
+   */
+  WsXmlNodeH add( const char *ns, const char *name, const char *text = NULL ) {
+    return ws_xml_add_child( $self, ns, name, text );
+  }
+
+  /*
+   * add child (namespace, name, text) before(!) node
+   */
+  WsXmlNodeH add_before( const char *ns, const char *name, const char *text = NULL ) {
+    return ws_xml_add_prev_sibling( $self, ns, name, text );
+  }
+
+
+  %alias add &quot;&lt;&lt;&quot;;
+
+  /*
+   * add node as child
+   */
+  WsXmlNodeH add(WsXmlNodeH node) {
+    ws_xml_duplicate_tree( $self, node );
+    return $self;
+  }
+  
+
+  /*
+   * iterate over children
+   *
+   * See also XmlNode#next
+   *
+   * XmlNode#each iterates over children, XmlNode#next over siblings
+   *
+   * can be limited to children with specific name (and specific namespace)
+   *
+   * for array-like constructs, e.g
+   *  &lt;Parent&gt;
+   *    &lt;Child&gt;..
+   *    &lt;Child&gt;..
+   *    &lt;Child&gt;..
+   *    &lt;OtherChild&gt;..
+   *    &lt;OtherChild&gt;..
+   *    &lt;OtherChild&gt;..
+   *
+   *   doc.Parent.each do |child|
+   *     ... iterates over all 6 children ...
+   *   end
+   *
+   * use XmlNode#next as in
+   *   node = doc.OtherChild
+   *   while node do
+   *     ... do something with node ...
+   *    node = node.next
+   *   end
+   *
+   * call-seq:
+   *  node.each { |XmlNode| ... }
+   *  node.each(&quot;name&quot;) { |XmlNode| ... }
+   *  node.each(&quot;name&quot;, &quot;namespace&quot;) { |XmlNode| ... }
+   */
+
+  void each(const char *name = NULL, const char *ns = NULL) {
+    int i = 0;
+    WsXmlNodeH node = $self;
+    int count = ws_xml_get_child_count_by_qname( node, ns, name );
+    while ( i &lt; count ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_child(node, i, ns, name), SWIGTYPE_p___WsXmlNode, 0));
+      ++i;
+    }
+  }
+
+
+
+
+
+  %alias get &quot;[]&quot;;
+
+  /*
+   * get child by index
+   *
+   * call-seq:
+   *  node.get(42) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(int i, const char *name = NULL, const char *ns = NULL) {
+    if (i &lt; 0 || i &gt;= ws_xml_get_child_count_by_qname($self,ns,name))
+      return NULL;
+    return ws_xml_get_child($self, i, ns, name);
+  }
+  
+  /*
+   * get first child by name (and namespace)
+   *
+   * call-seq:
+   *  node.get(&quot;name&quot;) -&gt; XmlNode
+   *  node.get(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(const char *name, const char *ns = NULL) {
+    return ws_xml_get_child($self, 0, ns, name);
+  }
+
+
+  /*
+   * get node attribute by index or name
+   *
+   * call-seq:
+   *  node.attr(1) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr(VALUE index = Qnil, VALUE namespace = Qnil) {
+    if (NIL_P(index)) { /* nil */
+      return ws_xml_get_node_attr( $self, 0 );
+    } else if (FIXNUM_P(index)) { /* numeric */
+      return ws_xml_get_node_attr( $self, FIX2INT(index) );      
+    } else { /* convert to string */
+      const char *ns = NULL;
+      const char *name = as_string(index);
+      if (!NIL_P(namespace)) {
+        ns = as_string(namespace);
+      }
+      return ws_xml_find_node_attr( $self, ns, name );
+    }
+  }
+
+  /*
+   * count node attribute
+   *
+   * call-seq:
+   *  node.attr_count -&gt; Integer
+   */
+  int attr_count() {
+    return ws_xml_get_node_attr_count( $self );
+  }
+  /*
+   * find node attribute by name
+   *
+   * call-seq:
+   *  node.attr_find(&quot;namespace&quot;, &quot;name&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_find( const char *ns, const char *name ) {
+    return ws_xml_find_node_attr( $self, ns, name );
+  }
+  /*
+   * add attribute to node
+   *
+   * call-seq:
+   *  node.attr_add(&quot;namespace&quot;, &quot;name&quot;, &quot;value&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_add( const char *ns, const char *name, const char *value ) {
+    return ws_xml_add_node_attr( $self, ns, name, value );
+  }
+  /*
+   * get end point reference
+   *
+   * call-seq:
+   *  node.epr(&quot;namespace&quot;, &quot;epr_node_name&quot;, Integer embedded) -&gt; EndPointReference
+   */
+  epr_t *epr( const char *ns, const char *epr_node_name, int embedded) {
+    return epr_deserialize($self, ns, epr_node_name, embedded);
+  }  
+
+
+
+  /*
+   * enumerate attributes
+   *
+   * call-seq:
+   *   node.each_attr { |XmlAttr| ... }
+   */
+  void each_attr() {
+    int i = 0;
+    while ( i &lt; ws_xml_get_node_attr_count( $self ) ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_node_attr($self, i), SWIGTYPE_p___WsXmlAttr, 0));
+      ++i;
+    }
+  }
+
+}</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-doc" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            doc &rarr; XmlDoc
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>/*</p>
+
+<pre>* get XmlDoc to which node belongs
+*
+*</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="doc-source">
+            <pre>WsXmlDocH doc() {
+    return ws_xml_get_node_doc( $self );
+  }
+  
+  /*
+   * get parent for node
+   *
+   * call-seq:
+   *  node.parent -&gt; XmlNode
+   */
+  WsXmlNodeH parent() {
+    return ws_xml_get_node_parent( $self );
+  }
+
+  %alias child &quot;first&quot;;
+
+
+  /*
+   * get first child of node
+   *
+   * call-seq:
+   *  node.child -&gt; XmlNode
+   */
+  WsXmlNodeH child() {
+    return xml_parser_get_first_child($self);
+  }
+  
+  /*
+   * get name for node
+   *
+   * call-seq:
+   *  node.name -&gt; String
+   */
+  char *name() {
+    return ws_xml_get_node_local_name( $self );
+  }
+
+  %rename(&quot;name=&quot;) set_name( const char *name);
+
+
+  /*
+   * set name of node
+   *
+   * call-seq:
+   *  node.name = String
+   */
+  void set_name( const char *name ) {
+    ws_xml_set_node_name( $self, ws_xml_get_node_name_ns( $self ), name );
+  }
+  
+  /*
+   * get namespace for node
+   *
+   * call-seq:
+   *  node.ns -&gt; String
+   */
+  char *ns() {
+    return ws_xml_get_node_name_ns( $self );
+  }
+
+
+  %rename(&quot;ns=&quot;) set_ns( const char *nsuri );
+
+  /*
+   * set namespace of node
+   *
+   * call-seq:
+   *  node.ns = String
+   */
+  void set_ns( const char *ns ) {
+    ws_xml_set_ns( $self, ns, ws_xml_get_node_name_ns_prefix($self) );
+  }
+
+  /*
+   * get prefix of nodes namespace
+   *
+   * call-seq:
+   *  node.prefix -&gt; String
+   */
+  const char *prefix() {
+    return ws_xml_get_node_name_ns_prefix($self);
+  }
+
+
+  %rename(&quot;lang=&quot;) set_lang(const char *lang);
+
+  /*
+   * set language
+   *
+   * call-seq:
+   *  node.lang = String
+   */
+  void set_lang(const char *lang) {
+    ws_xml_set_node_lang($self, lang);
+  }
+
+  /*
+   * find node within tree
+   * a NULL passed as &#39;ns&#39; (namespace) is treated as wildcard
+   *
+   * call-seq:
+   *  node.find(&quot;namespace&quot;, &quot;name&quot;) -&gt; String # recursive
+   *  node.find(&quot;namespace&quot;, &quot;name&quot;, 0) -&gt; String # non-recursive
+   */
+  WsXmlNodeH find( const char *ns, const char *name, int recursive = 1) {
+    return ws_xml_find_in_tree( $self, ns, name, recursive );
+  }
+                                 
+  /*
+   * iterate over siblings
+   *
+   * finds next sibling with same namespace and name
+   *
+   * See also XmlNode#each
+   *
+   * XmlNode#each iterates over children, XmlNode#next over siblings
+   *
+   * Example:
+   *    &lt;Foo&gt;
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Other&gt;...
+   *      &lt;Other&gt;...
+   *    &lt;/Foo&gt;
+   *
+   * node = root.Foo # points to &lt;Foo&gt; node
+   *
+   *   bar = node.Bar
+   *   while bar do
+   *     bar = bar.next
+   *   end
+   *
+   * will give you four iterations (all &lt;Bar&gt; nodes)
+   *
+   *   child = node.Bar
+   *   while child do
+   *     child = child.next(1)
+   *   end
+   *
+   * will give you six iterations (all children of &lt;Foo&gt;)
+   * The latter example is equal to
+   *
+   *   node.each do |child|
+   *     ...
+   *   end
+   *
+   */
+  WsXmlNodeH next(int all = 0) {
+    WsXmlNodeH next_node = xml_parser_get_next_child($self);
+    if (next_node &amp;&amp; !all) {
+      const char *ns_uri = ws_xml_get_node_name_ns($self);
+      const char *name = ws_xml_get_node_local_name($self);
+      if (ws_xml_is_node_qname(next_node, ns_uri, name) == 0) {
+        next_node = NULL;
+      }
+    }
+    return next_node;
+  }
+                                 
+  /*
+   * count node children
+   * if name given, count children with this name
+   * if name + ns given, count children with this namespace and name
+   */
+  int size(const char *name = NULL, const char *ns = NULL) {
+    return ws_xml_get_child_count_by_qname($self, ns, name);
+  }
+  
+  /*
+   * add child (namespace, name, text) to node
+   */
+  WsXmlNodeH add( const char *ns, const char *name, const char *text = NULL ) {
+    return ws_xml_add_child( $self, ns, name, text );
+  }
+
+  /*
+   * add child (namespace, name, text) before(!) node
+   */
+  WsXmlNodeH add_before( const char *ns, const char *name, const char *text = NULL ) {
+    return ws_xml_add_prev_sibling( $self, ns, name, text );
+  }
+
+
+  %alias add &quot;&lt;&lt;&quot;;
+
+  /*
+   * add node as child
+   */
+  WsXmlNodeH add(WsXmlNodeH node) {
+    ws_xml_duplicate_tree( $self, node );
+    return $self;
+  }
+  
+
+  /*
+   * iterate over children
+   *
+   * See also XmlNode#next
+   *
+   * XmlNode#each iterates over children, XmlNode#next over siblings
+   *
+   * can be limited to children with specific name (and specific namespace)
+   *
+   * for array-like constructs, e.g
+   *  &lt;Parent&gt;
+   *    &lt;Child&gt;..
+   *    &lt;Child&gt;..
+   *    &lt;Child&gt;..
+   *    &lt;OtherChild&gt;..
+   *    &lt;OtherChild&gt;..
+   *    &lt;OtherChild&gt;..
+   *
+   *   doc.Parent.each do |child|
+   *     ... iterates over all 6 children ...
+   *   end
+   *
+   * use XmlNode#next as in
+   *   node = doc.OtherChild
+   *   while node do
+   *     ... do something with node ...
+   *    node = node.next
+   *   end
+   *
+   * call-seq:
+   *  node.each { |XmlNode| ... }
+   *  node.each(&quot;name&quot;) { |XmlNode| ... }
+   *  node.each(&quot;name&quot;, &quot;namespace&quot;) { |XmlNode| ... }
+   */
+
+  void each(const char *name = NULL, const char *ns = NULL) {
+    int i = 0;
+    WsXmlNodeH node = $self;
+    int count = ws_xml_get_child_count_by_qname( node, ns, name );
+    while ( i &lt; count ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_child(node, i, ns, name), SWIGTYPE_p___WsXmlNode, 0));
+      ++i;
+    }
+  }
+
+
+
+
+
+  %alias get &quot;[]&quot;;
+
+  /*
+   * get child by index
+   *
+   * call-seq:
+   *  node.get(42) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(int i, const char *name = NULL, const char *ns = NULL) {
+    if (i &lt; 0 || i &gt;= ws_xml_get_child_count_by_qname($self,ns,name))
+      return NULL;
+    return ws_xml_get_child($self, i, ns, name);
+  }
+  
+  /*
+   * get first child by name (and namespace)
+   *
+   * call-seq:
+   *  node.get(&quot;name&quot;) -&gt; XmlNode
+   *  node.get(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(const char *name, const char *ns = NULL) {
+    return ws_xml_get_child($self, 0, ns, name);
+  }
+
+
+  /*
+   * get node attribute by index or name
+   *
+   * call-seq:
+   *  node.attr(1) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr(VALUE index = Qnil, VALUE namespace = Qnil) {
+    if (NIL_P(index)) { /* nil */
+      return ws_xml_get_node_attr( $self, 0 );
+    } else if (FIXNUM_P(index)) { /* numeric */
+      return ws_xml_get_node_attr( $self, FIX2INT(index) );      
+    } else { /* convert to string */
+      const char *ns = NULL;
+      const char *name = as_string(index);
+      if (!NIL_P(namespace)) {
+        ns = as_string(namespace);
+      }
+      return ws_xml_find_node_attr( $self, ns, name );
+    }
+  }
+
+  /*
+   * count node attribute
+   *
+   * call-seq:
+   *  node.attr_count -&gt; Integer
+   */
+  int attr_count() {
+    return ws_xml_get_node_attr_count( $self );
+  }
+  /*
+   * find node attribute by name
+   *
+   * call-seq:
+   *  node.attr_find(&quot;namespace&quot;, &quot;name&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_find( const char *ns, const char *name ) {
+    return ws_xml_find_node_attr( $self, ns, name );
+  }
+  /*
+   * add attribute to node
+   *
+   * call-seq:
+   *  node.attr_add(&quot;namespace&quot;, &quot;name&quot;, &quot;value&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_add( const char *ns, const char *name, const char *value ) {
+    return ws_xml_add_node_attr( $self, ns, name, value );
+  }
+  /*
+   * get end point reference
+   *
+   * call-seq:
+   *  node.epr(&quot;namespace&quot;, &quot;epr_node_name&quot;, Integer embedded) -&gt; EndPointReference
+   */
+  epr_t *epr( const char *ns, const char *epr_node_name, int embedded) {
+    return epr_deserialize($self, ns, epr_node_name, embedded);
+  }  
+
+
+
+  /*
+   * enumerate attributes
+   *
+   * call-seq:
+   *   node.each_attr { |XmlAttr| ... }
+   */
+  void each_attr() {
+    int i = 0;
+    while ( i &lt; ws_xml_get_node_attr_count( $self ) ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_node_attr($self, i), SWIGTYPE_p___WsXmlAttr, 0));
+      ++i;
+    }
+  }
+
+}</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-dump_file" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            dump_file(IO) &rarr; nil
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>/*</p>
+
+<pre>* dump node to file
+*
+*</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="dump_file-source">
+            <pre>void dump_file(FILE *fp) {
+    ws_xml_dump_node_tree( fp, $self );
+  }
+  
+
+  %alias equal &quot;==&quot;;
+  %typemap(out) int equal
+    &quot;$result = ($1 != 0) ? Qtrue : Qfalse;&quot;;
+
+
+  int equal( WsXmlNodeH n )
+
+  /*
+   * Test for identity (same object)
+   *
+   * call-seq:
+   *  XmlNode == XmlNode -&gt; Boolean
+   */
+  { return $self == n; }          
+  
+  /*
+   * get text (without xml tags) of node
+   *
+   * alias: to_s
+   *
+   * call-seq:
+   *  node.text(XmlNode) -&gt; String
+   */
+  char *text() {
+    return ws_xml_get_node_text( $self );
+  }
+
+  %rename( &quot;text=&quot; ) set_text( const char *text );
+
+  /*
+   * Set text of node
+   *
+   * call-seq:
+   *  node.text = String
+   */
+  void set_text( const char *text ) {
+    ws_xml_set_node_text( $self, text );
+  }
+  
+  /*
+   * get XmlDoc to which node belongs
+   *
+   * call-seq:
+   *  node.doc -&gt; XmlDoc
+   */
+  WsXmlDocH doc() {
+    return ws_xml_get_node_doc( $self );
+  }
+  
+  /*
+   * get parent for node
+   *
+   * call-seq:
+   *  node.parent -&gt; XmlNode
+   */
+  WsXmlNodeH parent() {
+    return ws_xml_get_node_parent( $self );
+  }
+
+  %alias child &quot;first&quot;;
+
+
+  /*
+   * get first child of node
+   *
+   * call-seq:
+   *  node.child -&gt; XmlNode
+   */
+  WsXmlNodeH child() {
+    return xml_parser_get_first_child($self);
+  }
+  
+  /*
+   * get name for node
+   *
+   * call-seq:
+   *  node.name -&gt; String
+   */
+  char *name() {
+    return ws_xml_get_node_local_name( $self );
+  }
+
+  %rename(&quot;name=&quot;) set_name( const char *name);
+
+
+  /*
+   * set name of node
+   *
+   * call-seq:
+   *  node.name = String
+   */
+  void set_name( const char *name ) {
+    ws_xml_set_node_name( $self, ws_xml_get_node_name_ns( $self ), name );
+  }
+  
+  /*
+   * get namespace for node
+   *
+   * call-seq:
+   *  node.ns -&gt; String
+   */
+  char *ns() {
+    return ws_xml_get_node_name_ns( $self );
+  }
+
+
+  %rename(&quot;ns=&quot;) set_ns( const char *nsuri );
+
+  /*
+   * set namespace of node
+   *
+   * call-seq:
+   *  node.ns = String
+   */
+  void set_ns( const char *ns ) {
+    ws_xml_set_ns( $self, ns, ws_xml_get_node_name_ns_prefix($self) );
+  }
+
+  /*
+   * get prefix of nodes namespace
+   *
+   * call-seq:
+   *  node.prefix -&gt; String
+   */
+  const char *prefix() {
+    return ws_xml_get_node_name_ns_prefix($self);
+  }
+
+
+  %rename(&quot;lang=&quot;) set_lang(const char *lang);
+
+  /*
+   * set language
+   *
+   * call-seq:
+   *  node.lang = String
+   */
+  void set_lang(const char *lang) {
+    ws_xml_set_node_lang($self, lang);
+  }
+
+  /*
+   * find node within tree
+   * a NULL passed as &#39;ns&#39; (namespace) is treated as wildcard
+   *
+   * call-seq:
+   *  node.find(&quot;namespace&quot;, &quot;name&quot;) -&gt; String # recursive
+   *  node.find(&quot;namespace&quot;, &quot;name&quot;, 0) -&gt; String # non-recursive
+   */
+  WsXmlNodeH find( const char *ns, const char *name, int recursive = 1) {
+    return ws_xml_find_in_tree( $self, ns, name, recursive );
+  }
+                                 
+  /*
+   * iterate over siblings
+   *
+   * finds next sibling with same namespace and name
+   *
+   * See also XmlNode#each
+   *
+   * XmlNode#each iterates over children, XmlNode#next over siblings
+   *
+   * Example:
+   *    &lt;Foo&gt;
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Other&gt;...
+   *      &lt;Other&gt;...
+   *    &lt;/Foo&gt;
+   *
+   * node = root.Foo # points to &lt;Foo&gt; node
+   *
+   *   bar = node.Bar
+   *   while bar do
+   *     bar = bar.next
+   *   end
+   *
+   * will give you four iterations (all &lt;Bar&gt; nodes)
+   *
+   *   child = node.Bar
+   *   while child do
+   *     child = child.next(1)
+   *   end
+   *
+   * will give you six iterations (all children of &lt;Foo&gt;)
+   * The latter example is equal to
+   *
+   *   node.each do |child|
+   *     ...
+   *   end
+   *
+   */
+  WsXmlNodeH next(int all = 0) {
+    WsXmlNodeH next_node = xml_parser_get_next_child($self);
+    if (next_node &amp;&amp; !all) {
+      const char *ns_uri = ws_xml_get_node_name_ns($self);
+      const char *name = ws_xml_get_node_local_name($self);
+      if (ws_xml_is_node_qname(next_node, ns_uri, name) == 0) {
+        next_node = NULL;
+      }
+    }
+    return next_node;
+  }
+                                 
+  /*
+   * count node children
+   * if name given, count children with this name
+   * if name + ns given, count children with this namespace and name
+   */
+  int size(const char *name = NULL, const char *ns = NULL) {
+    return ws_xml_get_child_count_by_qname($self, ns, name);
+  }
+  
+  /*
+   * add child (namespace, name, text) to node
+   */
+  WsXmlNodeH add( const char *ns, const char *name, const char *text = NULL ) {
+    return ws_xml_add_child( $self, ns, name, text );
+  }
+
+  /*
+   * add child (namespace, name, text) before(!) node
+   */
+  WsXmlNodeH add_before( const char *ns, const char *name, const char *text = NULL ) {
+    return ws_xml_add_prev_sibling( $self, ns, name, text );
+  }
+
+
+  %alias add &quot;&lt;&lt;&quot;;
+
+  /*
+   * add node as child
+   */
+  WsXmlNodeH add(WsXmlNodeH node) {
+    ws_xml_duplicate_tree( $self, node );
+    return $self;
+  }
+  
+
+  /*
+   * iterate over children
+   *
+   * See also XmlNode#next
+   *
+   * XmlNode#each iterates over children, XmlNode#next over siblings
+   *
+   * can be limited to children with specific name (and specific namespace)
+   *
+   * for array-like constructs, e.g
+   *  &lt;Parent&gt;
+   *    &lt;Child&gt;..
+   *    &lt;Child&gt;..
+   *    &lt;Child&gt;..
+   *    &lt;OtherChild&gt;..
+   *    &lt;OtherChild&gt;..
+   *    &lt;OtherChild&gt;..
+   *
+   *   doc.Parent.each do |child|
+   *     ... iterates over all 6 children ...
+   *   end
+   *
+   * use XmlNode#next as in
+   *   node = doc.OtherChild
+   *   while node do
+   *     ... do something with node ...
+   *    node = node.next
+   *   end
+   *
+   * call-seq:
+   *  node.each { |XmlNode| ... }
+   *  node.each(&quot;name&quot;) { |XmlNode| ... }
+   *  node.each(&quot;name&quot;, &quot;namespace&quot;) { |XmlNode| ... }
+   */
+
+  void each(const char *name = NULL, const char *ns = NULL) {
+    int i = 0;
+    WsXmlNodeH node = $self;
+    int count = ws_xml_get_child_count_by_qname( node, ns, name );
+    while ( i &lt; count ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_child(node, i, ns, name), SWIGTYPE_p___WsXmlNode, 0));
+      ++i;
+    }
+  }
+
+
+
+
+
+  %alias get &quot;[]&quot;;
+
+  /*
+   * get child by index
+   *
+   * call-seq:
+   *  node.get(42) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(int i, const char *name = NULL, const char *ns = NULL) {
+    if (i &lt; 0 || i &gt;= ws_xml_get_child_count_by_qname($self,ns,name))
+      return NULL;
+    return ws_xml_get_child($self, i, ns, name);
+  }
+  
+  /*
+   * get first child by name (and namespace)
+   *
+   * call-seq:
+   *  node.get(&quot;name&quot;) -&gt; XmlNode
+   *  node.get(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(const char *name, const char *ns = NULL) {
+    return ws_xml_get_child($self, 0, ns, name);
+  }
+
+
+  /*
+   * get node attribute by index or name
+   *
+   * call-seq:
+   *  node.attr(1) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr(VALUE index = Qnil, VALUE namespace = Qnil) {
+    if (NIL_P(index)) { /* nil */
+      return ws_xml_get_node_attr( $self, 0 );
+    } else if (FIXNUM_P(index)) { /* numeric */
+      return ws_xml_get_node_attr( $self, FIX2INT(index) );      
+    } else { /* convert to string */
+      const char *ns = NULL;
+      const char *name = as_string(index);
+      if (!NIL_P(namespace)) {
+        ns = as_string(namespace);
+      }
+      return ws_xml_find_node_attr( $self, ns, name );
+    }
+  }
+
+  /*
+   * count node attribute
+   *
+   * call-seq:
+   *  node.attr_count -&gt; Integer
+   */
+  int attr_count() {
+    return ws_xml_get_node_attr_count( $self );
+  }
+  /*
+   * find node attribute by name
+   *
+   * call-seq:
+   *  node.attr_find(&quot;namespace&quot;, &quot;name&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_find( const char *ns, const char *name ) {
+    return ws_xml_find_node_attr( $self, ns, name );
+  }
+  /*
+   * add attribute to node
+   *
+   * call-seq:
+   *  node.attr_add(&quot;namespace&quot;, &quot;name&quot;, &quot;value&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_add( const char *ns, const char *name, const char *value ) {
+    return ws_xml_add_node_attr( $self, ns, name, value );
+  }
+  /*
+   * get end point reference
+   *
+   * call-seq:
+   *  node.epr(&quot;namespace&quot;, &quot;epr_node_name&quot;, Integer embedded) -&gt; EndPointReference
+   */
+  epr_t *epr( const char *ns, const char *epr_node_name, int embedded) {
+    return epr_deserialize($self, ns, epr_node_name, embedded);
+  }  
+
+
+
+  /*
+   * enumerate attributes
+   *
+   * call-seq:
+   *   node.each_attr { |XmlAttr| ... }
+   */
+  void each_attr() {
+    int i = 0;
+    while ( i &lt; ws_xml_get_node_attr_count( $self ) ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_node_attr($self, i), SWIGTYPE_p___WsXmlAttr, 0));
+      ++i;
+    }
+  }
+
+}</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-each" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            each { |XmlNode| ... }
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            each(&quot;name&quot;) { |XmlNode| ... }
+          </span>
+          
+        </div>
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            each(&quot;name&quot;, &quot;namespace&quot;) { |XmlNode| ... }
+          </span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>/*</p>
+
+<pre class="ruby"><span class="ruby-operator">*</span> <span class="ruby-identifier">iterate</span> <span class="ruby-identifier">over</span> <span class="ruby-identifier">children</span>
+<span class="ruby-operator">*</span>
+<span class="ruby-operator">*</span> <span class="ruby-constant">See</span> <span class="ruby-identifier">also</span> <span class="ruby-constant">XmlNode</span><span class="ruby-comment">#next</span>
+<span class="ruby-operator">*</span>
+<span class="ruby-operator">*</span> <span class="ruby-constant">XmlNode</span><span class="ruby-comment">#each iterates over children, XmlNode#next over siblings</span>
+<span class="ruby-operator">*</span>
+<span class="ruby-operator">*</span> <span class="ruby-identifier">can</span> <span class="ruby-identifier">be</span> <span class="ruby-identifier">limited</span> <span class="ruby-identifier">to</span> <span class="ruby-identifier">children</span> <span class="ruby-identifier">with</span> <span class="ruby-identifier">specific</span> <span class="ruby-identifier">name</span> (<span class="ruby-keyword">and</span> <span class="ruby-identifier">specific</span> <span class="ruby-identifier">namespace</span>)
+<span class="ruby-operator">*</span>
+<span class="ruby-operator">*</span> <span class="ruby-keyword">for</span> <span class="ruby-identifier">array</span><span class="ruby-operator">-</span><span class="ruby-identifier">like</span> <span class="ruby-identifier">constructs</span>, <span class="ruby-identifier">e</span>.<span class="ruby-identifier">g</span>
+<span class="ruby-operator">*</span>  <span class="ruby-operator">&lt;</span><span class="ruby-constant">Parent</span><span class="ruby-operator">&gt;</span>
+<span class="ruby-operator">*</span>    <span class="ruby-operator">&lt;</span><span class="ruby-constant">Child</span><span class="ruby-operator">&gt;</span><span class="ruby-operator">..</span>
+<span class="ruby-operator">*</span>    <span class="ruby-operator">&lt;</span><span class="ruby-constant">Child</span><span class="ruby-operator">&gt;</span><span class="ruby-operator">..</span>
+<span class="ruby-operator">*</span>    <span class="ruby-operator">&lt;</span><span class="ruby-constant">Child</span><span class="ruby-operator">&gt;</span><span class="ruby-operator">..</span>
+<span class="ruby-operator">*</span>    <span class="ruby-operator">&lt;</span><span class="ruby-constant">OtherChild</span><span class="ruby-operator">&gt;</span><span class="ruby-operator">..</span>
+<span class="ruby-operator">*</span>    <span class="ruby-operator">&lt;</span><span class="ruby-constant">OtherChild</span><span class="ruby-operator">&gt;</span><span class="ruby-operator">..</span>
+<span class="ruby-operator">*</span>    <span class="ruby-operator">&lt;</span><span class="ruby-constant">OtherChild</span><span class="ruby-operator">&gt;</span><span class="ruby-operator">..</span>
+<span class="ruby-operator">*</span>
+<span class="ruby-operator">*</span>   <span class="ruby-identifier">doc</span>.<span class="ruby-constant">Parent</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">child</span><span class="ruby-operator">|</span>
+<span class="ruby-operator">*</span>     <span class="ruby-operator">...</span> <span class="ruby-identifier">iterates</span> <span class="ruby-identifier">over</span> <span class="ruby-identifier">all</span> <span class="ruby-value">6</span> <span class="ruby-identifier">children</span> <span class="ruby-operator">...</span>
+<span class="ruby-operator">*</span>   <span class="ruby-keyword">end</span>
+<span class="ruby-operator">*</span>
+<span class="ruby-operator">*</span> <span class="ruby-identifier">use</span> <span class="ruby-constant">XmlNode</span><span class="ruby-comment">#next as in</span>
+<span class="ruby-operator">*</span>   <span class="ruby-identifier">node</span> = <span class="ruby-identifier">doc</span>.<span class="ruby-constant">OtherChild</span>
+<span class="ruby-operator">*</span>   <span class="ruby-keyword">while</span> <span class="ruby-identifier">node</span> <span class="ruby-keyword">do</span>
+<span class="ruby-operator">*</span>     <span class="ruby-operator">...</span> <span class="ruby-keyword">do</span> <span class="ruby-identifier">something</span> <span class="ruby-identifier">with</span> <span class="ruby-identifier">node</span> <span class="ruby-operator">...</span>
+<span class="ruby-operator">*</span>    <span class="ruby-identifier">node</span> = <span class="ruby-identifier">node</span>.<span class="ruby-identifier">next</span>
+<span class="ruby-operator">*</span>   <span class="ruby-keyword">end</span>
+<span class="ruby-operator">*</span>
+<span class="ruby-operator">*</span>
+</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="each-source">
+            <pre>void each(const char *name = NULL, const char *ns = NULL) {
+    int i = 0;
+    WsXmlNodeH node = $self;
+    int count = ws_xml_get_child_count_by_qname( node, ns, name );
+    while ( i &lt; count ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_child(node, i, ns, name), SWIGTYPE_p___WsXmlNode, 0));
+      ++i;
+    }
+  }
+
+
+
+
+
+  %alias get &quot;[]&quot;;
+
+  /*
+   * get child by index
+   *
+   * call-seq:
+   *  node.get(42) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(int i, const char *name = NULL, const char *ns = NULL) {
+    if (i &lt; 0 || i &gt;= ws_xml_get_child_count_by_qname($self,ns,name))
+      return NULL;
+    return ws_xml_get_child($self, i, ns, name);
+  }
+  
+  /*
+   * get first child by name (and namespace)
+   *
+   * call-seq:
+   *  node.get(&quot;name&quot;) -&gt; XmlNode
+   *  node.get(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(const char *name, const char *ns = NULL) {
+    return ws_xml_get_child($self, 0, ns, name);
+  }
+
+
+  /*
+   * get node attribute by index or name
+   *
+   * call-seq:
+   *  node.attr(1) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr(VALUE index = Qnil, VALUE namespace = Qnil) {
+    if (NIL_P(index)) { /* nil */
+      return ws_xml_get_node_attr( $self, 0 );
+    } else if (FIXNUM_P(index)) { /* numeric */
+      return ws_xml_get_node_attr( $self, FIX2INT(index) );      
+    } else { /* convert to string */
+      const char *ns = NULL;
+      const char *name = as_string(index);
+      if (!NIL_P(namespace)) {
+        ns = as_string(namespace);
+      }
+      return ws_xml_find_node_attr( $self, ns, name );
+    }
+  }
+
+  /*
+   * count node attribute
+   *
+   * call-seq:
+   *  node.attr_count -&gt; Integer
+   */
+  int attr_count() {
+    return ws_xml_get_node_attr_count( $self );
+  }
+  /*
+   * find node attribute by name
+   *
+   * call-seq:
+   *  node.attr_find(&quot;namespace&quot;, &quot;name&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_find( const char *ns, const char *name ) {
+    return ws_xml_find_node_attr( $self, ns, name );
+  }
+  /*
+   * add attribute to node
+   *
+   * call-seq:
+   *  node.attr_add(&quot;namespace&quot;, &quot;name&quot;, &quot;value&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_add( const char *ns, const char *name, const char *value ) {
+    return ws_xml_add_node_attr( $self, ns, name, value );
+  }
+  /*
+   * get end point reference
+   *
+   * call-seq:
+   *  node.epr(&quot;namespace&quot;, &quot;epr_node_name&quot;, Integer embedded) -&gt; EndPointReference
+   */
+  epr_t *epr( const char *ns, const char *epr_node_name, int embedded) {
+    return epr_deserialize($self, ns, epr_node_name, embedded);
+  }  
+
+
+
+  /*
+   * enumerate attributes
+   *
+   * call-seq:
+   *   node.each_attr { |XmlAttr| ... }
+   */
+  void each_attr() {
+    int i = 0;
+    while ( i &lt; ws_xml_get_node_attr_count( $self ) ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_node_attr($self, i), SWIGTYPE_p___WsXmlAttr, 0));
+      ++i;
+    }
+  }
+
+}</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-each_attr" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            each_attr { |XmlAttr| ... }
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>/*</p>
+
+<pre>* enumerate attributes
+*
+*</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="each_attr-source">
+            <pre>void each_attr() {
+    int i = 0;
+    while ( i &lt; ws_xml_get_node_attr_count( $self ) ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_node_attr($self, i), SWIGTYPE_p___WsXmlAttr, 0));
+      ++i;
+    }
+  }
+
+}</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-epr" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            epr(&quot;namespace&quot;, &quot;epr_node_name&quot;, Integer embedded) &rarr; EndPointReference
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>/*</p>
+
+<pre>* get end point reference
+*
+*</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="epr-source">
+            <pre>epr_t *epr( const char *ns, const char *epr_node_name, int embedded) {
+    return epr_deserialize($self, ns, epr_node_name, embedded);
+  }  
+
+
+
+  /*
+   * enumerate attributes
+   *
+   * call-seq:
+   *   node.each_attr { |XmlAttr| ... }
+   */
+  void each_attr() {
+    int i = 0;
+    while ( i &lt; ws_xml_get_node_attr_count( $self ) ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_node_attr($self, i), SWIGTYPE_p___WsXmlAttr, 0));
+      ++i;
+    }
+  }
+
+}</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-find" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            find(&quot;namespace&quot;, &quot;name&quot;) &rarr; String # recursive
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            find(&quot;namespace&quot;, &quot;name&quot;, 0) &rarr; String # non-recursive
+          </span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>/*</p>
+
+<pre>* find node within tree
+* a NULL passed as &#39;ns&#39; (namespace) is treated as wildcard
+*
+*</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="find-source">
+            <pre>WsXmlNodeH find( const char *ns, const char *name, int recursive = 1) {
+    return ws_xml_find_in_tree( $self, ns, name, recursive );
+  }
+                                 
+  /*
+   * iterate over siblings
+   *
+   * finds next sibling with same namespace and name
+   *
+   * See also XmlNode#each
+   *
+   * XmlNode#each iterates over children, XmlNode#next over siblings
+   *
+   * Example:
+   *    &lt;Foo&gt;
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Other&gt;...
+   *      &lt;Other&gt;...
+   *    &lt;/Foo&gt;
+   *
+   * node = root.Foo # points to &lt;Foo&gt; node
+   *
+   *   bar = node.Bar
+   *   while bar do
+   *     bar = bar.next
+   *   end
+   *
+   * will give you four iterations (all &lt;Bar&gt; nodes)
+   *
+   *   child = node.Bar
+   *   while child do
+   *     child = child.next(1)
+   *   end
+   *
+   * will give you six iterations (all children of &lt;Foo&gt;)
+   * The latter example is equal to
+   *
+   *   node.each do |child|
+   *     ...
+   *   end
+   *
+   */
+  WsXmlNodeH next(int all = 0) {
+    WsXmlNodeH next_node = xml_parser_get_next_child($self);
+    if (next_node &amp;&amp; !all) {
+      const char *ns_uri = ws_xml_get_node_name_ns($self);
+      const char *name = ws_xml_get_node_local_name($self);
+      if (ws_xml_is_node_qname(next_node, ns_uri, name) == 0) {
+        next_node = NULL;
+      }
+    }
+    return next_node;
+  }
+                                 
+  /*
+   * count node children
+   * if name given, count children with this name
+   * if name + ns given, count children with this namespace and name
+   */
+  int size(const char *name = NULL, const char *ns = NULL) {
+    return ws_xml_get_child_count_by_qname($self, ns, name);
+  }
+  
+  /*
+   * add child (namespace, name, text) to node
+   */
+  WsXmlNodeH add( const char *ns, const char *name, const char *text = NULL ) {
+    return ws_xml_add_child( $self, ns, name, text );
+  }
+
+  /*
+   * add child (namespace, name, text) before(!) node
+   */
+  WsXmlNodeH add_before( const char *ns, const char *name, const char *text = NULL ) {
+    return ws_xml_add_prev_sibling( $self, ns, name, text );
+  }
+
+
+  %alias add &quot;&lt;&lt;&quot;;
+
+  /*
+   * add node as child
+   */
+  WsXmlNodeH add(WsXmlNodeH node) {
+    ws_xml_duplicate_tree( $self, node );
+    return $self;
+  }
+  
+
+  /*
+   * iterate over children
+   *
+   * See also XmlNode#next
+   *
+   * XmlNode#each iterates over children, XmlNode#next over siblings
+   *
+   * can be limited to children with specific name (and specific namespace)
+   *
+   * for array-like constructs, e.g
+   *  &lt;Parent&gt;
+   *    &lt;Child&gt;..
+   *    &lt;Child&gt;..
+   *    &lt;Child&gt;..
+   *    &lt;OtherChild&gt;..
+   *    &lt;OtherChild&gt;..
+   *    &lt;OtherChild&gt;..
+   *
+   *   doc.Parent.each do |child|
+   *     ... iterates over all 6 children ...
+   *   end
+   *
+   * use XmlNode#next as in
+   *   node = doc.OtherChild
+   *   while node do
+   *     ... do something with node ...
+   *    node = node.next
+   *   end
+   *
+   * call-seq:
+   *  node.each { |XmlNode| ... }
+   *  node.each(&quot;name&quot;) { |XmlNode| ... }
+   *  node.each(&quot;name&quot;, &quot;namespace&quot;) { |XmlNode| ... }
+   */
+
+  void each(const char *name = NULL, const char *ns = NULL) {
+    int i = 0;
+    WsXmlNodeH node = $self;
+    int count = ws_xml_get_child_count_by_qname( node, ns, name );
+    while ( i &lt; count ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_child(node, i, ns, name), SWIGTYPE_p___WsXmlNode, 0));
+      ++i;
+    }
+  }
+
+
+
+
+
+  %alias get &quot;[]&quot;;
+
+  /*
+   * get child by index
+   *
+   * call-seq:
+   *  node.get(42) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(int i, const char *name = NULL, const char *ns = NULL) {
+    if (i &lt; 0 || i &gt;= ws_xml_get_child_count_by_qname($self,ns,name))
+      return NULL;
+    return ws_xml_get_child($self, i, ns, name);
+  }
+  
+  /*
+   * get first child by name (and namespace)
+   *
+   * call-seq:
+   *  node.get(&quot;name&quot;) -&gt; XmlNode
+   *  node.get(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(const char *name, const char *ns = NULL) {
+    return ws_xml_get_child($self, 0, ns, name);
+  }
+
+
+  /*
+   * get node attribute by index or name
+   *
+   * call-seq:
+   *  node.attr(1) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr(VALUE index = Qnil, VALUE namespace = Qnil) {
+    if (NIL_P(index)) { /* nil */
+      return ws_xml_get_node_attr( $self, 0 );
+    } else if (FIXNUM_P(index)) { /* numeric */
+      return ws_xml_get_node_attr( $self, FIX2INT(index) );      
+    } else { /* convert to string */
+      const char *ns = NULL;
+      const char *name = as_string(index);
+      if (!NIL_P(namespace)) {
+        ns = as_string(namespace);
+      }
+      return ws_xml_find_node_attr( $self, ns, name );
+    }
+  }
+
+  /*
+   * count node attribute
+   *
+   * call-seq:
+   *  node.attr_count -&gt; Integer
+   */
+  int attr_count() {
+    return ws_xml_get_node_attr_count( $self );
+  }
+  /*
+   * find node attribute by name
+   *
+   * call-seq:
+   *  node.attr_find(&quot;namespace&quot;, &quot;name&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_find( const char *ns, const char *name ) {
+    return ws_xml_find_node_attr( $self, ns, name );
+  }
+  /*
+   * add attribute to node
+   *
+   * call-seq:
+   *  node.attr_add(&quot;namespace&quot;, &quot;name&quot;, &quot;value&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_add( const char *ns, const char *name, const char *value ) {
+    return ws_xml_add_node_attr( $self, ns, name, value );
+  }
+  /*
+   * get end point reference
+   *
+   * call-seq:
+   *  node.epr(&quot;namespace&quot;, &quot;epr_node_name&quot;, Integer embedded) -&gt; EndPointReference
+   */
+  epr_t *epr( const char *ns, const char *epr_node_name, int embedded) {
+    return epr_deserialize($self, ns, epr_node_name, embedded);
+  }  
+
+
+
+  /*
+   * enumerate attributes
+   *
+   * call-seq:
+   *   node.each_attr { |XmlAttr| ... }
+   */
+  void each_attr() {
+    int i = 0;
+    while ( i &lt; ws_xml_get_node_attr_count( $self ) ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_node_attr($self, i), SWIGTYPE_p___WsXmlAttr, 0));
+      ++i;
+    }
+  }
+
+}</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-get" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            get(42) &rarr; XmlNode
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            get(42, &quot;name&quot;) &rarr; XmlNode
+          </span>
+          
+        </div>
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            get(42, &quot;name&quot;, &quot;namespace&quot;) &rarr; XmlNode
+          </span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>/*</p>
+
+<pre>* get child by index
+*
+*</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="get-source">
+            <pre>WsXmlNodeH get(int i, const char *name = NULL, const char *ns = NULL) {
+    if (i &lt; 0 || i &gt;= ws_xml_get_child_count_by_qname($self,ns,name))
+      return NULL;
+    return ws_xml_get_child($self, i, ns, name);
+  }
+  
+  /*
+   * get first child by name (and namespace)
+   *
+   * call-seq:
+   *  node.get(&quot;name&quot;) -&gt; XmlNode
+   *  node.get(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(const char *name, const char *ns = NULL) {
+    return ws_xml_get_child($self, 0, ns, name);
+  }
+
+
+  /*
+   * get node attribute by index or name
+   *
+   * call-seq:
+   *  node.attr(1) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr(VALUE index = Qnil, VALUE namespace = Qnil) {
+    if (NIL_P(index)) { /* nil */
+      return ws_xml_get_node_attr( $self, 0 );
+    } else if (FIXNUM_P(index)) { /* numeric */
+      return ws_xml_get_node_attr( $self, FIX2INT(index) );      
+    } else { /* convert to string */
+      const char *ns = NULL;
+      const char *name = as_string(index);
+      if (!NIL_P(namespace)) {
+        ns = as_string(namespace);
+      }
+      return ws_xml_find_node_attr( $self, ns, name );
+    }
+  }
+
+  /*
+   * count node attribute
+   *
+   * call-seq:
+   *  node.attr_count -&gt; Integer
+   */
+  int attr_count() {
+    return ws_xml_get_node_attr_count( $self );
+  }
+  /*
+   * find node attribute by name
+   *
+   * call-seq:
+   *  node.attr_find(&quot;namespace&quot;, &quot;name&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_find( const char *ns, const char *name ) {
+    return ws_xml_find_node_attr( $self, ns, name );
+  }
+  /*
+   * add attribute to node
+   *
+   * call-seq:
+   *  node.attr_add(&quot;namespace&quot;, &quot;name&quot;, &quot;value&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_add( const char *ns, const char *name, const char *value ) {
+    return ws_xml_add_node_attr( $self, ns, name, value );
+  }
+  /*
+   * get end point reference
+   *
+   * call-seq:
+   *  node.epr(&quot;namespace&quot;, &quot;epr_node_name&quot;, Integer embedded) -&gt; EndPointReference
+   */
+  epr_t *epr( const char *ns, const char *epr_node_name, int embedded) {
+    return epr_deserialize($self, ns, epr_node_name, embedded);
+  }  
+
+
+
+  /*
+   * enumerate attributes
+   *
+   * call-seq:
+   *   node.each_attr { |XmlAttr| ... }
+   */
+  void each_attr() {
+    int i = 0;
+    while ( i &lt; ws_xml_get_node_attr_count( $self ) ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_node_attr($self, i), SWIGTYPE_p___WsXmlAttr, 0));
+      ++i;
+    }
+  }
+
+}</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-lang-3D" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            lang = String
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>/*</p>
+
+<pre>* set language
+*
+*</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="lang-3D-source">
+            <pre>void set_lang(const char *lang) {
+    ws_xml_set_node_lang($self, lang);
+  }
+
+  /*
+   * find node within tree
+   * a NULL passed as &#39;ns&#39; (namespace) is treated as wildcard
+   *
+   * call-seq:
+   *  node.find(&quot;namespace&quot;, &quot;name&quot;) -&gt; String # recursive
+   *  node.find(&quot;namespace&quot;, &quot;name&quot;, 0) -&gt; String # non-recursive
+   */
+  WsXmlNodeH find( const char *ns, const char *name, int recursive = 1) {
+    return ws_xml_find_in_tree( $self, ns, name, recursive );
+  }
+                                 
+  /*
+   * iterate over siblings
+   *
+   * finds next sibling with same namespace and name
+   *
+   * See also XmlNode#each
+   *
+   * XmlNode#each iterates over children, XmlNode#next over siblings
+   *
+   * Example:
+   *    &lt;Foo&gt;
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Other&gt;...
+   *      &lt;Other&gt;...
+   *    &lt;/Foo&gt;
+   *
+   * node = root.Foo # points to &lt;Foo&gt; node
+   *
+   *   bar = node.Bar
+   *   while bar do
+   *     bar = bar.next
+   *   end
+   *
+   * will give you four iterations (all &lt;Bar&gt; nodes)
+   *
+   *   child = node.Bar
+   *   while child do
+   *     child = child.next(1)
+   *   end
+   *
+   * will give you six iterations (all children of &lt;Foo&gt;)
+   * The latter example is equal to
+   *
+   *   node.each do |child|
+   *     ...
+   *   end
+   *
+   */
+  WsXmlNodeH next(int all = 0) {
+    WsXmlNodeH next_node = xml_parser_get_next_child($self);
+    if (next_node &amp;&amp; !all) {
+      const char *ns_uri = ws_xml_get_node_name_ns($self);
+      const char *name = ws_xml_get_node_local_name($self);
+      if (ws_xml_is_node_qname(next_node, ns_uri, name) == 0) {
+        next_node = NULL;
+      }
+    }
+    return next_node;
+  }
+                                 
+  /*
+   * count node children
+   * if name given, count children with this name
+   * if name + ns given, count children with this namespace and name
+   */
+  int size(const char *name = NULL, const char *ns = NULL) {
+    return ws_xml_get_child_count_by_qname($self, ns, name);
+  }
+  
+  /*
+   * add child (namespace, name, text) to node
+   */
+  WsXmlNodeH add( const char *ns, const char *name, const char *text = NULL ) {
+    return ws_xml_add_child( $self, ns, name, text );
+  }
+
+  /*
+   * add child (namespace, name, text) before(!) node
+   */
+  WsXmlNodeH add_before( const char *ns, const char *name, const char *text = NULL ) {
+    return ws_xml_add_prev_sibling( $self, ns, name, text );
+  }
+
+
+  %alias add &quot;&lt;&lt;&quot;;
+
+  /*
+   * add node as child
+   */
+  WsXmlNodeH add(WsXmlNodeH node) {
+    ws_xml_duplicate_tree( $self, node );
+    return $self;
+  }
+  
+
+  /*
+   * iterate over children
+   *
+   * See also XmlNode#next
+   *
+   * XmlNode#each iterates over children, XmlNode#next over siblings
+   *
+   * can be limited to children with specific name (and specific namespace)
+   *
+   * for array-like constructs, e.g
+   *  &lt;Parent&gt;
+   *    &lt;Child&gt;..
+   *    &lt;Child&gt;..
+   *    &lt;Child&gt;..
+   *    &lt;OtherChild&gt;..
+   *    &lt;OtherChild&gt;..
+   *    &lt;OtherChild&gt;..
+   *
+   *   doc.Parent.each do |child|
+   *     ... iterates over all 6 children ...
+   *   end
+   *
+   * use XmlNode#next as in
+   *   node = doc.OtherChild
+   *   while node do
+   *     ... do something with node ...
+   *    node = node.next
+   *   end
+   *
+   * call-seq:
+   *  node.each { |XmlNode| ... }
+   *  node.each(&quot;name&quot;) { |XmlNode| ... }
+   *  node.each(&quot;name&quot;, &quot;namespace&quot;) { |XmlNode| ... }
+   */
+
+  void each(const char *name = NULL, const char *ns = NULL) {
+    int i = 0;
+    WsXmlNodeH node = $self;
+    int count = ws_xml_get_child_count_by_qname( node, ns, name );
+    while ( i &lt; count ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_child(node, i, ns, name), SWIGTYPE_p___WsXmlNode, 0));
+      ++i;
+    }
+  }
+
+
+
+
+
+  %alias get &quot;[]&quot;;
+
+  /*
+   * get child by index
+   *
+   * call-seq:
+   *  node.get(42) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(int i, const char *name = NULL, const char *ns = NULL) {
+    if (i &lt; 0 || i &gt;= ws_xml_get_child_count_by_qname($self,ns,name))
+      return NULL;
+    return ws_xml_get_child($self, i, ns, name);
+  }
+  
+  /*
+   * get first child by name (and namespace)
+   *
+   * call-seq:
+   *  node.get(&quot;name&quot;) -&gt; XmlNode
+   *  node.get(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(const char *name, const char *ns = NULL) {
+    return ws_xml_get_child($self, 0, ns, name);
+  }
+
+
+  /*
+   * get node attribute by index or name
+   *
+   * call-seq:
+   *  node.attr(1) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr(VALUE index = Qnil, VALUE namespace = Qnil) {
+    if (NIL_P(index)) { /* nil */
+      return ws_xml_get_node_attr( $self, 0 );
+    } else if (FIXNUM_P(index)) { /* numeric */
+      return ws_xml_get_node_attr( $self, FIX2INT(index) );      
+    } else { /* convert to string */
+      const char *ns = NULL;
+      const char *name = as_string(index);
+      if (!NIL_P(namespace)) {
+        ns = as_string(namespace);
+      }
+      return ws_xml_find_node_attr( $self, ns, name );
+    }
+  }
+
+  /*
+   * count node attribute
+   *
+   * call-seq:
+   *  node.attr_count -&gt; Integer
+   */
+  int attr_count() {
+    return ws_xml_get_node_attr_count( $self );
+  }
+  /*
+   * find node attribute by name
+   *
+   * call-seq:
+   *  node.attr_find(&quot;namespace&quot;, &quot;name&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_find( const char *ns, const char *name ) {
+    return ws_xml_find_node_attr( $self, ns, name );
+  }
+  /*
+   * add attribute to node
+   *
+   * call-seq:
+   *  node.attr_add(&quot;namespace&quot;, &quot;name&quot;, &quot;value&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_add( const char *ns, const char *name, const char *value ) {
+    return ws_xml_add_node_attr( $self, ns, name, value );
+  }
+  /*
+   * get end point reference
+   *
+   * call-seq:
+   *  node.epr(&quot;namespace&quot;, &quot;epr_node_name&quot;, Integer embedded) -&gt; EndPointReference
+   */
+  epr_t *epr( const char *ns, const char *epr_node_name, int embedded) {
+    return epr_deserialize($self, ns, epr_node_name, embedded);
+  }  
+
+
+
+  /*
+   * enumerate attributes
+   *
+   * call-seq:
+   *   node.each_attr { |XmlAttr| ... }
+   */
+  void each_attr() {
+    int i = 0;
+    while ( i &lt; ws_xml_get_node_attr_count( $self ) ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_node_attr($self, i), SWIGTYPE_p___WsXmlAttr, 0));
+      ++i;
+    }
+  }
+
+}</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-name" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            name &rarr; String
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>/*</p>
+
+<pre>* get name for node
+*
+*</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="name-source">
+            <pre>char *name() {
+    return ws_xml_get_node_local_name( $self );
+  }
+
+  %rename(&quot;name=&quot;) set_name( const char *name);
+
+
+  /*
+   * set name of node
+   *
+   * call-seq:
+   *  node.name = String
+   */
+  void set_name( const char *name ) {
+    ws_xml_set_node_name( $self, ws_xml_get_node_name_ns( $self ), name );
+  }
+  
+  /*
+   * get namespace for node
+   *
+   * call-seq:
+   *  node.ns -&gt; String
+   */
+  char *ns() {
+    return ws_xml_get_node_name_ns( $self );
+  }
+
+
+  %rename(&quot;ns=&quot;) set_ns( const char *nsuri );
+
+  /*
+   * set namespace of node
+   *
+   * call-seq:
+   *  node.ns = String
+   */
+  void set_ns( const char *ns ) {
+    ws_xml_set_ns( $self, ns, ws_xml_get_node_name_ns_prefix($self) );
+  }
+
+  /*
+   * get prefix of nodes namespace
+   *
+   * call-seq:
+   *  node.prefix -&gt; String
+   */
+  const char *prefix() {
+    return ws_xml_get_node_name_ns_prefix($self);
+  }
+
+
+  %rename(&quot;lang=&quot;) set_lang(const char *lang);
+
+  /*
+   * set language
+   *
+   * call-seq:
+   *  node.lang = String
+   */
+  void set_lang(const char *lang) {
+    ws_xml_set_node_lang($self, lang);
+  }
+
+  /*
+   * find node within tree
+   * a NULL passed as &#39;ns&#39; (namespace) is treated as wildcard
+   *
+   * call-seq:
+   *  node.find(&quot;namespace&quot;, &quot;name&quot;) -&gt; String # recursive
+   *  node.find(&quot;namespace&quot;, &quot;name&quot;, 0) -&gt; String # non-recursive
+   */
+  WsXmlNodeH find( const char *ns, const char *name, int recursive = 1) {
+    return ws_xml_find_in_tree( $self, ns, name, recursive );
+  }
+                                 
+  /*
+   * iterate over siblings
+   *
+   * finds next sibling with same namespace and name
+   *
+   * See also XmlNode#each
+   *
+   * XmlNode#each iterates over children, XmlNode#next over siblings
+   *
+   * Example:
+   *    &lt;Foo&gt;
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Other&gt;...
+   *      &lt;Other&gt;...
+   *    &lt;/Foo&gt;
+   *
+   * node = root.Foo # points to &lt;Foo&gt; node
+   *
+   *   bar = node.Bar
+   *   while bar do
+   *     bar = bar.next
+   *   end
+   *
+   * will give you four iterations (all &lt;Bar&gt; nodes)
+   *
+   *   child = node.Bar
+   *   while child do
+   *     child = child.next(1)
+   *   end
+   *
+   * will give you six iterations (all children of &lt;Foo&gt;)
+   * The latter example is equal to
+   *
+   *   node.each do |child|
+   *     ...
+   *   end
+   *
+   */
+  WsXmlNodeH next(int all = 0) {
+    WsXmlNodeH next_node = xml_parser_get_next_child($self);
+    if (next_node &amp;&amp; !all) {
+      const char *ns_uri = ws_xml_get_node_name_ns($self);
+      const char *name = ws_xml_get_node_local_name($self);
+      if (ws_xml_is_node_qname(next_node, ns_uri, name) == 0) {
+        next_node = NULL;
+      }
+    }
+    return next_node;
+  }
+                                 
+  /*
+   * count node children
+   * if name given, count children with this name
+   * if name + ns given, count children with this namespace and name
+   */
+  int size(const char *name = NULL, const char *ns = NULL) {
+    return ws_xml_get_child_count_by_qname($self, ns, name);
+  }
+  
+  /*
+   * add child (namespace, name, text) to node
+   */
+  WsXmlNodeH add( const char *ns, const char *name, const char *text = NULL ) {
+    return ws_xml_add_child( $self, ns, name, text );
+  }
+
+  /*
+   * add child (namespace, name, text) before(!) node
+   */
+  WsXmlNodeH add_before( const char *ns, const char *name, const char *text = NULL ) {
+    return ws_xml_add_prev_sibling( $self, ns, name, text );
+  }
+
+
+  %alias add &quot;&lt;&lt;&quot;;
+
+  /*
+   * add node as child
+   */
+  WsXmlNodeH add(WsXmlNodeH node) {
+    ws_xml_duplicate_tree( $self, node );
+    return $self;
+  }
+  
+
+  /*
+   * iterate over children
+   *
+   * See also XmlNode#next
+   *
+   * XmlNode#each iterates over children, XmlNode#next over siblings
+   *
+   * can be limited to children with specific name (and specific namespace)
+   *
+   * for array-like constructs, e.g
+   *  &lt;Parent&gt;
+   *    &lt;Child&gt;..
+   *    &lt;Child&gt;..
+   *    &lt;Child&gt;..
+   *    &lt;OtherChild&gt;..
+   *    &lt;OtherChild&gt;..
+   *    &lt;OtherChild&gt;..
+   *
+   *   doc.Parent.each do |child|
+   *     ... iterates over all 6 children ...
+   *   end
+   *
+   * use XmlNode#next as in
+   *   node = doc.OtherChild
+   *   while node do
+   *     ... do something with node ...
+   *    node = node.next
+   *   end
+   *
+   * call-seq:
+   *  node.each { |XmlNode| ... }
+   *  node.each(&quot;name&quot;) { |XmlNode| ... }
+   *  node.each(&quot;name&quot;, &quot;namespace&quot;) { |XmlNode| ... }
+   */
+
+  void each(const char *name = NULL, const char *ns = NULL) {
+    int i = 0;
+    WsXmlNodeH node = $self;
+    int count = ws_xml_get_child_count_by_qname( node, ns, name );
+    while ( i &lt; count ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_child(node, i, ns, name), SWIGTYPE_p___WsXmlNode, 0));
+      ++i;
+    }
+  }
+
+
+
+
+
+  %alias get &quot;[]&quot;;
+
+  /*
+   * get child by index
+   *
+   * call-seq:
+   *  node.get(42) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(int i, const char *name = NULL, const char *ns = NULL) {
+    if (i &lt; 0 || i &gt;= ws_xml_get_child_count_by_qname($self,ns,name))
+      return NULL;
+    return ws_xml_get_child($self, i, ns, name);
+  }
+  
+  /*
+   * get first child by name (and namespace)
+   *
+   * call-seq:
+   *  node.get(&quot;name&quot;) -&gt; XmlNode
+   *  node.get(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(const char *name, const char *ns = NULL) {
+    return ws_xml_get_child($self, 0, ns, name);
+  }
+
+
+  /*
+   * get node attribute by index or name
+   *
+   * call-seq:
+   *  node.attr(1) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr(VALUE index = Qnil, VALUE namespace = Qnil) {
+    if (NIL_P(index)) { /* nil */
+      return ws_xml_get_node_attr( $self, 0 );
+    } else if (FIXNUM_P(index)) { /* numeric */
+      return ws_xml_get_node_attr( $self, FIX2INT(index) );      
+    } else { /* convert to string */
+      const char *ns = NULL;
+      const char *name = as_string(index);
+      if (!NIL_P(namespace)) {
+        ns = as_string(namespace);
+      }
+      return ws_xml_find_node_attr( $self, ns, name );
+    }
+  }
+
+  /*
+   * count node attribute
+   *
+   * call-seq:
+   *  node.attr_count -&gt; Integer
+   */
+  int attr_count() {
+    return ws_xml_get_node_attr_count( $self );
+  }
+  /*
+   * find node attribute by name
+   *
+   * call-seq:
+   *  node.attr_find(&quot;namespace&quot;, &quot;name&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_find( const char *ns, const char *name ) {
+    return ws_xml_find_node_attr( $self, ns, name );
+  }
+  /*
+   * add attribute to node
+   *
+   * call-seq:
+   *  node.attr_add(&quot;namespace&quot;, &quot;name&quot;, &quot;value&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_add( const char *ns, const char *name, const char *value ) {
+    return ws_xml_add_node_attr( $self, ns, name, value );
+  }
+  /*
+   * get end point reference
+   *
+   * call-seq:
+   *  node.epr(&quot;namespace&quot;, &quot;epr_node_name&quot;, Integer embedded) -&gt; EndPointReference
+   */
+  epr_t *epr( const char *ns, const char *epr_node_name, int embedded) {
+    return epr_deserialize($self, ns, epr_node_name, embedded);
+  }  
+
+
+
+  /*
+   * enumerate attributes
+   *
+   * call-seq:
+   *   node.each_attr { |XmlAttr| ... }
+   */
+  void each_attr() {
+    int i = 0;
+    while ( i &lt; ws_xml_get_node_attr_count( $self ) ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_node_attr($self, i), SWIGTYPE_p___WsXmlAttr, 0));
+      ++i;
+    }
+  }
+
+}</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-name-3D" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            name = String
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>/*</p>
+
+<pre>* set name of node
+*
+*</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="name-3D-source">
+            <pre>void set_name( const char *name ) {
+    ws_xml_set_node_name( $self, ws_xml_get_node_name_ns( $self ), name );
+  }
+  
+  /*
+   * get namespace for node
+   *
+   * call-seq:
+   *  node.ns -&gt; String
+   */
+  char *ns() {
+    return ws_xml_get_node_name_ns( $self );
+  }
+
+
+  %rename(&quot;ns=&quot;) set_ns( const char *nsuri );
+
+  /*
+   * set namespace of node
+   *
+   * call-seq:
+   *  node.ns = String
+   */
+  void set_ns( const char *ns ) {
+    ws_xml_set_ns( $self, ns, ws_xml_get_node_name_ns_prefix($self) );
+  }
+
+  /*
+   * get prefix of nodes namespace
+   *
+   * call-seq:
+   *  node.prefix -&gt; String
+   */
+  const char *prefix() {
+    return ws_xml_get_node_name_ns_prefix($self);
+  }
+
+
+  %rename(&quot;lang=&quot;) set_lang(const char *lang);
+
+  /*
+   * set language
+   *
+   * call-seq:
+   *  node.lang = String
+   */
+  void set_lang(const char *lang) {
+    ws_xml_set_node_lang($self, lang);
+  }
+
+  /*
+   * find node within tree
+   * a NULL passed as &#39;ns&#39; (namespace) is treated as wildcard
+   *
+   * call-seq:
+   *  node.find(&quot;namespace&quot;, &quot;name&quot;) -&gt; String # recursive
+   *  node.find(&quot;namespace&quot;, &quot;name&quot;, 0) -&gt; String # non-recursive
+   */
+  WsXmlNodeH find( const char *ns, const char *name, int recursive = 1) {
+    return ws_xml_find_in_tree( $self, ns, name, recursive );
+  }
+                                 
+  /*
+   * iterate over siblings
+   *
+   * finds next sibling with same namespace and name
+   *
+   * See also XmlNode#each
+   *
+   * XmlNode#each iterates over children, XmlNode#next over siblings
+   *
+   * Example:
+   *    &lt;Foo&gt;
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Other&gt;...
+   *      &lt;Other&gt;...
+   *    &lt;/Foo&gt;
+   *
+   * node = root.Foo # points to &lt;Foo&gt; node
+   *
+   *   bar = node.Bar
+   *   while bar do
+   *     bar = bar.next
+   *   end
+   *
+   * will give you four iterations (all &lt;Bar&gt; nodes)
+   *
+   *   child = node.Bar
+   *   while child do
+   *     child = child.next(1)
+   *   end
+   *
+   * will give you six iterations (all children of &lt;Foo&gt;)
+   * The latter example is equal to
+   *
+   *   node.each do |child|
+   *     ...
+   *   end
+   *
+   */
+  WsXmlNodeH next(int all = 0) {
+    WsXmlNodeH next_node = xml_parser_get_next_child($self);
+    if (next_node &amp;&amp; !all) {
+      const char *ns_uri = ws_xml_get_node_name_ns($self);
+      const char *name = ws_xml_get_node_local_name($self);
+      if (ws_xml_is_node_qname(next_node, ns_uri, name) == 0) {
+        next_node = NULL;
+      }
+    }
+    return next_node;
+  }
+                                 
+  /*
+   * count node children
+   * if name given, count children with this name
+   * if name + ns given, count children with this namespace and name
+   */
+  int size(const char *name = NULL, const char *ns = NULL) {
+    return ws_xml_get_child_count_by_qname($self, ns, name);
+  }
+  
+  /*
+   * add child (namespace, name, text) to node
+   */
+  WsXmlNodeH add( const char *ns, const char *name, const char *text = NULL ) {
+    return ws_xml_add_child( $self, ns, name, text );
+  }
+
+  /*
+   * add child (namespace, name, text) before(!) node
+   */
+  WsXmlNodeH add_before( const char *ns, const char *name, const char *text = NULL ) {
+    return ws_xml_add_prev_sibling( $self, ns, name, text );
+  }
+
+
+  %alias add &quot;&lt;&lt;&quot;;
+
+  /*
+   * add node as child
+   */
+  WsXmlNodeH add(WsXmlNodeH node) {
+    ws_xml_duplicate_tree( $self, node );
+    return $self;
+  }
+  
+
+  /*
+   * iterate over children
+   *
+   * See also XmlNode#next
+   *
+   * XmlNode#each iterates over children, XmlNode#next over siblings
+   *
+   * can be limited to children with specific name (and specific namespace)
+   *
+   * for array-like constructs, e.g
+   *  &lt;Parent&gt;
+   *    &lt;Child&gt;..
+   *    &lt;Child&gt;..
+   *    &lt;Child&gt;..
+   *    &lt;OtherChild&gt;..
+   *    &lt;OtherChild&gt;..
+   *    &lt;OtherChild&gt;..
+   *
+   *   doc.Parent.each do |child|
+   *     ... iterates over all 6 children ...
+   *   end
+   *
+   * use XmlNode#next as in
+   *   node = doc.OtherChild
+   *   while node do
+   *     ... do something with node ...
+   *    node = node.next
+   *   end
+   *
+   * call-seq:
+   *  node.each { |XmlNode| ... }
+   *  node.each(&quot;name&quot;) { |XmlNode| ... }
+   *  node.each(&quot;name&quot;, &quot;namespace&quot;) { |XmlNode| ... }
+   */
+
+  void each(const char *name = NULL, const char *ns = NULL) {
+    int i = 0;
+    WsXmlNodeH node = $self;
+    int count = ws_xml_get_child_count_by_qname( node, ns, name );
+    while ( i &lt; count ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_child(node, i, ns, name), SWIGTYPE_p___WsXmlNode, 0));
+      ++i;
+    }
+  }
+
+
+
+
+
+  %alias get &quot;[]&quot;;
+
+  /*
+   * get child by index
+   *
+   * call-seq:
+   *  node.get(42) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(int i, const char *name = NULL, const char *ns = NULL) {
+    if (i &lt; 0 || i &gt;= ws_xml_get_child_count_by_qname($self,ns,name))
+      return NULL;
+    return ws_xml_get_child($self, i, ns, name);
+  }
+  
+  /*
+   * get first child by name (and namespace)
+   *
+   * call-seq:
+   *  node.get(&quot;name&quot;) -&gt; XmlNode
+   *  node.get(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(const char *name, const char *ns = NULL) {
+    return ws_xml_get_child($self, 0, ns, name);
+  }
+
+
+  /*
+   * get node attribute by index or name
+   *
+   * call-seq:
+   *  node.attr(1) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr(VALUE index = Qnil, VALUE namespace = Qnil) {
+    if (NIL_P(index)) { /* nil */
+      return ws_xml_get_node_attr( $self, 0 );
+    } else if (FIXNUM_P(index)) { /* numeric */
+      return ws_xml_get_node_attr( $self, FIX2INT(index) );      
+    } else { /* convert to string */
+      const char *ns = NULL;
+      const char *name = as_string(index);
+      if (!NIL_P(namespace)) {
+        ns = as_string(namespace);
+      }
+      return ws_xml_find_node_attr( $self, ns, name );
+    }
+  }
+
+  /*
+   * count node attribute
+   *
+   * call-seq:
+   *  node.attr_count -&gt; Integer
+   */
+  int attr_count() {
+    return ws_xml_get_node_attr_count( $self );
+  }
+  /*
+   * find node attribute by name
+   *
+   * call-seq:
+   *  node.attr_find(&quot;namespace&quot;, &quot;name&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_find( const char *ns, const char *name ) {
+    return ws_xml_find_node_attr( $self, ns, name );
+  }
+  /*
+   * add attribute to node
+   *
+   * call-seq:
+   *  node.attr_add(&quot;namespace&quot;, &quot;name&quot;, &quot;value&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_add( const char *ns, const char *name, const char *value ) {
+    return ws_xml_add_node_attr( $self, ns, name, value );
+  }
+  /*
+   * get end point reference
+   *
+   * call-seq:
+   *  node.epr(&quot;namespace&quot;, &quot;epr_node_name&quot;, Integer embedded) -&gt; EndPointReference
+   */
+  epr_t *epr( const char *ns, const char *epr_node_name, int embedded) {
+    return epr_deserialize($self, ns, epr_node_name, embedded);
+  }  
+
+
+
+  /*
+   * enumerate attributes
+   *
+   * call-seq:
+   *   node.each_attr { |XmlAttr| ... }
+   */
+  void each_attr() {
+    int i = 0;
+    while ( i &lt; ws_xml_get_node_attr_count( $self ) ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_node_attr($self, i), SWIGTYPE_p___WsXmlAttr, 0));
+      ++i;
+    }
+  }
+
+}</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-next" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">next</span><span
+            class="method-args">(p1)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>iterate over siblings</p>
+
+<p>finds next sibling with same namespace and name</p>
+
+<p>See also <a href="XmlNode.html#method-i-each">#each</a></p>
+
+<p><a href="XmlNode.html#method-i-each">#each</a> iterates over children, <a
+href="XmlNode.html#method-i-next">#next</a> over siblings</p>
+
+<p>Example:</p>
+
+<pre>&lt;Foo&gt;
+  &lt;Bar&gt;...
+  &lt;Bar&gt;...
+  &lt;Bar&gt;...
+  &lt;Bar&gt;...
+  &lt;Other&gt;...
+  &lt;Other&gt;...
+&lt;/Foo&gt;</pre>
+
+<p>node = root.Foo # points to &lt;Foo&gt; node</p>
+
+<pre>bar = node.Bar
+while bar do
+  bar = bar.next
+end</pre>
+
+<p>will give you four iterations (all &lt;Bar&gt; nodes)</p>
+
+<pre>child = node.Bar
+while child do
+  child = child.next(1)
+end</pre>
+
+<p>will give you six iterations (all children of &lt;Foo&gt;) The latter
+example is equal to</p>
+
+<pre class="ruby"><span class="ruby-identifier">node</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">child</span><span class="ruby-operator">|</span>
+  <span class="ruby-operator">...</span>
+<span class="ruby-keyword">end</span>
+</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="next-source">
+            <pre>WsXmlNodeH next(int all = 0) {
+    WsXmlNodeH next_node = xml_parser_get_next_child($self);
+    if (next_node &amp;&amp; !all) {
+      const char *ns_uri = ws_xml_get_node_name_ns($self);
+      const char *name = ws_xml_get_node_local_name($self);
+      if (ws_xml_is_node_qname(next_node, ns_uri, name) == 0) {
+        next_node = NULL;
+      }
+    }
+    return next_node;
+  }
+                                 
+  /*
+   * count node children
+   * if name given, count children with this name
+   * if name + ns given, count children with this namespace and name
+   */
+  int size(const char *name = NULL, const char *ns = NULL) {
+    return ws_xml_get_child_count_by_qname($self, ns, name);
+  }
+  
+  /*
+   * add child (namespace, name, text) to node
+   */
+  WsXmlNodeH add( const char *ns, const char *name, const char *text = NULL ) {
+    return ws_xml_add_child( $self, ns, name, text );
+  }
+
+  /*
+   * add child (namespace, name, text) before(!) node
+   */
+  WsXmlNodeH add_before( const char *ns, const char *name, const char *text = NULL ) {
+    return ws_xml_add_prev_sibling( $self, ns, name, text );
+  }
+
+
+  %alias add &quot;&lt;&lt;&quot;;
+
+  /*
+   * add node as child
+   */
+  WsXmlNodeH add(WsXmlNodeH node) {
+    ws_xml_duplicate_tree( $self, node );
+    return $self;
+  }
+  
+
+  /*
+   * iterate over children
+   *
+   * See also XmlNode#next
+   *
+   * XmlNode#each iterates over children, XmlNode#next over siblings
+   *
+   * can be limited to children with specific name (and specific namespace)
+   *
+   * for array-like constructs, e.g
+   *  &lt;Parent&gt;
+   *    &lt;Child&gt;..
+   *    &lt;Child&gt;..
+   *    &lt;Child&gt;..
+   *    &lt;OtherChild&gt;..
+   *    &lt;OtherChild&gt;..
+   *    &lt;OtherChild&gt;..
+   *
+   *   doc.Parent.each do |child|
+   *     ... iterates over all 6 children ...
+   *   end
+   *
+   * use XmlNode#next as in
+   *   node = doc.OtherChild
+   *   while node do
+   *     ... do something with node ...
+   *    node = node.next
+   *   end
+   *
+   * call-seq:
+   *  node.each { |XmlNode| ... }
+   *  node.each(&quot;name&quot;) { |XmlNode| ... }
+   *  node.each(&quot;name&quot;, &quot;namespace&quot;) { |XmlNode| ... }
+   */
+
+  void each(const char *name = NULL, const char *ns = NULL) {
+    int i = 0;
+    WsXmlNodeH node = $self;
+    int count = ws_xml_get_child_count_by_qname( node, ns, name );
+    while ( i &lt; count ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_child(node, i, ns, name), SWIGTYPE_p___WsXmlNode, 0));
+      ++i;
+    }
+  }
+
+
+
+
+
+  %alias get &quot;[]&quot;;
+
+  /*
+   * get child by index
+   *
+   * call-seq:
+   *  node.get(42) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(int i, const char *name = NULL, const char *ns = NULL) {
+    if (i &lt; 0 || i &gt;= ws_xml_get_child_count_by_qname($self,ns,name))
+      return NULL;
+    return ws_xml_get_child($self, i, ns, name);
+  }
+  
+  /*
+   * get first child by name (and namespace)
+   *
+   * call-seq:
+   *  node.get(&quot;name&quot;) -&gt; XmlNode
+   *  node.get(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(const char *name, const char *ns = NULL) {
+    return ws_xml_get_child($self, 0, ns, name);
+  }
+
+
+  /*
+   * get node attribute by index or name
+   *
+   * call-seq:
+   *  node.attr(1) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr(VALUE index = Qnil, VALUE namespace = Qnil) {
+    if (NIL_P(index)) { /* nil */
+      return ws_xml_get_node_attr( $self, 0 );
+    } else if (FIXNUM_P(index)) { /* numeric */
+      return ws_xml_get_node_attr( $self, FIX2INT(index) );      
+    } else { /* convert to string */
+      const char *ns = NULL;
+      const char *name = as_string(index);
+      if (!NIL_P(namespace)) {
+        ns = as_string(namespace);
+      }
+      return ws_xml_find_node_attr( $self, ns, name );
+    }
+  }
+
+  /*
+   * count node attribute
+   *
+   * call-seq:
+   *  node.attr_count -&gt; Integer
+   */
+  int attr_count() {
+    return ws_xml_get_node_attr_count( $self );
+  }
+  /*
+   * find node attribute by name
+   *
+   * call-seq:
+   *  node.attr_find(&quot;namespace&quot;, &quot;name&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_find( const char *ns, const char *name ) {
+    return ws_xml_find_node_attr( $self, ns, name );
+  }
+  /*
+   * add attribute to node
+   *
+   * call-seq:
+   *  node.attr_add(&quot;namespace&quot;, &quot;name&quot;, &quot;value&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_add( const char *ns, const char *name, const char *value ) {
+    return ws_xml_add_node_attr( $self, ns, name, value );
+  }
+  /*
+   * get end point reference
+   *
+   * call-seq:
+   *  node.epr(&quot;namespace&quot;, &quot;epr_node_name&quot;, Integer embedded) -&gt; EndPointReference
+   */
+  epr_t *epr( const char *ns, const char *epr_node_name, int embedded) {
+    return epr_deserialize($self, ns, epr_node_name, embedded);
+  }  
+
+
+
+  /*
+   * enumerate attributes
+   *
+   * call-seq:
+   *   node.each_attr { |XmlAttr| ... }
+   */
+  void each_attr() {
+    int i = 0;
+    while ( i &lt; ws_xml_get_node_attr_count( $self ) ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_node_attr($self, i), SWIGTYPE_p___WsXmlAttr, 0));
+      ++i;
+    }
+  }
+
+}</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-ns" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            ns &rarr; String
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>/*</p>
+
+<pre>* get namespace for node
+*
+*</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="ns-source">
+            <pre>char *ns() {
+    return ws_xml_get_node_name_ns( $self );
+  }
+
+
+  %rename(&quot;ns=&quot;) set_ns( const char *nsuri );
+
+  /*
+   * set namespace of node
+   *
+   * call-seq:
+   *  node.ns = String
+   */
+  void set_ns( const char *ns ) {
+    ws_xml_set_ns( $self, ns, ws_xml_get_node_name_ns_prefix($self) );
+  }
+
+  /*
+   * get prefix of nodes namespace
+   *
+   * call-seq:
+   *  node.prefix -&gt; String
+   */
+  const char *prefix() {
+    return ws_xml_get_node_name_ns_prefix($self);
+  }
+
+
+  %rename(&quot;lang=&quot;) set_lang(const char *lang);
+
+  /*
+   * set language
+   *
+   * call-seq:
+   *  node.lang = String
+   */
+  void set_lang(const char *lang) {
+    ws_xml_set_node_lang($self, lang);
+  }
+
+  /*
+   * find node within tree
+   * a NULL passed as &#39;ns&#39; (namespace) is treated as wildcard
+   *
+   * call-seq:
+   *  node.find(&quot;namespace&quot;, &quot;name&quot;) -&gt; String # recursive
+   *  node.find(&quot;namespace&quot;, &quot;name&quot;, 0) -&gt; String # non-recursive
+   */
+  WsXmlNodeH find( const char *ns, const char *name, int recursive = 1) {
+    return ws_xml_find_in_tree( $self, ns, name, recursive );
+  }
+                                 
+  /*
+   * iterate over siblings
+   *
+   * finds next sibling with same namespace and name
+   *
+   * See also XmlNode#each
+   *
+   * XmlNode#each iterates over children, XmlNode#next over siblings
+   *
+   * Example:
+   *    &lt;Foo&gt;
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Other&gt;...
+   *      &lt;Other&gt;...
+   *    &lt;/Foo&gt;
+   *
+   * node = root.Foo # points to &lt;Foo&gt; node
+   *
+   *   bar = node.Bar
+   *   while bar do
+   *     bar = bar.next
+   *   end
+   *
+   * will give you four iterations (all &lt;Bar&gt; nodes)
+   *
+   *   child = node.Bar
+   *   while child do
+   *     child = child.next(1)
+   *   end
+   *
+   * will give you six iterations (all children of &lt;Foo&gt;)
+   * The latter example is equal to
+   *
+   *   node.each do |child|
+   *     ...
+   *   end
+   *
+   */
+  WsXmlNodeH next(int all = 0) {
+    WsXmlNodeH next_node = xml_parser_get_next_child($self);
+    if (next_node &amp;&amp; !all) {
+      const char *ns_uri = ws_xml_get_node_name_ns($self);
+      const char *name = ws_xml_get_node_local_name($self);
+      if (ws_xml_is_node_qname(next_node, ns_uri, name) == 0) {
+        next_node = NULL;
+      }
+    }
+    return next_node;
+  }
+                                 
+  /*
+   * count node children
+   * if name given, count children with this name
+   * if name + ns given, count children with this namespace and name
+   */
+  int size(const char *name = NULL, const char *ns = NULL) {
+    return ws_xml_get_child_count_by_qname($self, ns, name);
+  }
+  
+  /*
+   * add child (namespace, name, text) to node
+   */
+  WsXmlNodeH add( const char *ns, const char *name, const char *text = NULL ) {
+    return ws_xml_add_child( $self, ns, name, text );
+  }
+
+  /*
+   * add child (namespace, name, text) before(!) node
+   */
+  WsXmlNodeH add_before( const char *ns, const char *name, const char *text = NULL ) {
+    return ws_xml_add_prev_sibling( $self, ns, name, text );
+  }
+
+
+  %alias add &quot;&lt;&lt;&quot;;
+
+  /*
+   * add node as child
+   */
+  WsXmlNodeH add(WsXmlNodeH node) {
+    ws_xml_duplicate_tree( $self, node );
+    return $self;
+  }
+  
+
+  /*
+   * iterate over children
+   *
+   * See also XmlNode#next
+   *
+   * XmlNode#each iterates over children, XmlNode#next over siblings
+   *
+   * can be limited to children with specific name (and specific namespace)
+   *
+   * for array-like constructs, e.g
+   *  &lt;Parent&gt;
+   *    &lt;Child&gt;..
+   *    &lt;Child&gt;..
+   *    &lt;Child&gt;..
+   *    &lt;OtherChild&gt;..
+   *    &lt;OtherChild&gt;..
+   *    &lt;OtherChild&gt;..
+   *
+   *   doc.Parent.each do |child|
+   *     ... iterates over all 6 children ...
+   *   end
+   *
+   * use XmlNode#next as in
+   *   node = doc.OtherChild
+   *   while node do
+   *     ... do something with node ...
+   *    node = node.next
+   *   end
+   *
+   * call-seq:
+   *  node.each { |XmlNode| ... }
+   *  node.each(&quot;name&quot;) { |XmlNode| ... }
+   *  node.each(&quot;name&quot;, &quot;namespace&quot;) { |XmlNode| ... }
+   */
+
+  void each(const char *name = NULL, const char *ns = NULL) {
+    int i = 0;
+    WsXmlNodeH node = $self;
+    int count = ws_xml_get_child_count_by_qname( node, ns, name );
+    while ( i &lt; count ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_child(node, i, ns, name), SWIGTYPE_p___WsXmlNode, 0));
+      ++i;
+    }
+  }
+
+
+
+
+
+  %alias get &quot;[]&quot;;
+
+  /*
+   * get child by index
+   *
+   * call-seq:
+   *  node.get(42) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(int i, const char *name = NULL, const char *ns = NULL) {
+    if (i &lt; 0 || i &gt;= ws_xml_get_child_count_by_qname($self,ns,name))
+      return NULL;
+    return ws_xml_get_child($self, i, ns, name);
+  }
+  
+  /*
+   * get first child by name (and namespace)
+   *
+   * call-seq:
+   *  node.get(&quot;name&quot;) -&gt; XmlNode
+   *  node.get(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(const char *name, const char *ns = NULL) {
+    return ws_xml_get_child($self, 0, ns, name);
+  }
+
+
+  /*
+   * get node attribute by index or name
+   *
+   * call-seq:
+   *  node.attr(1) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr(VALUE index = Qnil, VALUE namespace = Qnil) {
+    if (NIL_P(index)) { /* nil */
+      return ws_xml_get_node_attr( $self, 0 );
+    } else if (FIXNUM_P(index)) { /* numeric */
+      return ws_xml_get_node_attr( $self, FIX2INT(index) );      
+    } else { /* convert to string */
+      const char *ns = NULL;
+      const char *name = as_string(index);
+      if (!NIL_P(namespace)) {
+        ns = as_string(namespace);
+      }
+      return ws_xml_find_node_attr( $self, ns, name );
+    }
+  }
+
+  /*
+   * count node attribute
+   *
+   * call-seq:
+   *  node.attr_count -&gt; Integer
+   */
+  int attr_count() {
+    return ws_xml_get_node_attr_count( $self );
+  }
+  /*
+   * find node attribute by name
+   *
+   * call-seq:
+   *  node.attr_find(&quot;namespace&quot;, &quot;name&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_find( const char *ns, const char *name ) {
+    return ws_xml_find_node_attr( $self, ns, name );
+  }
+  /*
+   * add attribute to node
+   *
+   * call-seq:
+   *  node.attr_add(&quot;namespace&quot;, &quot;name&quot;, &quot;value&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_add( const char *ns, const char *name, const char *value ) {
+    return ws_xml_add_node_attr( $self, ns, name, value );
+  }
+  /*
+   * get end point reference
+   *
+   * call-seq:
+   *  node.epr(&quot;namespace&quot;, &quot;epr_node_name&quot;, Integer embedded) -&gt; EndPointReference
+   */
+  epr_t *epr( const char *ns, const char *epr_node_name, int embedded) {
+    return epr_deserialize($self, ns, epr_node_name, embedded);
+  }  
+
+
+
+  /*
+   * enumerate attributes
+   *
+   * call-seq:
+   *   node.each_attr { |XmlAttr| ... }
+   */
+  void each_attr() {
+    int i = 0;
+    while ( i &lt; ws_xml_get_node_attr_count( $self ) ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_node_attr($self, i), SWIGTYPE_p___WsXmlAttr, 0));
+      ++i;
+    }
+  }
+
+}</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-ns-3D" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            ns = String
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>/*</p>
+
+<pre>* set namespace of node
+*
+*</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="ns-3D-source">
+            <pre>void set_ns( const char *ns ) {
+    ws_xml_set_ns( $self, ns, ws_xml_get_node_name_ns_prefix($self) );
+  }
+
+  /*
+   * get prefix of nodes namespace
+   *
+   * call-seq:
+   *  node.prefix -&gt; String
+   */
+  const char *prefix() {
+    return ws_xml_get_node_name_ns_prefix($self);
+  }
+
+
+  %rename(&quot;lang=&quot;) set_lang(const char *lang);
+
+  /*
+   * set language
+   *
+   * call-seq:
+   *  node.lang = String
+   */
+  void set_lang(const char *lang) {
+    ws_xml_set_node_lang($self, lang);
+  }
+
+  /*
+   * find node within tree
+   * a NULL passed as &#39;ns&#39; (namespace) is treated as wildcard
+   *
+   * call-seq:
+   *  node.find(&quot;namespace&quot;, &quot;name&quot;) -&gt; String # recursive
+   *  node.find(&quot;namespace&quot;, &quot;name&quot;, 0) -&gt; String # non-recursive
+   */
+  WsXmlNodeH find( const char *ns, const char *name, int recursive = 1) {
+    return ws_xml_find_in_tree( $self, ns, name, recursive );
+  }
+                                 
+  /*
+   * iterate over siblings
+   *
+   * finds next sibling with same namespace and name
+   *
+   * See also XmlNode#each
+   *
+   * XmlNode#each iterates over children, XmlNode#next over siblings
+   *
+   * Example:
+   *    &lt;Foo&gt;
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Other&gt;...
+   *      &lt;Other&gt;...
+   *    &lt;/Foo&gt;
+   *
+   * node = root.Foo # points to &lt;Foo&gt; node
+   *
+   *   bar = node.Bar
+   *   while bar do
+   *     bar = bar.next
+   *   end
+   *
+   * will give you four iterations (all &lt;Bar&gt; nodes)
+   *
+   *   child = node.Bar
+   *   while child do
+   *     child = child.next(1)
+   *   end
+   *
+   * will give you six iterations (all children of &lt;Foo&gt;)
+   * The latter example is equal to
+   *
+   *   node.each do |child|
+   *     ...
+   *   end
+   *
+   */
+  WsXmlNodeH next(int all = 0) {
+    WsXmlNodeH next_node = xml_parser_get_next_child($self);
+    if (next_node &amp;&amp; !all) {
+      const char *ns_uri = ws_xml_get_node_name_ns($self);
+      const char *name = ws_xml_get_node_local_name($self);
+      if (ws_xml_is_node_qname(next_node, ns_uri, name) == 0) {
+        next_node = NULL;
+      }
+    }
+    return next_node;
+  }
+                                 
+  /*
+   * count node children
+   * if name given, count children with this name
+   * if name + ns given, count children with this namespace and name
+   */
+  int size(const char *name = NULL, const char *ns = NULL) {
+    return ws_xml_get_child_count_by_qname($self, ns, name);
+  }
+  
+  /*
+   * add child (namespace, name, text) to node
+   */
+  WsXmlNodeH add( const char *ns, const char *name, const char *text = NULL ) {
+    return ws_xml_add_child( $self, ns, name, text );
+  }
+
+  /*
+   * add child (namespace, name, text) before(!) node
+   */
+  WsXmlNodeH add_before( const char *ns, const char *name, const char *text = NULL ) {
+    return ws_xml_add_prev_sibling( $self, ns, name, text );
+  }
+
+
+  %alias add &quot;&lt;&lt;&quot;;
+
+  /*
+   * add node as child
+   */
+  WsXmlNodeH add(WsXmlNodeH node) {
+    ws_xml_duplicate_tree( $self, node );
+    return $self;
+  }
+  
+
+  /*
+   * iterate over children
+   *
+   * See also XmlNode#next
+   *
+   * XmlNode#each iterates over children, XmlNode#next over siblings
+   *
+   * can be limited to children with specific name (and specific namespace)
+   *
+   * for array-like constructs, e.g
+   *  &lt;Parent&gt;
+   *    &lt;Child&gt;..
+   *    &lt;Child&gt;..
+   *    &lt;Child&gt;..
+   *    &lt;OtherChild&gt;..
+   *    &lt;OtherChild&gt;..
+   *    &lt;OtherChild&gt;..
+   *
+   *   doc.Parent.each do |child|
+   *     ... iterates over all 6 children ...
+   *   end
+   *
+   * use XmlNode#next as in
+   *   node = doc.OtherChild
+   *   while node do
+   *     ... do something with node ...
+   *    node = node.next
+   *   end
+   *
+   * call-seq:
+   *  node.each { |XmlNode| ... }
+   *  node.each(&quot;name&quot;) { |XmlNode| ... }
+   *  node.each(&quot;name&quot;, &quot;namespace&quot;) { |XmlNode| ... }
+   */
+
+  void each(const char *name = NULL, const char *ns = NULL) {
+    int i = 0;
+    WsXmlNodeH node = $self;
+    int count = ws_xml_get_child_count_by_qname( node, ns, name );
+    while ( i &lt; count ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_child(node, i, ns, name), SWIGTYPE_p___WsXmlNode, 0));
+      ++i;
+    }
+  }
+
+
+
+
+
+  %alias get &quot;[]&quot;;
+
+  /*
+   * get child by index
+   *
+   * call-seq:
+   *  node.get(42) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(int i, const char *name = NULL, const char *ns = NULL) {
+    if (i &lt; 0 || i &gt;= ws_xml_get_child_count_by_qname($self,ns,name))
+      return NULL;
+    return ws_xml_get_child($self, i, ns, name);
+  }
+  
+  /*
+   * get first child by name (and namespace)
+   *
+   * call-seq:
+   *  node.get(&quot;name&quot;) -&gt; XmlNode
+   *  node.get(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(const char *name, const char *ns = NULL) {
+    return ws_xml_get_child($self, 0, ns, name);
+  }
+
+
+  /*
+   * get node attribute by index or name
+   *
+   * call-seq:
+   *  node.attr(1) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr(VALUE index = Qnil, VALUE namespace = Qnil) {
+    if (NIL_P(index)) { /* nil */
+      return ws_xml_get_node_attr( $self, 0 );
+    } else if (FIXNUM_P(index)) { /* numeric */
+      return ws_xml_get_node_attr( $self, FIX2INT(index) );      
+    } else { /* convert to string */
+      const char *ns = NULL;
+      const char *name = as_string(index);
+      if (!NIL_P(namespace)) {
+        ns = as_string(namespace);
+      }
+      return ws_xml_find_node_attr( $self, ns, name );
+    }
+  }
+
+  /*
+   * count node attribute
+   *
+   * call-seq:
+   *  node.attr_count -&gt; Integer
+   */
+  int attr_count() {
+    return ws_xml_get_node_attr_count( $self );
+  }
+  /*
+   * find node attribute by name
+   *
+   * call-seq:
+   *  node.attr_find(&quot;namespace&quot;, &quot;name&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_find( const char *ns, const char *name ) {
+    return ws_xml_find_node_attr( $self, ns, name );
+  }
+  /*
+   * add attribute to node
+   *
+   * call-seq:
+   *  node.attr_add(&quot;namespace&quot;, &quot;name&quot;, &quot;value&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_add( const char *ns, const char *name, const char *value ) {
+    return ws_xml_add_node_attr( $self, ns, name, value );
+  }
+  /*
+   * get end point reference
+   *
+   * call-seq:
+   *  node.epr(&quot;namespace&quot;, &quot;epr_node_name&quot;, Integer embedded) -&gt; EndPointReference
+   */
+  epr_t *epr( const char *ns, const char *epr_node_name, int embedded) {
+    return epr_deserialize($self, ns, epr_node_name, embedded);
+  }  
+
+
+
+  /*
+   * enumerate attributes
+   *
+   * call-seq:
+   *   node.each_attr { |XmlAttr| ... }
+   */
+  void each_attr() {
+    int i = 0;
+    while ( i &lt; ws_xml_get_node_attr_count( $self ) ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_node_attr($self, i), SWIGTYPE_p___WsXmlAttr, 0));
+      ++i;
+    }
+  }
+
+}</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-parent" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            parent &rarr; XmlNode
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>/*</p>
+
+<pre>* get parent for node
+*
+*</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="parent-source">
+            <pre>WsXmlNodeH parent() {
+    return ws_xml_get_node_parent( $self );
+  }
+
+  %alias child &quot;first&quot;;
+
+
+  /*
+   * get first child of node
+   *
+   * call-seq:
+   *  node.child -&gt; XmlNode
+   */
+  WsXmlNodeH child() {
+    return xml_parser_get_first_child($self);
+  }
+  
+  /*
+   * get name for node
+   *
+   * call-seq:
+   *  node.name -&gt; String
+   */
+  char *name() {
+    return ws_xml_get_node_local_name( $self );
+  }
+
+  %rename(&quot;name=&quot;) set_name( const char *name);
+
+
+  /*
+   * set name of node
+   *
+   * call-seq:
+   *  node.name = String
+   */
+  void set_name( const char *name ) {
+    ws_xml_set_node_name( $self, ws_xml_get_node_name_ns( $self ), name );
+  }
+  
+  /*
+   * get namespace for node
+   *
+   * call-seq:
+   *  node.ns -&gt; String
+   */
+  char *ns() {
+    return ws_xml_get_node_name_ns( $self );
+  }
+
+
+  %rename(&quot;ns=&quot;) set_ns( const char *nsuri );
+
+  /*
+   * set namespace of node
+   *
+   * call-seq:
+   *  node.ns = String
+   */
+  void set_ns( const char *ns ) {
+    ws_xml_set_ns( $self, ns, ws_xml_get_node_name_ns_prefix($self) );
+  }
+
+  /*
+   * get prefix of nodes namespace
+   *
+   * call-seq:
+   *  node.prefix -&gt; String
+   */
+  const char *prefix() {
+    return ws_xml_get_node_name_ns_prefix($self);
+  }
+
+
+  %rename(&quot;lang=&quot;) set_lang(const char *lang);
+
+  /*
+   * set language
+   *
+   * call-seq:
+   *  node.lang = String
+   */
+  void set_lang(const char *lang) {
+    ws_xml_set_node_lang($self, lang);
+  }
+
+  /*
+   * find node within tree
+   * a NULL passed as &#39;ns&#39; (namespace) is treated as wildcard
+   *
+   * call-seq:
+   *  node.find(&quot;namespace&quot;, &quot;name&quot;) -&gt; String # recursive
+   *  node.find(&quot;namespace&quot;, &quot;name&quot;, 0) -&gt; String # non-recursive
+   */
+  WsXmlNodeH find( const char *ns, const char *name, int recursive = 1) {
+    return ws_xml_find_in_tree( $self, ns, name, recursive );
+  }
+                                 
+  /*
+   * iterate over siblings
+   *
+   * finds next sibling with same namespace and name
+   *
+   * See also XmlNode#each
+   *
+   * XmlNode#each iterates over children, XmlNode#next over siblings
+   *
+   * Example:
+   *    &lt;Foo&gt;
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Other&gt;...
+   *      &lt;Other&gt;...
+   *    &lt;/Foo&gt;
+   *
+   * node = root.Foo # points to &lt;Foo&gt; node
+   *
+   *   bar = node.Bar
+   *   while bar do
+   *     bar = bar.next
+   *   end
+   *
+   * will give you four iterations (all &lt;Bar&gt; nodes)
+   *
+   *   child = node.Bar
+   *   while child do
+   *     child = child.next(1)
+   *   end
+   *
+   * will give you six iterations (all children of &lt;Foo&gt;)
+   * The latter example is equal to
+   *
+   *   node.each do |child|
+   *     ...
+   *   end
+   *
+   */
+  WsXmlNodeH next(int all = 0) {
+    WsXmlNodeH next_node = xml_parser_get_next_child($self);
+    if (next_node &amp;&amp; !all) {
+      const char *ns_uri = ws_xml_get_node_name_ns($self);
+      const char *name = ws_xml_get_node_local_name($self);
+      if (ws_xml_is_node_qname(next_node, ns_uri, name) == 0) {
+        next_node = NULL;
+      }
+    }
+    return next_node;
+  }
+                                 
+  /*
+   * count node children
+   * if name given, count children with this name
+   * if name + ns given, count children with this namespace and name
+   */
+  int size(const char *name = NULL, const char *ns = NULL) {
+    return ws_xml_get_child_count_by_qname($self, ns, name);
+  }
+  
+  /*
+   * add child (namespace, name, text) to node
+   */
+  WsXmlNodeH add( const char *ns, const char *name, const char *text = NULL ) {
+    return ws_xml_add_child( $self, ns, name, text );
+  }
+
+  /*
+   * add child (namespace, name, text) before(!) node
+   */
+  WsXmlNodeH add_before( const char *ns, const char *name, const char *text = NULL ) {
+    return ws_xml_add_prev_sibling( $self, ns, name, text );
+  }
+
+
+  %alias add &quot;&lt;&lt;&quot;;
+
+  /*
+   * add node as child
+   */
+  WsXmlNodeH add(WsXmlNodeH node) {
+    ws_xml_duplicate_tree( $self, node );
+    return $self;
+  }
+  
+
+  /*
+   * iterate over children
+   *
+   * See also XmlNode#next
+   *
+   * XmlNode#each iterates over children, XmlNode#next over siblings
+   *
+   * can be limited to children with specific name (and specific namespace)
+   *
+   * for array-like constructs, e.g
+   *  &lt;Parent&gt;
+   *    &lt;Child&gt;..
+   *    &lt;Child&gt;..
+   *    &lt;Child&gt;..
+   *    &lt;OtherChild&gt;..
+   *    &lt;OtherChild&gt;..
+   *    &lt;OtherChild&gt;..
+   *
+   *   doc.Parent.each do |child|
+   *     ... iterates over all 6 children ...
+   *   end
+   *
+   * use XmlNode#next as in
+   *   node = doc.OtherChild
+   *   while node do
+   *     ... do something with node ...
+   *    node = node.next
+   *   end
+   *
+   * call-seq:
+   *  node.each { |XmlNode| ... }
+   *  node.each(&quot;name&quot;) { |XmlNode| ... }
+   *  node.each(&quot;name&quot;, &quot;namespace&quot;) { |XmlNode| ... }
+   */
+
+  void each(const char *name = NULL, const char *ns = NULL) {
+    int i = 0;
+    WsXmlNodeH node = $self;
+    int count = ws_xml_get_child_count_by_qname( node, ns, name );
+    while ( i &lt; count ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_child(node, i, ns, name), SWIGTYPE_p___WsXmlNode, 0));
+      ++i;
+    }
+  }
+
+
+
+
+
+  %alias get &quot;[]&quot;;
+
+  /*
+   * get child by index
+   *
+   * call-seq:
+   *  node.get(42) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(int i, const char *name = NULL, const char *ns = NULL) {
+    if (i &lt; 0 || i &gt;= ws_xml_get_child_count_by_qname($self,ns,name))
+      return NULL;
+    return ws_xml_get_child($self, i, ns, name);
+  }
+  
+  /*
+   * get first child by name (and namespace)
+   *
+   * call-seq:
+   *  node.get(&quot;name&quot;) -&gt; XmlNode
+   *  node.get(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(const char *name, const char *ns = NULL) {
+    return ws_xml_get_child($self, 0, ns, name);
+  }
+
+
+  /*
+   * get node attribute by index or name
+   *
+   * call-seq:
+   *  node.attr(1) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr(VALUE index = Qnil, VALUE namespace = Qnil) {
+    if (NIL_P(index)) { /* nil */
+      return ws_xml_get_node_attr( $self, 0 );
+    } else if (FIXNUM_P(index)) { /* numeric */
+      return ws_xml_get_node_attr( $self, FIX2INT(index) );      
+    } else { /* convert to string */
+      const char *ns = NULL;
+      const char *name = as_string(index);
+      if (!NIL_P(namespace)) {
+        ns = as_string(namespace);
+      }
+      return ws_xml_find_node_attr( $self, ns, name );
+    }
+  }
+
+  /*
+   * count node attribute
+   *
+   * call-seq:
+   *  node.attr_count -&gt; Integer
+   */
+  int attr_count() {
+    return ws_xml_get_node_attr_count( $self );
+  }
+  /*
+   * find node attribute by name
+   *
+   * call-seq:
+   *  node.attr_find(&quot;namespace&quot;, &quot;name&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_find( const char *ns, const char *name ) {
+    return ws_xml_find_node_attr( $self, ns, name );
+  }
+  /*
+   * add attribute to node
+   *
+   * call-seq:
+   *  node.attr_add(&quot;namespace&quot;, &quot;name&quot;, &quot;value&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_add( const char *ns, const char *name, const char *value ) {
+    return ws_xml_add_node_attr( $self, ns, name, value );
+  }
+  /*
+   * get end point reference
+   *
+   * call-seq:
+   *  node.epr(&quot;namespace&quot;, &quot;epr_node_name&quot;, Integer embedded) -&gt; EndPointReference
+   */
+  epr_t *epr( const char *ns, const char *epr_node_name, int embedded) {
+    return epr_deserialize($self, ns, epr_node_name, embedded);
+  }  
+
+
+
+  /*
+   * enumerate attributes
+   *
+   * call-seq:
+   *   node.each_attr { |XmlAttr| ... }
+   */
+  void each_attr() {
+    int i = 0;
+    while ( i &lt; ws_xml_get_node_attr_count( $self ) ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_node_attr($self, i), SWIGTYPE_p___WsXmlAttr, 0));
+      ++i;
+    }
+  }
+
+}</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-prefix" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            prefix &rarr; String
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>/*</p>
+
+<pre>* get prefix of nodes namespace
+*
+*</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="prefix-source">
+            <pre>const char *prefix() {
+    return ws_xml_get_node_name_ns_prefix($self);
+  }
+
+
+  %rename(&quot;lang=&quot;) set_lang(const char *lang);
+
+  /*
+   * set language
+   *
+   * call-seq:
+   *  node.lang = String
+   */
+  void set_lang(const char *lang) {
+    ws_xml_set_node_lang($self, lang);
+  }
+
+  /*
+   * find node within tree
+   * a NULL passed as &#39;ns&#39; (namespace) is treated as wildcard
+   *
+   * call-seq:
+   *  node.find(&quot;namespace&quot;, &quot;name&quot;) -&gt; String # recursive
+   *  node.find(&quot;namespace&quot;, &quot;name&quot;, 0) -&gt; String # non-recursive
+   */
+  WsXmlNodeH find( const char *ns, const char *name, int recursive = 1) {
+    return ws_xml_find_in_tree( $self, ns, name, recursive );
+  }
+                                 
+  /*
+   * iterate over siblings
+   *
+   * finds next sibling with same namespace and name
+   *
+   * See also XmlNode#each
+   *
+   * XmlNode#each iterates over children, XmlNode#next over siblings
+   *
+   * Example:
+   *    &lt;Foo&gt;
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Other&gt;...
+   *      &lt;Other&gt;...
+   *    &lt;/Foo&gt;
+   *
+   * node = root.Foo # points to &lt;Foo&gt; node
+   *
+   *   bar = node.Bar
+   *   while bar do
+   *     bar = bar.next
+   *   end
+   *
+   * will give you four iterations (all &lt;Bar&gt; nodes)
+   *
+   *   child = node.Bar
+   *   while child do
+   *     child = child.next(1)
+   *   end
+   *
+   * will give you six iterations (all children of &lt;Foo&gt;)
+   * The latter example is equal to
+   *
+   *   node.each do |child|
+   *     ...
+   *   end
+   *
+   */
+  WsXmlNodeH next(int all = 0) {
+    WsXmlNodeH next_node = xml_parser_get_next_child($self);
+    if (next_node &amp;&amp; !all) {
+      const char *ns_uri = ws_xml_get_node_name_ns($self);
+      const char *name = ws_xml_get_node_local_name($self);
+      if (ws_xml_is_node_qname(next_node, ns_uri, name) == 0) {
+        next_node = NULL;
+      }
+    }
+    return next_node;
+  }
+                                 
+  /*
+   * count node children
+   * if name given, count children with this name
+   * if name + ns given, count children with this namespace and name
+   */
+  int size(const char *name = NULL, const char *ns = NULL) {
+    return ws_xml_get_child_count_by_qname($self, ns, name);
+  }
+  
+  /*
+   * add child (namespace, name, text) to node
+   */
+  WsXmlNodeH add( const char *ns, const char *name, const char *text = NULL ) {
+    return ws_xml_add_child( $self, ns, name, text );
+  }
+
+  /*
+   * add child (namespace, name, text) before(!) node
+   */
+  WsXmlNodeH add_before( const char *ns, const char *name, const char *text = NULL ) {
+    return ws_xml_add_prev_sibling( $self, ns, name, text );
+  }
+
+
+  %alias add &quot;&lt;&lt;&quot;;
+
+  /*
+   * add node as child
+   */
+  WsXmlNodeH add(WsXmlNodeH node) {
+    ws_xml_duplicate_tree( $self, node );
+    return $self;
+  }
+  
+
+  /*
+   * iterate over children
+   *
+   * See also XmlNode#next
+   *
+   * XmlNode#each iterates over children, XmlNode#next over siblings
+   *
+   * can be limited to children with specific name (and specific namespace)
+   *
+   * for array-like constructs, e.g
+   *  &lt;Parent&gt;
+   *    &lt;Child&gt;..
+   *    &lt;Child&gt;..
+   *    &lt;Child&gt;..
+   *    &lt;OtherChild&gt;..
+   *    &lt;OtherChild&gt;..
+   *    &lt;OtherChild&gt;..
+   *
+   *   doc.Parent.each do |child|
+   *     ... iterates over all 6 children ...
+   *   end
+   *
+   * use XmlNode#next as in
+   *   node = doc.OtherChild
+   *   while node do
+   *     ... do something with node ...
+   *    node = node.next
+   *   end
+   *
+   * call-seq:
+   *  node.each { |XmlNode| ... }
+   *  node.each(&quot;name&quot;) { |XmlNode| ... }
+   *  node.each(&quot;name&quot;, &quot;namespace&quot;) { |XmlNode| ... }
+   */
+
+  void each(const char *name = NULL, const char *ns = NULL) {
+    int i = 0;
+    WsXmlNodeH node = $self;
+    int count = ws_xml_get_child_count_by_qname( node, ns, name );
+    while ( i &lt; count ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_child(node, i, ns, name), SWIGTYPE_p___WsXmlNode, 0));
+      ++i;
+    }
+  }
+
+
+
+
+
+  %alias get &quot;[]&quot;;
+
+  /*
+   * get child by index
+   *
+   * call-seq:
+   *  node.get(42) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(int i, const char *name = NULL, const char *ns = NULL) {
+    if (i &lt; 0 || i &gt;= ws_xml_get_child_count_by_qname($self,ns,name))
+      return NULL;
+    return ws_xml_get_child($self, i, ns, name);
+  }
+  
+  /*
+   * get first child by name (and namespace)
+   *
+   * call-seq:
+   *  node.get(&quot;name&quot;) -&gt; XmlNode
+   *  node.get(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(const char *name, const char *ns = NULL) {
+    return ws_xml_get_child($self, 0, ns, name);
+  }
+
+
+  /*
+   * get node attribute by index or name
+   *
+   * call-seq:
+   *  node.attr(1) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr(VALUE index = Qnil, VALUE namespace = Qnil) {
+    if (NIL_P(index)) { /* nil */
+      return ws_xml_get_node_attr( $self, 0 );
+    } else if (FIXNUM_P(index)) { /* numeric */
+      return ws_xml_get_node_attr( $self, FIX2INT(index) );      
+    } else { /* convert to string */
+      const char *ns = NULL;
+      const char *name = as_string(index);
+      if (!NIL_P(namespace)) {
+        ns = as_string(namespace);
+      }
+      return ws_xml_find_node_attr( $self, ns, name );
+    }
+  }
+
+  /*
+   * count node attribute
+   *
+   * call-seq:
+   *  node.attr_count -&gt; Integer
+   */
+  int attr_count() {
+    return ws_xml_get_node_attr_count( $self );
+  }
+  /*
+   * find node attribute by name
+   *
+   * call-seq:
+   *  node.attr_find(&quot;namespace&quot;, &quot;name&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_find( const char *ns, const char *name ) {
+    return ws_xml_find_node_attr( $self, ns, name );
+  }
+  /*
+   * add attribute to node
+   *
+   * call-seq:
+   *  node.attr_add(&quot;namespace&quot;, &quot;name&quot;, &quot;value&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_add( const char *ns, const char *name, const char *value ) {
+    return ws_xml_add_node_attr( $self, ns, name, value );
+  }
+  /*
+   * get end point reference
+   *
+   * call-seq:
+   *  node.epr(&quot;namespace&quot;, &quot;epr_node_name&quot;, Integer embedded) -&gt; EndPointReference
+   */
+  epr_t *epr( const char *ns, const char *epr_node_name, int embedded) {
+    return epr_deserialize($self, ns, epr_node_name, embedded);
+  }  
+
+
+
+  /*
+   * enumerate attributes
+   *
+   * call-seq:
+   *   node.each_attr { |XmlAttr| ... }
+   */
+  void each_attr() {
+    int i = 0;
+    while ( i &lt; ws_xml_get_node_attr_count( $self ) ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_node_attr($self, i), SWIGTYPE_p___WsXmlAttr, 0));
+      ++i;
+    }
+  }
+
+}</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-size" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">size</span><span
+            class="method-args">(p1, p2)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>count node children if name given, count children with this name if name +
+ns given, count children with this namespace and name</p>
+          
+          
+
+          
+          <div class="method-source-code" id="size-source">
+            <pre>int size(const char *name = NULL, const char *ns = NULL) {
+    return ws_xml_get_child_count_by_qname($self, ns, name);
+  }
+  
+  /*
+   * add child (namespace, name, text) to node
+   */
+  WsXmlNodeH add( const char *ns, const char *name, const char *text = NULL ) {
+    return ws_xml_add_child( $self, ns, name, text );
+  }
+
+  /*
+   * add child (namespace, name, text) before(!) node
+   */
+  WsXmlNodeH add_before( const char *ns, const char *name, const char *text = NULL ) {
+    return ws_xml_add_prev_sibling( $self, ns, name, text );
+  }
+
+
+  %alias add &quot;&lt;&lt;&quot;;
+
+  /*
+   * add node as child
+   */
+  WsXmlNodeH add(WsXmlNodeH node) {
+    ws_xml_duplicate_tree( $self, node );
+    return $self;
+  }
+  
+
+  /*
+   * iterate over children
+   *
+   * See also XmlNode#next
+   *
+   * XmlNode#each iterates over children, XmlNode#next over siblings
+   *
+   * can be limited to children with specific name (and specific namespace)
+   *
+   * for array-like constructs, e.g
+   *  &lt;Parent&gt;
+   *    &lt;Child&gt;..
+   *    &lt;Child&gt;..
+   *    &lt;Child&gt;..
+   *    &lt;OtherChild&gt;..
+   *    &lt;OtherChild&gt;..
+   *    &lt;OtherChild&gt;..
+   *
+   *   doc.Parent.each do |child|
+   *     ... iterates over all 6 children ...
+   *   end
+   *
+   * use XmlNode#next as in
+   *   node = doc.OtherChild
+   *   while node do
+   *     ... do something with node ...
+   *    node = node.next
+   *   end
+   *
+   * call-seq:
+   *  node.each { |XmlNode| ... }
+   *  node.each(&quot;name&quot;) { |XmlNode| ... }
+   *  node.each(&quot;name&quot;, &quot;namespace&quot;) { |XmlNode| ... }
+   */
+
+  void each(const char *name = NULL, const char *ns = NULL) {
+    int i = 0;
+    WsXmlNodeH node = $self;
+    int count = ws_xml_get_child_count_by_qname( node, ns, name );
+    while ( i &lt; count ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_child(node, i, ns, name), SWIGTYPE_p___WsXmlNode, 0));
+      ++i;
+    }
+  }
+
+
+
+
+
+  %alias get &quot;[]&quot;;
+
+  /*
+   * get child by index
+   *
+   * call-seq:
+   *  node.get(42) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(int i, const char *name = NULL, const char *ns = NULL) {
+    if (i &lt; 0 || i &gt;= ws_xml_get_child_count_by_qname($self,ns,name))
+      return NULL;
+    return ws_xml_get_child($self, i, ns, name);
+  }
+  
+  /*
+   * get first child by name (and namespace)
+   *
+   * call-seq:
+   *  node.get(&quot;name&quot;) -&gt; XmlNode
+   *  node.get(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(const char *name, const char *ns = NULL) {
+    return ws_xml_get_child($self, 0, ns, name);
+  }
+
+
+  /*
+   * get node attribute by index or name
+   *
+   * call-seq:
+   *  node.attr(1) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr(VALUE index = Qnil, VALUE namespace = Qnil) {
+    if (NIL_P(index)) { /* nil */
+      return ws_xml_get_node_attr( $self, 0 );
+    } else if (FIXNUM_P(index)) { /* numeric */
+      return ws_xml_get_node_attr( $self, FIX2INT(index) );      
+    } else { /* convert to string */
+      const char *ns = NULL;
+      const char *name = as_string(index);
+      if (!NIL_P(namespace)) {
+        ns = as_string(namespace);
+      }
+      return ws_xml_find_node_attr( $self, ns, name );
+    }
+  }
+
+  /*
+   * count node attribute
+   *
+   * call-seq:
+   *  node.attr_count -&gt; Integer
+   */
+  int attr_count() {
+    return ws_xml_get_node_attr_count( $self );
+  }
+  /*
+   * find node attribute by name
+   *
+   * call-seq:
+   *  node.attr_find(&quot;namespace&quot;, &quot;name&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_find( const char *ns, const char *name ) {
+    return ws_xml_find_node_attr( $self, ns, name );
+  }
+  /*
+   * add attribute to node
+   *
+   * call-seq:
+   *  node.attr_add(&quot;namespace&quot;, &quot;name&quot;, &quot;value&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_add( const char *ns, const char *name, const char *value ) {
+    return ws_xml_add_node_attr( $self, ns, name, value );
+  }
+  /*
+   * get end point reference
+   *
+   * call-seq:
+   *  node.epr(&quot;namespace&quot;, &quot;epr_node_name&quot;, Integer embedded) -&gt; EndPointReference
+   */
+  epr_t *epr( const char *ns, const char *epr_node_name, int embedded) {
+    return epr_deserialize($self, ns, epr_node_name, embedded);
+  }  
+
+
+
+  /*
+   * enumerate attributes
+   *
+   * call-seq:
+   *   node.each_attr { |XmlAttr| ... }
+   */
+  void each_attr() {
+    int i = 0;
+    while ( i &lt; ws_xml_get_node_attr_count( $self ) ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_node_attr($self, i), SWIGTYPE_p___WsXmlAttr, 0));
+      ++i;
+    }
+  }
+
+}</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-string" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            string(XmlNode) &rarr; String
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>/*</p>
+
+<pre>* dump node as XML string
+*
+* alias: to_xml
+*
+*</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="string-source">
+            <pre>char *string() {
+    int size;
+    char *buf;
+    ws_xml_dump_memory_node_tree( $self, &amp;buf, &amp;size );
+    return buf;
+  }
+  
+  /*
+   * dump node to file
+   *
+   * call-seq:
+   *  node.dump_file(IO) -&gt; nil
+   */
+  void dump_file(FILE *fp) {
+    ws_xml_dump_node_tree( fp, $self );
+  }
+  
+
+  %alias equal &quot;==&quot;;
+  %typemap(out) int equal
+    &quot;$result = ($1 != 0) ? Qtrue : Qfalse;&quot;;
+
+
+  int equal( WsXmlNodeH n )
+
+  /*
+   * Test for identity (same object)
+   *
+   * call-seq:
+   *  XmlNode == XmlNode -&gt; Boolean
+   */
+  { return $self == n; }          
+  
+  /*
+   * get text (without xml tags) of node
+   *
+   * alias: to_s
+   *
+   * call-seq:
+   *  node.text(XmlNode) -&gt; String
+   */
+  char *text() {
+    return ws_xml_get_node_text( $self );
+  }
+
+  %rename( &quot;text=&quot; ) set_text( const char *text );
+
+  /*
+   * Set text of node
+   *
+   * call-seq:
+   *  node.text = String
+   */
+  void set_text( const char *text ) {
+    ws_xml_set_node_text( $self, text );
+  }
+  
+  /*
+   * get XmlDoc to which node belongs
+   *
+   * call-seq:
+   *  node.doc -&gt; XmlDoc
+   */
+  WsXmlDocH doc() {
+    return ws_xml_get_node_doc( $self );
+  }
+  
+  /*
+   * get parent for node
+   *
+   * call-seq:
+   *  node.parent -&gt; XmlNode
+   */
+  WsXmlNodeH parent() {
+    return ws_xml_get_node_parent( $self );
+  }
+
+  %alias child &quot;first&quot;;
+
+
+  /*
+   * get first child of node
+   *
+   * call-seq:
+   *  node.child -&gt; XmlNode
+   */
+  WsXmlNodeH child() {
+    return xml_parser_get_first_child($self);
+  }
+  
+  /*
+   * get name for node
+   *
+   * call-seq:
+   *  node.name -&gt; String
+   */
+  char *name() {
+    return ws_xml_get_node_local_name( $self );
+  }
+
+  %rename(&quot;name=&quot;) set_name( const char *name);
+
+
+  /*
+   * set name of node
+   *
+   * call-seq:
+   *  node.name = String
+   */
+  void set_name( const char *name ) {
+    ws_xml_set_node_name( $self, ws_xml_get_node_name_ns( $self ), name );
+  }
+  
+  /*
+   * get namespace for node
+   *
+   * call-seq:
+   *  node.ns -&gt; String
+   */
+  char *ns() {
+    return ws_xml_get_node_name_ns( $self );
+  }
+
+
+  %rename(&quot;ns=&quot;) set_ns( const char *nsuri );
+
+  /*
+   * set namespace of node
+   *
+   * call-seq:
+   *  node.ns = String
+   */
+  void set_ns( const char *ns ) {
+    ws_xml_set_ns( $self, ns, ws_xml_get_node_name_ns_prefix($self) );
+  }
+
+  /*
+   * get prefix of nodes namespace
+   *
+   * call-seq:
+   *  node.prefix -&gt; String
+   */
+  const char *prefix() {
+    return ws_xml_get_node_name_ns_prefix($self);
+  }
+
+
+  %rename(&quot;lang=&quot;) set_lang(const char *lang);
+
+  /*
+   * set language
+   *
+   * call-seq:
+   *  node.lang = String
+   */
+  void set_lang(const char *lang) {
+    ws_xml_set_node_lang($self, lang);
+  }
+
+  /*
+   * find node within tree
+   * a NULL passed as &#39;ns&#39; (namespace) is treated as wildcard
+   *
+   * call-seq:
+   *  node.find(&quot;namespace&quot;, &quot;name&quot;) -&gt; String # recursive
+   *  node.find(&quot;namespace&quot;, &quot;name&quot;, 0) -&gt; String # non-recursive
+   */
+  WsXmlNodeH find( const char *ns, const char *name, int recursive = 1) {
+    return ws_xml_find_in_tree( $self, ns, name, recursive );
+  }
+                                 
+  /*
+   * iterate over siblings
+   *
+   * finds next sibling with same namespace and name
+   *
+   * See also XmlNode#each
+   *
+   * XmlNode#each iterates over children, XmlNode#next over siblings
+   *
+   * Example:
+   *    &lt;Foo&gt;
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Other&gt;...
+   *      &lt;Other&gt;...
+   *    &lt;/Foo&gt;
+   *
+   * node = root.Foo # points to &lt;Foo&gt; node
+   *
+   *   bar = node.Bar
+   *   while bar do
+   *     bar = bar.next
+   *   end
+   *
+   * will give you four iterations (all &lt;Bar&gt; nodes)
+   *
+   *   child = node.Bar
+   *   while child do
+   *     child = child.next(1)
+   *   end
+   *
+   * will give you six iterations (all children of &lt;Foo&gt;)
+   * The latter example is equal to
+   *
+   *   node.each do |child|
+   *     ...
+   *   end
+   *
+   */
+  WsXmlNodeH next(int all = 0) {
+    WsXmlNodeH next_node = xml_parser_get_next_child($self);
+    if (next_node &amp;&amp; !all) {
+      const char *ns_uri = ws_xml_get_node_name_ns($self);
+      const char *name = ws_xml_get_node_local_name($self);
+      if (ws_xml_is_node_qname(next_node, ns_uri, name) == 0) {
+        next_node = NULL;
+      }
+    }
+    return next_node;
+  }
+                                 
+  /*
+   * count node children
+   * if name given, count children with this name
+   * if name + ns given, count children with this namespace and name
+   */
+  int size(const char *name = NULL, const char *ns = NULL) {
+    return ws_xml_get_child_count_by_qname($self, ns, name);
+  }
+  
+  /*
+   * add child (namespace, name, text) to node
+   */
+  WsXmlNodeH add( const char *ns, const char *name, const char *text = NULL ) {
+    return ws_xml_add_child( $self, ns, name, text );
+  }
+
+  /*
+   * add child (namespace, name, text) before(!) node
+   */
+  WsXmlNodeH add_before( const char *ns, const char *name, const char *text = NULL ) {
+    return ws_xml_add_prev_sibling( $self, ns, name, text );
+  }
+
+
+  %alias add &quot;&lt;&lt;&quot;;
+
+  /*
+   * add node as child
+   */
+  WsXmlNodeH add(WsXmlNodeH node) {
+    ws_xml_duplicate_tree( $self, node );
+    return $self;
+  }
+  
+
+  /*
+   * iterate over children
+   *
+   * See also XmlNode#next
+   *
+   * XmlNode#each iterates over children, XmlNode#next over siblings
+   *
+   * can be limited to children with specific name (and specific namespace)
+   *
+   * for array-like constructs, e.g
+   *  &lt;Parent&gt;
+   *    &lt;Child&gt;..
+   *    &lt;Child&gt;..
+   *    &lt;Child&gt;..
+   *    &lt;OtherChild&gt;..
+   *    &lt;OtherChild&gt;..
+   *    &lt;OtherChild&gt;..
+   *
+   *   doc.Parent.each do |child|
+   *     ... iterates over all 6 children ...
+   *   end
+   *
+   * use XmlNode#next as in
+   *   node = doc.OtherChild
+   *   while node do
+   *     ... do something with node ...
+   *    node = node.next
+   *   end
+   *
+   * call-seq:
+   *  node.each { |XmlNode| ... }
+   *  node.each(&quot;name&quot;) { |XmlNode| ... }
+   *  node.each(&quot;name&quot;, &quot;namespace&quot;) { |XmlNode| ... }
+   */
+
+  void each(const char *name = NULL, const char *ns = NULL) {
+    int i = 0;
+    WsXmlNodeH node = $self;
+    int count = ws_xml_get_child_count_by_qname( node, ns, name );
+    while ( i &lt; count ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_child(node, i, ns, name), SWIGTYPE_p___WsXmlNode, 0));
+      ++i;
+    }
+  }
+
+
+
+
+
+  %alias get &quot;[]&quot;;
+
+  /*
+   * get child by index
+   *
+   * call-seq:
+   *  node.get(42) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(int i, const char *name = NULL, const char *ns = NULL) {
+    if (i &lt; 0 || i &gt;= ws_xml_get_child_count_by_qname($self,ns,name))
+      return NULL;
+    return ws_xml_get_child($self, i, ns, name);
+  }
+  
+  /*
+   * get first child by name (and namespace)
+   *
+   * call-seq:
+   *  node.get(&quot;name&quot;) -&gt; XmlNode
+   *  node.get(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(const char *name, const char *ns = NULL) {
+    return ws_xml_get_child($self, 0, ns, name);
+  }
+
+
+  /*
+   * get node attribute by index or name
+   *
+   * call-seq:
+   *  node.attr(1) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr(VALUE index = Qnil, VALUE namespace = Qnil) {
+    if (NIL_P(index)) { /* nil */
+      return ws_xml_get_node_attr( $self, 0 );
+    } else if (FIXNUM_P(index)) { /* numeric */
+      return ws_xml_get_node_attr( $self, FIX2INT(index) );      
+    } else { /* convert to string */
+      const char *ns = NULL;
+      const char *name = as_string(index);
+      if (!NIL_P(namespace)) {
+        ns = as_string(namespace);
+      }
+      return ws_xml_find_node_attr( $self, ns, name );
+    }
+  }
+
+  /*
+   * count node attribute
+   *
+   * call-seq:
+   *  node.attr_count -&gt; Integer
+   */
+  int attr_count() {
+    return ws_xml_get_node_attr_count( $self );
+  }
+  /*
+   * find node attribute by name
+   *
+   * call-seq:
+   *  node.attr_find(&quot;namespace&quot;, &quot;name&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_find( const char *ns, const char *name ) {
+    return ws_xml_find_node_attr( $self, ns, name );
+  }
+  /*
+   * add attribute to node
+   *
+   * call-seq:
+   *  node.attr_add(&quot;namespace&quot;, &quot;name&quot;, &quot;value&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_add( const char *ns, const char *name, const char *value ) {
+    return ws_xml_add_node_attr( $self, ns, name, value );
+  }
+  /*
+   * get end point reference
+   *
+   * call-seq:
+   *  node.epr(&quot;namespace&quot;, &quot;epr_node_name&quot;, Integer embedded) -&gt; EndPointReference
+   */
+  epr_t *epr( const char *ns, const char *epr_node_name, int embedded) {
+    return epr_deserialize($self, ns, epr_node_name, embedded);
+  }  
+
+
+
+  /*
+   * enumerate attributes
+   *
+   * call-seq:
+   *   node.each_attr { |XmlAttr| ... }
+   */
+  void each_attr() {
+    int i = 0;
+    while ( i &lt; ws_xml_get_node_attr_count( $self ) ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_node_attr($self, i), SWIGTYPE_p___WsXmlAttr, 0));
+      ++i;
+    }
+  }
+
+}</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-text" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            text(XmlNode) &rarr; String
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>/*</p>
+
+<pre>* get text (without xml tags) of node
+*
+* alias: to_s
+*
+*</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="text-source">
+            <pre>char *text() {
+    return ws_xml_get_node_text( $self );
+  }
+
+  %rename( &quot;text=&quot; ) set_text( const char *text );
+
+  /*
+   * Set text of node
+   *
+   * call-seq:
+   *  node.text = String
+   */
+  void set_text( const char *text ) {
+    ws_xml_set_node_text( $self, text );
+  }
+  
+  /*
+   * get XmlDoc to which node belongs
+   *
+   * call-seq:
+   *  node.doc -&gt; XmlDoc
+   */
+  WsXmlDocH doc() {
+    return ws_xml_get_node_doc( $self );
+  }
+  
+  /*
+   * get parent for node
+   *
+   * call-seq:
+   *  node.parent -&gt; XmlNode
+   */
+  WsXmlNodeH parent() {
+    return ws_xml_get_node_parent( $self );
+  }
+
+  %alias child &quot;first&quot;;
+
+
+  /*
+   * get first child of node
+   *
+   * call-seq:
+   *  node.child -&gt; XmlNode
+   */
+  WsXmlNodeH child() {
+    return xml_parser_get_first_child($self);
+  }
+  
+  /*
+   * get name for node
+   *
+   * call-seq:
+   *  node.name -&gt; String
+   */
+  char *name() {
+    return ws_xml_get_node_local_name( $self );
+  }
+
+  %rename(&quot;name=&quot;) set_name( const char *name);
+
+
+  /*
+   * set name of node
+   *
+   * call-seq:
+   *  node.name = String
+   */
+  void set_name( const char *name ) {
+    ws_xml_set_node_name( $self, ws_xml_get_node_name_ns( $self ), name );
+  }
+  
+  /*
+   * get namespace for node
+   *
+   * call-seq:
+   *  node.ns -&gt; String
+   */
+  char *ns() {
+    return ws_xml_get_node_name_ns( $self );
+  }
+
+
+  %rename(&quot;ns=&quot;) set_ns( const char *nsuri );
+
+  /*
+   * set namespace of node
+   *
+   * call-seq:
+   *  node.ns = String
+   */
+  void set_ns( const char *ns ) {
+    ws_xml_set_ns( $self, ns, ws_xml_get_node_name_ns_prefix($self) );
+  }
+
+  /*
+   * get prefix of nodes namespace
+   *
+   * call-seq:
+   *  node.prefix -&gt; String
+   */
+  const char *prefix() {
+    return ws_xml_get_node_name_ns_prefix($self);
+  }
+
+
+  %rename(&quot;lang=&quot;) set_lang(const char *lang);
+
+  /*
+   * set language
+   *
+   * call-seq:
+   *  node.lang = String
+   */
+  void set_lang(const char *lang) {
+    ws_xml_set_node_lang($self, lang);
+  }
+
+  /*
+   * find node within tree
+   * a NULL passed as &#39;ns&#39; (namespace) is treated as wildcard
+   *
+   * call-seq:
+   *  node.find(&quot;namespace&quot;, &quot;name&quot;) -&gt; String # recursive
+   *  node.find(&quot;namespace&quot;, &quot;name&quot;, 0) -&gt; String # non-recursive
+   */
+  WsXmlNodeH find( const char *ns, const char *name, int recursive = 1) {
+    return ws_xml_find_in_tree( $self, ns, name, recursive );
+  }
+                                 
+  /*
+   * iterate over siblings
+   *
+   * finds next sibling with same namespace and name
+   *
+   * See also XmlNode#each
+   *
+   * XmlNode#each iterates over children, XmlNode#next over siblings
+   *
+   * Example:
+   *    &lt;Foo&gt;
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Other&gt;...
+   *      &lt;Other&gt;...
+   *    &lt;/Foo&gt;
+   *
+   * node = root.Foo # points to &lt;Foo&gt; node
+   *
+   *   bar = node.Bar
+   *   while bar do
+   *     bar = bar.next
+   *   end
+   *
+   * will give you four iterations (all &lt;Bar&gt; nodes)
+   *
+   *   child = node.Bar
+   *   while child do
+   *     child = child.next(1)
+   *   end
+   *
+   * will give you six iterations (all children of &lt;Foo&gt;)
+   * The latter example is equal to
+   *
+   *   node.each do |child|
+   *     ...
+   *   end
+   *
+   */
+  WsXmlNodeH next(int all = 0) {
+    WsXmlNodeH next_node = xml_parser_get_next_child($self);
+    if (next_node &amp;&amp; !all) {
+      const char *ns_uri = ws_xml_get_node_name_ns($self);
+      const char *name = ws_xml_get_node_local_name($self);
+      if (ws_xml_is_node_qname(next_node, ns_uri, name) == 0) {
+        next_node = NULL;
+      }
+    }
+    return next_node;
+  }
+                                 
+  /*
+   * count node children
+   * if name given, count children with this name
+   * if name + ns given, count children with this namespace and name
+   */
+  int size(const char *name = NULL, const char *ns = NULL) {
+    return ws_xml_get_child_count_by_qname($self, ns, name);
+  }
+  
+  /*
+   * add child (namespace, name, text) to node
+   */
+  WsXmlNodeH add( const char *ns, const char *name, const char *text = NULL ) {
+    return ws_xml_add_child( $self, ns, name, text );
+  }
+
+  /*
+   * add child (namespace, name, text) before(!) node
+   */
+  WsXmlNodeH add_before( const char *ns, const char *name, const char *text = NULL ) {
+    return ws_xml_add_prev_sibling( $self, ns, name, text );
+  }
+
+
+  %alias add &quot;&lt;&lt;&quot;;
+
+  /*
+   * add node as child
+   */
+  WsXmlNodeH add(WsXmlNodeH node) {
+    ws_xml_duplicate_tree( $self, node );
+    return $self;
+  }
+  
+
+  /*
+   * iterate over children
+   *
+   * See also XmlNode#next
+   *
+   * XmlNode#each iterates over children, XmlNode#next over siblings
+   *
+   * can be limited to children with specific name (and specific namespace)
+   *
+   * for array-like constructs, e.g
+   *  &lt;Parent&gt;
+   *    &lt;Child&gt;..
+   *    &lt;Child&gt;..
+   *    &lt;Child&gt;..
+   *    &lt;OtherChild&gt;..
+   *    &lt;OtherChild&gt;..
+   *    &lt;OtherChild&gt;..
+   *
+   *   doc.Parent.each do |child|
+   *     ... iterates over all 6 children ...
+   *   end
+   *
+   * use XmlNode#next as in
+   *   node = doc.OtherChild
+   *   while node do
+   *     ... do something with node ...
+   *    node = node.next
+   *   end
+   *
+   * call-seq:
+   *  node.each { |XmlNode| ... }
+   *  node.each(&quot;name&quot;) { |XmlNode| ... }
+   *  node.each(&quot;name&quot;, &quot;namespace&quot;) { |XmlNode| ... }
+   */
+
+  void each(const char *name = NULL, const char *ns = NULL) {
+    int i = 0;
+    WsXmlNodeH node = $self;
+    int count = ws_xml_get_child_count_by_qname( node, ns, name );
+    while ( i &lt; count ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_child(node, i, ns, name), SWIGTYPE_p___WsXmlNode, 0));
+      ++i;
+    }
+  }
+
+
+
+
+
+  %alias get &quot;[]&quot;;
+
+  /*
+   * get child by index
+   *
+   * call-seq:
+   *  node.get(42) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(int i, const char *name = NULL, const char *ns = NULL) {
+    if (i &lt; 0 || i &gt;= ws_xml_get_child_count_by_qname($self,ns,name))
+      return NULL;
+    return ws_xml_get_child($self, i, ns, name);
+  }
+  
+  /*
+   * get first child by name (and namespace)
+   *
+   * call-seq:
+   *  node.get(&quot;name&quot;) -&gt; XmlNode
+   *  node.get(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(const char *name, const char *ns = NULL) {
+    return ws_xml_get_child($self, 0, ns, name);
+  }
+
+
+  /*
+   * get node attribute by index or name
+   *
+   * call-seq:
+   *  node.attr(1) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr(VALUE index = Qnil, VALUE namespace = Qnil) {
+    if (NIL_P(index)) { /* nil */
+      return ws_xml_get_node_attr( $self, 0 );
+    } else if (FIXNUM_P(index)) { /* numeric */
+      return ws_xml_get_node_attr( $self, FIX2INT(index) );      
+    } else { /* convert to string */
+      const char *ns = NULL;
+      const char *name = as_string(index);
+      if (!NIL_P(namespace)) {
+        ns = as_string(namespace);
+      }
+      return ws_xml_find_node_attr( $self, ns, name );
+    }
+  }
+
+  /*
+   * count node attribute
+   *
+   * call-seq:
+   *  node.attr_count -&gt; Integer
+   */
+  int attr_count() {
+    return ws_xml_get_node_attr_count( $self );
+  }
+  /*
+   * find node attribute by name
+   *
+   * call-seq:
+   *  node.attr_find(&quot;namespace&quot;, &quot;name&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_find( const char *ns, const char *name ) {
+    return ws_xml_find_node_attr( $self, ns, name );
+  }
+  /*
+   * add attribute to node
+   *
+   * call-seq:
+   *  node.attr_add(&quot;namespace&quot;, &quot;name&quot;, &quot;value&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_add( const char *ns, const char *name, const char *value ) {
+    return ws_xml_add_node_attr( $self, ns, name, value );
+  }
+  /*
+   * get end point reference
+   *
+   * call-seq:
+   *  node.epr(&quot;namespace&quot;, &quot;epr_node_name&quot;, Integer embedded) -&gt; EndPointReference
+   */
+  epr_t *epr( const char *ns, const char *epr_node_name, int embedded) {
+    return epr_deserialize($self, ns, epr_node_name, embedded);
+  }  
+
+
+
+  /*
+   * enumerate attributes
+   *
+   * call-seq:
+   *   node.each_attr { |XmlAttr| ... }
+   */
+  void each_attr() {
+    int i = 0;
+    while ( i &lt; ws_xml_get_node_attr_count( $self ) ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_node_attr($self, i), SWIGTYPE_p___WsXmlAttr, 0));
+      ++i;
+    }
+  }
+
+}</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-text-3D" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            text = String
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>/*</p>
+
+<pre>* Set text of node
+*
+*</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="text-3D-source">
+            <pre>void set_text( const char *text ) {
+    ws_xml_set_node_text( $self, text );
+  }
+  
+  /*
+   * get XmlDoc to which node belongs
+   *
+   * call-seq:
+   *  node.doc -&gt; XmlDoc
+   */
+  WsXmlDocH doc() {
+    return ws_xml_get_node_doc( $self );
+  }
+  
+  /*
+   * get parent for node
+   *
+   * call-seq:
+   *  node.parent -&gt; XmlNode
+   */
+  WsXmlNodeH parent() {
+    return ws_xml_get_node_parent( $self );
+  }
+
+  %alias child &quot;first&quot;;
+
+
+  /*
+   * get first child of node
+   *
+   * call-seq:
+   *  node.child -&gt; XmlNode
+   */
+  WsXmlNodeH child() {
+    return xml_parser_get_first_child($self);
+  }
+  
+  /*
+   * get name for node
+   *
+   * call-seq:
+   *  node.name -&gt; String
+   */
+  char *name() {
+    return ws_xml_get_node_local_name( $self );
+  }
+
+  %rename(&quot;name=&quot;) set_name( const char *name);
+
+
+  /*
+   * set name of node
+   *
+   * call-seq:
+   *  node.name = String
+   */
+  void set_name( const char *name ) {
+    ws_xml_set_node_name( $self, ws_xml_get_node_name_ns( $self ), name );
+  }
+  
+  /*
+   * get namespace for node
+   *
+   * call-seq:
+   *  node.ns -&gt; String
+   */
+  char *ns() {
+    return ws_xml_get_node_name_ns( $self );
+  }
+
+
+  %rename(&quot;ns=&quot;) set_ns( const char *nsuri );
+
+  /*
+   * set namespace of node
+   *
+   * call-seq:
+   *  node.ns = String
+   */
+  void set_ns( const char *ns ) {
+    ws_xml_set_ns( $self, ns, ws_xml_get_node_name_ns_prefix($self) );
+  }
+
+  /*
+   * get prefix of nodes namespace
+   *
+   * call-seq:
+   *  node.prefix -&gt; String
+   */
+  const char *prefix() {
+    return ws_xml_get_node_name_ns_prefix($self);
+  }
+
+
+  %rename(&quot;lang=&quot;) set_lang(const char *lang);
+
+  /*
+   * set language
+   *
+   * call-seq:
+   *  node.lang = String
+   */
+  void set_lang(const char *lang) {
+    ws_xml_set_node_lang($self, lang);
+  }
+
+  /*
+   * find node within tree
+   * a NULL passed as &#39;ns&#39; (namespace) is treated as wildcard
+   *
+   * call-seq:
+   *  node.find(&quot;namespace&quot;, &quot;name&quot;) -&gt; String # recursive
+   *  node.find(&quot;namespace&quot;, &quot;name&quot;, 0) -&gt; String # non-recursive
+   */
+  WsXmlNodeH find( const char *ns, const char *name, int recursive = 1) {
+    return ws_xml_find_in_tree( $self, ns, name, recursive );
+  }
+                                 
+  /*
+   * iterate over siblings
+   *
+   * finds next sibling with same namespace and name
+   *
+   * See also XmlNode#each
+   *
+   * XmlNode#each iterates over children, XmlNode#next over siblings
+   *
+   * Example:
+   *    &lt;Foo&gt;
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Bar&gt;...
+   *      &lt;Other&gt;...
+   *      &lt;Other&gt;...
+   *    &lt;/Foo&gt;
+   *
+   * node = root.Foo # points to &lt;Foo&gt; node
+   *
+   *   bar = node.Bar
+   *   while bar do
+   *     bar = bar.next
+   *   end
+   *
+   * will give you four iterations (all &lt;Bar&gt; nodes)
+   *
+   *   child = node.Bar
+   *   while child do
+   *     child = child.next(1)
+   *   end
+   *
+   * will give you six iterations (all children of &lt;Foo&gt;)
+   * The latter example is equal to
+   *
+   *   node.each do |child|
+   *     ...
+   *   end
+   *
+   */
+  WsXmlNodeH next(int all = 0) {
+    WsXmlNodeH next_node = xml_parser_get_next_child($self);
+    if (next_node &amp;&amp; !all) {
+      const char *ns_uri = ws_xml_get_node_name_ns($self);
+      const char *name = ws_xml_get_node_local_name($self);
+      if (ws_xml_is_node_qname(next_node, ns_uri, name) == 0) {
+        next_node = NULL;
+      }
+    }
+    return next_node;
+  }
+                                 
+  /*
+   * count node children
+   * if name given, count children with this name
+   * if name + ns given, count children with this namespace and name
+   */
+  int size(const char *name = NULL, const char *ns = NULL) {
+    return ws_xml_get_child_count_by_qname($self, ns, name);
+  }
+  
+  /*
+   * add child (namespace, name, text) to node
+   */
+  WsXmlNodeH add( const char *ns, const char *name, const char *text = NULL ) {
+    return ws_xml_add_child( $self, ns, name, text );
+  }
+
+  /*
+   * add child (namespace, name, text) before(!) node
+   */
+  WsXmlNodeH add_before( const char *ns, const char *name, const char *text = NULL ) {
+    return ws_xml_add_prev_sibling( $self, ns, name, text );
+  }
+
+
+  %alias add &quot;&lt;&lt;&quot;;
+
+  /*
+   * add node as child
+   */
+  WsXmlNodeH add(WsXmlNodeH node) {
+    ws_xml_duplicate_tree( $self, node );
+    return $self;
+  }
+  
+
+  /*
+   * iterate over children
+   *
+   * See also XmlNode#next
+   *
+   * XmlNode#each iterates over children, XmlNode#next over siblings
+   *
+   * can be limited to children with specific name (and specific namespace)
+   *
+   * for array-like constructs, e.g
+   *  &lt;Parent&gt;
+   *    &lt;Child&gt;..
+   *    &lt;Child&gt;..
+   *    &lt;Child&gt;..
+   *    &lt;OtherChild&gt;..
+   *    &lt;OtherChild&gt;..
+   *    &lt;OtherChild&gt;..
+   *
+   *   doc.Parent.each do |child|
+   *     ... iterates over all 6 children ...
+   *   end
+   *
+   * use XmlNode#next as in
+   *   node = doc.OtherChild
+   *   while node do
+   *     ... do something with node ...
+   *    node = node.next
+   *   end
+   *
+   * call-seq:
+   *  node.each { |XmlNode| ... }
+   *  node.each(&quot;name&quot;) { |XmlNode| ... }
+   *  node.each(&quot;name&quot;, &quot;namespace&quot;) { |XmlNode| ... }
+   */
+
+  void each(const char *name = NULL, const char *ns = NULL) {
+    int i = 0;
+    WsXmlNodeH node = $self;
+    int count = ws_xml_get_child_count_by_qname( node, ns, name );
+    while ( i &lt; count ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_child(node, i, ns, name), SWIGTYPE_p___WsXmlNode, 0));
+      ++i;
+    }
+  }
+
+
+
+
+
+  %alias get &quot;[]&quot;;
+
+  /*
+   * get child by index
+   *
+   * call-seq:
+   *  node.get(42) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;) -&gt; XmlNode
+   *  node.get(42, &quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(int i, const char *name = NULL, const char *ns = NULL) {
+    if (i &lt; 0 || i &gt;= ws_xml_get_child_count_by_qname($self,ns,name))
+      return NULL;
+    return ws_xml_get_child($self, i, ns, name);
+  }
+  
+  /*
+   * get first child by name (and namespace)
+   *
+   * call-seq:
+   *  node.get(&quot;name&quot;) -&gt; XmlNode
+   *  node.get(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlNode
+   */
+  WsXmlNodeH get(const char *name, const char *ns = NULL) {
+    return ws_xml_get_child($self, 0, ns, name);
+  }
+
+
+  /*
+   * get node attribute by index or name
+   *
+   * call-seq:
+   *  node.attr(1) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;) -&gt; XmlAttr
+   *  node.attr(&quot;name&quot;, &quot;namespace&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr(VALUE index = Qnil, VALUE namespace = Qnil) {
+    if (NIL_P(index)) { /* nil */
+      return ws_xml_get_node_attr( $self, 0 );
+    } else if (FIXNUM_P(index)) { /* numeric */
+      return ws_xml_get_node_attr( $self, FIX2INT(index) );      
+    } else { /* convert to string */
+      const char *ns = NULL;
+      const char *name = as_string(index);
+      if (!NIL_P(namespace)) {
+        ns = as_string(namespace);
+      }
+      return ws_xml_find_node_attr( $self, ns, name );
+    }
+  }
+
+  /*
+   * count node attribute
+   *
+   * call-seq:
+   *  node.attr_count -&gt; Integer
+   */
+  int attr_count() {
+    return ws_xml_get_node_attr_count( $self );
+  }
+  /*
+   * find node attribute by name
+   *
+   * call-seq:
+   *  node.attr_find(&quot;namespace&quot;, &quot;name&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_find( const char *ns, const char *name ) {
+    return ws_xml_find_node_attr( $self, ns, name );
+  }
+  /*
+   * add attribute to node
+   *
+   * call-seq:
+   *  node.attr_add(&quot;namespace&quot;, &quot;name&quot;, &quot;value&quot;) -&gt; XmlAttr
+   */
+  WsXmlAttrH attr_add( const char *ns, const char *name, const char *value ) {
+    return ws_xml_add_node_attr( $self, ns, name, value );
+  }
+  /*
+   * get end point reference
+   *
+   * call-seq:
+   *  node.epr(&quot;namespace&quot;, &quot;epr_node_name&quot;, Integer embedded) -&gt; EndPointReference
+   */
+  epr_t *epr( const char *ns, const char *epr_node_name, int embedded) {
+    return epr_deserialize($self, ns, epr_node_name, embedded);
+  }  
+
+
+
+  /*
+   * enumerate attributes
+   *
+   * call-seq:
+   *   node.each_attr { |XmlAttr| ... }
+   */
+  void each_attr() {
+    int i = 0;
+    while ( i &lt; ws_xml_get_node_attr_count( $self ) ) {
+      rb_yield( SWIG_NewPointerObj((void*) ws_xml_get_node_attr($self, i), SWIGTYPE_p___WsXmlAttr, 0));
+      ++i;
+    }
+  }
+
+}</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

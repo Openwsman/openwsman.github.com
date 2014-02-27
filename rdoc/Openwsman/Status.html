@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Openwsman::Status - Openwsman - WS-Management for all</title>
+
+<link href="../fonts.css" rel="stylesheet">
+<link href="../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script src="../js/jquery.js"></script>
+<script src="../js/navigation.js"></script>
+<script src="../js/search_index.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/searcher.js"></script>
+<script src="../js/darkfish.js"></script>
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link">Object
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-i-code">#code</a>
+    
+    <li ><a href="#method-i-code-3D">#code=</a>
+    
+    <li ><a href="#method-i-detail">#detail</a>
+    
+    <li ><a href="#method-i-detail-3D">#detail=</a>
+    
+    <li ><a href="#method-i-generate_fault">#generate_fault</a>
+    
+    <li ><a href="#method-i-msg">#msg</a>
+    
+    <li ><a href="#method-i-msg-3D">#msg=</a>
+    
+    <li ><a href="#method-i-to_s">#to_s</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Openwsman::Status">
+  <h1 id="class-Openwsman::Status" class="class">
+    class Openwsman::Status
+  </h1>
+
+  <section class="description">
+    
+<p>*</p>
+<ul><li>
+<p><a href="Status.html">Status</a> represents the detailed status of a
+(failed) WS-Management</p>
+</li><li>
+<p>operation.</p>
+</li></ul>
+
+<p>*</p>
+<ul><li>
+<p>Its primarily used implementing server-side plugins to report a Fault</p>
+</li><li>
+<p>back to the calling client.</p>
+</li></ul>
+
+<p>*/</p>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            Openwsman::Status.new # create &#39;good&#39; status
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            Openwsman::Status.new error_code
+          </span>
+          
+        </div>
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            Openwsman::Status.new error_code, error_detail
+          </span>
+          
+        </div>
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            Openwsman::Status.new error_code, error_detail, &quot;Error message&quot;
+          </span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>/*</p>
+
+<pre>* Create a new Status object
+*
+*</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre>(int code = 0, int detail = 0, const char *msg = NULL) {
+    WsmanStatus *s = (WsmanStatus *)malloc(sizeof(WsmanStatus));
+    wsman_status_init(s);
+    if (code)
+      s-&gt;fault_code = code;
+    if (msg)
+      s-&gt;fault_msg = strdup(msg);
+    if (detail &lt; 0
+        || detail &gt; OWSMAN_SYSTEM_ERROR) {
+      SWIG_exception( SWIG_ValueError, &quot;Bad fault detail&quot; );
+    }
+    else {
+      s-&gt;fault_detail_code = detail;
+    }
+
+    return s;
+  }
+  ~_WsmanStatus() {
+    if ($self-&gt;fault_msg) free($self-&gt;fault_msg);
+    free($self);
+  }
+  /*
+   * String representation (returns the fault message)
+   * call-seq:
+   *   status.to_s -&gt; String
+   */
+  const char *to_s() {
+    return $self-&gt;fault_msg;
+  }
+
+  %rename(&quot;code=&quot;) set_code(int code);
+
+  /*
+   * Set the fault code
+   * call-seq:
+   *   status.code = 1
+   */
+  void set_code(int code) { $self-&gt;fault_code = code; }
+  /*
+   * Get the fault code
+   * call-seq:
+   *   status.code -&gt; Integer
+   */
+  int code() {
+    return $self-&gt;fault_code;
+  }
+
+  %rename(&quot;detail=&quot;) set_detail(int detail);
+
+  /*
+   * Set the fault detail code
+   * call-seq:
+   *   status.detail = 42
+   */
+  void set_detail(int detail) {
+    if (detail &lt; 0
+        || detail &gt; OWSMAN_SYSTEM_ERROR) {
+      SWIG_exception( SWIG_ValueError, &quot;Bad fault detail&quot; );
+    }
+    else {
+      $self-&gt;fault_detail_code = detail;
+    }
+
+  }
+  /*
+   * Get the fault detail code
+   * call-seq:
+   *   status.detail -&gt; Integer
+   */
+  int detail() {
+    return $self-&gt;fault_detail_code;
+  }
+
+  %rename(&quot;msg=&quot;) set_msg(const char *msg);
+
+  /*
+   * Set the fault message
+   * call-seq:
+   *   status.msg = &quot;This is a fault message&quot;
+   */
+  void set_msg(const char *msg) {
+    if ($self-&gt;fault_msg)
+      free($self-&gt;fault_msg);
+    if (msg)
+      $self-&gt;fault_msg = strdup(msg);
+    else
+      $self-&gt;fault_msg = NULL;
+  }
+  /*
+   * Get the fault message
+   * call-seq:
+   *   status.msg -&gt; String
+   */
+  const char *msg() {
+    return $self-&gt;fault_msg;
+  }
+
+  %typemap(newfree) WsXmlDocH &quot;ws_xml_destroy_doc($1);&quot;;
+  /*
+   * Create a new fault XmlDoc based on Status information
+   * call-seq:
+   *   status.generate_fault(xml_doc) -&gt; XmlDoc
+   */
+  WsXmlDocH generate_fault(WsXmlDocH doc) {
+    return wsman_generate_fault( doc, $self-&gt;fault_code, $self-&gt;fault_detail_code, $self-&gt;fault_msg);
+  }
+}</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-code" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            code &rarr; Integer
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>/*</p>
+
+<pre>* Get the fault code
+*</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="code-source">
+            <pre>int code() {
+    return $self-&gt;fault_code;
+  }
+
+  %rename(&quot;detail=&quot;) set_detail(int detail);
+
+  /*
+   * Set the fault detail code
+   * call-seq:
+   *   status.detail = 42
+   */
+  void set_detail(int detail) {
+    if (detail &lt; 0
+        || detail &gt; OWSMAN_SYSTEM_ERROR) {
+      SWIG_exception( SWIG_ValueError, &quot;Bad fault detail&quot; );
+    }
+    else {
+      $self-&gt;fault_detail_code = detail;
+    }
+
+  }
+  /*
+   * Get the fault detail code
+   * call-seq:
+   *   status.detail -&gt; Integer
+   */
+  int detail() {
+    return $self-&gt;fault_detail_code;
+  }
+
+  %rename(&quot;msg=&quot;) set_msg(const char *msg);
+
+  /*
+   * Set the fault message
+   * call-seq:
+   *   status.msg = &quot;This is a fault message&quot;
+   */
+  void set_msg(const char *msg) {
+    if ($self-&gt;fault_msg)
+      free($self-&gt;fault_msg);
+    if (msg)
+      $self-&gt;fault_msg = strdup(msg);
+    else
+      $self-&gt;fault_msg = NULL;
+  }
+  /*
+   * Get the fault message
+   * call-seq:
+   *   status.msg -&gt; String
+   */
+  const char *msg() {
+    return $self-&gt;fault_msg;
+  }
+
+  %typemap(newfree) WsXmlDocH &quot;ws_xml_destroy_doc($1);&quot;;
+  /*
+   * Create a new fault XmlDoc based on Status information
+   * call-seq:
+   *   status.generate_fault(xml_doc) -&gt; XmlDoc
+   */
+  WsXmlDocH generate_fault(WsXmlDocH doc) {
+    return wsman_generate_fault( doc, $self-&gt;fault_code, $self-&gt;fault_detail_code, $self-&gt;fault_msg);
+  }
+}</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-code-3D" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            code = 1
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>/*</p>
+
+<pre>* Set the fault code
+*</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="code-3D-source">
+            <pre>void set_code(int code) { $self-&gt;fault_code = code; }
+  /*
+   * Get the fault code
+   * call-seq:
+   *   status.code -&gt; Integer
+   */
+  int code() {
+    return $self-&gt;fault_code;
+  }
+
+  %rename(&quot;detail=&quot;) set_detail(int detail);
+
+  /*
+   * Set the fault detail code
+   * call-seq:
+   *   status.detail = 42
+   */
+  void set_detail(int detail) {
+    if (detail &lt; 0
+        || detail &gt; OWSMAN_SYSTEM_ERROR) {
+      SWIG_exception( SWIG_ValueError, &quot;Bad fault detail&quot; );
+    }
+    else {
+      $self-&gt;fault_detail_code = detail;
+    }
+
+  }
+  /*
+   * Get the fault detail code
+   * call-seq:
+   *   status.detail -&gt; Integer
+   */
+  int detail() {
+    return $self-&gt;fault_detail_code;
+  }
+
+  %rename(&quot;msg=&quot;) set_msg(const char *msg);
+
+  /*
+   * Set the fault message
+   * call-seq:
+   *   status.msg = &quot;This is a fault message&quot;
+   */
+  void set_msg(const char *msg) {
+    if ($self-&gt;fault_msg)
+      free($self-&gt;fault_msg);
+    if (msg)
+      $self-&gt;fault_msg = strdup(msg);
+    else
+      $self-&gt;fault_msg = NULL;
+  }
+  /*
+   * Get the fault message
+   * call-seq:
+   *   status.msg -&gt; String
+   */
+  const char *msg() {
+    return $self-&gt;fault_msg;
+  }
+
+  %typemap(newfree) WsXmlDocH &quot;ws_xml_destroy_doc($1);&quot;;
+  /*
+   * Create a new fault XmlDoc based on Status information
+   * call-seq:
+   *   status.generate_fault(xml_doc) -&gt; XmlDoc
+   */
+  WsXmlDocH generate_fault(WsXmlDocH doc) {
+    return wsman_generate_fault( doc, $self-&gt;fault_code, $self-&gt;fault_detail_code, $self-&gt;fault_msg);
+  }
+}</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-detail" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            detail &rarr; Integer
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>/*</p>
+
+<pre>* Get the fault detail code
+*</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="detail-source">
+            <pre>int detail() {
+    return $self-&gt;fault_detail_code;
+  }
+
+  %rename(&quot;msg=&quot;) set_msg(const char *msg);
+
+  /*
+   * Set the fault message
+   * call-seq:
+   *   status.msg = &quot;This is a fault message&quot;
+   */
+  void set_msg(const char *msg) {
+    if ($self-&gt;fault_msg)
+      free($self-&gt;fault_msg);
+    if (msg)
+      $self-&gt;fault_msg = strdup(msg);
+    else
+      $self-&gt;fault_msg = NULL;
+  }
+  /*
+   * Get the fault message
+   * call-seq:
+   *   status.msg -&gt; String
+   */
+  const char *msg() {
+    return $self-&gt;fault_msg;
+  }
+
+  %typemap(newfree) WsXmlDocH &quot;ws_xml_destroy_doc($1);&quot;;
+  /*
+   * Create a new fault XmlDoc based on Status information
+   * call-seq:
+   *   status.generate_fault(xml_doc) -&gt; XmlDoc
+   */
+  WsXmlDocH generate_fault(WsXmlDocH doc) {
+    return wsman_generate_fault( doc, $self-&gt;fault_code, $self-&gt;fault_detail_code, $self-&gt;fault_msg);
+  }
+}</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-detail-3D" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            detail = 42
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>/*</p>
+
+<pre>* Set the fault detail code
+*</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="detail-3D-source">
+            <pre>void set_detail(int detail) {
+    if (detail &lt; 0
+        || detail &gt; OWSMAN_SYSTEM_ERROR) {
+      SWIG_exception( SWIG_ValueError, &quot;Bad fault detail&quot; );
+    }
+    else {
+      $self-&gt;fault_detail_code = detail;
+    }
+
+  }
+  /*
+   * Get the fault detail code
+   * call-seq:
+   *   status.detail -&gt; Integer
+   */
+  int detail() {
+    return $self-&gt;fault_detail_code;
+  }
+
+  %rename(&quot;msg=&quot;) set_msg(const char *msg);
+
+  /*
+   * Set the fault message
+   * call-seq:
+   *   status.msg = &quot;This is a fault message&quot;
+   */
+  void set_msg(const char *msg) {
+    if ($self-&gt;fault_msg)
+      free($self-&gt;fault_msg);
+    if (msg)
+      $self-&gt;fault_msg = strdup(msg);
+    else
+      $self-&gt;fault_msg = NULL;
+  }
+  /*
+   * Get the fault message
+   * call-seq:
+   *   status.msg -&gt; String
+   */
+  const char *msg() {
+    return $self-&gt;fault_msg;
+  }
+
+  %typemap(newfree) WsXmlDocH &quot;ws_xml_destroy_doc($1);&quot;;
+  /*
+   * Create a new fault XmlDoc based on Status information
+   * call-seq:
+   *   status.generate_fault(xml_doc) -&gt; XmlDoc
+   */
+  WsXmlDocH generate_fault(WsXmlDocH doc) {
+    return wsman_generate_fault( doc, $self-&gt;fault_code, $self-&gt;fault_detail_code, $self-&gt;fault_msg);
+  }
+}</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-generate_fault" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            generate_fault(xml_doc) &rarr; XmlDoc
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>/*</p>
+
+<pre>* Create a new fault XmlDoc based on Status information
+*</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="generate_fault-source">
+            <pre>WsXmlDocH generate_fault(WsXmlDocH doc) {
+    return wsman_generate_fault( doc, $self-&gt;fault_code, $self-&gt;fault_detail_code, $self-&gt;fault_msg);
+  }
+}</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-msg" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            msg &rarr; String
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>/*</p>
+
+<pre>* Get the fault message
+*</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="msg-source">
+            <pre>const char *msg() {
+    return $self-&gt;fault_msg;
+  }
+
+  %typemap(newfree) WsXmlDocH &quot;ws_xml_destroy_doc($1);&quot;;
+  /*
+   * Create a new fault XmlDoc based on Status information
+   * call-seq:
+   *   status.generate_fault(xml_doc) -&gt; XmlDoc
+   */
+  WsXmlDocH generate_fault(WsXmlDocH doc) {
+    return wsman_generate_fault( doc, $self-&gt;fault_code, $self-&gt;fault_detail_code, $self-&gt;fault_msg);
+  }
+}</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-msg-3D" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            msg = &quot;This is a fault message&quot;
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>/*</p>
+
+<pre>* Set the fault message
+*</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="msg-3D-source">
+            <pre>void set_msg(const char *msg) {
+    if ($self-&gt;fault_msg)
+      free($self-&gt;fault_msg);
+    if (msg)
+      $self-&gt;fault_msg = strdup(msg);
+    else
+      $self-&gt;fault_msg = NULL;
+  }
+  /*
+   * Get the fault message
+   * call-seq:
+   *   status.msg -&gt; String
+   */
+  const char *msg() {
+    return $self-&gt;fault_msg;
+  }
+
+  %typemap(newfree) WsXmlDocH &quot;ws_xml_destroy_doc($1);&quot;;
+  /*
+   * Create a new fault XmlDoc based on Status information
+   * call-seq:
+   *   status.generate_fault(xml_doc) -&gt; XmlDoc
+   */
+  WsXmlDocH generate_fault(WsXmlDocH doc) {
+    return wsman_generate_fault( doc, $self-&gt;fault_code, $self-&gt;fault_detail_code, $self-&gt;fault_msg);
+  }
+}</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-to_s" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            to_s &rarr; String
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>/*</p>
+
+<pre>* String representation (returns the fault message)
+*</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="to_s-source">
+            <pre>const char *to_s() {
+    return $self-&gt;fault_msg;
+  }
+
+  %rename(&quot;code=&quot;) set_code(int code);
+
+  /*
+   * Set the fault code
+   * call-seq:
+   *   status.code = 1
+   */
+  void set_code(int code) { $self-&gt;fault_code = code; }
+  /*
+   * Get the fault code
+   * call-seq:
+   *   status.code -&gt; Integer
+   */
+  int code() {
+    return $self-&gt;fault_code;
+  }
+
+  %rename(&quot;detail=&quot;) set_detail(int detail);
+
+  /*
+   * Set the fault detail code
+   * call-seq:
+   *   status.detail = 42
+   */
+  void set_detail(int detail) {
+    if (detail &lt; 0
+        || detail &gt; OWSMAN_SYSTEM_ERROR) {
+      SWIG_exception( SWIG_ValueError, &quot;Bad fault detail&quot; );
+    }
+    else {
+      $self-&gt;fault_detail_code = detail;
+    }
+
+  }
+  /*
+   * Get the fault detail code
+   * call-seq:
+   *   status.detail -&gt; Integer
+   */
+  int detail() {
+    return $self-&gt;fault_detail_code;
+  }
+
+  %rename(&quot;msg=&quot;) set_msg(const char *msg);
+
+  /*
+   * Set the fault message
+   * call-seq:
+   *   status.msg = &quot;This is a fault message&quot;
+   */
+  void set_msg(const char *msg) {
+    if ($self-&gt;fault_msg)
+      free($self-&gt;fault_msg);
+    if (msg)
+      $self-&gt;fault_msg = strdup(msg);
+    else
+      $self-&gt;fault_msg = NULL;
+  }
+  /*
+   * Get the fault message
+   * call-seq:
+   *   status.msg -&gt; String
+   */
+  const char *msg() {
+    return $self-&gt;fault_msg;
+  }
+
+  %typemap(newfree) WsXmlDocH &quot;ws_xml_destroy_doc($1);&quot;;
+  /*
+   * Create a new fault XmlDoc based on Status information
+   * call-seq:
+   *   status.generate_fault(xml_doc) -&gt; XmlDoc
+   */
+  WsXmlDocH generate_fault(WsXmlDocH doc) {
+    return wsman_generate_fault( doc, $self-&gt;fault_code, $self-&gt;fault_detail_code, $self-&gt;fault_msg);
+  }
+}</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+
