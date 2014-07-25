@@ -4,21 +4,21 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class ClientOptions - Openwsman - WS-Management for all</title>
+<title>class Openwsman::ClientOptions - Openwsman - WS-Management for all</title>
 
-<link href="./fonts.css" rel="stylesheet">
-<link href="./rdoc.css" rel="stylesheet">
+<link href="../fonts.css" rel="stylesheet">
+<link href="../rdoc.css" rel="stylesheet">
 
 <script type="text/javascript">
-  var rdoc_rel_prefix = "./";
+  var rdoc_rel_prefix = "../";
 </script>
 
-<script src="./js/jquery.js"></script>
-<script src="./js/navigation.js"></script>
-<script src="./js/search_index.js"></script>
-<script src="./js/search.js"></script>
-<script src="./js/searcher.js"></script>
-<script src="./js/darkfish.js"></script>
+<script src="../js/jquery.js"></script>
+<script src="../js/navigation.js"></script>
+<script src="../js/search_index.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/searcher.js"></script>
+<script src="../js/darkfish.js"></script>
 
 
 <body id="top" role="document" class="class">
@@ -26,13 +26,13 @@
   <div id="project-navigation">
     <div id="home-section" role="region" title="Quick navigation" class="nav-section">
   <h2>
-    <a href="./index.html" rel="home">Home</a>
+    <a href="../index.html" rel="home">Home</a>
   </h2>
 
   <div id="table-of-contents-navigation">
-    <a href="./table_of_contents.html#pages">Pages</a>
-    <a href="./table_of_contents.html#classes">Classes</a>
-    <a href="./table_of_contents.html#methods">Methods</a>
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
   </div>
 </div>
 
@@ -153,35 +153,21 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-ClientOptions">
-  <h1 id="class-ClientOptions" class="class">
-    class ClientOptions
+<main role="main" aria-labelledby="class-Openwsman::ClientOptions">
+  <h1 id="class-Openwsman::ClientOptions" class="class">
+    class Openwsman::ClientOptions
   </h1>
 
   <section class="description">
     
-<p>*</p>
-<ul><li>
 <p><a href="ClientOptions.html">ClientOptions</a> control the behaviour of the
 Client connection</p>
-</li></ul>
 
-<p>*</p>
-<ul><li>
 <p>The primary use of <a href="ClientOptions.html">ClientOptions</a> in normal
-operations is adding</p>
-</li><li>
-<p>selectors - key/value pairs added to the request URL.</p>
-</li></ul>
+operations is adding selectors - key/value pairs added to the request URL.</p>
 
-<p>*</p>
-<ul><li>
-<p>For WS-CIM operations, selectors define the key attributes for</p>
-</li><li>
-<p>the selected CIM class to address a specific instance of the class.</p>
-</li></ul>
-
-<p>* */</p>
+<p>For WS-CIM operations, selectors define the key attributes for the selected
+CIM class to address a specific instance of the class.</p>
 
   </section>
 
@@ -220,15 +206,10 @@ operations is adding</p>
 
         <div class="method-description">
           
-          <p>/*</p>
+          <p>Add an option (for OptionSet) as key/value pair</p>
 
-<pre>* Add an option (for OptionSet) as key/value pair
-*
-* NOTE:
-* the value must be properly escaped (replace &amp; with &amp;amp;, etc.)
-* in Ruby use CGI::escapeHTML()
-*
-*</pre>
+<p>NOTE: the value must be properly escaped (replace &amp; with &amp;amp;,
+etc.) in Ruby use CGI::escapeHTML()</p>
           
           
 
@@ -238,7 +219,6 @@ operations is adding</p>
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_option($self, key, value);
   }
@@ -254,6 +234,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options = { &quot;Name&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_options(VALUE hash)
   {
@@ -266,6 +247,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options -&gt; Hash
+   *
    */
   VALUE get_options(void)
   {
@@ -283,12 +265,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_selector($self, key, value);
   }
@@ -304,6 +286,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_selectors(VALUE hash)
   {
@@ -316,6 +299,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors -&gt; Hash
+   *
    */
   VALUE get_selectors(void)
   {
@@ -326,26 +310,41 @@ operations is adding</p>
 
   /*
    * Add a property as key/value pair
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
+   * * Key is evaluated as String
+   * * Value is evaluated as String or EndPointReference
    *
    * call-seq:
    *   options.add_property &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_property &quot;Key&quot;, EndPointReference.new(...)
+   *
    */
   void add_property(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
 
-
-    wsmc_add_property($self, key, value);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      const epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_property_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_property($self, key, value);
+    }
   }
+
   
 
   %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
   /*
    * Set properties from Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
+   *
    */
   void set_properties(VALUE hash)
   {
@@ -355,9 +354,11 @@ operations is adding</p>
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties -&gt; Hash
+   *
    */
   VALUE get_properties(void)
   {
@@ -373,6 +374,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri = &quot;http://...&quot;
+   *
    */
   void set_delivery_uri( const char *delivery_uri ) {
     wsmc_set_delivery_uri(delivery_uri, $self);
@@ -383,6 +385,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri -&gt; String
+   *
    */
   const char *delivery_uri() {
     return $self-&gt;delivery_uri;
@@ -396,6 +399,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
+   *
    */
   void set_sub_expiry(unsigned int event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
@@ -406,6 +410,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry -&gt; Integer
+   *
    */
   int sub_expiry() {
     return $self-&gt;expires;
@@ -419,6 +424,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
+   *
    */
   void set_heartbeat_interval(unsigned int heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
@@ -429,6 +435,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval -&gt; Integer
+   *
    */
   int heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
@@ -442,6 +449,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode = Openwsman::WSMAN_DELIVERY_PUSH
+   *
    */
   void set_delivery_mode(unsigned int delivery_mode) {
     if (delivery_mode &gt; WSMAN_DELIVERY_PULL)
@@ -456,6 +464,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode -&gt; Integer
+   *
    */
   int delivery_mode() {
     return $self-&gt;delivery_mode;
@@ -474,6 +483,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
+   *
    */
   void set_delivery_security_mode(unsigned int delivery_sec_mode) {
     if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
@@ -487,6 +497,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode -&gt; Integer
+   *
    */
   int delivery_sec_mode() {
     return $self-&gt;delivery_sec_mode;
@@ -515,15 +526,26 @@ operations is adding</p>
           
         </div>
         
+        <div class="method-heading">
+          <span class="method-callseq">
+            add_property &quot;Key&quot;, EndPointReference.new(...)
+          </span>
+          
+        </div>
+        
         
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Add a property as key/value pair
-*
-*</pre>
+          <p>Add a property as key/value pair</p>
+<ul><li>
+<p>Input parameters to &#39;invoke&#39;d methods are represented as
+ClientOption properties</p>
+</li><li>
+<p>Key is evaluated as String</p>
+</li><li>
+<p>Value is evaluated as String or EndPointReference</p>
+</li></ul>
           
           
 
@@ -532,19 +554,29 @@ operations is adding</p>
             <pre>void add_property(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
 
-
-    wsmc_add_property($self, key, value);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      const epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_property_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_property($self, key, value);
+    }
   }
+
   
 
   %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
   /*
    * Set properties from Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
+   *
    */
   void set_properties(VALUE hash)
   {
@@ -554,9 +586,11 @@ operations is adding</p>
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties -&gt; Hash
+   *
    */
   VALUE get_properties(void)
   {
@@ -572,6 +606,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri = &quot;http://...&quot;
+   *
    */
   void set_delivery_uri( const char *delivery_uri ) {
     wsmc_set_delivery_uri(delivery_uri, $self);
@@ -582,6 +617,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri -&gt; String
+   *
    */
   const char *delivery_uri() {
     return $self-&gt;delivery_uri;
@@ -595,6 +631,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
+   *
    */
   void set_sub_expiry(unsigned int event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
@@ -605,6 +642,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry -&gt; Integer
+   *
    */
   int sub_expiry() {
     return $self-&gt;expires;
@@ -618,6 +656,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
+   *
    */
   void set_heartbeat_interval(unsigned int heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
@@ -628,6 +667,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval -&gt; Integer
+   *
    */
   int heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
@@ -641,6 +681,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode = Openwsman::WSMAN_DELIVERY_PUSH
+   *
    */
   void set_delivery_mode(unsigned int delivery_mode) {
     if (delivery_mode &gt; WSMAN_DELIVERY_PULL)
@@ -655,6 +696,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode -&gt; Integer
+   *
    */
   int delivery_mode() {
     return $self-&gt;delivery_mode;
@@ -673,6 +715,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
+   *
    */
   void set_delivery_security_mode(unsigned int delivery_sec_mode) {
     if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
@@ -686,6 +729,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode -&gt; Integer
+   *
    */
   int delivery_sec_mode() {
     return $self-&gt;delivery_sec_mode;
@@ -718,15 +762,10 @@ operations is adding</p>
 
         <div class="method-description">
           
-          <p>/*</p>
+          <p>Add a selector as key/value pair</p>
 
-<pre>* Add a selector as key/value pair
-*
-* NOTE:
-* the value must be properly escaped (replace &amp; with &amp;amp;, etc.)
-* in Ruby use CGI::escapeHTML()
-*
-*</pre>
+<p>NOTE: the value must be properly escaped (replace &amp; with &amp;amp;,
+etc.) in Ruby use CGI::escapeHTML()</p>
           
           
 
@@ -736,7 +775,6 @@ operations is adding</p>
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_selector($self, key, value);
   }
@@ -752,6 +790,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_selectors(VALUE hash)
   {
@@ -764,6 +803,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors -&gt; Hash
+   *
    */
   VALUE get_selectors(void)
   {
@@ -774,26 +814,41 @@ operations is adding</p>
 
   /*
    * Add a property as key/value pair
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
+   * * Key is evaluated as String
+   * * Value is evaluated as String or EndPointReference
    *
    * call-seq:
    *   options.add_property &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_property &quot;Key&quot;, EndPointReference.new(...)
+   *
    */
   void add_property(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
 
-
-    wsmc_add_property($self, key, value);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      const epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_property_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_property($self, key, value);
+    }
   }
+
   
 
   %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
   /*
    * Set properties from Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
+   *
    */
   void set_properties(VALUE hash)
   {
@@ -803,9 +858,11 @@ operations is adding</p>
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties -&gt; Hash
+   *
    */
   VALUE get_properties(void)
   {
@@ -821,6 +878,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri = &quot;http://...&quot;
+   *
    */
   void set_delivery_uri( const char *delivery_uri ) {
     wsmc_set_delivery_uri(delivery_uri, $self);
@@ -831,6 +889,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri -&gt; String
+   *
    */
   const char *delivery_uri() {
     return $self-&gt;delivery_uri;
@@ -844,6 +903,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
+   *
    */
   void set_sub_expiry(unsigned int event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
@@ -854,6 +914,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry -&gt; Integer
+   *
    */
   int sub_expiry() {
     return $self-&gt;expires;
@@ -867,6 +928,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
+   *
    */
   void set_heartbeat_interval(unsigned int heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
@@ -877,6 +939,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval -&gt; Integer
+   *
    */
   int heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
@@ -890,6 +953,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode = Openwsman::WSMAN_DELIVERY_PUSH
+   *
    */
   void set_delivery_mode(unsigned int delivery_mode) {
     if (delivery_mode &gt; WSMAN_DELIVERY_PULL)
@@ -904,6 +968,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode -&gt; Integer
+   *
    */
   int delivery_mode() {
     return $self-&gt;delivery_mode;
@@ -922,6 +987,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
+   *
    */
   void set_delivery_security_mode(unsigned int delivery_sec_mode) {
     if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
@@ -935,6 +1001,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode -&gt; Integer
+   *
    */
   int delivery_sec_mode() {
     return $self-&gt;delivery_sec_mode;
@@ -967,16 +1034,11 @@ operations is adding</p>
 
         <div class="method-description">
           
-          <p>/*</p>
+          <p>Get CIM Namespace for <a href="../Openwsman.html">Openwsman</a> Note:
+Microsoft WinRM set the resource namespace by attaching it to the resource
+URI</p>
 
-<pre>* Get CIM Namespace for Openwsman
-* Note:
-* Microsoft WinRM set the resource namespace by attaching it
-* to the resource URI
-*
-* See also: Openwsman.epr_prefix_for
-*
-*</pre>
+<p>See also: Openwsman.epr_prefix_for</p>
           
           
 
@@ -995,6 +1057,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reference = &quot;&lt;xml ...&gt;&quot;
+   *
    */
   void set_reference(const char *reference) {
     wsmc_set_reference(reference, $self);
@@ -1009,6 +1072,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reference -&gt; String
+   *
    */
   const char *get_reference() {
     return $self-&gt;reference;
@@ -1024,12 +1088,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_option &quot;Name&quot;, &quot;Value&quot;
+   *
    */
   void add_option(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_option($self, key, value);
   }
@@ -1045,6 +1109,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options = { &quot;Name&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_options(VALUE hash)
   {
@@ -1057,6 +1122,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options -&gt; Hash
+   *
    */
   VALUE get_options(void)
   {
@@ -1074,12 +1140,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_selector($self, key, value);
   }
@@ -1095,6 +1161,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_selectors(VALUE hash)
   {
@@ -1107,6 +1174,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors -&gt; Hash
+   *
    */
   VALUE get_selectors(void)
   {
@@ -1117,26 +1185,41 @@ operations is adding</p>
 
   /*
    * Add a property as key/value pair
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
+   * * Key is evaluated as String
+   * * Value is evaluated as String or EndPointReference
    *
    * call-seq:
    *   options.add_property &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_property &quot;Key&quot;, EndPointReference.new(...)
+   *
    */
   void add_property(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
 
-
-    wsmc_add_property($self, key, value);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      const epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_property_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_property($self, key, value);
+    }
   }
+
   
 
   %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
   /*
    * Set properties from Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
+   *
    */
   void set_properties(VALUE hash)
   {
@@ -1146,9 +1229,11 @@ operations is adding</p>
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties -&gt; Hash
+   *
    */
   VALUE get_properties(void)
   {
@@ -1164,6 +1249,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri = &quot;http://...&quot;
+   *
    */
   void set_delivery_uri( const char *delivery_uri ) {
     wsmc_set_delivery_uri(delivery_uri, $self);
@@ -1174,6 +1260,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri -&gt; String
+   *
    */
   const char *delivery_uri() {
     return $self-&gt;delivery_uri;
@@ -1187,6 +1274,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
+   *
    */
   void set_sub_expiry(unsigned int event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
@@ -1197,6 +1285,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry -&gt; Integer
+   *
    */
   int sub_expiry() {
     return $self-&gt;expires;
@@ -1210,6 +1299,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
+   *
    */
   void set_heartbeat_interval(unsigned int heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
@@ -1220,6 +1310,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval -&gt; Integer
+   *
    */
   int heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
@@ -1233,6 +1324,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode = Openwsman::WSMAN_DELIVERY_PUSH
+   *
    */
   void set_delivery_mode(unsigned int delivery_mode) {
     if (delivery_mode &gt; WSMAN_DELIVERY_PULL)
@@ -1247,6 +1339,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode -&gt; Integer
+   *
    */
   int delivery_mode() {
     return $self-&gt;delivery_mode;
@@ -1265,6 +1358,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
+   *
    */
   void set_delivery_security_mode(unsigned int delivery_sec_mode) {
     if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
@@ -1278,6 +1372,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode -&gt; Integer
+   *
    */
   int delivery_sec_mode() {
     return $self-&gt;delivery_sec_mode;
@@ -1310,17 +1405,11 @@ operations is adding</p>
 
         <div class="method-description">
           
-          <p>/*</p>
+          <p>Set CIM Namespace for <a href="../Openwsman.html">Openwsman</a> (default is
+root/cimv2) Note: Microsoft WinRM set the resource namespace by attaching
+it to the resource URI</p>
 
-<pre>* Set CIM Namespace for Openwsman
-* (default is root/cimv2)
-* Note:
-* Microsoft WinRM set the resource namespace by attaching it
-* to the resource URI
-*
-* See also: Openwsman.epr_prefix_for
-*
-*</pre>
+<p>See also: Openwsman.epr_prefix_for</p>
           
           
 
@@ -1343,6 +1432,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.cim_namespace -&gt; String
+   *
    */
   const char *get_cim_namespace() {
     return $self-&gt;cim_ns;
@@ -1357,6 +1447,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reference = &quot;&lt;xml ...&gt;&quot;
+   *
    */
   void set_reference(const char *reference) {
     wsmc_set_reference(reference, $self);
@@ -1371,6 +1462,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reference -&gt; String
+   *
    */
   const char *get_reference() {
     return $self-&gt;reference;
@@ -1386,12 +1478,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_option &quot;Name&quot;, &quot;Value&quot;
+   *
    */
   void add_option(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_option($self, key, value);
   }
@@ -1407,6 +1499,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options = { &quot;Name&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_options(VALUE hash)
   {
@@ -1419,6 +1512,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options -&gt; Hash
+   *
    */
   VALUE get_options(void)
   {
@@ -1436,12 +1530,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_selector($self, key, value);
   }
@@ -1457,6 +1551,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_selectors(VALUE hash)
   {
@@ -1469,6 +1564,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors -&gt; Hash
+   *
    */
   VALUE get_selectors(void)
   {
@@ -1479,26 +1575,41 @@ operations is adding</p>
 
   /*
    * Add a property as key/value pair
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
+   * * Key is evaluated as String
+   * * Value is evaluated as String or EndPointReference
    *
    * call-seq:
    *   options.add_property &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_property &quot;Key&quot;, EndPointReference.new(...)
+   *
    */
   void add_property(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
 
-
-    wsmc_add_property($self, key, value);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      const epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_property_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_property($self, key, value);
+    }
   }
+
   
 
   %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
   /*
    * Set properties from Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
+   *
    */
   void set_properties(VALUE hash)
   {
@@ -1508,9 +1619,11 @@ operations is adding</p>
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties -&gt; Hash
+   *
    */
   VALUE get_properties(void)
   {
@@ -1526,6 +1639,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri = &quot;http://...&quot;
+   *
    */
   void set_delivery_uri( const char *delivery_uri ) {
     wsmc_set_delivery_uri(delivery_uri, $self);
@@ -1536,6 +1650,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri -&gt; String
+   *
    */
   const char *delivery_uri() {
     return $self-&gt;delivery_uri;
@@ -1549,6 +1664,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
+   *
    */
   void set_sub_expiry(unsigned int event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
@@ -1559,6 +1675,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry -&gt; Integer
+   *
    */
   int sub_expiry() {
     return $self-&gt;expires;
@@ -1572,6 +1689,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
+   *
    */
   void set_heartbeat_interval(unsigned int heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
@@ -1582,6 +1700,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval -&gt; Integer
+   *
    */
   int heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
@@ -1595,6 +1714,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode = Openwsman::WSMAN_DELIVERY_PUSH
+   *
    */
   void set_delivery_mode(unsigned int delivery_mode) {
     if (delivery_mode &gt; WSMAN_DELIVERY_PULL)
@@ -1609,6 +1729,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode -&gt; Integer
+   *
    */
   int delivery_mode() {
     return $self-&gt;delivery_mode;
@@ -1627,6 +1748,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
+   *
    */
   void set_delivery_security_mode(unsigned int delivery_sec_mode) {
     if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
@@ -1640,6 +1762,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode -&gt; Integer
+   *
    */
   int delivery_sec_mode() {
     return $self-&gt;delivery_sec_mode;
@@ -1672,15 +1795,12 @@ operations is adding</p>
 
         <div class="method-description">
           
-          <p>/*</p>
+          <p>Reset dump all operations to the dumpfile</p>
 
-<pre>* Reset dump all operations to the dumpfile
-*
-* Used for debugging on the wire-level
-*
-* See also: set_dump_request
-*
-*</pre>
+<p>Used for debugging on the wire-level</p>
+
+<p>See also: <a
+href="ClientOptions.html#method-i-set_dump_request">#set_dump_request</a></p>
           
           
 
@@ -1700,6 +1820,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.flags = Openwsman::FLAG_ENUMERATION_OPTIMIZATION
+   *
    */
   void set_flags(int flags) {
     wsmc_set_action_option($self, flags);
@@ -1715,6 +1836,7 @@ operations is adding</p>
    *
    * call-seq:
    *   optins.flags -&gt; Integer
+   *
    */
   unsigned int get_flags() {
     return wsmc_get_action_option($self);
@@ -1740,6 +1862,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reset_flags
+   *
    */
   void reset_flags() {
     wsmc_clear_action_option($self, ~FLAG_NONE);
@@ -1753,6 +1876,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.max_envelope_size = 10240
+   *
    */
   void set_max_envelope_size(unsigned long size) {
     $self-&gt;max_envelope_size = size;
@@ -1766,6 +1890,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.max_envelope_size -&gt; Integer
+   *
    */
   unsigned long get_max_envelope_size() {
     return $self-&gt;max_envelope_size;
@@ -1779,6 +1904,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.max_elements = 42
+   *
    */
   void set_max_elements(int elements) {
     $self-&gt;max_elements = elements;
@@ -1792,6 +1918,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.max_elements -&gt; Integer
+   *
    */
   int get_max_elements() {
     return $self-&gt;max_elements;
@@ -1806,6 +1933,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.timeout = 60*1000 # 60 seconds
+   *
    */
   void set_timeout(unsigned long timeout) {
     $self-&gt;timeout = timeout;
@@ -1820,6 +1948,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.timeout -&gt; Integer
+   *
    */
   unsigned long get_timeout() {
     return $self-&gt;timeout;
@@ -1835,6 +1964,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.fragment = &quot;xpath/expression&quot;
+   *
    */
   void set_fragment(char *fragment) {
     wsmc_set_fragment(fragment, $self);
@@ -1849,6 +1979,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.fragment -&gt; String
+   *
    */
   const char *get_fragment() {
     return $self-&gt;fragment;
@@ -1868,6 +1999,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.cim_namespace = &quot;root/interop&quot;
+   *
    */
   void set_cim_namespace(char *cim_namespace) {
     wsmc_set_cim_ns(cim_namespace, $self);
@@ -1886,6 +2018,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.cim_namespace -&gt; String
+   *
    */
   const char *get_cim_namespace() {
     return $self-&gt;cim_ns;
@@ -1900,6 +2033,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reference = &quot;&lt;xml ...&gt;&quot;
+   *
    */
   void set_reference(const char *reference) {
     wsmc_set_reference(reference, $self);
@@ -1914,6 +2048,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reference -&gt; String
+   *
    */
   const char *get_reference() {
     return $self-&gt;reference;
@@ -1929,12 +2064,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_option &quot;Name&quot;, &quot;Value&quot;
+   *
    */
   void add_option(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_option($self, key, value);
   }
@@ -1950,6 +2085,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options = { &quot;Name&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_options(VALUE hash)
   {
@@ -1962,6 +2098,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options -&gt; Hash
+   *
    */
   VALUE get_options(void)
   {
@@ -1979,12 +2116,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_selector($self, key, value);
   }
@@ -2000,6 +2137,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_selectors(VALUE hash)
   {
@@ -2012,6 +2150,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors -&gt; Hash
+   *
    */
   VALUE get_selectors(void)
   {
@@ -2022,26 +2161,41 @@ operations is adding</p>
 
   /*
    * Add a property as key/value pair
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
+   * * Key is evaluated as String
+   * * Value is evaluated as String or EndPointReference
    *
    * call-seq:
    *   options.add_property &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_property &quot;Key&quot;, EndPointReference.new(...)
+   *
    */
   void add_property(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
 
-
-    wsmc_add_property($self, key, value);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      const epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_property_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_property($self, key, value);
+    }
   }
+
   
 
   %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
   /*
    * Set properties from Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
+   *
    */
   void set_properties(VALUE hash)
   {
@@ -2051,9 +2205,11 @@ operations is adding</p>
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties -&gt; Hash
+   *
    */
   VALUE get_properties(void)
   {
@@ -2069,6 +2225,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri = &quot;http://...&quot;
+   *
    */
   void set_delivery_uri( const char *delivery_uri ) {
     wsmc_set_delivery_uri(delivery_uri, $self);
@@ -2079,6 +2236,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri -&gt; String
+   *
    */
   const char *delivery_uri() {
     return $self-&gt;delivery_uri;
@@ -2092,6 +2250,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
+   *
    */
   void set_sub_expiry(unsigned int event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
@@ -2102,6 +2261,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry -&gt; Integer
+   *
    */
   int sub_expiry() {
     return $self-&gt;expires;
@@ -2115,6 +2275,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
+   *
    */
   void set_heartbeat_interval(unsigned int heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
@@ -2125,6 +2286,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval -&gt; Integer
+   *
    */
   int heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
@@ -2138,6 +2300,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode = Openwsman::WSMAN_DELIVERY_PUSH
+   *
    */
   void set_delivery_mode(unsigned int delivery_mode) {
     if (delivery_mode &gt; WSMAN_DELIVERY_PULL)
@@ -2152,6 +2315,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode -&gt; Integer
+   *
    */
   int delivery_mode() {
     return $self-&gt;delivery_mode;
@@ -2170,6 +2334,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
+   *
    */
   void set_delivery_security_mode(unsigned int delivery_sec_mode) {
     if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
@@ -2183,6 +2348,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode -&gt; Integer
+   *
    */
   int delivery_sec_mode() {
     return $self-&gt;delivery_sec_mode;
@@ -2234,6 +2400,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reset_flags
+   *
    */
   void reset_flags() {
     wsmc_clear_action_option($self, ~FLAG_NONE);
@@ -2247,6 +2414,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.max_envelope_size = 10240
+   *
    */
   void set_max_envelope_size(unsigned long size) {
     $self-&gt;max_envelope_size = size;
@@ -2260,6 +2428,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.max_envelope_size -&gt; Integer
+   *
    */
   unsigned long get_max_envelope_size() {
     return $self-&gt;max_envelope_size;
@@ -2273,6 +2442,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.max_elements = 42
+   *
    */
   void set_max_elements(int elements) {
     $self-&gt;max_elements = elements;
@@ -2286,6 +2456,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.max_elements -&gt; Integer
+   *
    */
   int get_max_elements() {
     return $self-&gt;max_elements;
@@ -2300,6 +2471,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.timeout = 60*1000 # 60 seconds
+   *
    */
   void set_timeout(unsigned long timeout) {
     $self-&gt;timeout = timeout;
@@ -2314,6 +2486,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.timeout -&gt; Integer
+   *
    */
   unsigned long get_timeout() {
     return $self-&gt;timeout;
@@ -2329,6 +2502,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.fragment = &quot;xpath/expression&quot;
+   *
    */
   void set_fragment(char *fragment) {
     wsmc_set_fragment(fragment, $self);
@@ -2343,6 +2517,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.fragment -&gt; String
+   *
    */
   const char *get_fragment() {
     return $self-&gt;fragment;
@@ -2362,6 +2537,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.cim_namespace = &quot;root/interop&quot;
+   *
    */
   void set_cim_namespace(char *cim_namespace) {
     wsmc_set_cim_ns(cim_namespace, $self);
@@ -2380,6 +2556,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.cim_namespace -&gt; String
+   *
    */
   const char *get_cim_namespace() {
     return $self-&gt;cim_ns;
@@ -2394,6 +2571,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reference = &quot;&lt;xml ...&gt;&quot;
+   *
    */
   void set_reference(const char *reference) {
     wsmc_set_reference(reference, $self);
@@ -2408,6 +2586,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reference -&gt; String
+   *
    */
   const char *get_reference() {
     return $self-&gt;reference;
@@ -2423,12 +2602,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_option &quot;Name&quot;, &quot;Value&quot;
+   *
    */
   void add_option(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_option($self, key, value);
   }
@@ -2444,6 +2623,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options = { &quot;Name&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_options(VALUE hash)
   {
@@ -2456,6 +2636,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options -&gt; Hash
+   *
    */
   VALUE get_options(void)
   {
@@ -2473,12 +2654,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_selector($self, key, value);
   }
@@ -2494,6 +2675,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_selectors(VALUE hash)
   {
@@ -2506,6 +2688,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors -&gt; Hash
+   *
    */
   VALUE get_selectors(void)
   {
@@ -2516,26 +2699,41 @@ operations is adding</p>
 
   /*
    * Add a property as key/value pair
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
+   * * Key is evaluated as String
+   * * Value is evaluated as String or EndPointReference
    *
    * call-seq:
    *   options.add_property &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_property &quot;Key&quot;, EndPointReference.new(...)
+   *
    */
   void add_property(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
 
-
-    wsmc_add_property($self, key, value);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      const epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_property_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_property($self, key, value);
+    }
   }
+
   
 
   %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
   /*
    * Set properties from Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
+   *
    */
   void set_properties(VALUE hash)
   {
@@ -2545,9 +2743,11 @@ operations is adding</p>
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties -&gt; Hash
+   *
    */
   VALUE get_properties(void)
   {
@@ -2563,6 +2763,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri = &quot;http://...&quot;
+   *
    */
   void set_delivery_uri( const char *delivery_uri ) {
     wsmc_set_delivery_uri(delivery_uri, $self);
@@ -2573,6 +2774,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri -&gt; String
+   *
    */
   const char *delivery_uri() {
     return $self-&gt;delivery_uri;
@@ -2586,6 +2788,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
+   *
    */
   void set_sub_expiry(unsigned int event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
@@ -2596,6 +2799,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry -&gt; Integer
+   *
    */
   int sub_expiry() {
     return $self-&gt;expires;
@@ -2609,6 +2813,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
+   *
    */
   void set_heartbeat_interval(unsigned int heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
@@ -2619,6 +2824,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval -&gt; Integer
+   *
    */
   int heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
@@ -2632,6 +2838,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode = Openwsman::WSMAN_DELIVERY_PUSH
+   *
    */
   void set_delivery_mode(unsigned int delivery_mode) {
     if (delivery_mode &gt; WSMAN_DELIVERY_PULL)
@@ -2646,6 +2853,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode -&gt; Integer
+   *
    */
   int delivery_mode() {
     return $self-&gt;delivery_mode;
@@ -2664,6 +2872,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
+   *
    */
   void set_delivery_security_mode(unsigned int delivery_sec_mode) {
     if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
@@ -2677,6 +2886,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode -&gt; Integer
+   *
    */
   int delivery_sec_mode() {
     return $self-&gt;delivery_sec_mode;
@@ -2709,11 +2919,7 @@ operations is adding</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Get subscription delivery mode (push, pushwithack,events,pull)
-*
-*</pre>
+          <p>Get subscription delivery mode (push, pushwithack,events,pull)</p>
           
           
 
@@ -2736,6 +2942,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
+   *
    */
   void set_delivery_security_mode(unsigned int delivery_sec_mode) {
     if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
@@ -2749,6 +2956,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode -&gt; Integer
+   *
    */
   int delivery_sec_mode() {
     return $self-&gt;delivery_sec_mode;
@@ -2781,11 +2989,7 @@ operations is adding</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Set subscription delivery mode (push, pushwithack,events,pull)
-*
-*</pre>
+          <p>Set subscription delivery mode (push, pushwithack,events,pull)</p>
           
           
 
@@ -2804,6 +3008,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode -&gt; Integer
+   *
    */
   int delivery_mode() {
     return $self-&gt;delivery_mode;
@@ -2822,6 +3027,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
+   *
    */
   void set_delivery_security_mode(unsigned int delivery_sec_mode) {
     if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
@@ -2835,6 +3041,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode -&gt; Integer
+   *
    */
   int delivery_sec_mode() {
     return $self-&gt;delivery_sec_mode;
@@ -2867,11 +3074,7 @@ operations is adding</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Get subscription delivery security mode
-*
-*</pre>
+          <p>Get subscription delivery security mode</p>
           
           
 
@@ -2908,16 +3111,11 @@ operations is adding</p>
 
         <div class="method-description">
           
-          <p>/*</p>
+          <p>Set subscription delivery security mode</p>
 
-<pre>* Set subscription delivery security mode
-*
-* (auto, http basic, http digest, https basic, https digest,
-* https mutual, https mutual basic, https mutual digest,
-* http spnego kerberos, https spnego kerberos,
-* https mutual spnego kerberos)
-*
-*</pre>
+<p>(auto, http basic, http digest, https basic, https digest, https mutual,
+https mutual basic, https mutual digest, http spnego kerberos, https spnego
+kerberos, https mutual spnego kerberos)</p>
           
           
 
@@ -2935,6 +3133,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode -&gt; Integer
+   *
    */
   int delivery_sec_mode() {
     return $self-&gt;delivery_sec_mode;
@@ -2967,11 +3166,7 @@ operations is adding</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Get delivery uri
-*
-*</pre>
+          <p>Get delivery uri</p>
           
           
 
@@ -2989,6 +3184,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
+   *
    */
   void set_sub_expiry(unsigned int event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
@@ -2999,6 +3195,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry -&gt; Integer
+   *
    */
   int sub_expiry() {
     return $self-&gt;expires;
@@ -3012,6 +3209,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
+   *
    */
   void set_heartbeat_interval(unsigned int heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
@@ -3022,6 +3220,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval -&gt; Integer
+   *
    */
   int heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
@@ -3035,6 +3234,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode = Openwsman::WSMAN_DELIVERY_PUSH
+   *
    */
   void set_delivery_mode(unsigned int delivery_mode) {
     if (delivery_mode &gt; WSMAN_DELIVERY_PULL)
@@ -3049,6 +3249,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode -&gt; Integer
+   *
    */
   int delivery_mode() {
     return $self-&gt;delivery_mode;
@@ -3067,6 +3268,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
+   *
    */
   void set_delivery_security_mode(unsigned int delivery_sec_mode) {
     if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
@@ -3080,6 +3282,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode -&gt; Integer
+   *
    */
   int delivery_sec_mode() {
     return $self-&gt;delivery_sec_mode;
@@ -3112,11 +3315,7 @@ operations is adding</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Set delivery uri
-*
-*</pre>
+          <p>Set delivery uri</p>
           
           
 
@@ -3131,6 +3330,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri -&gt; String
+   *
    */
   const char *delivery_uri() {
     return $self-&gt;delivery_uri;
@@ -3144,6 +3344,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
+   *
    */
   void set_sub_expiry(unsigned int event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
@@ -3154,6 +3355,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry -&gt; Integer
+   *
    */
   int sub_expiry() {
     return $self-&gt;expires;
@@ -3167,6 +3369,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
+   *
    */
   void set_heartbeat_interval(unsigned int heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
@@ -3177,6 +3380,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval -&gt; Integer
+   *
    */
   int heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
@@ -3190,6 +3394,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode = Openwsman::WSMAN_DELIVERY_PUSH
+   *
    */
   void set_delivery_mode(unsigned int delivery_mode) {
     if (delivery_mode &gt; WSMAN_DELIVERY_PULL)
@@ -3204,6 +3409,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode -&gt; Integer
+   *
    */
   int delivery_mode() {
     return $self-&gt;delivery_mode;
@@ -3222,6 +3428,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
+   *
    */
   void set_delivery_security_mode(unsigned int delivery_sec_mode) {
     if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
@@ -3235,6 +3442,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode -&gt; Integer
+   *
    */
   int delivery_sec_mode() {
     return $self-&gt;delivery_sec_mode;
@@ -3267,13 +3475,9 @@ operations is adding</p>
 
         <div class="method-description">
           
-          <p>/*</p>
+          <p>get option flag(s)</p>
 
-<pre>* get option flag(s)
-* 
-* return current flags bitmask
-*
-*</pre>
+<p>return current flags bitmask</p>
           
           
 
@@ -3303,6 +3507,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reset_flags
+   *
    */
   void reset_flags() {
     wsmc_clear_action_option($self, ~FLAG_NONE);
@@ -3316,6 +3521,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.max_envelope_size = 10240
+   *
    */
   void set_max_envelope_size(unsigned long size) {
     $self-&gt;max_envelope_size = size;
@@ -3329,6 +3535,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.max_envelope_size -&gt; Integer
+   *
    */
   unsigned long get_max_envelope_size() {
     return $self-&gt;max_envelope_size;
@@ -3342,6 +3549,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.max_elements = 42
+   *
    */
   void set_max_elements(int elements) {
     $self-&gt;max_elements = elements;
@@ -3355,6 +3563,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.max_elements -&gt; Integer
+   *
    */
   int get_max_elements() {
     return $self-&gt;max_elements;
@@ -3369,6 +3578,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.timeout = 60*1000 # 60 seconds
+   *
    */
   void set_timeout(unsigned long timeout) {
     $self-&gt;timeout = timeout;
@@ -3383,6 +3593,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.timeout -&gt; Integer
+   *
    */
   unsigned long get_timeout() {
     return $self-&gt;timeout;
@@ -3398,6 +3609,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.fragment = &quot;xpath/expression&quot;
+   *
    */
   void set_fragment(char *fragment) {
     wsmc_set_fragment(fragment, $self);
@@ -3412,6 +3624,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.fragment -&gt; String
+   *
    */
   const char *get_fragment() {
     return $self-&gt;fragment;
@@ -3431,6 +3644,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.cim_namespace = &quot;root/interop&quot;
+   *
    */
   void set_cim_namespace(char *cim_namespace) {
     wsmc_set_cim_ns(cim_namespace, $self);
@@ -3449,6 +3663,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.cim_namespace -&gt; String
+   *
    */
   const char *get_cim_namespace() {
     return $self-&gt;cim_ns;
@@ -3463,6 +3678,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reference = &quot;&lt;xml ...&gt;&quot;
+   *
    */
   void set_reference(const char *reference) {
     wsmc_set_reference(reference, $self);
@@ -3477,6 +3693,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reference -&gt; String
+   *
    */
   const char *get_reference() {
     return $self-&gt;reference;
@@ -3492,12 +3709,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_option &quot;Name&quot;, &quot;Value&quot;
+   *
    */
   void add_option(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_option($self, key, value);
   }
@@ -3513,6 +3730,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options = { &quot;Name&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_options(VALUE hash)
   {
@@ -3525,6 +3743,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options -&gt; Hash
+   *
    */
   VALUE get_options(void)
   {
@@ -3542,12 +3761,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_selector($self, key, value);
   }
@@ -3563,6 +3782,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_selectors(VALUE hash)
   {
@@ -3575,6 +3795,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors -&gt; Hash
+   *
    */
   VALUE get_selectors(void)
   {
@@ -3585,26 +3806,41 @@ operations is adding</p>
 
   /*
    * Add a property as key/value pair
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
+   * * Key is evaluated as String
+   * * Value is evaluated as String or EndPointReference
    *
    * call-seq:
    *   options.add_property &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_property &quot;Key&quot;, EndPointReference.new(...)
+   *
    */
   void add_property(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
 
-
-    wsmc_add_property($self, key, value);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      const epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_property_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_property($self, key, value);
+    }
   }
+
   
 
   %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
   /*
    * Set properties from Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
+   *
    */
   void set_properties(VALUE hash)
   {
@@ -3614,9 +3850,11 @@ operations is adding</p>
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties -&gt; Hash
+   *
    */
   VALUE get_properties(void)
   {
@@ -3632,6 +3870,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri = &quot;http://...&quot;
+   *
    */
   void set_delivery_uri( const char *delivery_uri ) {
     wsmc_set_delivery_uri(delivery_uri, $self);
@@ -3642,6 +3881,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri -&gt; String
+   *
    */
   const char *delivery_uri() {
     return $self-&gt;delivery_uri;
@@ -3655,6 +3895,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
+   *
    */
   void set_sub_expiry(unsigned int event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
@@ -3665,6 +3906,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry -&gt; Integer
+   *
    */
   int sub_expiry() {
     return $self-&gt;expires;
@@ -3678,6 +3920,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
+   *
    */
   void set_heartbeat_interval(unsigned int heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
@@ -3688,6 +3931,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval -&gt; Integer
+   *
    */
   int heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
@@ -3701,6 +3945,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode = Openwsman::WSMAN_DELIVERY_PUSH
+   *
    */
   void set_delivery_mode(unsigned int delivery_mode) {
     if (delivery_mode &gt; WSMAN_DELIVERY_PULL)
@@ -3715,6 +3960,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode -&gt; Integer
+   *
    */
   int delivery_mode() {
     return $self-&gt;delivery_mode;
@@ -3733,6 +3979,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
+   *
    */
   void set_delivery_security_mode(unsigned int delivery_sec_mode) {
     if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
@@ -3746,6 +3993,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode -&gt; Integer
+   *
    */
   int delivery_sec_mode() {
     return $self-&gt;delivery_sec_mode;
@@ -3778,13 +4026,9 @@ operations is adding</p>
 
         <div class="method-description">
           
-          <p>/*</p>
+          <p>set option flag(s)</p>
 
-<pre>* set option flag(s)
-* 
-* adds new flag(s) to options
-*
-*</pre>
+<p>adds new flag(s) to options</p>
           
           
 
@@ -3804,6 +4048,7 @@ operations is adding</p>
    *
    * call-seq:
    *   optins.flags -&gt; Integer
+   *
    */
   unsigned int get_flags() {
     return wsmc_get_action_option($self);
@@ -3829,6 +4074,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reset_flags
+   *
    */
   void reset_flags() {
     wsmc_clear_action_option($self, ~FLAG_NONE);
@@ -3842,6 +4088,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.max_envelope_size = 10240
+   *
    */
   void set_max_envelope_size(unsigned long size) {
     $self-&gt;max_envelope_size = size;
@@ -3855,6 +4102,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.max_envelope_size -&gt; Integer
+   *
    */
   unsigned long get_max_envelope_size() {
     return $self-&gt;max_envelope_size;
@@ -3868,6 +4116,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.max_elements = 42
+   *
    */
   void set_max_elements(int elements) {
     $self-&gt;max_elements = elements;
@@ -3881,6 +4130,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.max_elements -&gt; Integer
+   *
    */
   int get_max_elements() {
     return $self-&gt;max_elements;
@@ -3895,6 +4145,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.timeout = 60*1000 # 60 seconds
+   *
    */
   void set_timeout(unsigned long timeout) {
     $self-&gt;timeout = timeout;
@@ -3909,6 +4160,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.timeout -&gt; Integer
+   *
    */
   unsigned long get_timeout() {
     return $self-&gt;timeout;
@@ -3924,6 +4176,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.fragment = &quot;xpath/expression&quot;
+   *
    */
   void set_fragment(char *fragment) {
     wsmc_set_fragment(fragment, $self);
@@ -3938,6 +4191,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.fragment -&gt; String
+   *
    */
   const char *get_fragment() {
     return $self-&gt;fragment;
@@ -3957,6 +4211,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.cim_namespace = &quot;root/interop&quot;
+   *
    */
   void set_cim_namespace(char *cim_namespace) {
     wsmc_set_cim_ns(cim_namespace, $self);
@@ -3975,6 +4230,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.cim_namespace -&gt; String
+   *
    */
   const char *get_cim_namespace() {
     return $self-&gt;cim_ns;
@@ -3989,6 +4245,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reference = &quot;&lt;xml ...&gt;&quot;
+   *
    */
   void set_reference(const char *reference) {
     wsmc_set_reference(reference, $self);
@@ -4003,6 +4260,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reference -&gt; String
+   *
    */
   const char *get_reference() {
     return $self-&gt;reference;
@@ -4018,12 +4276,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_option &quot;Name&quot;, &quot;Value&quot;
+   *
    */
   void add_option(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_option($self, key, value);
   }
@@ -4039,6 +4297,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options = { &quot;Name&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_options(VALUE hash)
   {
@@ -4051,6 +4310,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options -&gt; Hash
+   *
    */
   VALUE get_options(void)
   {
@@ -4068,12 +4328,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_selector($self, key, value);
   }
@@ -4089,6 +4349,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_selectors(VALUE hash)
   {
@@ -4101,6 +4362,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors -&gt; Hash
+   *
    */
   VALUE get_selectors(void)
   {
@@ -4111,26 +4373,41 @@ operations is adding</p>
 
   /*
    * Add a property as key/value pair
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
+   * * Key is evaluated as String
+   * * Value is evaluated as String or EndPointReference
    *
    * call-seq:
    *   options.add_property &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_property &quot;Key&quot;, EndPointReference.new(...)
+   *
    */
   void add_property(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
 
-
-    wsmc_add_property($self, key, value);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      const epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_property_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_property($self, key, value);
+    }
   }
+
   
 
   %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
   /*
    * Set properties from Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
+   *
    */
   void set_properties(VALUE hash)
   {
@@ -4140,9 +4417,11 @@ operations is adding</p>
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties -&gt; Hash
+   *
    */
   VALUE get_properties(void)
   {
@@ -4158,6 +4437,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri = &quot;http://...&quot;
+   *
    */
   void set_delivery_uri( const char *delivery_uri ) {
     wsmc_set_delivery_uri(delivery_uri, $self);
@@ -4168,6 +4448,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri -&gt; String
+   *
    */
   const char *delivery_uri() {
     return $self-&gt;delivery_uri;
@@ -4181,6 +4462,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
+   *
    */
   void set_sub_expiry(unsigned int event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
@@ -4191,6 +4473,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry -&gt; Integer
+   *
    */
   int sub_expiry() {
     return $self-&gt;expires;
@@ -4204,6 +4487,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
+   *
    */
   void set_heartbeat_interval(unsigned int heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
@@ -4214,6 +4498,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval -&gt; Integer
+   *
    */
   int heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
@@ -4227,6 +4512,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode = Openwsman::WSMAN_DELIVERY_PUSH
+   *
    */
   void set_delivery_mode(unsigned int delivery_mode) {
     if (delivery_mode &gt; WSMAN_DELIVERY_PULL)
@@ -4241,6 +4527,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode -&gt; Integer
+   *
    */
   int delivery_mode() {
     return $self-&gt;delivery_mode;
@@ -4259,6 +4546,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
+   *
    */
   void set_delivery_security_mode(unsigned int delivery_sec_mode) {
     if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
@@ -4272,6 +4560,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode -&gt; Integer
+   *
    */
   int delivery_sec_mode() {
     return $self-&gt;delivery_sec_mode;
@@ -4304,12 +4593,7 @@ operations is adding</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Get fragment filter
-* See DSP0226, section 7.7.
-*
-*</pre>
+          <p>Get fragment filter See DSP0226, section 7.7.</p>
           
           
 
@@ -4333,6 +4617,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.cim_namespace = &quot;root/interop&quot;
+   *
    */
   void set_cim_namespace(char *cim_namespace) {
     wsmc_set_cim_ns(cim_namespace, $self);
@@ -4351,6 +4636,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.cim_namespace -&gt; String
+   *
    */
   const char *get_cim_namespace() {
     return $self-&gt;cim_ns;
@@ -4365,6 +4651,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reference = &quot;&lt;xml ...&gt;&quot;
+   *
    */
   void set_reference(const char *reference) {
     wsmc_set_reference(reference, $self);
@@ -4379,6 +4666,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reference -&gt; String
+   *
    */
   const char *get_reference() {
     return $self-&gt;reference;
@@ -4394,12 +4682,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_option &quot;Name&quot;, &quot;Value&quot;
+   *
    */
   void add_option(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_option($self, key, value);
   }
@@ -4415,6 +4703,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options = { &quot;Name&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_options(VALUE hash)
   {
@@ -4427,6 +4716,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options -&gt; Hash
+   *
    */
   VALUE get_options(void)
   {
@@ -4444,12 +4734,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_selector($self, key, value);
   }
@@ -4465,6 +4755,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_selectors(VALUE hash)
   {
@@ -4477,6 +4768,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors -&gt; Hash
+   *
    */
   VALUE get_selectors(void)
   {
@@ -4487,26 +4779,41 @@ operations is adding</p>
 
   /*
    * Add a property as key/value pair
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
+   * * Key is evaluated as String
+   * * Value is evaluated as String or EndPointReference
    *
    * call-seq:
    *   options.add_property &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_property &quot;Key&quot;, EndPointReference.new(...)
+   *
    */
   void add_property(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
 
-
-    wsmc_add_property($self, key, value);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      const epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_property_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_property($self, key, value);
+    }
   }
+
   
 
   %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
   /*
    * Set properties from Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
+   *
    */
   void set_properties(VALUE hash)
   {
@@ -4516,9 +4823,11 @@ operations is adding</p>
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties -&gt; Hash
+   *
    */
   VALUE get_properties(void)
   {
@@ -4534,6 +4843,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri = &quot;http://...&quot;
+   *
    */
   void set_delivery_uri( const char *delivery_uri ) {
     wsmc_set_delivery_uri(delivery_uri, $self);
@@ -4544,6 +4854,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri -&gt; String
+   *
    */
   const char *delivery_uri() {
     return $self-&gt;delivery_uri;
@@ -4557,6 +4868,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
+   *
    */
   void set_sub_expiry(unsigned int event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
@@ -4567,6 +4879,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry -&gt; Integer
+   *
    */
   int sub_expiry() {
     return $self-&gt;expires;
@@ -4580,6 +4893,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
+   *
    */
   void set_heartbeat_interval(unsigned int heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
@@ -4590,6 +4904,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval -&gt; Integer
+   *
    */
   int heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
@@ -4603,6 +4918,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode = Openwsman::WSMAN_DELIVERY_PUSH
+   *
    */
   void set_delivery_mode(unsigned int delivery_mode) {
     if (delivery_mode &gt; WSMAN_DELIVERY_PULL)
@@ -4617,6 +4933,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode -&gt; Integer
+   *
    */
   int delivery_mode() {
     return $self-&gt;delivery_mode;
@@ -4635,6 +4952,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
+   *
    */
   void set_delivery_security_mode(unsigned int delivery_sec_mode) {
     if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
@@ -4648,6 +4966,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode -&gt; Integer
+   *
    */
   int delivery_sec_mode() {
     return $self-&gt;delivery_sec_mode;
@@ -4680,13 +4999,7 @@ operations is adding</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Set fragment filter
-* See DSP0226, section 7.7.
-* (Supported Dialects: XPATH)
-*
-*</pre>
+          <p>Set fragment filter See DSP0226, section 7.7. (Supported Dialects: XPATH)</p>
           
           
 
@@ -4705,6 +5018,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.fragment -&gt; String
+   *
    */
   const char *get_fragment() {
     return $self-&gt;fragment;
@@ -4724,6 +5038,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.cim_namespace = &quot;root/interop&quot;
+   *
    */
   void set_cim_namespace(char *cim_namespace) {
     wsmc_set_cim_ns(cim_namespace, $self);
@@ -4742,6 +5057,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.cim_namespace -&gt; String
+   *
    */
   const char *get_cim_namespace() {
     return $self-&gt;cim_ns;
@@ -4756,6 +5072,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reference = &quot;&lt;xml ...&gt;&quot;
+   *
    */
   void set_reference(const char *reference) {
     wsmc_set_reference(reference, $self);
@@ -4770,6 +5087,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reference -&gt; String
+   *
    */
   const char *get_reference() {
     return $self-&gt;reference;
@@ -4785,12 +5103,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_option &quot;Name&quot;, &quot;Value&quot;
+   *
    */
   void add_option(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_option($self, key, value);
   }
@@ -4806,6 +5124,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options = { &quot;Name&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_options(VALUE hash)
   {
@@ -4818,6 +5137,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options -&gt; Hash
+   *
    */
   VALUE get_options(void)
   {
@@ -4835,12 +5155,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_selector($self, key, value);
   }
@@ -4856,6 +5176,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_selectors(VALUE hash)
   {
@@ -4868,6 +5189,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors -&gt; Hash
+   *
    */
   VALUE get_selectors(void)
   {
@@ -4878,26 +5200,41 @@ operations is adding</p>
 
   /*
    * Add a property as key/value pair
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
+   * * Key is evaluated as String
+   * * Value is evaluated as String or EndPointReference
    *
    * call-seq:
    *   options.add_property &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_property &quot;Key&quot;, EndPointReference.new(...)
+   *
    */
   void add_property(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
 
-
-    wsmc_add_property($self, key, value);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      const epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_property_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_property($self, key, value);
+    }
   }
+
   
 
   %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
   /*
    * Set properties from Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
+   *
    */
   void set_properties(VALUE hash)
   {
@@ -4907,9 +5244,11 @@ operations is adding</p>
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties -&gt; Hash
+   *
    */
   VALUE get_properties(void)
   {
@@ -4925,6 +5264,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri = &quot;http://...&quot;
+   *
    */
   void set_delivery_uri( const char *delivery_uri ) {
     wsmc_set_delivery_uri(delivery_uri, $self);
@@ -4935,6 +5275,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri -&gt; String
+   *
    */
   const char *delivery_uri() {
     return $self-&gt;delivery_uri;
@@ -4948,6 +5289,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
+   *
    */
   void set_sub_expiry(unsigned int event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
@@ -4958,6 +5300,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry -&gt; Integer
+   *
    */
   int sub_expiry() {
     return $self-&gt;expires;
@@ -4971,6 +5314,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
+   *
    */
   void set_heartbeat_interval(unsigned int heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
@@ -4981,6 +5325,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval -&gt; Integer
+   *
    */
   int heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
@@ -4994,6 +5339,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode = Openwsman::WSMAN_DELIVERY_PUSH
+   *
    */
   void set_delivery_mode(unsigned int delivery_mode) {
     if (delivery_mode &gt; WSMAN_DELIVERY_PULL)
@@ -5008,6 +5354,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode -&gt; Integer
+   *
    */
   int delivery_mode() {
     return $self-&gt;delivery_mode;
@@ -5026,6 +5373,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
+   *
    */
   void set_delivery_security_mode(unsigned int delivery_sec_mode) {
     if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
@@ -5039,6 +5387,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode -&gt; Integer
+   *
    */
   int delivery_sec_mode() {
     return $self-&gt;delivery_sec_mode;
@@ -5071,11 +5420,7 @@ operations is adding</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Get subscription heartbeat interval (in seconds)
-*
-*</pre>
+          <p>Get subscription heartbeat interval (in seconds)</p>
           
           
 
@@ -5093,6 +5438,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode = Openwsman::WSMAN_DELIVERY_PUSH
+   *
    */
   void set_delivery_mode(unsigned int delivery_mode) {
     if (delivery_mode &gt; WSMAN_DELIVERY_PULL)
@@ -5107,6 +5453,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode -&gt; Integer
+   *
    */
   int delivery_mode() {
     return $self-&gt;delivery_mode;
@@ -5125,6 +5472,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
+   *
    */
   void set_delivery_security_mode(unsigned int delivery_sec_mode) {
     if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
@@ -5138,6 +5486,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode -&gt; Integer
+   *
    */
   int delivery_sec_mode() {
     return $self-&gt;delivery_sec_mode;
@@ -5170,11 +5519,7 @@ operations is adding</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Set subscription heartbeat interval (in seconds)
-*
-*</pre>
+          <p>Set subscription heartbeat interval (in seconds)</p>
           
           
 
@@ -5189,6 +5534,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval -&gt; Integer
+   *
    */
   int heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
@@ -5202,6 +5548,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode = Openwsman::WSMAN_DELIVERY_PUSH
+   *
    */
   void set_delivery_mode(unsigned int delivery_mode) {
     if (delivery_mode &gt; WSMAN_DELIVERY_PULL)
@@ -5216,6 +5563,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode -&gt; Integer
+   *
    */
   int delivery_mode() {
     return $self-&gt;delivery_mode;
@@ -5234,6 +5582,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
+   *
    */
   void set_delivery_security_mode(unsigned int delivery_sec_mode) {
     if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
@@ -5247,6 +5596,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode -&gt; Integer
+   *
    */
   int delivery_sec_mode() {
     return $self-&gt;delivery_sec_mode;
@@ -5279,11 +5629,7 @@ operations is adding</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Return enumeration elements limit
-*
-*</pre>
+          <p>Return enumeration elements limit</p>
           
           
 
@@ -5302,6 +5648,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.timeout = 60*1000 # 60 seconds
+   *
    */
   void set_timeout(unsigned long timeout) {
     $self-&gt;timeout = timeout;
@@ -5316,6 +5663,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.timeout -&gt; Integer
+   *
    */
   unsigned long get_timeout() {
     return $self-&gt;timeout;
@@ -5331,6 +5679,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.fragment = &quot;xpath/expression&quot;
+   *
    */
   void set_fragment(char *fragment) {
     wsmc_set_fragment(fragment, $self);
@@ -5345,6 +5694,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.fragment -&gt; String
+   *
    */
   const char *get_fragment() {
     return $self-&gt;fragment;
@@ -5364,6 +5714,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.cim_namespace = &quot;root/interop&quot;
+   *
    */
   void set_cim_namespace(char *cim_namespace) {
     wsmc_set_cim_ns(cim_namespace, $self);
@@ -5382,6 +5733,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.cim_namespace -&gt; String
+   *
    */
   const char *get_cim_namespace() {
     return $self-&gt;cim_ns;
@@ -5396,6 +5748,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reference = &quot;&lt;xml ...&gt;&quot;
+   *
    */
   void set_reference(const char *reference) {
     wsmc_set_reference(reference, $self);
@@ -5410,6 +5763,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reference -&gt; String
+   *
    */
   const char *get_reference() {
     return $self-&gt;reference;
@@ -5425,12 +5779,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_option &quot;Name&quot;, &quot;Value&quot;
+   *
    */
   void add_option(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_option($self, key, value);
   }
@@ -5446,6 +5800,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options = { &quot;Name&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_options(VALUE hash)
   {
@@ -5458,6 +5813,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options -&gt; Hash
+   *
    */
   VALUE get_options(void)
   {
@@ -5475,12 +5831,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_selector($self, key, value);
   }
@@ -5496,6 +5852,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_selectors(VALUE hash)
   {
@@ -5508,6 +5865,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors -&gt; Hash
+   *
    */
   VALUE get_selectors(void)
   {
@@ -5518,26 +5876,41 @@ operations is adding</p>
 
   /*
    * Add a property as key/value pair
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
+   * * Key is evaluated as String
+   * * Value is evaluated as String or EndPointReference
    *
    * call-seq:
    *   options.add_property &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_property &quot;Key&quot;, EndPointReference.new(...)
+   *
    */
   void add_property(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
 
-
-    wsmc_add_property($self, key, value);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      const epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_property_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_property($self, key, value);
+    }
   }
+
   
 
   %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
   /*
    * Set properties from Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
+   *
    */
   void set_properties(VALUE hash)
   {
@@ -5547,9 +5920,11 @@ operations is adding</p>
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties -&gt; Hash
+   *
    */
   VALUE get_properties(void)
   {
@@ -5565,6 +5940,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri = &quot;http://...&quot;
+   *
    */
   void set_delivery_uri( const char *delivery_uri ) {
     wsmc_set_delivery_uri(delivery_uri, $self);
@@ -5575,6 +5951,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri -&gt; String
+   *
    */
   const char *delivery_uri() {
     return $self-&gt;delivery_uri;
@@ -5588,6 +5965,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
+   *
    */
   void set_sub_expiry(unsigned int event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
@@ -5598,6 +5976,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry -&gt; Integer
+   *
    */
   int sub_expiry() {
     return $self-&gt;expires;
@@ -5611,6 +5990,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
+   *
    */
   void set_heartbeat_interval(unsigned int heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
@@ -5621,6 +6001,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval -&gt; Integer
+   *
    */
   int heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
@@ -5634,6 +6015,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode = Openwsman::WSMAN_DELIVERY_PUSH
+   *
    */
   void set_delivery_mode(unsigned int delivery_mode) {
     if (delivery_mode &gt; WSMAN_DELIVERY_PULL)
@@ -5648,6 +6030,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode -&gt; Integer
+   *
    */
   int delivery_mode() {
     return $self-&gt;delivery_mode;
@@ -5666,6 +6049,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
+   *
    */
   void set_delivery_security_mode(unsigned int delivery_sec_mode) {
     if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
@@ -5679,6 +6063,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode -&gt; Integer
+   *
    */
   int delivery_sec_mode() {
     return $self-&gt;delivery_sec_mode;
@@ -5711,11 +6096,7 @@ operations is adding</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Limit number of elements returned by enumeration
-*
-*</pre>
+          <p>Limit number of elements returned by enumeration</p>
           
           
 
@@ -5733,6 +6114,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.max_elements -&gt; Integer
+   *
    */
   int get_max_elements() {
     return $self-&gt;max_elements;
@@ -5747,6 +6129,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.timeout = 60*1000 # 60 seconds
+   *
    */
   void set_timeout(unsigned long timeout) {
     $self-&gt;timeout = timeout;
@@ -5761,6 +6144,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.timeout -&gt; Integer
+   *
    */
   unsigned long get_timeout() {
     return $self-&gt;timeout;
@@ -5776,6 +6160,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.fragment = &quot;xpath/expression&quot;
+   *
    */
   void set_fragment(char *fragment) {
     wsmc_set_fragment(fragment, $self);
@@ -5790,6 +6175,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.fragment -&gt; String
+   *
    */
   const char *get_fragment() {
     return $self-&gt;fragment;
@@ -5809,6 +6195,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.cim_namespace = &quot;root/interop&quot;
+   *
    */
   void set_cim_namespace(char *cim_namespace) {
     wsmc_set_cim_ns(cim_namespace, $self);
@@ -5827,6 +6214,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.cim_namespace -&gt; String
+   *
    */
   const char *get_cim_namespace() {
     return $self-&gt;cim_ns;
@@ -5841,6 +6229,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reference = &quot;&lt;xml ...&gt;&quot;
+   *
    */
   void set_reference(const char *reference) {
     wsmc_set_reference(reference, $self);
@@ -5855,6 +6244,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reference -&gt; String
+   *
    */
   const char *get_reference() {
     return $self-&gt;reference;
@@ -5870,12 +6260,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_option &quot;Name&quot;, &quot;Value&quot;
+   *
    */
   void add_option(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_option($self, key, value);
   }
@@ -5891,6 +6281,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options = { &quot;Name&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_options(VALUE hash)
   {
@@ -5903,6 +6294,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options -&gt; Hash
+   *
    */
   VALUE get_options(void)
   {
@@ -5920,12 +6312,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_selector($self, key, value);
   }
@@ -5941,6 +6333,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_selectors(VALUE hash)
   {
@@ -5953,6 +6346,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors -&gt; Hash
+   *
    */
   VALUE get_selectors(void)
   {
@@ -5963,26 +6357,41 @@ operations is adding</p>
 
   /*
    * Add a property as key/value pair
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
+   * * Key is evaluated as String
+   * * Value is evaluated as String or EndPointReference
    *
    * call-seq:
    *   options.add_property &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_property &quot;Key&quot;, EndPointReference.new(...)
+   *
    */
   void add_property(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
 
-
-    wsmc_add_property($self, key, value);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      const epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_property_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_property($self, key, value);
+    }
   }
+
   
 
   %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
   /*
    * Set properties from Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
+   *
    */
   void set_properties(VALUE hash)
   {
@@ -5992,9 +6401,11 @@ operations is adding</p>
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties -&gt; Hash
+   *
    */
   VALUE get_properties(void)
   {
@@ -6010,6 +6421,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri = &quot;http://...&quot;
+   *
    */
   void set_delivery_uri( const char *delivery_uri ) {
     wsmc_set_delivery_uri(delivery_uri, $self);
@@ -6020,6 +6432,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri -&gt; String
+   *
    */
   const char *delivery_uri() {
     return $self-&gt;delivery_uri;
@@ -6033,6 +6446,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
+   *
    */
   void set_sub_expiry(unsigned int event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
@@ -6043,6 +6457,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry -&gt; Integer
+   *
    */
   int sub_expiry() {
     return $self-&gt;expires;
@@ -6056,6 +6471,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
+   *
    */
   void set_heartbeat_interval(unsigned int heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
@@ -6066,6 +6482,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval -&gt; Integer
+   *
    */
   int heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
@@ -6079,6 +6496,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode = Openwsman::WSMAN_DELIVERY_PUSH
+   *
    */
   void set_delivery_mode(unsigned int delivery_mode) {
     if (delivery_mode &gt; WSMAN_DELIVERY_PULL)
@@ -6093,6 +6511,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode -&gt; Integer
+   *
    */
   int delivery_mode() {
     return $self-&gt;delivery_mode;
@@ -6111,6 +6530,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
+   *
    */
   void set_delivery_security_mode(unsigned int delivery_sec_mode) {
     if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
@@ -6124,6 +6544,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode -&gt; Integer
+   *
    */
   int delivery_sec_mode() {
     return $self-&gt;delivery_sec_mode;
@@ -6156,11 +6577,7 @@ operations is adding</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Return size limit of result document
-*
-*</pre>
+          <p>Return size limit of result document</p>
           
           
 
@@ -6178,6 +6595,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.max_elements = 42
+   *
    */
   void set_max_elements(int elements) {
     $self-&gt;max_elements = elements;
@@ -6191,6 +6609,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.max_elements -&gt; Integer
+   *
    */
   int get_max_elements() {
     return $self-&gt;max_elements;
@@ -6205,6 +6624,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.timeout = 60*1000 # 60 seconds
+   *
    */
   void set_timeout(unsigned long timeout) {
     $self-&gt;timeout = timeout;
@@ -6219,6 +6639,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.timeout -&gt; Integer
+   *
    */
   unsigned long get_timeout() {
     return $self-&gt;timeout;
@@ -6234,6 +6655,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.fragment = &quot;xpath/expression&quot;
+   *
    */
   void set_fragment(char *fragment) {
     wsmc_set_fragment(fragment, $self);
@@ -6248,6 +6670,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.fragment -&gt; String
+   *
    */
   const char *get_fragment() {
     return $self-&gt;fragment;
@@ -6267,6 +6690,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.cim_namespace = &quot;root/interop&quot;
+   *
    */
   void set_cim_namespace(char *cim_namespace) {
     wsmc_set_cim_ns(cim_namespace, $self);
@@ -6285,6 +6709,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.cim_namespace -&gt; String
+   *
    */
   const char *get_cim_namespace() {
     return $self-&gt;cim_ns;
@@ -6299,6 +6724,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reference = &quot;&lt;xml ...&gt;&quot;
+   *
    */
   void set_reference(const char *reference) {
     wsmc_set_reference(reference, $self);
@@ -6313,6 +6739,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reference -&gt; String
+   *
    */
   const char *get_reference() {
     return $self-&gt;reference;
@@ -6328,12 +6755,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_option &quot;Name&quot;, &quot;Value&quot;
+   *
    */
   void add_option(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_option($self, key, value);
   }
@@ -6349,6 +6776,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options = { &quot;Name&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_options(VALUE hash)
   {
@@ -6361,6 +6789,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options -&gt; Hash
+   *
    */
   VALUE get_options(void)
   {
@@ -6378,12 +6807,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_selector($self, key, value);
   }
@@ -6399,6 +6828,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_selectors(VALUE hash)
   {
@@ -6411,6 +6841,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors -&gt; Hash
+   *
    */
   VALUE get_selectors(void)
   {
@@ -6421,26 +6852,41 @@ operations is adding</p>
 
   /*
    * Add a property as key/value pair
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
+   * * Key is evaluated as String
+   * * Value is evaluated as String or EndPointReference
    *
    * call-seq:
    *   options.add_property &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_property &quot;Key&quot;, EndPointReference.new(...)
+   *
    */
   void add_property(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
 
-
-    wsmc_add_property($self, key, value);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      const epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_property_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_property($self, key, value);
+    }
   }
+
   
 
   %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
   /*
    * Set properties from Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
+   *
    */
   void set_properties(VALUE hash)
   {
@@ -6450,9 +6896,11 @@ operations is adding</p>
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties -&gt; Hash
+   *
    */
   VALUE get_properties(void)
   {
@@ -6468,6 +6916,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri = &quot;http://...&quot;
+   *
    */
   void set_delivery_uri( const char *delivery_uri ) {
     wsmc_set_delivery_uri(delivery_uri, $self);
@@ -6478,6 +6927,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri -&gt; String
+   *
    */
   const char *delivery_uri() {
     return $self-&gt;delivery_uri;
@@ -6491,6 +6941,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
+   *
    */
   void set_sub_expiry(unsigned int event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
@@ -6501,6 +6952,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry -&gt; Integer
+   *
    */
   int sub_expiry() {
     return $self-&gt;expires;
@@ -6514,6 +6966,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
+   *
    */
   void set_heartbeat_interval(unsigned int heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
@@ -6524,6 +6977,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval -&gt; Integer
+   *
    */
   int heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
@@ -6537,6 +6991,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode = Openwsman::WSMAN_DELIVERY_PUSH
+   *
    */
   void set_delivery_mode(unsigned int delivery_mode) {
     if (delivery_mode &gt; WSMAN_DELIVERY_PULL)
@@ -6551,6 +7006,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode -&gt; Integer
+   *
    */
   int delivery_mode() {
     return $self-&gt;delivery_mode;
@@ -6569,6 +7025,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
+   *
    */
   void set_delivery_security_mode(unsigned int delivery_sec_mode) {
     if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
@@ -6582,6 +7039,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode -&gt; Integer
+   *
    */
   int delivery_sec_mode() {
     return $self-&gt;delivery_sec_mode;
@@ -6614,11 +7072,7 @@ operations is adding</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Limit size of result document
-*
-*</pre>
+          <p>Limit size of result document</p>
           
           
 
@@ -6636,6 +7090,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.max_envelope_size -&gt; Integer
+   *
    */
   unsigned long get_max_envelope_size() {
     return $self-&gt;max_envelope_size;
@@ -6649,6 +7104,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.max_elements = 42
+   *
    */
   void set_max_elements(int elements) {
     $self-&gt;max_elements = elements;
@@ -6662,6 +7118,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.max_elements -&gt; Integer
+   *
    */
   int get_max_elements() {
     return $self-&gt;max_elements;
@@ -6676,6 +7133,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.timeout = 60*1000 # 60 seconds
+   *
    */
   void set_timeout(unsigned long timeout) {
     $self-&gt;timeout = timeout;
@@ -6690,6 +7148,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.timeout -&gt; Integer
+   *
    */
   unsigned long get_timeout() {
     return $self-&gt;timeout;
@@ -6705,6 +7164,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.fragment = &quot;xpath/expression&quot;
+   *
    */
   void set_fragment(char *fragment) {
     wsmc_set_fragment(fragment, $self);
@@ -6719,6 +7179,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.fragment -&gt; String
+   *
    */
   const char *get_fragment() {
     return $self-&gt;fragment;
@@ -6738,6 +7199,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.cim_namespace = &quot;root/interop&quot;
+   *
    */
   void set_cim_namespace(char *cim_namespace) {
     wsmc_set_cim_ns(cim_namespace, $self);
@@ -6756,6 +7218,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.cim_namespace -&gt; String
+   *
    */
   const char *get_cim_namespace() {
     return $self-&gt;cim_ns;
@@ -6770,6 +7233,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reference = &quot;&lt;xml ...&gt;&quot;
+   *
    */
   void set_reference(const char *reference) {
     wsmc_set_reference(reference, $self);
@@ -6784,6 +7248,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reference -&gt; String
+   *
    */
   const char *get_reference() {
     return $self-&gt;reference;
@@ -6799,12 +7264,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_option &quot;Name&quot;, &quot;Value&quot;
+   *
    */
   void add_option(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_option($self, key, value);
   }
@@ -6820,6 +7285,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options = { &quot;Name&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_options(VALUE hash)
   {
@@ -6832,6 +7298,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options -&gt; Hash
+   *
    */
   VALUE get_options(void)
   {
@@ -6849,12 +7316,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_selector($self, key, value);
   }
@@ -6870,6 +7337,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_selectors(VALUE hash)
   {
@@ -6882,6 +7350,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors -&gt; Hash
+   *
    */
   VALUE get_selectors(void)
   {
@@ -6892,26 +7361,41 @@ operations is adding</p>
 
   /*
    * Add a property as key/value pair
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
+   * * Key is evaluated as String
+   * * Value is evaluated as String or EndPointReference
    *
    * call-seq:
    *   options.add_property &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_property &quot;Key&quot;, EndPointReference.new(...)
+   *
    */
   void add_property(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
 
-
-    wsmc_add_property($self, key, value);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      const epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_property_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_property($self, key, value);
+    }
   }
+
   
 
   %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
   /*
    * Set properties from Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
+   *
    */
   void set_properties(VALUE hash)
   {
@@ -6921,9 +7405,11 @@ operations is adding</p>
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties -&gt; Hash
+   *
    */
   VALUE get_properties(void)
   {
@@ -6939,6 +7425,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri = &quot;http://...&quot;
+   *
    */
   void set_delivery_uri( const char *delivery_uri ) {
     wsmc_set_delivery_uri(delivery_uri, $self);
@@ -6949,6 +7436,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri -&gt; String
+   *
    */
   const char *delivery_uri() {
     return $self-&gt;delivery_uri;
@@ -6962,6 +7450,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
+   *
    */
   void set_sub_expiry(unsigned int event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
@@ -6972,6 +7461,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry -&gt; Integer
+   *
    */
   int sub_expiry() {
     return $self-&gt;expires;
@@ -6985,6 +7475,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
+   *
    */
   void set_heartbeat_interval(unsigned int heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
@@ -6995,6 +7486,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval -&gt; Integer
+   *
    */
   int heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
@@ -7008,6 +7500,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode = Openwsman::WSMAN_DELIVERY_PUSH
+   *
    */
   void set_delivery_mode(unsigned int delivery_mode) {
     if (delivery_mode &gt; WSMAN_DELIVERY_PULL)
@@ -7022,6 +7515,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode -&gt; Integer
+   *
    */
   int delivery_mode() {
     return $self-&gt;delivery_mode;
@@ -7040,6 +7534,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
+   *
    */
   void set_delivery_security_mode(unsigned int delivery_sec_mode) {
     if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
@@ -7053,6 +7548,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode -&gt; Integer
+   *
    */
   int delivery_sec_mode() {
     return $self-&gt;delivery_sec_mode;
@@ -7085,11 +7581,7 @@ operations is adding</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Get options (for OptionSet) as Hash
-*
-*</pre>
+          <p>Get options (for OptionSet) as Hash</p>
           
           
 
@@ -7111,12 +7603,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_selector($self, key, value);
   }
@@ -7132,6 +7624,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_selectors(VALUE hash)
   {
@@ -7144,6 +7637,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors -&gt; Hash
+   *
    */
   VALUE get_selectors(void)
   {
@@ -7154,26 +7648,41 @@ operations is adding</p>
 
   /*
    * Add a property as key/value pair
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
+   * * Key is evaluated as String
+   * * Value is evaluated as String or EndPointReference
    *
    * call-seq:
    *   options.add_property &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_property &quot;Key&quot;, EndPointReference.new(...)
+   *
    */
   void add_property(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
 
-
-    wsmc_add_property($self, key, value);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      const epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_property_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_property($self, key, value);
+    }
   }
+
   
 
   %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
   /*
    * Set properties from Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
+   *
    */
   void set_properties(VALUE hash)
   {
@@ -7183,9 +7692,11 @@ operations is adding</p>
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties -&gt; Hash
+   *
    */
   VALUE get_properties(void)
   {
@@ -7201,6 +7712,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri = &quot;http://...&quot;
+   *
    */
   void set_delivery_uri( const char *delivery_uri ) {
     wsmc_set_delivery_uri(delivery_uri, $self);
@@ -7211,6 +7723,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri -&gt; String
+   *
    */
   const char *delivery_uri() {
     return $self-&gt;delivery_uri;
@@ -7224,6 +7737,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
+   *
    */
   void set_sub_expiry(unsigned int event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
@@ -7234,6 +7748,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry -&gt; Integer
+   *
    */
   int sub_expiry() {
     return $self-&gt;expires;
@@ -7247,6 +7762,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
+   *
    */
   void set_heartbeat_interval(unsigned int heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
@@ -7257,6 +7773,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval -&gt; Integer
+   *
    */
   int heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
@@ -7270,6 +7787,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode = Openwsman::WSMAN_DELIVERY_PUSH
+   *
    */
   void set_delivery_mode(unsigned int delivery_mode) {
     if (delivery_mode &gt; WSMAN_DELIVERY_PULL)
@@ -7284,6 +7802,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode -&gt; Integer
+   *
    */
   int delivery_mode() {
     return $self-&gt;delivery_mode;
@@ -7302,6 +7821,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
+   *
    */
   void set_delivery_security_mode(unsigned int delivery_sec_mode) {
     if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
@@ -7315,6 +7835,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode -&gt; Integer
+   *
    */
   int delivery_sec_mode() {
     return $self-&gt;delivery_sec_mode;
@@ -7347,15 +7868,10 @@ operations is adding</p>
 
         <div class="method-description">
           
-          <p>/*</p>
+          <p>Set options (for OptionSet) from Hash</p>
 
-<pre>* Set options (for OptionSet) from Hash
-*
-* NOTE:
-* the values must be properly escaped (replace &amp; with &amp;amp;, etc.)
-* in Ruby use CGI::escapeHTML()
-*
-*</pre>
+<p>NOTE: the values must be properly escaped (replace &amp; with &amp;amp;,
+etc.) in Ruby use CGI::escapeHTML()</p>
           
           
 
@@ -7372,6 +7888,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options -&gt; Hash
+   *
    */
   VALUE get_options(void)
   {
@@ -7389,12 +7906,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_selector($self, key, value);
   }
@@ -7410,6 +7927,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_selectors(VALUE hash)
   {
@@ -7422,6 +7940,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors -&gt; Hash
+   *
    */
   VALUE get_selectors(void)
   {
@@ -7432,26 +7951,41 @@ operations is adding</p>
 
   /*
    * Add a property as key/value pair
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
+   * * Key is evaluated as String
+   * * Value is evaluated as String or EndPointReference
    *
    * call-seq:
    *   options.add_property &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_property &quot;Key&quot;, EndPointReference.new(...)
+   *
    */
   void add_property(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
 
-
-    wsmc_add_property($self, key, value);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      const epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_property_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_property($self, key, value);
+    }
   }
+
   
 
   %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
   /*
    * Set properties from Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
+   *
    */
   void set_properties(VALUE hash)
   {
@@ -7461,9 +7995,11 @@ operations is adding</p>
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties -&gt; Hash
+   *
    */
   VALUE get_properties(void)
   {
@@ -7479,6 +8015,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri = &quot;http://...&quot;
+   *
    */
   void set_delivery_uri( const char *delivery_uri ) {
     wsmc_set_delivery_uri(delivery_uri, $self);
@@ -7489,6 +8026,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri -&gt; String
+   *
    */
   const char *delivery_uri() {
     return $self-&gt;delivery_uri;
@@ -7502,6 +8040,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
+   *
    */
   void set_sub_expiry(unsigned int event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
@@ -7512,6 +8051,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry -&gt; Integer
+   *
    */
   int sub_expiry() {
     return $self-&gt;expires;
@@ -7525,6 +8065,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
+   *
    */
   void set_heartbeat_interval(unsigned int heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
@@ -7535,6 +8076,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval -&gt; Integer
+   *
    */
   int heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
@@ -7548,6 +8090,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode = Openwsman::WSMAN_DELIVERY_PUSH
+   *
    */
   void set_delivery_mode(unsigned int delivery_mode) {
     if (delivery_mode &gt; WSMAN_DELIVERY_PULL)
@@ -7562,6 +8105,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode -&gt; Integer
+   *
    */
   int delivery_mode() {
     return $self-&gt;delivery_mode;
@@ -7580,6 +8124,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
+   *
    */
   void set_delivery_security_mode(unsigned int delivery_sec_mode) {
     if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
@@ -7593,6 +8138,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode -&gt; Integer
+   *
    */
   int delivery_sec_mode() {
     return $self-&gt;delivery_sec_mode;
@@ -7625,11 +8171,11 @@ operations is adding</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Get properties as Hash
-*
-*</pre>
+          <p>Get properties as Hash</p>
+<ul><li>
+<p>Input parameters to &#39;invoke&#39;d methods are represented as
+ClientOption properties</p>
+</li></ul>
           
           
 
@@ -7649,6 +8195,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri = &quot;http://...&quot;
+   *
    */
   void set_delivery_uri( const char *delivery_uri ) {
     wsmc_set_delivery_uri(delivery_uri, $self);
@@ -7659,6 +8206,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri -&gt; String
+   *
    */
   const char *delivery_uri() {
     return $self-&gt;delivery_uri;
@@ -7672,6 +8220,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
+   *
    */
   void set_sub_expiry(unsigned int event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
@@ -7682,6 +8231,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry -&gt; Integer
+   *
    */
   int sub_expiry() {
     return $self-&gt;expires;
@@ -7695,6 +8245,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
+   *
    */
   void set_heartbeat_interval(unsigned int heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
@@ -7705,6 +8256,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval -&gt; Integer
+   *
    */
   int heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
@@ -7718,6 +8270,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode = Openwsman::WSMAN_DELIVERY_PUSH
+   *
    */
   void set_delivery_mode(unsigned int delivery_mode) {
     if (delivery_mode &gt; WSMAN_DELIVERY_PULL)
@@ -7732,6 +8285,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode -&gt; Integer
+   *
    */
   int delivery_mode() {
     return $self-&gt;delivery_mode;
@@ -7750,6 +8304,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
+   *
    */
   void set_delivery_security_mode(unsigned int delivery_sec_mode) {
     if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
@@ -7763,6 +8318,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode -&gt; Integer
+   *
    */
   int delivery_sec_mode() {
     return $self-&gt;delivery_sec_mode;
@@ -7795,11 +8351,11 @@ operations is adding</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Set properties from Hash
-*
-*</pre>
+          <p>Set properties from Hash</p>
+<ul><li>
+<p>Input parameters to &#39;invoke&#39;d methods are represented as
+ClientOption properties</p>
+</li></ul>
           
           
 
@@ -7813,9 +8369,11 @@ operations is adding</p>
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties -&gt; Hash
+   *
    */
   VALUE get_properties(void)
   {
@@ -7831,6 +8389,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri = &quot;http://...&quot;
+   *
    */
   void set_delivery_uri( const char *delivery_uri ) {
     wsmc_set_delivery_uri(delivery_uri, $self);
@@ -7841,6 +8400,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri -&gt; String
+   *
    */
   const char *delivery_uri() {
     return $self-&gt;delivery_uri;
@@ -7854,6 +8414,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
+   *
    */
   void set_sub_expiry(unsigned int event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
@@ -7864,6 +8425,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry -&gt; Integer
+   *
    */
   int sub_expiry() {
     return $self-&gt;expires;
@@ -7877,6 +8439,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
+   *
    */
   void set_heartbeat_interval(unsigned int heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
@@ -7887,6 +8450,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval -&gt; Integer
+   *
    */
   int heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
@@ -7900,6 +8464,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode = Openwsman::WSMAN_DELIVERY_PUSH
+   *
    */
   void set_delivery_mode(unsigned int delivery_mode) {
     if (delivery_mode &gt; WSMAN_DELIVERY_PULL)
@@ -7914,6 +8479,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode -&gt; Integer
+   *
    */
   int delivery_mode() {
     return $self-&gt;delivery_mode;
@@ -7932,6 +8498,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
+   *
    */
   void set_delivery_security_mode(unsigned int delivery_sec_mode) {
     if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
@@ -7945,6 +8512,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode -&gt; Integer
+   *
    */
   int delivery_sec_mode() {
     return $self-&gt;delivery_sec_mode;
@@ -7977,12 +8545,8 @@ operations is adding</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Get WS-Addressing reference properties
-* Returns the string representation of a valid XML document
-*
-*</pre>
+          <p>Get WS-Addressing reference properties Returns the string representation of
+a valid XML document</p>
           
           
 
@@ -8002,12 +8566,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_option &quot;Name&quot;, &quot;Value&quot;
+   *
    */
   void add_option(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_option($self, key, value);
   }
@@ -8023,6 +8587,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options = { &quot;Name&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_options(VALUE hash)
   {
@@ -8035,6 +8600,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options -&gt; Hash
+   *
    */
   VALUE get_options(void)
   {
@@ -8052,12 +8618,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_selector($self, key, value);
   }
@@ -8073,6 +8639,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_selectors(VALUE hash)
   {
@@ -8085,6 +8652,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors -&gt; Hash
+   *
    */
   VALUE get_selectors(void)
   {
@@ -8095,26 +8663,41 @@ operations is adding</p>
 
   /*
    * Add a property as key/value pair
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
+   * * Key is evaluated as String
+   * * Value is evaluated as String or EndPointReference
    *
    * call-seq:
    *   options.add_property &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_property &quot;Key&quot;, EndPointReference.new(...)
+   *
    */
   void add_property(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
 
-
-    wsmc_add_property($self, key, value);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      const epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_property_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_property($self, key, value);
+    }
   }
+
   
 
   %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
   /*
    * Set properties from Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
+   *
    */
   void set_properties(VALUE hash)
   {
@@ -8124,9 +8707,11 @@ operations is adding</p>
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties -&gt; Hash
+   *
    */
   VALUE get_properties(void)
   {
@@ -8142,6 +8727,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri = &quot;http://...&quot;
+   *
    */
   void set_delivery_uri( const char *delivery_uri ) {
     wsmc_set_delivery_uri(delivery_uri, $self);
@@ -8152,6 +8738,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri -&gt; String
+   *
    */
   const char *delivery_uri() {
     return $self-&gt;delivery_uri;
@@ -8165,6 +8752,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
+   *
    */
   void set_sub_expiry(unsigned int event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
@@ -8175,6 +8763,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry -&gt; Integer
+   *
    */
   int sub_expiry() {
     return $self-&gt;expires;
@@ -8188,6 +8777,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
+   *
    */
   void set_heartbeat_interval(unsigned int heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
@@ -8198,6 +8788,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval -&gt; Integer
+   *
    */
   int heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
@@ -8211,6 +8802,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode = Openwsman::WSMAN_DELIVERY_PUSH
+   *
    */
   void set_delivery_mode(unsigned int delivery_mode) {
     if (delivery_mode &gt; WSMAN_DELIVERY_PULL)
@@ -8225,6 +8817,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode -&gt; Integer
+   *
    */
   int delivery_mode() {
     return $self-&gt;delivery_mode;
@@ -8243,6 +8836,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
+   *
    */
   void set_delivery_security_mode(unsigned int delivery_sec_mode) {
     if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
@@ -8256,6 +8850,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode -&gt; Integer
+   *
    */
   int delivery_sec_mode() {
     return $self-&gt;delivery_sec_mode;
@@ -8288,12 +8883,8 @@ operations is adding</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Set WS-Addressing reference properties
-* Argument must the string representation of a valid XML document
-*
-*</pre>
+          <p>Set WS-Addressing reference properties Argument must the string
+representation of a valid XML document</p>
           
           
 
@@ -8312,6 +8903,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reference -&gt; String
+   *
    */
   const char *get_reference() {
     return $self-&gt;reference;
@@ -8327,12 +8919,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_option &quot;Name&quot;, &quot;Value&quot;
+   *
    */
   void add_option(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_option($self, key, value);
   }
@@ -8348,6 +8940,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options = { &quot;Name&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_options(VALUE hash)
   {
@@ -8360,6 +8953,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options -&gt; Hash
+   *
    */
   VALUE get_options(void)
   {
@@ -8377,12 +8971,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_selector($self, key, value);
   }
@@ -8398,6 +8992,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_selectors(VALUE hash)
   {
@@ -8410,6 +9005,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors -&gt; Hash
+   *
    */
   VALUE get_selectors(void)
   {
@@ -8420,26 +9016,41 @@ operations is adding</p>
 
   /*
    * Add a property as key/value pair
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
+   * * Key is evaluated as String
+   * * Value is evaluated as String or EndPointReference
    *
    * call-seq:
    *   options.add_property &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_property &quot;Key&quot;, EndPointReference.new(...)
+   *
    */
   void add_property(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
 
-
-    wsmc_add_property($self, key, value);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      const epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_property_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_property($self, key, value);
+    }
   }
+
   
 
   %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
   /*
    * Set properties from Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
+   *
    */
   void set_properties(VALUE hash)
   {
@@ -8449,9 +9060,11 @@ operations is adding</p>
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties -&gt; Hash
+   *
    */
   VALUE get_properties(void)
   {
@@ -8467,6 +9080,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri = &quot;http://...&quot;
+   *
    */
   void set_delivery_uri( const char *delivery_uri ) {
     wsmc_set_delivery_uri(delivery_uri, $self);
@@ -8477,6 +9091,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri -&gt; String
+   *
    */
   const char *delivery_uri() {
     return $self-&gt;delivery_uri;
@@ -8490,6 +9105,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
+   *
    */
   void set_sub_expiry(unsigned int event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
@@ -8500,6 +9116,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry -&gt; Integer
+   *
    */
   int sub_expiry() {
     return $self-&gt;expires;
@@ -8513,6 +9130,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
+   *
    */
   void set_heartbeat_interval(unsigned int heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
@@ -8523,6 +9141,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval -&gt; Integer
+   *
    */
   int heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
@@ -8536,6 +9155,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode = Openwsman::WSMAN_DELIVERY_PUSH
+   *
    */
   void set_delivery_mode(unsigned int delivery_mode) {
     if (delivery_mode &gt; WSMAN_DELIVERY_PULL)
@@ -8550,6 +9170,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode -&gt; Integer
+   *
    */
   int delivery_mode() {
     return $self-&gt;delivery_mode;
@@ -8568,6 +9189,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
+   *
    */
   void set_delivery_security_mode(unsigned int delivery_sec_mode) {
     if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
@@ -8581,6 +9203,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode -&gt; Integer
+   *
    */
   int delivery_sec_mode() {
     return $self-&gt;delivery_sec_mode;
@@ -8613,13 +9236,9 @@ operations is adding</p>
 
         <div class="method-description">
           
-          <p>/*</p>
+          <p>reset option flags</p>
 
-<pre>* reset option flags
-* 
-* sets option flags bitmask to FLAG_NONE
-*
-*</pre>
+<p>sets option flags bitmask to FLAG_NONE</p>
           
           
 
@@ -8637,6 +9256,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.max_envelope_size = 10240
+   *
    */
   void set_max_envelope_size(unsigned long size) {
     $self-&gt;max_envelope_size = size;
@@ -8650,6 +9270,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.max_envelope_size -&gt; Integer
+   *
    */
   unsigned long get_max_envelope_size() {
     return $self-&gt;max_envelope_size;
@@ -8663,6 +9284,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.max_elements = 42
+   *
    */
   void set_max_elements(int elements) {
     $self-&gt;max_elements = elements;
@@ -8676,6 +9298,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.max_elements -&gt; Integer
+   *
    */
   int get_max_elements() {
     return $self-&gt;max_elements;
@@ -8690,6 +9313,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.timeout = 60*1000 # 60 seconds
+   *
    */
   void set_timeout(unsigned long timeout) {
     $self-&gt;timeout = timeout;
@@ -8704,6 +9328,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.timeout -&gt; Integer
+   *
    */
   unsigned long get_timeout() {
     return $self-&gt;timeout;
@@ -8719,6 +9344,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.fragment = &quot;xpath/expression&quot;
+   *
    */
   void set_fragment(char *fragment) {
     wsmc_set_fragment(fragment, $self);
@@ -8733,6 +9359,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.fragment -&gt; String
+   *
    */
   const char *get_fragment() {
     return $self-&gt;fragment;
@@ -8752,6 +9379,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.cim_namespace = &quot;root/interop&quot;
+   *
    */
   void set_cim_namespace(char *cim_namespace) {
     wsmc_set_cim_ns(cim_namespace, $self);
@@ -8770,6 +9398,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.cim_namespace -&gt; String
+   *
    */
   const char *get_cim_namespace() {
     return $self-&gt;cim_ns;
@@ -8784,6 +9413,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reference = &quot;&lt;xml ...&gt;&quot;
+   *
    */
   void set_reference(const char *reference) {
     wsmc_set_reference(reference, $self);
@@ -8798,6 +9428,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reference -&gt; String
+   *
    */
   const char *get_reference() {
     return $self-&gt;reference;
@@ -8813,12 +9444,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_option &quot;Name&quot;, &quot;Value&quot;
+   *
    */
   void add_option(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_option($self, key, value);
   }
@@ -8834,6 +9465,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options = { &quot;Name&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_options(VALUE hash)
   {
@@ -8846,6 +9478,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options -&gt; Hash
+   *
    */
   VALUE get_options(void)
   {
@@ -8863,12 +9496,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_selector($self, key, value);
   }
@@ -8884,6 +9517,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_selectors(VALUE hash)
   {
@@ -8896,6 +9530,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors -&gt; Hash
+   *
    */
   VALUE get_selectors(void)
   {
@@ -8906,26 +9541,41 @@ operations is adding</p>
 
   /*
    * Add a property as key/value pair
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
+   * * Key is evaluated as String
+   * * Value is evaluated as String or EndPointReference
    *
    * call-seq:
    *   options.add_property &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_property &quot;Key&quot;, EndPointReference.new(...)
+   *
    */
   void add_property(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
 
-
-    wsmc_add_property($self, key, value);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      const epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_property_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_property($self, key, value);
+    }
   }
+
   
 
   %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
   /*
    * Set properties from Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
+   *
    */
   void set_properties(VALUE hash)
   {
@@ -8935,9 +9585,11 @@ operations is adding</p>
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties -&gt; Hash
+   *
    */
   VALUE get_properties(void)
   {
@@ -8953,6 +9605,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri = &quot;http://...&quot;
+   *
    */
   void set_delivery_uri( const char *delivery_uri ) {
     wsmc_set_delivery_uri(delivery_uri, $self);
@@ -8963,6 +9616,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri -&gt; String
+   *
    */
   const char *delivery_uri() {
     return $self-&gt;delivery_uri;
@@ -8976,6 +9630,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
+   *
    */
   void set_sub_expiry(unsigned int event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
@@ -8986,6 +9641,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry -&gt; Integer
+   *
    */
   int sub_expiry() {
     return $self-&gt;expires;
@@ -8999,6 +9655,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
+   *
    */
   void set_heartbeat_interval(unsigned int heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
@@ -9009,6 +9666,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval -&gt; Integer
+   *
    */
   int heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
@@ -9022,6 +9680,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode = Openwsman::WSMAN_DELIVERY_PUSH
+   *
    */
   void set_delivery_mode(unsigned int delivery_mode) {
     if (delivery_mode &gt; WSMAN_DELIVERY_PULL)
@@ -9036,6 +9695,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode -&gt; Integer
+   *
    */
   int delivery_mode() {
     return $self-&gt;delivery_mode;
@@ -9054,6 +9714,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
+   *
    */
   void set_delivery_security_mode(unsigned int delivery_sec_mode) {
     if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
@@ -9067,6 +9728,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode -&gt; Integer
+   *
    */
   int delivery_sec_mode() {
     return $self-&gt;delivery_sec_mode;
@@ -9099,11 +9761,7 @@ operations is adding</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Get selectors as Hash
-*
-*</pre>
+          <p>Get selectors as Hash</p>
           
           
 
@@ -9118,26 +9776,41 @@ operations is adding</p>
 
   /*
    * Add a property as key/value pair
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
+   * * Key is evaluated as String
+   * * Value is evaluated as String or EndPointReference
    *
    * call-seq:
    *   options.add_property &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_property &quot;Key&quot;, EndPointReference.new(...)
+   *
    */
   void add_property(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
 
-
-    wsmc_add_property($self, key, value);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      const epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_property_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_property($self, key, value);
+    }
   }
+
   
 
   %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
   /*
    * Set properties from Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
+   *
    */
   void set_properties(VALUE hash)
   {
@@ -9147,9 +9820,11 @@ operations is adding</p>
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties -&gt; Hash
+   *
    */
   VALUE get_properties(void)
   {
@@ -9165,6 +9840,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri = &quot;http://...&quot;
+   *
    */
   void set_delivery_uri( const char *delivery_uri ) {
     wsmc_set_delivery_uri(delivery_uri, $self);
@@ -9175,6 +9851,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri -&gt; String
+   *
    */
   const char *delivery_uri() {
     return $self-&gt;delivery_uri;
@@ -9188,6 +9865,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
+   *
    */
   void set_sub_expiry(unsigned int event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
@@ -9198,6 +9876,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry -&gt; Integer
+   *
    */
   int sub_expiry() {
     return $self-&gt;expires;
@@ -9211,6 +9890,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
+   *
    */
   void set_heartbeat_interval(unsigned int heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
@@ -9221,6 +9901,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval -&gt; Integer
+   *
    */
   int heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
@@ -9234,6 +9915,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode = Openwsman::WSMAN_DELIVERY_PUSH
+   *
    */
   void set_delivery_mode(unsigned int delivery_mode) {
     if (delivery_mode &gt; WSMAN_DELIVERY_PULL)
@@ -9248,6 +9930,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode -&gt; Integer
+   *
    */
   int delivery_mode() {
     return $self-&gt;delivery_mode;
@@ -9266,6 +9949,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
+   *
    */
   void set_delivery_security_mode(unsigned int delivery_sec_mode) {
     if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
@@ -9279,6 +9963,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode -&gt; Integer
+   *
    */
   int delivery_sec_mode() {
     return $self-&gt;delivery_sec_mode;
@@ -9311,15 +9996,10 @@ operations is adding</p>
 
         <div class="method-description">
           
-          <p>/*</p>
+          <p>Set selectors from Hash</p>
 
-<pre>* Set selectors from Hash
-*
-* NOTE:
-* the values must be properly escaped (replace &amp; with &amp;amp;, etc.)
-* in Ruby use CGI::escapeHTML()
-*
-*</pre>
+<p>NOTE: the values must be properly escaped (replace &amp; with &amp;amp;,
+etc.) in Ruby use CGI::escapeHTML()</p>
           
           
 
@@ -9336,6 +10016,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors -&gt; Hash
+   *
    */
   VALUE get_selectors(void)
   {
@@ -9346,26 +10027,41 @@ operations is adding</p>
 
   /*
    * Add a property as key/value pair
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
+   * * Key is evaluated as String
+   * * Value is evaluated as String or EndPointReference
    *
    * call-seq:
    *   options.add_property &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_property &quot;Key&quot;, EndPointReference.new(...)
+   *
    */
   void add_property(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
 
-
-    wsmc_add_property($self, key, value);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      const epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_property_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_property($self, key, value);
+    }
   }
+
   
 
   %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
   /*
    * Set properties from Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
+   *
    */
   void set_properties(VALUE hash)
   {
@@ -9375,9 +10071,11 @@ operations is adding</p>
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties -&gt; Hash
+   *
    */
   VALUE get_properties(void)
   {
@@ -9393,6 +10091,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri = &quot;http://...&quot;
+   *
    */
   void set_delivery_uri( const char *delivery_uri ) {
     wsmc_set_delivery_uri(delivery_uri, $self);
@@ -9403,6 +10102,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri -&gt; String
+   *
    */
   const char *delivery_uri() {
     return $self-&gt;delivery_uri;
@@ -9416,6 +10116,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
+   *
    */
   void set_sub_expiry(unsigned int event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
@@ -9426,6 +10127,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry -&gt; Integer
+   *
    */
   int sub_expiry() {
     return $self-&gt;expires;
@@ -9439,6 +10141,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
+   *
    */
   void set_heartbeat_interval(unsigned int heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
@@ -9449,6 +10152,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval -&gt; Integer
+   *
    */
   int heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
@@ -9462,6 +10166,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode = Openwsman::WSMAN_DELIVERY_PUSH
+   *
    */
   void set_delivery_mode(unsigned int delivery_mode) {
     if (delivery_mode &gt; WSMAN_DELIVERY_PULL)
@@ -9476,6 +10181,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode -&gt; Integer
+   *
    */
   int delivery_mode() {
     return $self-&gt;delivery_mode;
@@ -9494,6 +10200,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
+   *
    */
   void set_delivery_security_mode(unsigned int delivery_sec_mode) {
     if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
@@ -9507,6 +10214,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode -&gt; Integer
+   *
    */
   int delivery_sec_mode() {
     return $self-&gt;delivery_sec_mode;
@@ -9539,15 +10247,12 @@ operations is adding</p>
 
         <div class="method-description">
           
-          <p>/*</p>
+          <p>Request to dump all operations to the dumpfile</p>
 
-<pre>* Request to dump all operations to the dumpfile
-*
-* Used for debugging on the wire-level
-*
-* See also: clear_dump_request
-*
-*</pre>
+<p>Used for debugging on the wire-level</p>
+
+<p>See also: <a
+href="ClientOptions.html#method-i-clear_dump_request">#clear_dump_request</a></p>
           
           
 
@@ -9566,6 +10271,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.clear_dump_request
+   *
    */
   void clear_dump_request(void) {
     wsmc_clear_action_option($self, FLAG_DUMP_REQUEST );
@@ -9581,6 +10287,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.flags = Openwsman::FLAG_ENUMERATION_OPTIMIZATION
+   *
    */
   void set_flags(int flags) {
     wsmc_set_action_option($self, flags);
@@ -9596,6 +10303,7 @@ operations is adding</p>
    *
    * call-seq:
    *   optins.flags -&gt; Integer
+   *
    */
   unsigned int get_flags() {
     return wsmc_get_action_option($self);
@@ -9621,6 +10329,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reset_flags
+   *
    */
   void reset_flags() {
     wsmc_clear_action_option($self, ~FLAG_NONE);
@@ -9634,6 +10343,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.max_envelope_size = 10240
+   *
    */
   void set_max_envelope_size(unsigned long size) {
     $self-&gt;max_envelope_size = size;
@@ -9647,6 +10357,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.max_envelope_size -&gt; Integer
+   *
    */
   unsigned long get_max_envelope_size() {
     return $self-&gt;max_envelope_size;
@@ -9660,6 +10371,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.max_elements = 42
+   *
    */
   void set_max_elements(int elements) {
     $self-&gt;max_elements = elements;
@@ -9673,6 +10385,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.max_elements -&gt; Integer
+   *
    */
   int get_max_elements() {
     return $self-&gt;max_elements;
@@ -9687,6 +10400,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.timeout = 60*1000 # 60 seconds
+   *
    */
   void set_timeout(unsigned long timeout) {
     $self-&gt;timeout = timeout;
@@ -9701,6 +10415,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.timeout -&gt; Integer
+   *
    */
   unsigned long get_timeout() {
     return $self-&gt;timeout;
@@ -9716,6 +10431,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.fragment = &quot;xpath/expression&quot;
+   *
    */
   void set_fragment(char *fragment) {
     wsmc_set_fragment(fragment, $self);
@@ -9730,6 +10446,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.fragment -&gt; String
+   *
    */
   const char *get_fragment() {
     return $self-&gt;fragment;
@@ -9749,6 +10466,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.cim_namespace = &quot;root/interop&quot;
+   *
    */
   void set_cim_namespace(char *cim_namespace) {
     wsmc_set_cim_ns(cim_namespace, $self);
@@ -9767,6 +10485,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.cim_namespace -&gt; String
+   *
    */
   const char *get_cim_namespace() {
     return $self-&gt;cim_ns;
@@ -9781,6 +10500,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reference = &quot;&lt;xml ...&gt;&quot;
+   *
    */
   void set_reference(const char *reference) {
     wsmc_set_reference(reference, $self);
@@ -9795,6 +10515,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reference -&gt; String
+   *
    */
   const char *get_reference() {
     return $self-&gt;reference;
@@ -9810,12 +10531,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_option &quot;Name&quot;, &quot;Value&quot;
+   *
    */
   void add_option(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_option($self, key, value);
   }
@@ -9831,6 +10552,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options = { &quot;Name&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_options(VALUE hash)
   {
@@ -9843,6 +10565,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options -&gt; Hash
+   *
    */
   VALUE get_options(void)
   {
@@ -9860,12 +10583,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_selector($self, key, value);
   }
@@ -9881,6 +10604,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_selectors(VALUE hash)
   {
@@ -9893,6 +10617,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors -&gt; Hash
+   *
    */
   VALUE get_selectors(void)
   {
@@ -9903,26 +10628,41 @@ operations is adding</p>
 
   /*
    * Add a property as key/value pair
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
+   * * Key is evaluated as String
+   * * Value is evaluated as String or EndPointReference
    *
    * call-seq:
    *   options.add_property &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_property &quot;Key&quot;, EndPointReference.new(...)
+   *
    */
   void add_property(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
 
-
-    wsmc_add_property($self, key, value);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      const epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_property_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_property($self, key, value);
+    }
   }
+
   
 
   %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
   /*
    * Set properties from Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
+   *
    */
   void set_properties(VALUE hash)
   {
@@ -9932,9 +10672,11 @@ operations is adding</p>
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties -&gt; Hash
+   *
    */
   VALUE get_properties(void)
   {
@@ -9950,6 +10692,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri = &quot;http://...&quot;
+   *
    */
   void set_delivery_uri( const char *delivery_uri ) {
     wsmc_set_delivery_uri(delivery_uri, $self);
@@ -9960,6 +10703,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri -&gt; String
+   *
    */
   const char *delivery_uri() {
     return $self-&gt;delivery_uri;
@@ -9973,6 +10717,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
+   *
    */
   void set_sub_expiry(unsigned int event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
@@ -9983,6 +10728,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry -&gt; Integer
+   *
    */
   int sub_expiry() {
     return $self-&gt;expires;
@@ -9996,6 +10742,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
+   *
    */
   void set_heartbeat_interval(unsigned int heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
@@ -10006,6 +10753,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval -&gt; Integer
+   *
    */
   int heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
@@ -10019,6 +10767,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode = Openwsman::WSMAN_DELIVERY_PUSH
+   *
    */
   void set_delivery_mode(unsigned int delivery_mode) {
     if (delivery_mode &gt; WSMAN_DELIVERY_PULL)
@@ -10033,6 +10782,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode -&gt; Integer
+   *
    */
   int delivery_mode() {
     return $self-&gt;delivery_mode;
@@ -10051,6 +10801,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
+   *
    */
   void set_delivery_security_mode(unsigned int delivery_sec_mode) {
     if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
@@ -10064,6 +10815,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode -&gt; Integer
+   *
    */
   int delivery_sec_mode() {
     return $self-&gt;delivery_sec_mode;
@@ -10096,11 +10848,7 @@ operations is adding</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Get subscription expiry timeout (in seconds)
-*
-*</pre>
+          <p>Get subscription expiry timeout (in seconds)</p>
           
           
 
@@ -10118,6 +10866,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
+   *
    */
   void set_heartbeat_interval(unsigned int heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
@@ -10128,6 +10877,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval -&gt; Integer
+   *
    */
   int heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
@@ -10141,6 +10891,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode = Openwsman::WSMAN_DELIVERY_PUSH
+   *
    */
   void set_delivery_mode(unsigned int delivery_mode) {
     if (delivery_mode &gt; WSMAN_DELIVERY_PULL)
@@ -10155,6 +10906,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode -&gt; Integer
+   *
    */
   int delivery_mode() {
     return $self-&gt;delivery_mode;
@@ -10173,6 +10925,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
+   *
    */
   void set_delivery_security_mode(unsigned int delivery_sec_mode) {
     if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
@@ -10186,6 +10939,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode -&gt; Integer
+   *
    */
   int delivery_sec_mode() {
     return $self-&gt;delivery_sec_mode;
@@ -10218,11 +10972,7 @@ operations is adding</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Set subscription expiry timeout (in seconds)
-*
-*</pre>
+          <p>Set subscription expiry timeout (in seconds)</p>
           
           
 
@@ -10237,6 +10987,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry -&gt; Integer
+   *
    */
   int sub_expiry() {
     return $self-&gt;expires;
@@ -10250,6 +11001,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
+   *
    */
   void set_heartbeat_interval(unsigned int heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
@@ -10260,6 +11012,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval -&gt; Integer
+   *
    */
   int heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
@@ -10273,6 +11026,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode = Openwsman::WSMAN_DELIVERY_PUSH
+   *
    */
   void set_delivery_mode(unsigned int delivery_mode) {
     if (delivery_mode &gt; WSMAN_DELIVERY_PULL)
@@ -10287,6 +11041,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode -&gt; Integer
+   *
    */
   int delivery_mode() {
     return $self-&gt;delivery_mode;
@@ -10305,6 +11060,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
+   *
    */
   void set_delivery_security_mode(unsigned int delivery_sec_mode) {
     if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
@@ -10318,6 +11074,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode -&gt; Integer
+   *
    */
   int delivery_sec_mode() {
     return $self-&gt;delivery_sec_mode;
@@ -10350,12 +11107,9 @@ operations is adding</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Return operation timeout in milliseconds
-* See Openwsman::Transport.timeout for transport timeout
-*
-*</pre>
+          <p>Return operation timeout in milliseconds See <a
+href="Transport.html#method-i-timeout">Openwsman::Transport#timeout</a> for
+transport timeout</p>
           
           
 
@@ -10375,6 +11129,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.fragment = &quot;xpath/expression&quot;
+   *
    */
   void set_fragment(char *fragment) {
     wsmc_set_fragment(fragment, $self);
@@ -10389,6 +11144,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.fragment -&gt; String
+   *
    */
   const char *get_fragment() {
     return $self-&gt;fragment;
@@ -10408,6 +11164,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.cim_namespace = &quot;root/interop&quot;
+   *
    */
   void set_cim_namespace(char *cim_namespace) {
     wsmc_set_cim_ns(cim_namespace, $self);
@@ -10426,6 +11183,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.cim_namespace -&gt; String
+   *
    */
   const char *get_cim_namespace() {
     return $self-&gt;cim_ns;
@@ -10440,6 +11198,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reference = &quot;&lt;xml ...&gt;&quot;
+   *
    */
   void set_reference(const char *reference) {
     wsmc_set_reference(reference, $self);
@@ -10454,6 +11213,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reference -&gt; String
+   *
    */
   const char *get_reference() {
     return $self-&gt;reference;
@@ -10469,12 +11229,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_option &quot;Name&quot;, &quot;Value&quot;
+   *
    */
   void add_option(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_option($self, key, value);
   }
@@ -10490,6 +11250,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options = { &quot;Name&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_options(VALUE hash)
   {
@@ -10502,6 +11263,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options -&gt; Hash
+   *
    */
   VALUE get_options(void)
   {
@@ -10519,12 +11281,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_selector($self, key, value);
   }
@@ -10540,6 +11302,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_selectors(VALUE hash)
   {
@@ -10552,6 +11315,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors -&gt; Hash
+   *
    */
   VALUE get_selectors(void)
   {
@@ -10562,26 +11326,41 @@ operations is adding</p>
 
   /*
    * Add a property as key/value pair
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
+   * * Key is evaluated as String
+   * * Value is evaluated as String or EndPointReference
    *
    * call-seq:
    *   options.add_property &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_property &quot;Key&quot;, EndPointReference.new(...)
+   *
    */
   void add_property(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
 
-
-    wsmc_add_property($self, key, value);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      const epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_property_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_property($self, key, value);
+    }
   }
+
   
 
   %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
   /*
    * Set properties from Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
+   *
    */
   void set_properties(VALUE hash)
   {
@@ -10591,9 +11370,11 @@ operations is adding</p>
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties -&gt; Hash
+   *
    */
   VALUE get_properties(void)
   {
@@ -10609,6 +11390,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri = &quot;http://...&quot;
+   *
    */
   void set_delivery_uri( const char *delivery_uri ) {
     wsmc_set_delivery_uri(delivery_uri, $self);
@@ -10619,6 +11401,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri -&gt; String
+   *
    */
   const char *delivery_uri() {
     return $self-&gt;delivery_uri;
@@ -10632,6 +11415,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
+   *
    */
   void set_sub_expiry(unsigned int event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
@@ -10642,6 +11426,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry -&gt; Integer
+   *
    */
   int sub_expiry() {
     return $self-&gt;expires;
@@ -10655,6 +11440,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
+   *
    */
   void set_heartbeat_interval(unsigned int heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
@@ -10665,6 +11451,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval -&gt; Integer
+   *
    */
   int heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
@@ -10678,6 +11465,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode = Openwsman::WSMAN_DELIVERY_PUSH
+   *
    */
   void set_delivery_mode(unsigned int delivery_mode) {
     if (delivery_mode &gt; WSMAN_DELIVERY_PULL)
@@ -10692,6 +11480,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode -&gt; Integer
+   *
    */
   int delivery_mode() {
     return $self-&gt;delivery_mode;
@@ -10710,6 +11499,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
+   *
    */
   void set_delivery_security_mode(unsigned int delivery_sec_mode) {
     if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
@@ -10723,6 +11513,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode -&gt; Integer
+   *
    */
   int delivery_sec_mode() {
     return $self-&gt;delivery_sec_mode;
@@ -10755,12 +11546,9 @@ operations is adding</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Operation timeout in milliseconds
-* See Openwsman::Transport.timeout for transport timeout
-*
-*</pre>
+          <p>Operation timeout in milliseconds See <a
+href="Transport.html#method-i-timeout">Openwsman::Transport#timeout</a> for
+transport timeout</p>
           
           
 
@@ -10779,6 +11567,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.timeout -&gt; Integer
+   *
    */
   unsigned long get_timeout() {
     return $self-&gt;timeout;
@@ -10794,6 +11583,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.fragment = &quot;xpath/expression&quot;
+   *
    */
   void set_fragment(char *fragment) {
     wsmc_set_fragment(fragment, $self);
@@ -10808,6 +11598,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.fragment -&gt; String
+   *
    */
   const char *get_fragment() {
     return $self-&gt;fragment;
@@ -10827,6 +11618,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.cim_namespace = &quot;root/interop&quot;
+   *
    */
   void set_cim_namespace(char *cim_namespace) {
     wsmc_set_cim_ns(cim_namespace, $self);
@@ -10845,6 +11637,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.cim_namespace -&gt; String
+   *
    */
   const char *get_cim_namespace() {
     return $self-&gt;cim_ns;
@@ -10859,6 +11652,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reference = &quot;&lt;xml ...&gt;&quot;
+   *
    */
   void set_reference(const char *reference) {
     wsmc_set_reference(reference, $self);
@@ -10873,6 +11667,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.reference -&gt; String
+   *
    */
   const char *get_reference() {
     return $self-&gt;reference;
@@ -10888,12 +11683,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_option &quot;Name&quot;, &quot;Value&quot;
+   *
    */
   void add_option(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_option($self, key, value);
   }
@@ -10909,6 +11704,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options = { &quot;Name&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_options(VALUE hash)
   {
@@ -10921,6 +11717,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.options -&gt; Hash
+   *
    */
   VALUE get_options(void)
   {
@@ -10938,12 +11735,12 @@ operations is adding</p>
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
     const char *value = as_string(v);
-
 
     wsmc_add_selector($self, key, value);
   }
@@ -10959,6 +11756,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
+   *
    */
   void set_selectors(VALUE hash)
   {
@@ -10971,6 +11769,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.selectors -&gt; Hash
+   *
    */
   VALUE get_selectors(void)
   {
@@ -10981,26 +11780,41 @@ operations is adding</p>
 
   /*
    * Add a property as key/value pair
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
+   * * Key is evaluated as String
+   * * Value is evaluated as String or EndPointReference
    *
    * call-seq:
    *   options.add_property &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_property &quot;Key&quot;, EndPointReference.new(...)
+   *
    */
   void add_property(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
 
-
-    wsmc_add_property($self, key, value);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      const epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_property_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_property($self, key, value);
+    }
   }
+
   
 
   %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
   /*
    * Set properties from Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
+   *
    */
   void set_properties(VALUE hash)
   {
@@ -11010,9 +11824,11 @@ operations is adding</p>
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
+   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
    *
    * call-seq:
    *   options.properties -&gt; Hash
+   *
    */
   VALUE get_properties(void)
   {
@@ -11028,6 +11844,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri = &quot;http://...&quot;
+   *
    */
   void set_delivery_uri( const char *delivery_uri ) {
     wsmc_set_delivery_uri(delivery_uri, $self);
@@ -11038,6 +11855,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_uri -&gt; String
+   *
    */
   const char *delivery_uri() {
     return $self-&gt;delivery_uri;
@@ -11051,6 +11869,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
+   *
    */
   void set_sub_expiry(unsigned int event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
@@ -11061,6 +11880,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.sub_expiry -&gt; Integer
+   *
    */
   int sub_expiry() {
     return $self-&gt;expires;
@@ -11074,6 +11894,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
+   *
    */
   void set_heartbeat_interval(unsigned int heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
@@ -11084,6 +11905,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.heartbeat_interval -&gt; Integer
+   *
    */
   int heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
@@ -11097,6 +11919,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode = Openwsman::WSMAN_DELIVERY_PUSH
+   *
    */
   void set_delivery_mode(unsigned int delivery_mode) {
     if (delivery_mode &gt; WSMAN_DELIVERY_PULL)
@@ -11111,6 +11934,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_mode -&gt; Integer
+   *
    */
   int delivery_mode() {
     return $self-&gt;delivery_mode;
@@ -11129,6 +11953,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
+   *
    */
   void set_delivery_security_mode(unsigned int delivery_sec_mode) {
     if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
@@ -11142,6 +11967,7 @@ operations is adding</p>
    *
    * call-seq:
    *   options.delivery_security_mode -&gt; Integer
+   *
    */
   int delivery_sec_mode() {
     return $self-&gt;delivery_sec_mode;

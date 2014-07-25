@@ -120,21 +120,11 @@
 
   <section class="description">
     
-<p>*</p>
-<ul><li>
 <p><a href="Context.html">Context</a> contains all information of an ongoing
 SOAP operation</p>
-</li></ul>
 
-<p>*</p>
-<ul><li>
 <p>There is no constructor for <a href="Context.html">Context</a>, use
-Soap.context to get the</p>
-</li><li>
-<p>current one.</p>
-</li></ul>
-
-<p>* */</p>
+Soap.context to get the current one.</p>
 
   </section>
 
@@ -180,10 +170,7 @@ Soap.context to get the</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* The action
-*</pre>
+          <p>The action</p>
           
           
 
@@ -197,6 +184,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.resource_uri -&gt; String
    *   context.resource_uri(xml_doc) -&gt; String
+   *
    */
   const char *resource_uri(WsXmlDocH doc = NULL) {
     return wsman_get_resource_uri($self, doc);
@@ -205,6 +193,7 @@ Soap.context to get the</p>
    * The option set
    * call-seq:
    *   context.option_set(xml_doc, &quot;op&quot;) -&gt; String
+   *
    */
   const char *option_set(WsXmlDocH doc, const char *op) {
     return wsman_get_option_set($self, doc, op);
@@ -213,6 +202,7 @@ Soap.context to get the</p>
    * Parse enumeration request
    * call-seq:
    *   context.parse_enum_request(enumerate_info) -&gt; Integer
+   *
    */
   int parse_enum_request(WsEnumerateInfo *enumInfo) {
     WsmanStatus status;
@@ -248,11 +238,7 @@ Soap.context to get the</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre class="ruby"><span class="ruby-operator">*</span> <span class="ruby-constant">The</span> <span class="ruby-keyword">class</span> <span class="ruby-identifier">name</span>
-<span class="ruby-operator">*</span>
-</pre>
+          <p>The class name</p>
           
           
 
@@ -265,6 +251,7 @@ Soap.context to get the</p>
    * The method name
    * call-seq:
    *   context.method -&gt; String
+   *
    */
   const char *method() {
     return wsman_get_method_name($self);
@@ -273,6 +260,7 @@ Soap.context to get the</p>
    * The method arguments
    * call-seq:
    *   context.method -&gt; Hash
+   *
    */
   hash_t *method_args(const char *resource_uri) {
     return wsman_get_method_args($self, resource_uri);
@@ -282,6 +270,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.max_elements -&gt; Integer
    *   context.max_elements(xmldoc) -&gt; Integer
+   *
    */
   int max_elements(WsXmlDocH doc = NULL) {
     return wsman_get_max_elements($self, doc);
@@ -291,6 +280,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.max_envelope_size -&gt; Integer
    *   context.max_envelope_size(xmldoc) -&gt; Integer
+   *
    */
   unsigned long max_envelope_size(WsXmlDocH doc = NULL) {
     return wsman_get_max_envelope_size($self, doc);
@@ -300,6 +290,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.fragment_string -&gt; String
    *   context.fragment_string(xmldoc) -&gt; String
+   *
    */
   const char *fragment_string(WsXmlDocH doc = NULL) {
     return wsman_get_fragment_string($self, doc);
@@ -308,6 +299,7 @@ Soap.context to get the</p>
    * The selector for an element
    * call-seq:
    *   context.selector(xml_doc, &quot;Name&quot;, 1) -&gt; String
+   *
    */
   const char *selector(WsXmlDocH doc, const char *name, int index) {
     return wsman_get_selector($self, doc, name, index);
@@ -316,6 +308,7 @@ Soap.context to get the</p>
    * The selectors from an endpoint reference
    * call-seq:
    *   context.selectors_from_epr(epr_node_as_xml_doc) -&gt; Hash
+   *
    */
   hash_t *selectors_from_epr(WsXmlNodeH epr_node) {
     return wsman_get_selectors_from_epr($self, epr_node);
@@ -325,6 +318,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.selectors -&gt; Hash
    *   context.selectors(xml_doc) -&gt; Hash
+   *
    */
   hash_t *selectors(WsXmlDocH doc = NULL) {
     return wsman_get_selector_list($self, doc);
@@ -334,6 +328,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.selectors_from_filter -&gt; Hash
    *   context.selectors_from_filter(xml_doc) -&gt; Hash
+   *
    */
   hash_t *selectors_from_filter(WsXmlDocH doc = NULL) {
     return wsman_get_selector_list_from_filter($self, doc);
@@ -343,6 +338,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.action -&gt; String
    *   context.action(xml_doc) -&gt; String
+   *
    */
   const char *action(WsXmlDocH doc = NULL) {
     return wsman_get_action($self, doc);
@@ -352,6 +348,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.resource_uri -&gt; String
    *   context.resource_uri(xml_doc) -&gt; String
+   *
    */
   const char *resource_uri(WsXmlDocH doc = NULL) {
     return wsman_get_resource_uri($self, doc);
@@ -360,6 +357,7 @@ Soap.context to get the</p>
    * The option set
    * call-seq:
    *   context.option_set(xml_doc, &quot;op&quot;) -&gt; String
+   *
    */
   const char *option_set(WsXmlDocH doc, const char *op) {
     return wsman_get_option_set($self, doc, op);
@@ -368,6 +366,7 @@ Soap.context to get the</p>
    * Parse enumeration request
    * call-seq:
    *   context.parse_enum_request(enumerate_info) -&gt; Integer
+   *
    */
   int parse_enum_request(WsEnumerateInfo *enumInfo) {
     WsmanStatus status;
@@ -403,10 +402,7 @@ Soap.context to get the</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Set the idle timeout for enumerations
-*</pre>
+          <p>Set the idle timeout for enumerations</p>
           
           
 
@@ -419,6 +415,7 @@ Soap.context to get the</p>
    * The class name
    * call-seq:
    *   context.classname -&gt; String
+   *
    */
   const char *classname() {
     return wsman_get_class_name($self);
@@ -427,6 +424,7 @@ Soap.context to get the</p>
    * The method name
    * call-seq:
    *   context.method -&gt; String
+   *
    */
   const char *method() {
     return wsman_get_method_name($self);
@@ -435,6 +433,7 @@ Soap.context to get the</p>
    * The method arguments
    * call-seq:
    *   context.method -&gt; Hash
+   *
    */
   hash_t *method_args(const char *resource_uri) {
     return wsman_get_method_args($self, resource_uri);
@@ -444,6 +443,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.max_elements -&gt; Integer
    *   context.max_elements(xmldoc) -&gt; Integer
+   *
    */
   int max_elements(WsXmlDocH doc = NULL) {
     return wsman_get_max_elements($self, doc);
@@ -453,6 +453,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.max_envelope_size -&gt; Integer
    *   context.max_envelope_size(xmldoc) -&gt; Integer
+   *
    */
   unsigned long max_envelope_size(WsXmlDocH doc = NULL) {
     return wsman_get_max_envelope_size($self, doc);
@@ -462,6 +463,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.fragment_string -&gt; String
    *   context.fragment_string(xmldoc) -&gt; String
+   *
    */
   const char *fragment_string(WsXmlDocH doc = NULL) {
     return wsman_get_fragment_string($self, doc);
@@ -470,6 +472,7 @@ Soap.context to get the</p>
    * The selector for an element
    * call-seq:
    *   context.selector(xml_doc, &quot;Name&quot;, 1) -&gt; String
+   *
    */
   const char *selector(WsXmlDocH doc, const char *name, int index) {
     return wsman_get_selector($self, doc, name, index);
@@ -478,6 +481,7 @@ Soap.context to get the</p>
    * The selectors from an endpoint reference
    * call-seq:
    *   context.selectors_from_epr(epr_node_as_xml_doc) -&gt; Hash
+   *
    */
   hash_t *selectors_from_epr(WsXmlNodeH epr_node) {
     return wsman_get_selectors_from_epr($self, epr_node);
@@ -487,6 +491,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.selectors -&gt; Hash
    *   context.selectors(xml_doc) -&gt; Hash
+   *
    */
   hash_t *selectors(WsXmlDocH doc = NULL) {
     return wsman_get_selector_list($self, doc);
@@ -496,6 +501,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.selectors_from_filter -&gt; Hash
    *   context.selectors_from_filter(xml_doc) -&gt; Hash
+   *
    */
   hash_t *selectors_from_filter(WsXmlDocH doc = NULL) {
     return wsman_get_selector_list_from_filter($self, doc);
@@ -505,6 +511,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.action -&gt; String
    *   context.action(xml_doc) -&gt; String
+   *
    */
   const char *action(WsXmlDocH doc = NULL) {
     return wsman_get_action($self, doc);
@@ -514,6 +521,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.resource_uri -&gt; String
    *   context.resource_uri(xml_doc) -&gt; String
+   *
    */
   const char *resource_uri(WsXmlDocH doc = NULL) {
     return wsman_get_resource_uri($self, doc);
@@ -522,6 +530,7 @@ Soap.context to get the</p>
    * The option set
    * call-seq:
    *   context.option_set(xml_doc, &quot;op&quot;) -&gt; String
+   *
    */
   const char *option_set(WsXmlDocH doc, const char *op) {
     return wsman_get_option_set($self, doc, op);
@@ -530,6 +539,7 @@ Soap.context to get the</p>
    * Parse enumeration request
    * call-seq:
    *   context.parse_enum_request(enumerate_info) -&gt; Integer
+   *
    */
   int parse_enum_request(WsEnumerateInfo *enumInfo) {
     WsmanStatus status;
@@ -572,10 +582,7 @@ Soap.context to get the</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* The fragment of the document
-*</pre>
+          <p>The fragment of the document</p>
           
           
 
@@ -588,6 +595,7 @@ Soap.context to get the</p>
    * The selector for an element
    * call-seq:
    *   context.selector(xml_doc, &quot;Name&quot;, 1) -&gt; String
+   *
    */
   const char *selector(WsXmlDocH doc, const char *name, int index) {
     return wsman_get_selector($self, doc, name, index);
@@ -596,6 +604,7 @@ Soap.context to get the</p>
    * The selectors from an endpoint reference
    * call-seq:
    *   context.selectors_from_epr(epr_node_as_xml_doc) -&gt; Hash
+   *
    */
   hash_t *selectors_from_epr(WsXmlNodeH epr_node) {
     return wsman_get_selectors_from_epr($self, epr_node);
@@ -605,6 +614,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.selectors -&gt; Hash
    *   context.selectors(xml_doc) -&gt; Hash
+   *
    */
   hash_t *selectors(WsXmlDocH doc = NULL) {
     return wsman_get_selector_list($self, doc);
@@ -614,6 +624,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.selectors_from_filter -&gt; Hash
    *   context.selectors_from_filter(xml_doc) -&gt; Hash
+   *
    */
   hash_t *selectors_from_filter(WsXmlDocH doc = NULL) {
     return wsman_get_selector_list_from_filter($self, doc);
@@ -623,6 +634,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.action -&gt; String
    *   context.action(xml_doc) -&gt; String
+   *
    */
   const char *action(WsXmlDocH doc = NULL) {
     return wsman_get_action($self, doc);
@@ -632,6 +644,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.resource_uri -&gt; String
    *   context.resource_uri(xml_doc) -&gt; String
+   *
    */
   const char *resource_uri(WsXmlDocH doc = NULL) {
     return wsman_get_resource_uri($self, doc);
@@ -640,6 +653,7 @@ Soap.context to get the</p>
    * The option set
    * call-seq:
    *   context.option_set(xml_doc, &quot;op&quot;) -&gt; String
+   *
    */
   const char *option_set(WsXmlDocH doc, const char *op) {
     return wsman_get_option_set($self, doc, op);
@@ -648,6 +662,7 @@ Soap.context to get the</p>
    * Parse enumeration request
    * call-seq:
    *   context.parse_enum_request(enumerate_info) -&gt; Integer
+   *
    */
   int parse_enum_request(WsEnumerateInfo *enumInfo) {
     WsmanStatus status;
@@ -683,10 +698,7 @@ Soap.context to get the</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* The incoming XmlDoc
-*</pre>
+          <p>The incoming XmlDoc</p>
           
           
 
@@ -699,6 +711,7 @@ Soap.context to get the</p>
    * Get the Soap runtime environment
    * call-seq:
    *   context.runtime -&gt; Openwsman::Soap
+   *
    */
   struct __Soap *runtime() {
     return ws_context_get_runtime($self);
@@ -710,6 +723,7 @@ Soap.context to get the</p>
    * Set the idle timeout for enumerations
    * call-seq:
    *   context.enum_idle_timeout = 60
+   *
    */
   void set_enumIdleTimeout(unsigned long timeout) {
     ws_set_context_enumIdleTimeout($self, timeout);
@@ -718,6 +732,7 @@ Soap.context to get the</p>
    * The class name
    * call-seq:
    *   context.classname -&gt; String
+   *
    */
   const char *classname() {
     return wsman_get_class_name($self);
@@ -726,6 +741,7 @@ Soap.context to get the</p>
    * The method name
    * call-seq:
    *   context.method -&gt; String
+   *
    */
   const char *method() {
     return wsman_get_method_name($self);
@@ -734,6 +750,7 @@ Soap.context to get the</p>
    * The method arguments
    * call-seq:
    *   context.method -&gt; Hash
+   *
    */
   hash_t *method_args(const char *resource_uri) {
     return wsman_get_method_args($self, resource_uri);
@@ -743,6 +760,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.max_elements -&gt; Integer
    *   context.max_elements(xmldoc) -&gt; Integer
+   *
    */
   int max_elements(WsXmlDocH doc = NULL) {
     return wsman_get_max_elements($self, doc);
@@ -752,6 +770,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.max_envelope_size -&gt; Integer
    *   context.max_envelope_size(xmldoc) -&gt; Integer
+   *
    */
   unsigned long max_envelope_size(WsXmlDocH doc = NULL) {
     return wsman_get_max_envelope_size($self, doc);
@@ -761,6 +780,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.fragment_string -&gt; String
    *   context.fragment_string(xmldoc) -&gt; String
+   *
    */
   const char *fragment_string(WsXmlDocH doc = NULL) {
     return wsman_get_fragment_string($self, doc);
@@ -769,6 +789,7 @@ Soap.context to get the</p>
    * The selector for an element
    * call-seq:
    *   context.selector(xml_doc, &quot;Name&quot;, 1) -&gt; String
+   *
    */
   const char *selector(WsXmlDocH doc, const char *name, int index) {
     return wsman_get_selector($self, doc, name, index);
@@ -777,6 +798,7 @@ Soap.context to get the</p>
    * The selectors from an endpoint reference
    * call-seq:
    *   context.selectors_from_epr(epr_node_as_xml_doc) -&gt; Hash
+   *
    */
   hash_t *selectors_from_epr(WsXmlNodeH epr_node) {
     return wsman_get_selectors_from_epr($self, epr_node);
@@ -786,6 +808,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.selectors -&gt; Hash
    *   context.selectors(xml_doc) -&gt; Hash
+   *
    */
   hash_t *selectors(WsXmlDocH doc = NULL) {
     return wsman_get_selector_list($self, doc);
@@ -795,6 +818,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.selectors_from_filter -&gt; Hash
    *   context.selectors_from_filter(xml_doc) -&gt; Hash
+   *
    */
   hash_t *selectors_from_filter(WsXmlDocH doc = NULL) {
     return wsman_get_selector_list_from_filter($self, doc);
@@ -804,6 +828,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.action -&gt; String
    *   context.action(xml_doc) -&gt; String
+   *
    */
   const char *action(WsXmlDocH doc = NULL) {
     return wsman_get_action($self, doc);
@@ -813,6 +838,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.resource_uri -&gt; String
    *   context.resource_uri(xml_doc) -&gt; String
+   *
    */
   const char *resource_uri(WsXmlDocH doc = NULL) {
     return wsman_get_resource_uri($self, doc);
@@ -821,6 +847,7 @@ Soap.context to get the</p>
    * The option set
    * call-seq:
    *   context.option_set(xml_doc, &quot;op&quot;) -&gt; String
+   *
    */
   const char *option_set(WsXmlDocH doc, const char *op) {
     return wsman_get_option_set($self, doc, op);
@@ -829,6 +856,7 @@ Soap.context to get the</p>
    * Parse enumeration request
    * call-seq:
    *   context.parse_enum_request(enumerate_info) -&gt; Integer
+   *
    */
   int parse_enum_request(WsEnumerateInfo *enumInfo) {
     WsmanStatus status;
@@ -871,10 +899,7 @@ Soap.context to get the</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* The maximum elements of the document
-*</pre>
+          <p>The maximum elements of the document</p>
           
           
 
@@ -888,6 +913,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.max_envelope_size -&gt; Integer
    *   context.max_envelope_size(xmldoc) -&gt; Integer
+   *
    */
   unsigned long max_envelope_size(WsXmlDocH doc = NULL) {
     return wsman_get_max_envelope_size($self, doc);
@@ -897,6 +923,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.fragment_string -&gt; String
    *   context.fragment_string(xmldoc) -&gt; String
+   *
    */
   const char *fragment_string(WsXmlDocH doc = NULL) {
     return wsman_get_fragment_string($self, doc);
@@ -905,6 +932,7 @@ Soap.context to get the</p>
    * The selector for an element
    * call-seq:
    *   context.selector(xml_doc, &quot;Name&quot;, 1) -&gt; String
+   *
    */
   const char *selector(WsXmlDocH doc, const char *name, int index) {
     return wsman_get_selector($self, doc, name, index);
@@ -913,6 +941,7 @@ Soap.context to get the</p>
    * The selectors from an endpoint reference
    * call-seq:
    *   context.selectors_from_epr(epr_node_as_xml_doc) -&gt; Hash
+   *
    */
   hash_t *selectors_from_epr(WsXmlNodeH epr_node) {
     return wsman_get_selectors_from_epr($self, epr_node);
@@ -922,6 +951,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.selectors -&gt; Hash
    *   context.selectors(xml_doc) -&gt; Hash
+   *
    */
   hash_t *selectors(WsXmlDocH doc = NULL) {
     return wsman_get_selector_list($self, doc);
@@ -931,6 +961,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.selectors_from_filter -&gt; Hash
    *   context.selectors_from_filter(xml_doc) -&gt; Hash
+   *
    */
   hash_t *selectors_from_filter(WsXmlDocH doc = NULL) {
     return wsman_get_selector_list_from_filter($self, doc);
@@ -940,6 +971,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.action -&gt; String
    *   context.action(xml_doc) -&gt; String
+   *
    */
   const char *action(WsXmlDocH doc = NULL) {
     return wsman_get_action($self, doc);
@@ -949,6 +981,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.resource_uri -&gt; String
    *   context.resource_uri(xml_doc) -&gt; String
+   *
    */
   const char *resource_uri(WsXmlDocH doc = NULL) {
     return wsman_get_resource_uri($self, doc);
@@ -957,6 +990,7 @@ Soap.context to get the</p>
    * The option set
    * call-seq:
    *   context.option_set(xml_doc, &quot;op&quot;) -&gt; String
+   *
    */
   const char *option_set(WsXmlDocH doc, const char *op) {
     return wsman_get_option_set($self, doc, op);
@@ -965,6 +999,7 @@ Soap.context to get the</p>
    * Parse enumeration request
    * call-seq:
    *   context.parse_enum_request(enumerate_info) -&gt; Integer
+   *
    */
   int parse_enum_request(WsEnumerateInfo *enumInfo) {
     WsmanStatus status;
@@ -1007,10 +1042,7 @@ Soap.context to get the</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* The maximum envelope size of the document
-*</pre>
+          <p>The maximum envelope size of the document</p>
           
           
 
@@ -1024,6 +1056,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.fragment_string -&gt; String
    *   context.fragment_string(xmldoc) -&gt; String
+   *
    */
   const char *fragment_string(WsXmlDocH doc = NULL) {
     return wsman_get_fragment_string($self, doc);
@@ -1032,6 +1065,7 @@ Soap.context to get the</p>
    * The selector for an element
    * call-seq:
    *   context.selector(xml_doc, &quot;Name&quot;, 1) -&gt; String
+   *
    */
   const char *selector(WsXmlDocH doc, const char *name, int index) {
     return wsman_get_selector($self, doc, name, index);
@@ -1040,6 +1074,7 @@ Soap.context to get the</p>
    * The selectors from an endpoint reference
    * call-seq:
    *   context.selectors_from_epr(epr_node_as_xml_doc) -&gt; Hash
+   *
    */
   hash_t *selectors_from_epr(WsXmlNodeH epr_node) {
     return wsman_get_selectors_from_epr($self, epr_node);
@@ -1049,6 +1084,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.selectors -&gt; Hash
    *   context.selectors(xml_doc) -&gt; Hash
+   *
    */
   hash_t *selectors(WsXmlDocH doc = NULL) {
     return wsman_get_selector_list($self, doc);
@@ -1058,6 +1094,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.selectors_from_filter -&gt; Hash
    *   context.selectors_from_filter(xml_doc) -&gt; Hash
+   *
    */
   hash_t *selectors_from_filter(WsXmlDocH doc = NULL) {
     return wsman_get_selector_list_from_filter($self, doc);
@@ -1067,6 +1104,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.action -&gt; String
    *   context.action(xml_doc) -&gt; String
+   *
    */
   const char *action(WsXmlDocH doc = NULL) {
     return wsman_get_action($self, doc);
@@ -1076,6 +1114,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.resource_uri -&gt; String
    *   context.resource_uri(xml_doc) -&gt; String
+   *
    */
   const char *resource_uri(WsXmlDocH doc = NULL) {
     return wsman_get_resource_uri($self, doc);
@@ -1084,6 +1123,7 @@ Soap.context to get the</p>
    * The option set
    * call-seq:
    *   context.option_set(xml_doc, &quot;op&quot;) -&gt; String
+   *
    */
   const char *option_set(WsXmlDocH doc, const char *op) {
     return wsman_get_option_set($self, doc, op);
@@ -1092,6 +1132,7 @@ Soap.context to get the</p>
    * Parse enumeration request
    * call-seq:
    *   context.parse_enum_request(enumerate_info) -&gt; Integer
+   *
    */
   int parse_enum_request(WsEnumerateInfo *enumInfo) {
     WsmanStatus status;
@@ -1127,10 +1168,7 @@ Soap.context to get the</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* The method name
-*</pre>
+          <p>The method name</p>
           
           
 
@@ -1143,6 +1181,7 @@ Soap.context to get the</p>
    * The method arguments
    * call-seq:
    *   context.method -&gt; Hash
+   *
    */
   hash_t *method_args(const char *resource_uri) {
     return wsman_get_method_args($self, resource_uri);
@@ -1152,6 +1191,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.max_elements -&gt; Integer
    *   context.max_elements(xmldoc) -&gt; Integer
+   *
    */
   int max_elements(WsXmlDocH doc = NULL) {
     return wsman_get_max_elements($self, doc);
@@ -1161,6 +1201,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.max_envelope_size -&gt; Integer
    *   context.max_envelope_size(xmldoc) -&gt; Integer
+   *
    */
   unsigned long max_envelope_size(WsXmlDocH doc = NULL) {
     return wsman_get_max_envelope_size($self, doc);
@@ -1170,6 +1211,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.fragment_string -&gt; String
    *   context.fragment_string(xmldoc) -&gt; String
+   *
    */
   const char *fragment_string(WsXmlDocH doc = NULL) {
     return wsman_get_fragment_string($self, doc);
@@ -1178,6 +1220,7 @@ Soap.context to get the</p>
    * The selector for an element
    * call-seq:
    *   context.selector(xml_doc, &quot;Name&quot;, 1) -&gt; String
+   *
    */
   const char *selector(WsXmlDocH doc, const char *name, int index) {
     return wsman_get_selector($self, doc, name, index);
@@ -1186,6 +1229,7 @@ Soap.context to get the</p>
    * The selectors from an endpoint reference
    * call-seq:
    *   context.selectors_from_epr(epr_node_as_xml_doc) -&gt; Hash
+   *
    */
   hash_t *selectors_from_epr(WsXmlNodeH epr_node) {
     return wsman_get_selectors_from_epr($self, epr_node);
@@ -1195,6 +1239,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.selectors -&gt; Hash
    *   context.selectors(xml_doc) -&gt; Hash
+   *
    */
   hash_t *selectors(WsXmlDocH doc = NULL) {
     return wsman_get_selector_list($self, doc);
@@ -1204,6 +1249,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.selectors_from_filter -&gt; Hash
    *   context.selectors_from_filter(xml_doc) -&gt; Hash
+   *
    */
   hash_t *selectors_from_filter(WsXmlDocH doc = NULL) {
     return wsman_get_selector_list_from_filter($self, doc);
@@ -1213,6 +1259,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.action -&gt; String
    *   context.action(xml_doc) -&gt; String
+   *
    */
   const char *action(WsXmlDocH doc = NULL) {
     return wsman_get_action($self, doc);
@@ -1222,6 +1269,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.resource_uri -&gt; String
    *   context.resource_uri(xml_doc) -&gt; String
+   *
    */
   const char *resource_uri(WsXmlDocH doc = NULL) {
     return wsman_get_resource_uri($self, doc);
@@ -1230,6 +1278,7 @@ Soap.context to get the</p>
    * The option set
    * call-seq:
    *   context.option_set(xml_doc, &quot;op&quot;) -&gt; String
+   *
    */
   const char *option_set(WsXmlDocH doc, const char *op) {
     return wsman_get_option_set($self, doc, op);
@@ -1238,6 +1287,7 @@ Soap.context to get the</p>
    * Parse enumeration request
    * call-seq:
    *   context.parse_enum_request(enumerate_info) -&gt; Integer
+   *
    */
   int parse_enum_request(WsEnumerateInfo *enumInfo) {
     WsmanStatus status;
@@ -1273,10 +1323,7 @@ Soap.context to get the</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* The method arguments
-*</pre>
+          <p>The method arguments</p>
           
           
 
@@ -1290,6 +1337,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.max_elements -&gt; Integer
    *   context.max_elements(xmldoc) -&gt; Integer
+   *
    */
   int max_elements(WsXmlDocH doc = NULL) {
     return wsman_get_max_elements($self, doc);
@@ -1299,6 +1347,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.max_envelope_size -&gt; Integer
    *   context.max_envelope_size(xmldoc) -&gt; Integer
+   *
    */
   unsigned long max_envelope_size(WsXmlDocH doc = NULL) {
     return wsman_get_max_envelope_size($self, doc);
@@ -1308,6 +1357,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.fragment_string -&gt; String
    *   context.fragment_string(xmldoc) -&gt; String
+   *
    */
   const char *fragment_string(WsXmlDocH doc = NULL) {
     return wsman_get_fragment_string($self, doc);
@@ -1316,6 +1366,7 @@ Soap.context to get the</p>
    * The selector for an element
    * call-seq:
    *   context.selector(xml_doc, &quot;Name&quot;, 1) -&gt; String
+   *
    */
   const char *selector(WsXmlDocH doc, const char *name, int index) {
     return wsman_get_selector($self, doc, name, index);
@@ -1324,6 +1375,7 @@ Soap.context to get the</p>
    * The selectors from an endpoint reference
    * call-seq:
    *   context.selectors_from_epr(epr_node_as_xml_doc) -&gt; Hash
+   *
    */
   hash_t *selectors_from_epr(WsXmlNodeH epr_node) {
     return wsman_get_selectors_from_epr($self, epr_node);
@@ -1333,6 +1385,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.selectors -&gt; Hash
    *   context.selectors(xml_doc) -&gt; Hash
+   *
    */
   hash_t *selectors(WsXmlDocH doc = NULL) {
     return wsman_get_selector_list($self, doc);
@@ -1342,6 +1395,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.selectors_from_filter -&gt; Hash
    *   context.selectors_from_filter(xml_doc) -&gt; Hash
+   *
    */
   hash_t *selectors_from_filter(WsXmlDocH doc = NULL) {
     return wsman_get_selector_list_from_filter($self, doc);
@@ -1351,6 +1405,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.action -&gt; String
    *   context.action(xml_doc) -&gt; String
+   *
    */
   const char *action(WsXmlDocH doc = NULL) {
     return wsman_get_action($self, doc);
@@ -1360,6 +1415,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.resource_uri -&gt; String
    *   context.resource_uri(xml_doc) -&gt; String
+   *
    */
   const char *resource_uri(WsXmlDocH doc = NULL) {
     return wsman_get_resource_uri($self, doc);
@@ -1368,6 +1424,7 @@ Soap.context to get the</p>
    * The option set
    * call-seq:
    *   context.option_set(xml_doc, &quot;op&quot;) -&gt; String
+   *
    */
   const char *option_set(WsXmlDocH doc, const char *op) {
     return wsman_get_option_set($self, doc, op);
@@ -1376,6 +1433,7 @@ Soap.context to get the</p>
    * Parse enumeration request
    * call-seq:
    *   context.parse_enum_request(enumerate_info) -&gt; Integer
+   *
    */
   int parse_enum_request(WsEnumerateInfo *enumInfo) {
     WsmanStatus status;
@@ -1411,10 +1469,7 @@ Soap.context to get the</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* The option set
-*</pre>
+          <p>The option set</p>
           
           
 
@@ -1427,6 +1482,7 @@ Soap.context to get the</p>
    * Parse enumeration request
    * call-seq:
    *   context.parse_enum_request(enumerate_info) -&gt; Integer
+   *
    */
   int parse_enum_request(WsEnumerateInfo *enumInfo) {
     WsmanStatus status;
@@ -1462,10 +1518,7 @@ Soap.context to get the</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Parse enumeration request
-*</pre>
+          <p>Parse enumeration request</p>
           
           
 
@@ -1512,10 +1565,7 @@ Soap.context to get the</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* The resource uri
-*</pre>
+          <p>The resource uri</p>
           
           
 
@@ -1528,6 +1578,7 @@ Soap.context to get the</p>
    * The option set
    * call-seq:
    *   context.option_set(xml_doc, &quot;op&quot;) -&gt; String
+   *
    */
   const char *option_set(WsXmlDocH doc, const char *op) {
     return wsman_get_option_set($self, doc, op);
@@ -1536,6 +1587,7 @@ Soap.context to get the</p>
    * Parse enumeration request
    * call-seq:
    *   context.parse_enum_request(enumerate_info) -&gt; Integer
+   *
    */
   int parse_enum_request(WsEnumerateInfo *enumInfo) {
     WsmanStatus status;
@@ -1571,10 +1623,7 @@ Soap.context to get the</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Get the Soap runtime environment
-*</pre>
+          <p>Get the Soap runtime environment</p>
           
           
 
@@ -1590,6 +1639,7 @@ Soap.context to get the</p>
    * Set the idle timeout for enumerations
    * call-seq:
    *   context.enum_idle_timeout = 60
+   *
    */
   void set_enumIdleTimeout(unsigned long timeout) {
     ws_set_context_enumIdleTimeout($self, timeout);
@@ -1598,6 +1648,7 @@ Soap.context to get the</p>
    * The class name
    * call-seq:
    *   context.classname -&gt; String
+   *
    */
   const char *classname() {
     return wsman_get_class_name($self);
@@ -1606,6 +1657,7 @@ Soap.context to get the</p>
    * The method name
    * call-seq:
    *   context.method -&gt; String
+   *
    */
   const char *method() {
     return wsman_get_method_name($self);
@@ -1614,6 +1666,7 @@ Soap.context to get the</p>
    * The method arguments
    * call-seq:
    *   context.method -&gt; Hash
+   *
    */
   hash_t *method_args(const char *resource_uri) {
     return wsman_get_method_args($self, resource_uri);
@@ -1623,6 +1676,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.max_elements -&gt; Integer
    *   context.max_elements(xmldoc) -&gt; Integer
+   *
    */
   int max_elements(WsXmlDocH doc = NULL) {
     return wsman_get_max_elements($self, doc);
@@ -1632,6 +1686,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.max_envelope_size -&gt; Integer
    *   context.max_envelope_size(xmldoc) -&gt; Integer
+   *
    */
   unsigned long max_envelope_size(WsXmlDocH doc = NULL) {
     return wsman_get_max_envelope_size($self, doc);
@@ -1641,6 +1696,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.fragment_string -&gt; String
    *   context.fragment_string(xmldoc) -&gt; String
+   *
    */
   const char *fragment_string(WsXmlDocH doc = NULL) {
     return wsman_get_fragment_string($self, doc);
@@ -1649,6 +1705,7 @@ Soap.context to get the</p>
    * The selector for an element
    * call-seq:
    *   context.selector(xml_doc, &quot;Name&quot;, 1) -&gt; String
+   *
    */
   const char *selector(WsXmlDocH doc, const char *name, int index) {
     return wsman_get_selector($self, doc, name, index);
@@ -1657,6 +1714,7 @@ Soap.context to get the</p>
    * The selectors from an endpoint reference
    * call-seq:
    *   context.selectors_from_epr(epr_node_as_xml_doc) -&gt; Hash
+   *
    */
   hash_t *selectors_from_epr(WsXmlNodeH epr_node) {
     return wsman_get_selectors_from_epr($self, epr_node);
@@ -1666,6 +1724,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.selectors -&gt; Hash
    *   context.selectors(xml_doc) -&gt; Hash
+   *
    */
   hash_t *selectors(WsXmlDocH doc = NULL) {
     return wsman_get_selector_list($self, doc);
@@ -1675,6 +1734,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.selectors_from_filter -&gt; Hash
    *   context.selectors_from_filter(xml_doc) -&gt; Hash
+   *
    */
   hash_t *selectors_from_filter(WsXmlDocH doc = NULL) {
     return wsman_get_selector_list_from_filter($self, doc);
@@ -1684,6 +1744,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.action -&gt; String
    *   context.action(xml_doc) -&gt; String
+   *
    */
   const char *action(WsXmlDocH doc = NULL) {
     return wsman_get_action($self, doc);
@@ -1693,6 +1754,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.resource_uri -&gt; String
    *   context.resource_uri(xml_doc) -&gt; String
+   *
    */
   const char *resource_uri(WsXmlDocH doc = NULL) {
     return wsman_get_resource_uri($self, doc);
@@ -1701,6 +1763,7 @@ Soap.context to get the</p>
    * The option set
    * call-seq:
    *   context.option_set(xml_doc, &quot;op&quot;) -&gt; String
+   *
    */
   const char *option_set(WsXmlDocH doc, const char *op) {
     return wsman_get_option_set($self, doc, op);
@@ -1709,6 +1772,7 @@ Soap.context to get the</p>
    * Parse enumeration request
    * call-seq:
    *   context.parse_enum_request(enumerate_info) -&gt; Integer
+   *
    */
   int parse_enum_request(WsEnumerateInfo *enumInfo) {
     WsmanStatus status;
@@ -1744,10 +1808,7 @@ Soap.context to get the</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* The selector for an element
-*</pre>
+          <p>The selector for an element</p>
           
           
 
@@ -1760,6 +1821,7 @@ Soap.context to get the</p>
    * The selectors from an endpoint reference
    * call-seq:
    *   context.selectors_from_epr(epr_node_as_xml_doc) -&gt; Hash
+   *
    */
   hash_t *selectors_from_epr(WsXmlNodeH epr_node) {
     return wsman_get_selectors_from_epr($self, epr_node);
@@ -1769,6 +1831,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.selectors -&gt; Hash
    *   context.selectors(xml_doc) -&gt; Hash
+   *
    */
   hash_t *selectors(WsXmlDocH doc = NULL) {
     return wsman_get_selector_list($self, doc);
@@ -1778,6 +1841,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.selectors_from_filter -&gt; Hash
    *   context.selectors_from_filter(xml_doc) -&gt; Hash
+   *
    */
   hash_t *selectors_from_filter(WsXmlDocH doc = NULL) {
     return wsman_get_selector_list_from_filter($self, doc);
@@ -1787,6 +1851,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.action -&gt; String
    *   context.action(xml_doc) -&gt; String
+   *
    */
   const char *action(WsXmlDocH doc = NULL) {
     return wsman_get_action($self, doc);
@@ -1796,6 +1861,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.resource_uri -&gt; String
    *   context.resource_uri(xml_doc) -&gt; String
+   *
    */
   const char *resource_uri(WsXmlDocH doc = NULL) {
     return wsman_get_resource_uri($self, doc);
@@ -1804,6 +1870,7 @@ Soap.context to get the</p>
    * The option set
    * call-seq:
    *   context.option_set(xml_doc, &quot;op&quot;) -&gt; String
+   *
    */
   const char *option_set(WsXmlDocH doc, const char *op) {
     return wsman_get_option_set($self, doc, op);
@@ -1812,6 +1879,7 @@ Soap.context to get the</p>
    * Parse enumeration request
    * call-seq:
    *   context.parse_enum_request(enumerate_info) -&gt; Integer
+   *
    */
   int parse_enum_request(WsEnumerateInfo *enumInfo) {
     WsmanStatus status;
@@ -1854,10 +1922,7 @@ Soap.context to get the</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* The selectors for a document
-*</pre>
+          <p>The selectors for a document</p>
           
           
 
@@ -1871,6 +1936,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.selectors_from_filter -&gt; Hash
    *   context.selectors_from_filter(xml_doc) -&gt; Hash
+   *
    */
   hash_t *selectors_from_filter(WsXmlDocH doc = NULL) {
     return wsman_get_selector_list_from_filter($self, doc);
@@ -1880,6 +1946,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.action -&gt; String
    *   context.action(xml_doc) -&gt; String
+   *
    */
   const char *action(WsXmlDocH doc = NULL) {
     return wsman_get_action($self, doc);
@@ -1889,6 +1956,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.resource_uri -&gt; String
    *   context.resource_uri(xml_doc) -&gt; String
+   *
    */
   const char *resource_uri(WsXmlDocH doc = NULL) {
     return wsman_get_resource_uri($self, doc);
@@ -1897,6 +1965,7 @@ Soap.context to get the</p>
    * The option set
    * call-seq:
    *   context.option_set(xml_doc, &quot;op&quot;) -&gt; String
+   *
    */
   const char *option_set(WsXmlDocH doc, const char *op) {
     return wsman_get_option_set($self, doc, op);
@@ -1905,6 +1974,7 @@ Soap.context to get the</p>
    * Parse enumeration request
    * call-seq:
    *   context.parse_enum_request(enumerate_info) -&gt; Integer
+   *
    */
   int parse_enum_request(WsEnumerateInfo *enumInfo) {
     WsmanStatus status;
@@ -1940,10 +2010,7 @@ Soap.context to get the</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* The selectors from an endpoint reference
-*</pre>
+          <p>The selectors from an endpoint reference</p>
           
           
 
@@ -1957,6 +2024,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.selectors -&gt; Hash
    *   context.selectors(xml_doc) -&gt; Hash
+   *
    */
   hash_t *selectors(WsXmlDocH doc = NULL) {
     return wsman_get_selector_list($self, doc);
@@ -1966,6 +2034,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.selectors_from_filter -&gt; Hash
    *   context.selectors_from_filter(xml_doc) -&gt; Hash
+   *
    */
   hash_t *selectors_from_filter(WsXmlDocH doc = NULL) {
     return wsman_get_selector_list_from_filter($self, doc);
@@ -1975,6 +2044,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.action -&gt; String
    *   context.action(xml_doc) -&gt; String
+   *
    */
   const char *action(WsXmlDocH doc = NULL) {
     return wsman_get_action($self, doc);
@@ -1984,6 +2054,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.resource_uri -&gt; String
    *   context.resource_uri(xml_doc) -&gt; String
+   *
    */
   const char *resource_uri(WsXmlDocH doc = NULL) {
     return wsman_get_resource_uri($self, doc);
@@ -1992,6 +2063,7 @@ Soap.context to get the</p>
    * The option set
    * call-seq:
    *   context.option_set(xml_doc, &quot;op&quot;) -&gt; String
+   *
    */
   const char *option_set(WsXmlDocH doc, const char *op) {
     return wsman_get_option_set($self, doc, op);
@@ -2000,6 +2072,7 @@ Soap.context to get the</p>
    * Parse enumeration request
    * call-seq:
    *   context.parse_enum_request(enumerate_info) -&gt; Integer
+   *
    */
   int parse_enum_request(WsEnumerateInfo *enumInfo) {
     WsmanStatus status;
@@ -2042,10 +2115,7 @@ Soap.context to get the</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* The selectors from a filter
-*</pre>
+          <p>The selectors from a filter</p>
           
           
 
@@ -2059,6 +2129,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.action -&gt; String
    *   context.action(xml_doc) -&gt; String
+   *
    */
   const char *action(WsXmlDocH doc = NULL) {
     return wsman_get_action($self, doc);
@@ -2068,6 +2139,7 @@ Soap.context to get the</p>
    * call-seq:
    *   context.resource_uri -&gt; String
    *   context.resource_uri(xml_doc) -&gt; String
+   *
    */
   const char *resource_uri(WsXmlDocH doc = NULL) {
     return wsman_get_resource_uri($self, doc);
@@ -2076,6 +2148,7 @@ Soap.context to get the</p>
    * The option set
    * call-seq:
    *   context.option_set(xml_doc, &quot;op&quot;) -&gt; String
+   *
    */
   const char *option_set(WsXmlDocH doc, const char *op) {
     return wsman_get_option_set($self, doc, op);
@@ -2084,6 +2157,7 @@ Soap.context to get the</p>
    * Parse enumeration request
    * call-seq:
    *   context.parse_enum_request(enumerate_info) -&gt; Integer
+   *
    */
   int parse_enum_request(WsEnumerateInfo *enumInfo) {
     WsmanStatus status;

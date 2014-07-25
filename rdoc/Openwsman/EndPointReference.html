@@ -116,22 +116,11 @@
 
   <section class="description">
     
-<p>*</p>
-<ul><li>
 <p>The <a href="EndPointReference.html">EndPointReference</a> is a stub to
 proxy server-side operations</p>
-</li></ul>
 
-<p>*</p>
-<ul><li>
-<p>Each WS-Management operation (Get, Enumerate, Invoke, …) has an</p>
-</li><li>
-<p>associated end point reference, providing the actual implementation of</p>
-</li><li>
-<p>the operation.</p>
-</li></ul>
-
-<p>* */</p>
+<p>Each WS-Management operation (Get, Enumerate, Invoke, …) has an associated
+end point reference, providing the actual implementation of the operation.</p>
 
   </section>
 
@@ -229,7 +218,7 @@ proxy server-side operations</p>
    * clone the EndPointReference instance
    *
    */
-  epr_t *clone(epr_t *epr) {
+  epr_t *clone(const epr_t *epr) {
     return epr_copy(epr);
   }
 
@@ -261,7 +250,7 @@ proxy server-side operations</p>
    * Compare two EndPointReferences
    *
    */
-  int cmp(epr_t *epr2) {
+  int cmp(const epr_t *epr2) {
     return epr_cmp($self, epr2);
   }
   
@@ -355,7 +344,7 @@ proxy server-side operations</p>
       if (p-&gt;type == 0) {
         value = SWIG_FromCharPtr(p-&gt;value);
       } else {
-        char *epr_value = epr_to_string((epr_t *)p-&gt;value);
+        char *epr_value = epr_to_string((const epr_t *)p-&gt;value);
         value = SWIG_FromCharPtr(epr_value);
         u_free(epr_value);
       }
@@ -476,7 +465,7 @@ proxy server-side operations</p>
    * Compare two EndPointReferences
    *
    */
-  int cmp(epr_t *epr2) {
+  int cmp(const epr_t *epr2) {
     return epr_cmp($self, epr2);
   }
   
@@ -570,7 +559,7 @@ proxy server-side operations</p>
       if (p-&gt;type == 0) {
         value = SWIG_FromCharPtr(p-&gt;value);
       } else {
-        char *epr_value = epr_to_string((epr_t *)p-&gt;value);
+        char *epr_value = epr_to_string((const epr_t *)p-&gt;value);
         value = SWIG_FromCharPtr(epr_value);
         u_free(epr_value);
       }
@@ -735,7 +724,7 @@ proxy server-side operations</p>
 
           
           <div class="method-source-code" id="clone-source">
-            <pre>epr_t *clone(epr_t *epr) {
+            <pre>epr_t *clone(const epr_t *epr) {
     return epr_copy(epr);
   }
 
@@ -767,7 +756,7 @@ proxy server-side operations</p>
    * Compare two EndPointReferences
    *
    */
-  int cmp(epr_t *epr2) {
+  int cmp(const epr_t *epr2) {
     return epr_cmp($self, epr2);
   }
   
@@ -861,7 +850,7 @@ proxy server-side operations</p>
       if (p-&gt;type == 0) {
         value = SWIG_FromCharPtr(p-&gt;value);
       } else {
-        char *epr_value = epr_to_string((epr_t *)p-&gt;value);
+        char *epr_value = epr_to_string((const epr_t *)p-&gt;value);
         value = SWIG_FromCharPtr(epr_value);
         u_free(epr_value);
       }
@@ -951,7 +940,7 @@ proxy server-side operations</p>
 
           
           <div class="method-source-code" id="cmp-source">
-            <pre>int cmp(epr_t *epr2) {
+            <pre>int cmp(const epr_t *epr2) {
     return epr_cmp($self, epr2);
   }
   
@@ -1045,7 +1034,7 @@ proxy server-side operations</p>
       if (p-&gt;type == 0) {
         value = SWIG_FromCharPtr(p-&gt;value);
       } else {
-        char *epr_value = epr_to_string((epr_t *)p-&gt;value);
+        char *epr_value = epr_to_string((const epr_t *)p-&gt;value);
         value = SWIG_FromCharPtr(epr_value);
         u_free(epr_value);
       }
@@ -1149,7 +1138,7 @@ proxy server-side operations</p>
       if (p-&gt;type == 0) {
         value = SWIG_FromCharPtr(p-&gt;value);
       } else {
-        char *epr_value = epr_to_string((epr_t *)p-&gt;value);
+        char *epr_value = epr_to_string((const epr_t *)p-&gt;value);
         value = SWIG_FromCharPtr(epr_value);
         u_free(epr_value);
       }
@@ -1398,7 +1387,7 @@ href="EndPointReference.html">EndPointReference</a></p>
       if (p-&gt;type == 0) {
         value = SWIG_FromCharPtr(p-&gt;value);
       } else {
-        char *epr_value = epr_to_string((epr_t *)p-&gt;value);
+        char *epr_value = epr_to_string((const epr_t *)p-&gt;value);
         value = SWIG_FromCharPtr(epr_value);
         u_free(epr_value);
       }
@@ -1540,7 +1529,7 @@ epr.name</pre>
       if (p-&gt;type == 0) {
         value = SWIG_FromCharPtr(p-&gt;value);
       } else {
-        char *epr_value = epr_to_string((epr_t *)p-&gt;value);
+        char *epr_value = epr_to_string((const epr_t *)p-&gt;value);
         value = SWIG_FromCharPtr(epr_value);
         u_free(epr_value);
       }
@@ -1696,7 +1685,7 @@ epr.name</pre>
       if (p-&gt;type == 0) {
         value = SWIG_FromCharPtr(p-&gt;value);
       } else {
-        char *epr_value = epr_to_string((epr_t *)p-&gt;value);
+        char *epr_value = epr_to_string((const epr_t *)p-&gt;value);
         value = SWIG_FromCharPtr(epr_value);
         u_free(epr_value);
       }
@@ -1817,7 +1806,7 @@ epr.name</pre>
       if (p-&gt;type == 0) {
         value = SWIG_FromCharPtr(p-&gt;value);
       } else {
-        char *epr_value = epr_to_string((epr_t *)p-&gt;value);
+        char *epr_value = epr_to_string((const epr_t *)p-&gt;value);
         value = SWIG_FromCharPtr(epr_value);
         u_free(epr_value);
       }
@@ -1923,7 +1912,7 @@ child (with namespace and name) of node</p>
    * Compare two EndPointReferences
    *
    */
-  int cmp(epr_t *epr2) {
+  int cmp(const epr_t *epr2) {
     return epr_cmp($self, epr2);
   }
   
@@ -2017,7 +2006,7 @@ child (with namespace and name) of node</p>
       if (p-&gt;type == 0) {
         value = SWIG_FromCharPtr(p-&gt;value);
       } else {
-        char *epr_value = epr_to_string((epr_t *)p-&gt;value);
+        char *epr_value = epr_to_string((const epr_t *)p-&gt;value);
         value = SWIG_FromCharPtr(epr_value);
         u_free(epr_value);
       }
@@ -2180,7 +2169,7 @@ child (with namespace and name) of node</p>
       if (p-&gt;type == 0) {
         value = SWIG_FromCharPtr(p-&gt;value);
       } else {
-        char *epr_value = epr_to_string((epr_t *)p-&gt;value);
+        char *epr_value = epr_to_string((const epr_t *)p-&gt;value);
         value = SWIG_FromCharPtr(epr_value);
         u_free(epr_value);
       }
@@ -2356,7 +2345,7 @@ child (with namespace and name) of node</p>
       if (p-&gt;type == 0) {
         value = SWIG_FromCharPtr(p-&gt;value);
       } else {
-        char *epr_value = epr_to_string((epr_t *)p-&gt;value);
+        char *epr_value = epr_to_string((const epr_t *)p-&gt;value);
         value = SWIG_FromCharPtr(epr_value);
         u_free(epr_value);
       }

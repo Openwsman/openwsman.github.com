@@ -100,12 +100,7 @@
 
   <section class="description">
     
-<p>*</p>
-<ul><li>
 <p><a href="SoapOp.html">SoapOp</a> represents a SOAP operation</p>
-</li></ul>
-
-<p>* */</p>
 
   </section>
 
@@ -144,10 +139,7 @@
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* The incoming XmlDoc
-*</pre>
+          <p>The incoming XmlDoc</p>
           
           
 
@@ -163,6 +155,7 @@
    * Set the incoming XmlDoc
    * call-seq:
    *   soap_op.indoc = xml_doc
+   *
    */
   void set_indoc( WsXmlDocH doc ) {
     soap_set_op_doc( $self, doc, 1 );
@@ -171,6 +164,7 @@
    * The outgoing XmlDoc
    * call-seq:
    *   soap_op.outdoc -&gt; Openwsman::XmlDoc
+   *
    */
   WsXmlDocH outdoc() {
     return soap_get_op_doc($self, 0);
@@ -182,6 +176,7 @@
    * Set the outgoing XmlDoc
    * call-seq:
    *   soap_op.outdoc = xml_doc
+   *
    */
   void set_outdoc( WsXmlDocH doc ) {
     soap_set_op_doc( $self, doc, 0 );
@@ -190,6 +185,7 @@
    * The Soap instance of this operation
    * call-seq:
    *   soap_op.soap -&gt; Openwsman::Soap
+   *
    */
   struct __Soap *soap() {
     return soap_get_op_soap($self);
@@ -198,6 +194,7 @@
    * The raw (SOAP) message for this operation
    * call-seq:
    *   soap_op.msg -&gt; Openwsman::Message
+   *
    */
   WsmanMessage *msg() {
     return wsman_get_msg_from_op($self);
@@ -206,6 +203,7 @@
    * The maximum size (on the wire) of this operation
    * call-seq:
    *   soap_op.maxsize -&gt; Integer
+   *
    */
   unsigned long maxsize(){
     return wsman_get_maxsize_from_op($self);
@@ -237,10 +235,7 @@
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Set the incoming XmlDoc
-*</pre>
+          <p>Set the incoming XmlDoc</p>
           
           
 
@@ -253,6 +248,7 @@
    * The outgoing XmlDoc
    * call-seq:
    *   soap_op.outdoc -&gt; Openwsman::XmlDoc
+   *
    */
   WsXmlDocH outdoc() {
     return soap_get_op_doc($self, 0);
@@ -264,6 +260,7 @@
    * Set the outgoing XmlDoc
    * call-seq:
    *   soap_op.outdoc = xml_doc
+   *
    */
   void set_outdoc( WsXmlDocH doc ) {
     soap_set_op_doc( $self, doc, 0 );
@@ -272,6 +269,7 @@
    * The Soap instance of this operation
    * call-seq:
    *   soap_op.soap -&gt; Openwsman::Soap
+   *
    */
   struct __Soap *soap() {
     return soap_get_op_soap($self);
@@ -280,6 +278,7 @@
    * The raw (SOAP) message for this operation
    * call-seq:
    *   soap_op.msg -&gt; Openwsman::Message
+   *
    */
   WsmanMessage *msg() {
     return wsman_get_msg_from_op($self);
@@ -288,6 +287,7 @@
    * The maximum size (on the wire) of this operation
    * call-seq:
    *   soap_op.maxsize -&gt; Integer
+   *
    */
   unsigned long maxsize(){
     return wsman_get_maxsize_from_op($self);
@@ -319,10 +319,7 @@
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* The maximum size (on the wire) of this operation
-*</pre>
+          <p>The maximum size (on the wire) of this operation</p>
           
           
 
@@ -355,10 +352,7 @@
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* The raw (SOAP) message for this operation
-*</pre>
+          <p>The raw (SOAP) message for this operation</p>
           
           
 
@@ -371,6 +365,7 @@
    * The maximum size (on the wire) of this operation
    * call-seq:
    *   soap_op.maxsize -&gt; Integer
+   *
    */
   unsigned long maxsize(){
     return wsman_get_maxsize_from_op($self);
@@ -402,10 +397,7 @@
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* The outgoing XmlDoc
-*</pre>
+          <p>The outgoing XmlDoc</p>
           
           
 
@@ -421,6 +413,7 @@
    * Set the outgoing XmlDoc
    * call-seq:
    *   soap_op.outdoc = xml_doc
+   *
    */
   void set_outdoc( WsXmlDocH doc ) {
     soap_set_op_doc( $self, doc, 0 );
@@ -429,6 +422,7 @@
    * The Soap instance of this operation
    * call-seq:
    *   soap_op.soap -&gt; Openwsman::Soap
+   *
    */
   struct __Soap *soap() {
     return soap_get_op_soap($self);
@@ -437,6 +431,7 @@
    * The raw (SOAP) message for this operation
    * call-seq:
    *   soap_op.msg -&gt; Openwsman::Message
+   *
    */
   WsmanMessage *msg() {
     return wsman_get_msg_from_op($self);
@@ -445,6 +440,7 @@
    * The maximum size (on the wire) of this operation
    * call-seq:
    *   soap_op.maxsize -&gt; Integer
+   *
    */
   unsigned long maxsize(){
     return wsman_get_maxsize_from_op($self);
@@ -476,10 +472,7 @@
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Set the outgoing XmlDoc
-*</pre>
+          <p>Set the outgoing XmlDoc</p>
           
           
 
@@ -492,6 +485,7 @@
    * The Soap instance of this operation
    * call-seq:
    *   soap_op.soap -&gt; Openwsman::Soap
+   *
    */
   struct __Soap *soap() {
     return soap_get_op_soap($self);
@@ -500,6 +494,7 @@
    * The raw (SOAP) message for this operation
    * call-seq:
    *   soap_op.msg -&gt; Openwsman::Message
+   *
    */
   WsmanMessage *msg() {
     return wsman_get_msg_from_op($self);
@@ -508,6 +503,7 @@
    * The maximum size (on the wire) of this operation
    * call-seq:
    *   soap_op.maxsize -&gt; Integer
+   *
    */
   unsigned long maxsize(){
     return wsman_get_maxsize_from_op($self);
@@ -539,10 +535,7 @@
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* The Soap instance of this operation
-*</pre>
+          <p>The Soap instance of this operation</p>
           
           
 
@@ -555,6 +548,7 @@
    * The raw (SOAP) message for this operation
    * call-seq:
    *   soap_op.msg -&gt; Openwsman::Message
+   *
    */
   WsmanMessage *msg() {
     return wsman_get_msg_from_op($self);
@@ -563,6 +557,7 @@
    * The maximum size (on the wire) of this operation
    * call-seq:
    *   soap_op.maxsize -&gt; Integer
+   *
    */
   unsigned long maxsize(){
     return wsman_get_maxsize_from_op($self);

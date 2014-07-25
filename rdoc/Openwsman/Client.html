@@ -146,15 +146,8 @@
 
   <section class="description">
     
-<p>*</p>
-<ul><li>
 <p>Instances of <a href="Client.html">Client</a> represent a connection to a
-client used for</p>
-</li><li>
-<p>sending WS-Management operation requests.</p>
-</li></ul>
-
-<p>* */</p>
+client used for sending WS-Management operation requests.</p>
 
   </section>
 
@@ -290,6 +283,7 @@ passing all client parameters separately</p>
    *
    * call-seq:
    *   client.scheme -&gt; String
+   *
    */
   char *scheme() {
     return wsmc_get_scheme( $self );
@@ -297,6 +291,7 @@ passing all client parameters separately</p>
 
   /*
    * The host part of the client URL
+   *
    */
   char *host() {
     return wsmc_get_hostname( $self );
@@ -304,6 +299,7 @@ passing all client parameters separately</p>
 
   /*
    * The TCP port used in the connection
+   *
    */
   int port() {
     return wsmc_get_port( $self );
@@ -311,6 +307,7 @@ passing all client parameters separately</p>
 
   /*
    * The path of the clien URL
+   *
    */
   char *path() {
     return wsmc_get_path( $self );
@@ -318,6 +315,7 @@ passing all client parameters separately</p>
 
   /*
    * The user name used for authentication
+   *
    */
   char *user() {
     return wsmc_get_user( $self );
@@ -325,6 +323,7 @@ passing all client parameters separately</p>
 
   /*
    * The password used for authentication
+   *
    */
   char *password() {
     return wsmc_get_password( $self );
@@ -1934,6 +1933,7 @@ a resource via an endpoint reference</p>
    *
    * call-seq:
    *   client.scheme -&gt; String
+   *
    */
   char *scheme() {
     return wsmc_get_scheme( $self );
@@ -1941,6 +1941,7 @@ a resource via an endpoint reference</p>
 
   /*
    * The host part of the client URL
+   *
    */
   char *host() {
     return wsmc_get_hostname( $self );
@@ -1948,6 +1949,7 @@ a resource via an endpoint reference</p>
 
   /*
    * The TCP port used in the connection
+   *
    */
   int port() {
     return wsmc_get_port( $self );
@@ -1955,6 +1957,7 @@ a resource via an endpoint reference</p>
 
   /*
    * The path of the clien URL
+   *
    */
   char *path() {
     return wsmc_get_path( $self );
@@ -1962,6 +1965,7 @@ a resource via an endpoint reference</p>
 
   /*
    * The user name used for authentication
+   *
    */
   char *user() {
     return wsmc_get_user( $self );
@@ -1969,6 +1973,7 @@ a resource via an endpoint reference</p>
 
   /*
    * The password used for authentication
+   *
    */
   char *password() {
     return wsmc_get_password( $self );
@@ -4069,6 +4074,7 @@ resource via an endpoint reference</p>
 
   /*
    * The TCP port used in the connection
+   *
    */
   int port() {
     return wsmc_get_port( $self );
@@ -4076,6 +4082,7 @@ resource via an endpoint reference</p>
 
   /*
    * The path of the clien URL
+   *
    */
   char *path() {
     return wsmc_get_path( $self );
@@ -4083,6 +4090,7 @@ resource via an endpoint reference</p>
 
   /*
    * The user name used for authentication
+   *
    */
   char *user() {
     return wsmc_get_user( $self );
@@ -4090,6 +4098,7 @@ resource via an endpoint reference</p>
 
   /*
    * The password used for authentication
+   *
    */
   char *password() {
     return wsmc_get_password( $self );
@@ -5514,6 +5523,7 @@ resource via an endpoint reference</p>
 
   /*
    * The user name used for authentication
+   *
    */
   char *user() {
     return wsmc_get_user( $self );
@@ -5521,6 +5531,7 @@ resource via an endpoint reference</p>
 
   /*
    * The password used for authentication
+   *
    */
   char *password() {
     return wsmc_get_password( $self );
@@ -5963,6 +5974,7 @@ resource via an endpoint reference</p>
 
   /*
    * The path of the clien URL
+   *
    */
   char *path() {
     return wsmc_get_path( $self );
@@ -5970,6 +5982,7 @@ resource via an endpoint reference</p>
 
   /*
    * The user name used for authentication
+   *
    */
   char *user() {
     return wsmc_get_user( $self );
@@ -5977,6 +5990,7 @@ resource via an endpoint reference</p>
 
   /*
    * The password used for authentication
+   *
    */
   char *password() {
     return wsmc_get_password( $self );
@@ -7195,6 +7209,7 @@ resource via an endpoint reference</p>
    *
    * call-seq:
    *   client.scheme -&gt; String
+   *
    */
   char *scheme() {
     return wsmc_get_scheme( $self );
@@ -7202,6 +7217,7 @@ resource via an endpoint reference</p>
 
   /*
    * The host part of the client URL
+   *
    */
   char *host() {
     return wsmc_get_hostname( $self );
@@ -7209,6 +7225,7 @@ resource via an endpoint reference</p>
 
   /*
    * The TCP port used in the connection
+   *
    */
   int port() {
     return wsmc_get_port( $self );
@@ -7216,6 +7233,7 @@ resource via an endpoint reference</p>
 
   /*
    * The path of the clien URL
+   *
    */
   char *path() {
     return wsmc_get_path( $self );
@@ -7223,6 +7241,7 @@ resource via an endpoint reference</p>
 
   /*
    * The user name used for authentication
+   *
    */
   char *user() {
     return wsmc_get_user( $self );
@@ -7230,6 +7249,7 @@ resource via an endpoint reference</p>
 
   /*
    * The password used for authentication
+   *
    */
   char *password() {
     return wsmc_get_password( $self );
@@ -7663,11 +7683,7 @@ resource via an endpoint reference</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* String representation of the transport scheme
-*
-*</pre>
+          <p>String representation of the transport scheme</p>
           
           
 
@@ -7679,6 +7695,7 @@ resource via an endpoint reference</p>
 
   /*
    * The host part of the client URL
+   *
    */
   char *host() {
     return wsmc_get_hostname( $self );
@@ -7686,6 +7703,7 @@ resource via an endpoint reference</p>
 
   /*
    * The TCP port used in the connection
+   *
    */
   int port() {
     return wsmc_get_port( $self );
@@ -7693,6 +7711,7 @@ resource via an endpoint reference</p>
 
   /*
    * The path of the clien URL
+   *
    */
   char *path() {
     return wsmc_get_path( $self );
@@ -7700,6 +7719,7 @@ resource via an endpoint reference</p>
 
   /*
    * The user name used for authentication
+   *
    */
   char *user() {
     return wsmc_get_user( $self );
@@ -7707,6 +7727,7 @@ resource via an endpoint reference</p>
 
   /*
    * The password used for authentication
+   *
    */
   char *password() {
     return wsmc_get_password( $self );
@@ -9200,6 +9221,7 @@ resource via an endpoint reference</p>
 
   /*
    * The password used for authentication
+   *
    */
   char *password() {
     return wsmc_get_password( $self );

@@ -93,34 +93,22 @@
   </h1>
 
   <section class="description">
-    <ul><li>
+    
 <p>An <a href="XmlAttr.html">XmlAttr</a> is a key/value pair representing an
 attribute of a node.</p>
-</li></ul>
 
-<p>*</p>
-<ul><li>
 <p>An attribute has</p>
-</li><li><ul><li>
+<ul><li>
 <p>a name (the key)</p>
-</li></ul>
-</li><li><ul><li>
+</li><li>
 <p>a namespace (optional)</p>
-</li></ul>
-</li><li><ul><li>
+</li><li>
 <p>a value</p>
 </li></ul>
-</li></ul>
 
-<p>*</p>
-<ul><li>
 <p>There is no standalone constructor available for <a
-href="XmlAttr.html">XmlAttr</a>, use</p>
-</li><li>
-<p>XmlNode.add_attr() to create a new attribute.</p>
-</li></ul>
-
-<p>* */</p>
+href="XmlAttr.html">XmlAttr</a>, use XmlNode.add_attr() to create a new
+attribute.</p>
 
   </section>
 
@@ -159,11 +147,7 @@ href="XmlAttr.html">XmlAttr</a>, use</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* get name for attr
-*
-*</pre>
+          <p>get name for attr</p>
           
           
 
@@ -177,6 +161,7 @@ href="XmlAttr.html">XmlAttr</a>, use</p>
    *
    * call-seq:
    *   attr.ns -&gt; String
+   *
    */
   char *ns() {
     return ws_xml_get_attr_ns( $self );
@@ -186,6 +171,7 @@ href="XmlAttr.html">XmlAttr</a>, use</p>
    *
    * call-seq:
    *   attr.value -&gt; String
+   *
    */
   char *value() {
     return ws_xml_get_attr_value( $self );
@@ -195,6 +181,7 @@ href="XmlAttr.html">XmlAttr</a>, use</p>
    *
    * call-seq:
    *   attr.remove -&gt; nil
+   *
    */
   void remove() {
     ws_xml_remove_node_attr( $self );
@@ -226,11 +213,7 @@ href="XmlAttr.html">XmlAttr</a>, use</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* get namespace for attr
-*
-*</pre>
+          <p>get namespace for attr</p>
           
           
 
@@ -244,6 +227,7 @@ href="XmlAttr.html">XmlAttr</a>, use</p>
    *
    * call-seq:
    *   attr.value -&gt; String
+   *
    */
   char *value() {
     return ws_xml_get_attr_value( $self );
@@ -253,6 +237,7 @@ href="XmlAttr.html">XmlAttr</a>, use</p>
    *
    * call-seq:
    *   attr.remove -&gt; nil
+   *
    */
   void remove() {
     ws_xml_remove_node_attr( $self );
@@ -284,11 +269,7 @@ href="XmlAttr.html">XmlAttr</a>, use</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* remove note attribute
-*
-*</pre>
+          <p>remove note attribute</p>
           
           
 
@@ -324,11 +305,7 @@ href="XmlAttr.html">XmlAttr</a>, use</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* get value for attr
-*
-*</pre>
+          <p>get value for attr</p>
           
           
 
@@ -342,6 +319,7 @@ href="XmlAttr.html">XmlAttr</a>, use</p>
    *
    * call-seq:
    *   attr.remove -&gt; nil
+   *
    */
   void remove() {
     ws_xml_remove_node_attr( $self );

@@ -112,24 +112,12 @@
 
   <section class="description">
     
-<p>*</p>
-<ul><li>
 <p><a href="EnumerateInfo.html">EnumerateInfo</a> contains all information
-related to an enumeration</p>
-</li><li>
-<p>request.</p>
-</li></ul>
+related to an enumeration request.</p>
 
-<p>*</p>
-<ul><li>
-<p>The initial client.enumerate operation only returns a <code>context</code></p>
-</li><li>
-<p>(String) which can be used to <code>pull</code> the next enumeration item.</p>
-</li><li>
-<p>This item contains the next context in the chain.</p>
-</li></ul>
-
-<p>* */</p>
+<p>The initial client.enumerate operation only returns a <code>context</code>
+(String) which can be used to <code>pull</code> the next enumeration item.
+This item contains the next context in the chain.</p>
 
   </section>
 
@@ -168,10 +156,7 @@ related to an enumeration</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* The current encoding (defaults to &#39;utf-8&#39;)
-*</pre>
+          <p>The current encoding (defaults to &#39;utf-8&#39;)</p>
           
           
 
@@ -184,6 +169,7 @@ related to an enumeration</p>
    * The Filter for this enumeration
    * call-seq:
    *    enumerate_info.filter -&gt; Openwsman::Filter
+   *
    */
   const filter_t *filter() {
     return $self-&gt;filter;
@@ -192,6 +178,7 @@ related to an enumeration</p>
    * The current index (number of the last returned item)
    * call-seq:
    *    enumerate_info.index -&gt; Integer
+   *
    */
   int index() {
     return $self-&gt;index;
@@ -203,6 +190,7 @@ related to an enumeration</p>
    * Set a specific index (used to skip ahead)
    * call-seq:
    *    enumerate_info.index = 42
+   *
    */
   void set_index(int i) {
     $self-&gt;index = i;
@@ -235,6 +223,7 @@ related to an enumeration</p>
    * XmlDoc representing the result pulled last
    * call-seq:
    *    enumerate_info.pull_result -&gt; Openwsman::XmlDoc
+   *
    */
   WsXmlDocH pull_result() {
     return (WsXmlDocH)$self-&gt;pullResultPtr;
@@ -248,6 +237,7 @@ related to an enumeration</p>
    * Used for server-side plugin extensions
    * call-seq:
    *    enumerate_info.pull_result = xml_doc
+   *
    */
   void set_pull_result(WsXmlDocH result) {
     $self-&gt;pullResultPtr = (void *)result;
@@ -279,10 +269,7 @@ related to an enumeration</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* The URL of the endpoint receiving the enumeration
-*</pre>
+          <p>The URL of the endpoint receiving the enumeration</p>
           
           
 
@@ -295,6 +282,7 @@ related to an enumeration</p>
    * The URI of the end point reference
    * call-seq:
    *    enumerate_info.epr_uri -&gt; String
+   *
    */
   const char *epr_uri() {
     return $self-&gt;epr_uri;
@@ -303,6 +291,7 @@ related to an enumeration</p>
    * The current encoding (defaults to &#39;utf-8&#39;)
    * call-seq:
    *    enumerate_info.encoding -&gt; String
+   *
    */
   const char *encoding() {
     return $self-&gt;encoding;
@@ -311,6 +300,7 @@ related to an enumeration</p>
    * The Filter for this enumeration
    * call-seq:
    *    enumerate_info.filter -&gt; Openwsman::Filter
+   *
    */
   const filter_t *filter() {
     return $self-&gt;filter;
@@ -319,6 +309,7 @@ related to an enumeration</p>
    * The current index (number of the last returned item)
    * call-seq:
    *    enumerate_info.index -&gt; Integer
+   *
    */
   int index() {
     return $self-&gt;index;
@@ -330,6 +321,7 @@ related to an enumeration</p>
    * Set a specific index (used to skip ahead)
    * call-seq:
    *    enumerate_info.index = 42
+   *
    */
   void set_index(int i) {
     $self-&gt;index = i;
@@ -362,6 +354,7 @@ related to an enumeration</p>
    * XmlDoc representing the result pulled last
    * call-seq:
    *    enumerate_info.pull_result -&gt; Openwsman::XmlDoc
+   *
    */
   WsXmlDocH pull_result() {
     return (WsXmlDocH)$self-&gt;pullResultPtr;
@@ -375,6 +368,7 @@ related to an enumeration</p>
    * Used for server-side plugin extensions
    * call-seq:
    *    enumerate_info.pull_result = xml_doc
+   *
    */
   void set_pull_result(WsXmlDocH result) {
     $self-&gt;pullResultPtr = (void *)result;
@@ -406,10 +400,7 @@ related to an enumeration</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* The URI of the end point reference
-*</pre>
+          <p>The URI of the end point reference</p>
           
           
 
@@ -422,6 +413,7 @@ related to an enumeration</p>
    * The current encoding (defaults to &#39;utf-8&#39;)
    * call-seq:
    *    enumerate_info.encoding -&gt; String
+   *
    */
   const char *encoding() {
     return $self-&gt;encoding;
@@ -430,6 +422,7 @@ related to an enumeration</p>
    * The Filter for this enumeration
    * call-seq:
    *    enumerate_info.filter -&gt; Openwsman::Filter
+   *
    */
   const filter_t *filter() {
     return $self-&gt;filter;
@@ -438,6 +431,7 @@ related to an enumeration</p>
    * The current index (number of the last returned item)
    * call-seq:
    *    enumerate_info.index -&gt; Integer
+   *
    */
   int index() {
     return $self-&gt;index;
@@ -449,6 +443,7 @@ related to an enumeration</p>
    * Set a specific index (used to skip ahead)
    * call-seq:
    *    enumerate_info.index = 42
+   *
    */
   void set_index(int i) {
     $self-&gt;index = i;
@@ -481,6 +476,7 @@ related to an enumeration</p>
    * XmlDoc representing the result pulled last
    * call-seq:
    *    enumerate_info.pull_result -&gt; Openwsman::XmlDoc
+   *
    */
   WsXmlDocH pull_result() {
     return (WsXmlDocH)$self-&gt;pullResultPtr;
@@ -494,6 +490,7 @@ related to an enumeration</p>
    * Used for server-side plugin extensions
    * call-seq:
    *    enumerate_info.pull_result = xml_doc
+   *
    */
   void set_pull_result(WsXmlDocH result) {
     $self-&gt;pullResultPtr = (void *)result;
@@ -525,10 +522,7 @@ related to an enumeration</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* The Filter for this enumeration
-*</pre>
+          <p>The Filter for this enumeration</p>
           
           
 
@@ -541,6 +535,7 @@ related to an enumeration</p>
    * The current index (number of the last returned item)
    * call-seq:
    *    enumerate_info.index -&gt; Integer
+   *
    */
   int index() {
     return $self-&gt;index;
@@ -552,6 +547,7 @@ related to an enumeration</p>
    * Set a specific index (used to skip ahead)
    * call-seq:
    *    enumerate_info.index = 42
+   *
    */
   void set_index(int i) {
     $self-&gt;index = i;
@@ -584,6 +580,7 @@ related to an enumeration</p>
    * XmlDoc representing the result pulled last
    * call-seq:
    *    enumerate_info.pull_result -&gt; Openwsman::XmlDoc
+   *
    */
   WsXmlDocH pull_result() {
     return (WsXmlDocH)$self-&gt;pullResultPtr;
@@ -597,6 +594,7 @@ related to an enumeration</p>
    * Used for server-side plugin extensions
    * call-seq:
    *    enumerate_info.pull_result = xml_doc
+   *
    */
   void set_pull_result(WsXmlDocH result) {
     $self-&gt;pullResultPtr = (void *)result;
@@ -628,10 +626,7 @@ related to an enumeration</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* enumeration flags
-*</pre>
+          <p>enumeration flags</p>
           
           
 
@@ -645,6 +640,7 @@ related to an enumeration</p>
    * The URL of the endpoint receiving the enumeration
    * call-seq:
    *    enumerate_info.epr_to -&gt; String
+   *
    */
   const char *epr_to() {
     return $self-&gt;epr_to;
@@ -653,6 +649,7 @@ related to an enumeration</p>
    * The URI of the end point reference
    * call-seq:
    *    enumerate_info.epr_uri -&gt; String
+   *
    */
   const char *epr_uri() {
     return $self-&gt;epr_uri;
@@ -661,6 +658,7 @@ related to an enumeration</p>
    * The current encoding (defaults to &#39;utf-8&#39;)
    * call-seq:
    *    enumerate_info.encoding -&gt; String
+   *
    */
   const char *encoding() {
     return $self-&gt;encoding;
@@ -669,6 +667,7 @@ related to an enumeration</p>
    * The Filter for this enumeration
    * call-seq:
    *    enumerate_info.filter -&gt; Openwsman::Filter
+   *
    */
   const filter_t *filter() {
     return $self-&gt;filter;
@@ -677,6 +676,7 @@ related to an enumeration</p>
    * The current index (number of the last returned item)
    * call-seq:
    *    enumerate_info.index -&gt; Integer
+   *
    */
   int index() {
     return $self-&gt;index;
@@ -688,6 +688,7 @@ related to an enumeration</p>
    * Set a specific index (used to skip ahead)
    * call-seq:
    *    enumerate_info.index = 42
+   *
    */
   void set_index(int i) {
     $self-&gt;index = i;
@@ -720,6 +721,7 @@ related to an enumeration</p>
    * XmlDoc representing the result pulled last
    * call-seq:
    *    enumerate_info.pull_result -&gt; Openwsman::XmlDoc
+   *
    */
   WsXmlDocH pull_result() {
     return (WsXmlDocH)$self-&gt;pullResultPtr;
@@ -733,6 +735,7 @@ related to an enumeration</p>
    * Used for server-side plugin extensions
    * call-seq:
    *    enumerate_info.pull_result = xml_doc
+   *
    */
   void set_pull_result(WsXmlDocH result) {
     $self-&gt;pullResultPtr = (void *)result;
@@ -764,10 +767,7 @@ related to an enumeration</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* The current index (number of the last returned item)
-*</pre>
+          <p>The current index (number of the last returned item)</p>
           
           
 
@@ -783,6 +783,7 @@ related to an enumeration</p>
    * Set a specific index (used to skip ahead)
    * call-seq:
    *    enumerate_info.index = 42
+   *
    */
   void set_index(int i) {
     $self-&gt;index = i;
@@ -815,6 +816,7 @@ related to an enumeration</p>
    * XmlDoc representing the result pulled last
    * call-seq:
    *    enumerate_info.pull_result -&gt; Openwsman::XmlDoc
+   *
    */
   WsXmlDocH pull_result() {
     return (WsXmlDocH)$self-&gt;pullResultPtr;
@@ -828,6 +830,7 @@ related to an enumeration</p>
    * Used for server-side plugin extensions
    * call-seq:
    *    enumerate_info.pull_result = xml_doc
+   *
    */
   void set_pull_result(WsXmlDocH result) {
     $self-&gt;pullResultPtr = (void *)result;
@@ -859,10 +862,7 @@ related to an enumeration</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Set a specific index (used to skip ahead)
-*</pre>
+          <p>Set a specific index (used to skip ahead)</p>
           
           
 
@@ -899,6 +899,7 @@ related to an enumeration</p>
    * XmlDoc representing the result pulled last
    * call-seq:
    *    enumerate_info.pull_result -&gt; Openwsman::XmlDoc
+   *
    */
   WsXmlDocH pull_result() {
     return (WsXmlDocH)$self-&gt;pullResultPtr;
@@ -912,6 +913,7 @@ related to an enumeration</p>
    * Used for server-side plugin extensions
    * call-seq:
    *    enumerate_info.pull_result = xml_doc
+   *
    */
   void set_pull_result(WsXmlDocH result) {
     $self-&gt;pullResultPtr = (void *)result;
@@ -943,10 +945,8 @@ related to an enumeration</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Return the maximum number of items that will be returned by this enumeration
-*</pre>
+          <p>Return the maximum number of items that will be returned by this
+enumeration</p>
           
           
 
@@ -960,6 +960,7 @@ related to an enumeration</p>
    * Set the maximum number of items returned by this enumeration
    * call-seq:
    *    enumerate_info.max_items = 100
+   *
    */
   void set_max_items(int mi) { $self-&gt;maxItems = mi; }
 
@@ -967,6 +968,7 @@ related to an enumeration</p>
    * enumeration flags
    * call-seq:
    *    enumerate_info.flags -&gt; Integer
+   *
    */
   int flags() {
     return $self-&gt;flags;
@@ -976,6 +978,7 @@ related to an enumeration</p>
    * The URL of the endpoint receiving the enumeration
    * call-seq:
    *    enumerate_info.epr_to -&gt; String
+   *
    */
   const char *epr_to() {
     return $self-&gt;epr_to;
@@ -984,6 +987,7 @@ related to an enumeration</p>
    * The URI of the end point reference
    * call-seq:
    *    enumerate_info.epr_uri -&gt; String
+   *
    */
   const char *epr_uri() {
     return $self-&gt;epr_uri;
@@ -992,6 +996,7 @@ related to an enumeration</p>
    * The current encoding (defaults to &#39;utf-8&#39;)
    * call-seq:
    *    enumerate_info.encoding -&gt; String
+   *
    */
   const char *encoding() {
     return $self-&gt;encoding;
@@ -1000,6 +1005,7 @@ related to an enumeration</p>
    * The Filter for this enumeration
    * call-seq:
    *    enumerate_info.filter -&gt; Openwsman::Filter
+   *
    */
   const filter_t *filter() {
     return $self-&gt;filter;
@@ -1008,6 +1014,7 @@ related to an enumeration</p>
    * The current index (number of the last returned item)
    * call-seq:
    *    enumerate_info.index -&gt; Integer
+   *
    */
   int index() {
     return $self-&gt;index;
@@ -1019,6 +1026,7 @@ related to an enumeration</p>
    * Set a specific index (used to skip ahead)
    * call-seq:
    *    enumerate_info.index = 42
+   *
    */
   void set_index(int i) {
     $self-&gt;index = i;
@@ -1051,6 +1059,7 @@ related to an enumeration</p>
    * XmlDoc representing the result pulled last
    * call-seq:
    *    enumerate_info.pull_result -&gt; Openwsman::XmlDoc
+   *
    */
   WsXmlDocH pull_result() {
     return (WsXmlDocH)$self-&gt;pullResultPtr;
@@ -1064,6 +1073,7 @@ related to an enumeration</p>
    * Used for server-side plugin extensions
    * call-seq:
    *    enumerate_info.pull_result = xml_doc
+   *
    */
   void set_pull_result(WsXmlDocH result) {
     $self-&gt;pullResultPtr = (void *)result;
@@ -1095,10 +1105,7 @@ related to an enumeration</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Set the maximum number of items returned by this enumeration
-*</pre>
+          <p>Set the maximum number of items returned by this enumeration</p>
           
           
 
@@ -1110,6 +1117,7 @@ related to an enumeration</p>
    * enumeration flags
    * call-seq:
    *    enumerate_info.flags -&gt; Integer
+   *
    */
   int flags() {
     return $self-&gt;flags;
@@ -1119,6 +1127,7 @@ related to an enumeration</p>
    * The URL of the endpoint receiving the enumeration
    * call-seq:
    *    enumerate_info.epr_to -&gt; String
+   *
    */
   const char *epr_to() {
     return $self-&gt;epr_to;
@@ -1127,6 +1136,7 @@ related to an enumeration</p>
    * The URI of the end point reference
    * call-seq:
    *    enumerate_info.epr_uri -&gt; String
+   *
    */
   const char *epr_uri() {
     return $self-&gt;epr_uri;
@@ -1135,6 +1145,7 @@ related to an enumeration</p>
    * The current encoding (defaults to &#39;utf-8&#39;)
    * call-seq:
    *    enumerate_info.encoding -&gt; String
+   *
    */
   const char *encoding() {
     return $self-&gt;encoding;
@@ -1143,6 +1154,7 @@ related to an enumeration</p>
    * The Filter for this enumeration
    * call-seq:
    *    enumerate_info.filter -&gt; Openwsman::Filter
+   *
    */
   const filter_t *filter() {
     return $self-&gt;filter;
@@ -1151,6 +1163,7 @@ related to an enumeration</p>
    * The current index (number of the last returned item)
    * call-seq:
    *    enumerate_info.index -&gt; Integer
+   *
    */
   int index() {
     return $self-&gt;index;
@@ -1162,6 +1175,7 @@ related to an enumeration</p>
    * Set a specific index (used to skip ahead)
    * call-seq:
    *    enumerate_info.index = 42
+   *
    */
   void set_index(int i) {
     $self-&gt;index = i;
@@ -1194,6 +1208,7 @@ related to an enumeration</p>
    * XmlDoc representing the result pulled last
    * call-seq:
    *    enumerate_info.pull_result -&gt; Openwsman::XmlDoc
+   *
    */
   WsXmlDocH pull_result() {
     return (WsXmlDocH)$self-&gt;pullResultPtr;
@@ -1207,6 +1222,7 @@ related to an enumeration</p>
    * Used for server-side plugin extensions
    * call-seq:
    *    enumerate_info.pull_result = xml_doc
+   *
    */
   void set_pull_result(WsXmlDocH result) {
     $self-&gt;pullResultPtr = (void *)result;
@@ -1238,10 +1254,7 @@ related to an enumeration</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* XmlDoc representing the result pulled last
-*</pre>
+          <p>XmlDoc representing the result pulled last</p>
           
           
 
@@ -1259,6 +1272,7 @@ related to an enumeration</p>
    * Used for server-side plugin extensions
    * call-seq:
    *    enumerate_info.pull_result = xml_doc
+   *
    */
   void set_pull_result(WsXmlDocH result) {
     $self-&gt;pullResultPtr = (void *)result;
@@ -1290,12 +1304,9 @@ related to an enumeration</p>
 
         <div class="method-description">
           
-          <p>/*</p>
+          <p>Set the pull result (XmlDoc)</p>
 
-<pre>* Set the pull result (XmlDoc)
-*
-* Used for server-side plugin extensions
-*</pre>
+<p>Used for server-side plugin extensions</p>
           
           
 
@@ -1359,6 +1370,7 @@ related to an enumeration</p>
    * XmlDoc representing the result pulled last
    * call-seq:
    *    enumerate_info.pull_result -&gt; Openwsman::XmlDoc
+   *
    */
   WsXmlDocH pull_result() {
     return (WsXmlDocH)$self-&gt;pullResultPtr;
@@ -1372,6 +1384,7 @@ related to an enumeration</p>
    * Used for server-side plugin extensions
    * call-seq:
    *    enumerate_info.pull_result = xml_doc
+   *
    */
   void set_pull_result(WsXmlDocH result) {
     $self-&gt;pullResultPtr = (void *)result;
@@ -1417,6 +1430,7 @@ related to an enumeration</p>
    * XmlDoc representing the result pulled last
    * call-seq:
    *    enumerate_info.pull_result -&gt; Openwsman::XmlDoc
+   *
    */
   WsXmlDocH pull_result() {
     return (WsXmlDocH)$self-&gt;pullResultPtr;
@@ -1430,6 +1444,7 @@ related to an enumeration</p>
    * Used for server-side plugin extensions
    * call-seq:
    *    enumerate_info.pull_result = xml_doc
+   *
    */
   void set_pull_result(WsXmlDocH result) {
     $self-&gt;pullResultPtr = (void *)result;

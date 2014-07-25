@@ -116,37 +116,21 @@
 
   <section class="description">
     
-<p>*</p>
-<ul><li>
 <p><a href="XmlDoc.html">XmlDoc</a> holds an XML document and thus represents
-the root of an XML</p>
-</li><li>
-<p>tree. <a href="XmlDoc.html">XmlDoc</a> is optimized for SOAP type
-documents, giving accessors</p>
-</li><li>
-<p>to the SOAP envelope, header and body.</p>
-</li></ul>
+the root of an XML tree. <a href="XmlDoc.html">XmlDoc</a> is optimized for
+SOAP type documents, giving accessors to the SOAP envelope, header and
+body.</p>
 
-<p>*</p>
-<ul><li>
-<p>Instances of the other XML related classes like XmlAttr and XmlNode</p>
-</li><li>
-<p>can only be created with an associated <a href="XmlDoc.html">XmlDoc</a>
+<p>Instances of the other XML related classes like XmlAttr and XmlNode can
+only be created with an associated <a href="XmlDoc.html">XmlDoc</a>
 instance.</p>
-</li></ul>
 
-<p>*</p>
-<ul><li>
 <p>Main properties of the XML document are</p>
-</li><li><ul><li>
+<ul><li>
 <p>name of the root element</p>
-</li></ul>
-</li><li><ul><li>
+</li><li>
 <p>encoding (defaults to <em>UTF-8</em>)</p>
 </li></ul>
-</li></ul>
-
-<p>* */</p>
 
   </section>
 
@@ -212,6 +196,7 @@ namespace as 2nd arg (defaults to NULL)</p>
    * call-seq:
    *  doc.string -&gt; String
    *  doc.to_xml -&gt; String
+   *
    */
   char *string() {
     int size;
@@ -251,6 +236,7 @@ namespace as 2nd arg (defaults to NULL)</p>
    *
    * call-seq:
    *   doc.dump(IO) -&gt; nil
+   *
    */
   void dump_file(FILE *fp) {
     ws_xml_dump_doc( fp, $self );
@@ -357,6 +343,7 @@ namespace as 2nd arg (defaults to NULL)</p>
    * call-seq:
    *  doc.fault(XmlDoc) -&gt; Openwsman::Fault
    *  doc.fault(XmlDoc) -&gt; nil # if XmlDoc is not a fault
+   *
    */
   WsManFault *fault() {
     WsManFault *f = NULL;
@@ -391,6 +378,7 @@ namespace as 2nd arg (defaults to NULL)</p>
    *
    * call-seq:
    *  doc.is_end_of_sequence() -&gt; Boolean
+   *
    */
   int is_end_of_sequence() {
     return NULL != ws_xml_find_in_tree( ws_xml_get_soap_body( $self ), XML_NS_ENUMERATION, WSENUM_END_OF_SEQUENCE, 1 );
@@ -506,6 +494,7 @@ namespace as 2nd arg (defaults to NULL)</p>
    * call-seq:
    *  doc.fault(XmlDoc) -&gt; Openwsman::Fault
    *  doc.fault(XmlDoc) -&gt; nil # if XmlDoc is not a fault
+   *
    */
   WsManFault *fault() {
     WsManFault *f = NULL;
@@ -540,6 +529,7 @@ namespace as 2nd arg (defaults to NULL)</p>
    *
    * call-seq:
    *  doc.is_end_of_sequence() -&gt; Boolean
+   *
    */
   int is_end_of_sequence() {
     return NULL != ws_xml_find_in_tree( ws_xml_get_soap_body( $self ), XML_NS_ENUMERATION, WSENUM_END_OF_SEQUENCE, 1 );
@@ -625,6 +615,7 @@ empty</p>
    * call-seq:
    *  doc.fault(XmlDoc) -&gt; Openwsman::Fault
    *  doc.fault(XmlDoc) -&gt; nil # if XmlDoc is not a fault
+   *
    */
   WsManFault *fault() {
     WsManFault *f = NULL;
@@ -659,6 +650,7 @@ empty</p>
    *
    * call-seq:
    *  doc.is_end_of_sequence() -&gt; Boolean
+   *
    */
   int is_end_of_sequence() {
     return NULL != ws_xml_find_in_tree( ws_xml_get_soap_body( $self ), XML_NS_ENUMERATION, WSENUM_END_OF_SEQUENCE, 1 );
@@ -715,6 +707,7 @@ response.</p>
    *
    * call-seq:
    *  doc.is_end_of_sequence() -&gt; Boolean
+   *
    */
   int is_end_of_sequence() {
     return NULL != ws_xml_find_in_tree( ws_xml_get_soap_body( $self ), XML_NS_ENUMERATION, WSENUM_END_OF_SEQUENCE, 1 );
@@ -747,11 +740,7 @@ response.</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* dump document to file
-*
-*</pre>
+          <p>dump document to file</p>
           
           
 
@@ -862,6 +851,7 @@ response.</p>
    * call-seq:
    *  doc.fault(XmlDoc) -&gt; Openwsman::Fault
    *  doc.fault(XmlDoc) -&gt; nil # if XmlDoc is not a fault
+   *
    */
   WsManFault *fault() {
     WsManFault *f = NULL;
@@ -896,6 +886,7 @@ response.</p>
    *
    * call-seq:
    *  doc.is_end_of_sequence() -&gt; Boolean
+   *
    */
   int is_end_of_sequence() {
     return NULL != ws_xml_find_in_tree( ws_xml_get_soap_body( $self ), XML_NS_ENUMERATION, WSENUM_END_OF_SEQUENCE, 1 );
@@ -993,6 +984,7 @@ be found</p>
    * call-seq:
    *  doc.fault(XmlDoc) -&gt; Openwsman::Fault
    *  doc.fault(XmlDoc) -&gt; nil # if XmlDoc is not a fault
+   *
    */
   WsManFault *fault() {
     WsManFault *f = NULL;
@@ -1027,6 +1019,7 @@ be found</p>
    *
    * call-seq:
    *  doc.is_end_of_sequence() -&gt; Boolean
+   *
    */
   int is_end_of_sequence() {
     return NULL != ws_xml_find_in_tree( ws_xml_get_soap_body( $self ), XML_NS_ENUMERATION, WSENUM_END_OF_SEQUENCE, 1 );
@@ -1096,6 +1089,7 @@ representation)</p>
    *
    * call-seq:
    *   doc.dump(IO) -&gt; nil
+   *
    */
   void dump_file(FILE *fp) {
     ws_xml_dump_doc( fp, $self );
@@ -1202,6 +1196,7 @@ representation)</p>
    * call-seq:
    *  doc.fault(XmlDoc) -&gt; Openwsman::Fault
    *  doc.fault(XmlDoc) -&gt; nil # if XmlDoc is not a fault
+   *
    */
   WsManFault *fault() {
     WsManFault *f = NULL;
@@ -1236,6 +1231,7 @@ representation)</p>
    *
    * call-seq:
    *  doc.is_end_of_sequence() -&gt; Boolean
+   *
    */
   int is_end_of_sequence() {
     return NULL != ws_xml_find_in_tree( ws_xml_get_soap_body( $self ), XML_NS_ENUMERATION, WSENUM_END_OF_SEQUENCE, 1 );
@@ -1361,6 +1357,7 @@ representation)</p>
    * call-seq:
    *  doc.fault(XmlDoc) -&gt; Openwsman::Fault
    *  doc.fault(XmlDoc) -&gt; nil # if XmlDoc is not a fault
+   *
    */
   WsManFault *fault() {
     WsManFault *f = NULL;
@@ -1395,6 +1392,7 @@ representation)</p>
    *
    * call-seq:
    *  doc.is_end_of_sequence() -&gt; Boolean
+   *
    */
   int is_end_of_sequence() {
     return NULL != ws_xml_find_in_tree( ws_xml_get_soap_body( $self ), XML_NS_ENUMERATION, WSENUM_END_OF_SEQUENCE, 1 );
@@ -1434,11 +1432,7 @@ representation)</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* retrieve fault data
-*
-*</pre>
+          <p>retrieve fault data</p>
           
           
 
@@ -1477,6 +1471,7 @@ representation)</p>
    *
    * call-seq:
    *  doc.is_end_of_sequence() -&gt; Boolean
+   *
    */
   int is_end_of_sequence() {
     return NULL != ws_xml_find_in_tree( ws_xml_get_soap_body( $self ), XML_NS_ENUMERATION, WSENUM_END_OF_SEQUENCE, 1 );
@@ -1546,6 +1541,7 @@ fault</p>
    * call-seq:
    *  doc.fault(XmlDoc) -&gt; Openwsman::Fault
    *  doc.fault(XmlDoc) -&gt; nil # if XmlDoc is not a fault
+   *
    */
   WsManFault *fault() {
     WsManFault *f = NULL;
@@ -1580,6 +1576,7 @@ fault</p>
    *
    * call-seq:
    *  doc.is_end_of_sequence() -&gt; Boolean
+   *
    */
   int is_end_of_sequence() {
     return NULL != ws_xml_find_in_tree( ws_xml_get_soap_body( $self ), XML_NS_ENUMERATION, WSENUM_END_OF_SEQUENCE, 1 );
@@ -1696,6 +1693,7 @@ fault</p>
    * call-seq:
    *  doc.fault(XmlDoc) -&gt; Openwsman::Fault
    *  doc.fault(XmlDoc) -&gt; nil # if XmlDoc is not a fault
+   *
    */
   WsManFault *fault() {
     WsManFault *f = NULL;
@@ -1730,6 +1728,7 @@ fault</p>
    *
    * call-seq:
    *  doc.is_end_of_sequence() -&gt; Boolean
+   *
    */
   int is_end_of_sequence() {
     return NULL != ws_xml_find_in_tree( ws_xml_get_soap_body( $self ), XML_NS_ENUMERATION, WSENUM_END_OF_SEQUENCE, 1 );
@@ -1762,11 +1761,7 @@ fault</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Check if document represents an end of sequence (last enumeration item)
-*
-*</pre>
+          <p>Check if document represents an end of sequence (last enumeration item)</p>
           
           
 
@@ -1820,6 +1815,7 @@ fault</p>
    * call-seq:
    *  doc.fault(XmlDoc) -&gt; Openwsman::Fault
    *  doc.fault(XmlDoc) -&gt; nil # if XmlDoc is not a fault
+   *
    */
   WsManFault *fault() {
     WsManFault *f = NULL;
@@ -1854,6 +1850,7 @@ fault</p>
    *
    * call-seq:
    *  doc.is_end_of_sequence() -&gt; Boolean
+   *
    */
   int is_end_of_sequence() {
     return NULL != ws_xml_find_in_tree( ws_xml_get_soap_body( $self ), XML_NS_ENUMERATION, WSENUM_END_OF_SEQUENCE, 1 );
@@ -1988,6 +1985,7 @@ fault</p>
    * call-seq:
    *  doc.fault(XmlDoc) -&gt; Openwsman::Fault
    *  doc.fault(XmlDoc) -&gt; nil # if XmlDoc is not a fault
+   *
    */
   WsManFault *fault() {
     WsManFault *f = NULL;
@@ -2022,6 +2020,7 @@ fault</p>
    *
    * call-seq:
    *  doc.is_end_of_sequence() -&gt; Boolean
+   *
    */
   int is_end_of_sequence() {
     return NULL != ws_xml_find_in_tree( ws_xml_get_soap_body( $self ), XML_NS_ENUMERATION, WSENUM_END_OF_SEQUENCE, 1 );
@@ -2061,14 +2060,11 @@ fault</p>
 
         <div class="method-description">
           
-          <p>/*</p>
+          <p>generic (indented) string representation of the <a
+href="XmlDoc.html">XmlDoc</a> UTF-8 encoded. see encode for setting the
+encoding.</p>
 
-<pre>* generic (indented) string representation of the XmlDoc UTF-8 encoded.
-* see encode for setting the encoding.
-*
-* alias: to_xml
-*
-*</pre>
+<p>alias: to_xml</p>
           
           
 
@@ -2112,6 +2108,7 @@ fault</p>
    *
    * call-seq:
    *   doc.dump(IO) -&gt; nil
+   *
    */
   void dump_file(FILE *fp) {
     ws_xml_dump_doc( fp, $self );
@@ -2218,6 +2215,7 @@ fault</p>
    * call-seq:
    *  doc.fault(XmlDoc) -&gt; Openwsman::Fault
    *  doc.fault(XmlDoc) -&gt; nil # if XmlDoc is not a fault
+   *
    */
   WsManFault *fault() {
     WsManFault *f = NULL;
@@ -2252,6 +2250,7 @@ fault</p>
    *
    * call-seq:
    *  doc.is_end_of_sequence() -&gt; Boolean
+   *
    */
   int is_end_of_sequence() {
     return NULL != ws_xml_find_in_tree( ws_xml_get_soap_body( $self ), XML_NS_ENUMERATION, WSENUM_END_OF_SEQUENCE, 1 );

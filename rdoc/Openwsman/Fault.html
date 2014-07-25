@@ -96,13 +96,8 @@
 
   <section class="description">
     
-<p>*</p>
-<ul><li>
 <p><a href="Fault.html">Fault</a> represents details of a failed WS-Management
 operation</p>
-</li></ul>
-
-<p>* */</p>
 
   </section>
 
@@ -141,10 +136,8 @@ operation</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Create a Fault representation of a failed WS-Management result doc
-*</pre>
+          <p>Create a <a href="Fault.html">Fault</a> representation of a failed
+WS-Management result doc</p>
           
           
 
@@ -160,32 +153,40 @@ operation</p>
   }
   /*
    * Fault code
+   *
    * call-seq:
    *   fault.code -&gt; String
+   *
    */
   const char *code() {
     return $self-&gt;code;
   }
   /*
    * Fault subcode
+   *
    * call-seq:
    *   fault.subcode -&gt; String
+   *
    */
   const char *subcode() {
     return $self-&gt;subcode;
   }
   /*
    * Fault reason
+   *
    * call-seq:
    *   fault.reason -&gt; String
+   *
    */
   const char *reason() {
     return $self-&gt;reason;
   }
   /*
    * Fault detail
+   *
    * call-seq:
    *   fault.detail -&gt; String
+   *
    */
   const char *detail() {
     return $self-&gt;fault_detail;
@@ -225,10 +226,7 @@ operation</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Fault code
-*</pre>
+          <p><a href="Fault.html">Fault</a> code</p>
           
           
 
@@ -239,24 +237,30 @@ operation</p>
   }
   /*
    * Fault subcode
+   *
    * call-seq:
    *   fault.subcode -&gt; String
+   *
    */
   const char *subcode() {
     return $self-&gt;subcode;
   }
   /*
    * Fault reason
+   *
    * call-seq:
    *   fault.reason -&gt; String
+   *
    */
   const char *reason() {
     return $self-&gt;reason;
   }
   /*
    * Fault detail
+   *
    * call-seq:
    *   fault.detail -&gt; String
+   *
    */
   const char *detail() {
     return $self-&gt;fault_detail;
@@ -288,10 +292,7 @@ operation</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Fault detail
-*</pre>
+          <p><a href="Fault.html">Fault</a> detail</p>
           
           
 
@@ -327,10 +328,7 @@ operation</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Fault reason
-*</pre>
+          <p><a href="Fault.html">Fault</a> reason</p>
           
           
 
@@ -341,8 +339,10 @@ operation</p>
   }
   /*
    * Fault detail
+   *
    * call-seq:
    *   fault.detail -&gt; String
+   *
    */
   const char *detail() {
     return $self-&gt;fault_detail;
@@ -374,10 +374,7 @@ operation</p>
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Fault subcode
-*</pre>
+          <p><a href="Fault.html">Fault</a> subcode</p>
           
           
 
@@ -388,16 +385,20 @@ operation</p>
   }
   /*
    * Fault reason
+   *
    * call-seq:
    *   fault.reason -&gt; String
+   *
    */
   const char *reason() {
     return $self-&gt;reason;
   }
   /*
    * Fault detail
+   *
    * call-seq:
    *   fault.detail -&gt; String
+   *
    */
   const char *detail() {
     return $self-&gt;fault_detail;

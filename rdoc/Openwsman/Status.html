@@ -104,22 +104,11 @@
 
   <section class="description">
     
-<p>*</p>
-<ul><li>
 <p><a href="Status.html">Status</a> represents the detailed status of a
-(failed) WS-Management</p>
-</li><li>
-<p>operation.</p>
-</li></ul>
+(failed) WS-Management operation.</p>
 
-<p>*</p>
-<ul><li>
-<p>Its primarily used implementing server-side plugins to report a Fault</p>
-</li><li>
-<p>back to the calling client.</p>
-</li></ul>
-
-<p>*/</p>
+<p>Its primarily used implementing server-side plugins to report a Fault back
+to the calling client.</p>
 
   </section>
 
@@ -179,11 +168,7 @@
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Create a new Status object
-*
-*</pre>
+          <p>Create a new <a href="Status.html">Status</a> object</p>
           
           
 
@@ -212,8 +197,10 @@
   }
   /*
    * String representation (returns the fault message)
+   *
    * call-seq:
    *   status.to_s -&gt; String
+   *
    */
   const char *to_s() {
     return $self-&gt;fault_msg;
@@ -223,14 +210,18 @@
 
   /*
    * Set the fault code
+   *
    * call-seq:
    *   status.code = 1
+   *
    */
   void set_code(int code) { $self-&gt;fault_code = code; }
   /*
    * Get the fault code
+   *
    * call-seq:
    *   status.code -&gt; Integer
+   *
    */
   int code() {
     return $self-&gt;fault_code;
@@ -240,8 +231,10 @@
 
   /*
    * Set the fault detail code
+   *
    * call-seq:
    *   status.detail = 42
+   *
    */
   void set_detail(int detail) {
     if (detail &lt; 0
@@ -255,8 +248,10 @@
   }
   /*
    * Get the fault detail code
+   *
    * call-seq:
    *   status.detail -&gt; Integer
+   *
    */
   int detail() {
     return $self-&gt;fault_detail_code;
@@ -266,8 +261,10 @@
 
   /*
    * Set the fault message
+   *
    * call-seq:
    *   status.msg = &quot;This is a fault message&quot;
+   *
    */
   void set_msg(const char *msg) {
     if ($self-&gt;fault_msg)
@@ -279,8 +276,10 @@
   }
   /*
    * Get the fault message
+   *
    * call-seq:
    *   status.msg -&gt; String
+   *
    */
   const char *msg() {
     return $self-&gt;fault_msg;
@@ -289,8 +288,10 @@
   %typemap(newfree) WsXmlDocH &quot;ws_xml_destroy_doc($1);&quot;;
   /*
    * Create a new fault XmlDoc based on Status information
+   *
    * call-seq:
    *   status.generate_fault(xml_doc) -&gt; XmlDoc
+   *
    */
   WsXmlDocH generate_fault(WsXmlDocH doc) {
     return wsman_generate_fault( doc, $self-&gt;fault_code, $self-&gt;fault_detail_code, $self-&gt;fault_msg);
@@ -330,10 +331,7 @@
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Get the fault code
-*</pre>
+          <p>Get the fault code</p>
           
           
 
@@ -347,8 +345,10 @@
 
   /*
    * Set the fault detail code
+   *
    * call-seq:
    *   status.detail = 42
+   *
    */
   void set_detail(int detail) {
     if (detail &lt; 0
@@ -362,8 +362,10 @@
   }
   /*
    * Get the fault detail code
+   *
    * call-seq:
    *   status.detail -&gt; Integer
+   *
    */
   int detail() {
     return $self-&gt;fault_detail_code;
@@ -373,8 +375,10 @@
 
   /*
    * Set the fault message
+   *
    * call-seq:
    *   status.msg = &quot;This is a fault message&quot;
+   *
    */
   void set_msg(const char *msg) {
     if ($self-&gt;fault_msg)
@@ -386,8 +390,10 @@
   }
   /*
    * Get the fault message
+   *
    * call-seq:
    *   status.msg -&gt; String
+   *
    */
   const char *msg() {
     return $self-&gt;fault_msg;
@@ -396,8 +402,10 @@
   %typemap(newfree) WsXmlDocH &quot;ws_xml_destroy_doc($1);&quot;;
   /*
    * Create a new fault XmlDoc based on Status information
+   *
    * call-seq:
    *   status.generate_fault(xml_doc) -&gt; XmlDoc
+   *
    */
   WsXmlDocH generate_fault(WsXmlDocH doc) {
     return wsman_generate_fault( doc, $self-&gt;fault_code, $self-&gt;fault_detail_code, $self-&gt;fault_msg);
@@ -429,10 +437,7 @@
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Set the fault code
-*</pre>
+          <p>Set the fault code</p>
           
           
 
@@ -441,8 +446,10 @@
             <pre>void set_code(int code) { $self-&gt;fault_code = code; }
   /*
    * Get the fault code
+   *
    * call-seq:
    *   status.code -&gt; Integer
+   *
    */
   int code() {
     return $self-&gt;fault_code;
@@ -452,8 +459,10 @@
 
   /*
    * Set the fault detail code
+   *
    * call-seq:
    *   status.detail = 42
+   *
    */
   void set_detail(int detail) {
     if (detail &lt; 0
@@ -467,8 +476,10 @@
   }
   /*
    * Get the fault detail code
+   *
    * call-seq:
    *   status.detail -&gt; Integer
+   *
    */
   int detail() {
     return $self-&gt;fault_detail_code;
@@ -478,8 +489,10 @@
 
   /*
    * Set the fault message
+   *
    * call-seq:
    *   status.msg = &quot;This is a fault message&quot;
+   *
    */
   void set_msg(const char *msg) {
     if ($self-&gt;fault_msg)
@@ -491,8 +504,10 @@
   }
   /*
    * Get the fault message
+   *
    * call-seq:
    *   status.msg -&gt; String
+   *
    */
   const char *msg() {
     return $self-&gt;fault_msg;
@@ -501,8 +516,10 @@
   %typemap(newfree) WsXmlDocH &quot;ws_xml_destroy_doc($1);&quot;;
   /*
    * Create a new fault XmlDoc based on Status information
+   *
    * call-seq:
    *   status.generate_fault(xml_doc) -&gt; XmlDoc
+   *
    */
   WsXmlDocH generate_fault(WsXmlDocH doc) {
     return wsman_generate_fault( doc, $self-&gt;fault_code, $self-&gt;fault_detail_code, $self-&gt;fault_msg);
@@ -534,10 +551,7 @@
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Get the fault detail code
-*</pre>
+          <p>Get the fault detail code</p>
           
           
 
@@ -551,8 +565,10 @@
 
   /*
    * Set the fault message
+   *
    * call-seq:
    *   status.msg = &quot;This is a fault message&quot;
+   *
    */
   void set_msg(const char *msg) {
     if ($self-&gt;fault_msg)
@@ -564,8 +580,10 @@
   }
   /*
    * Get the fault message
+   *
    * call-seq:
    *   status.msg -&gt; String
+   *
    */
   const char *msg() {
     return $self-&gt;fault_msg;
@@ -574,8 +592,10 @@
   %typemap(newfree) WsXmlDocH &quot;ws_xml_destroy_doc($1);&quot;;
   /*
    * Create a new fault XmlDoc based on Status information
+   *
    * call-seq:
    *   status.generate_fault(xml_doc) -&gt; XmlDoc
+   *
    */
   WsXmlDocH generate_fault(WsXmlDocH doc) {
     return wsman_generate_fault( doc, $self-&gt;fault_code, $self-&gt;fault_detail_code, $self-&gt;fault_msg);
@@ -607,10 +627,7 @@
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Set the fault detail code
-*</pre>
+          <p>Set the fault detail code</p>
           
           
 
@@ -628,8 +645,10 @@
   }
   /*
    * Get the fault detail code
+   *
    * call-seq:
    *   status.detail -&gt; Integer
+   *
    */
   int detail() {
     return $self-&gt;fault_detail_code;
@@ -639,8 +658,10 @@
 
   /*
    * Set the fault message
+   *
    * call-seq:
    *   status.msg = &quot;This is a fault message&quot;
+   *
    */
   void set_msg(const char *msg) {
     if ($self-&gt;fault_msg)
@@ -652,8 +673,10 @@
   }
   /*
    * Get the fault message
+   *
    * call-seq:
    *   status.msg -&gt; String
+   *
    */
   const char *msg() {
     return $self-&gt;fault_msg;
@@ -662,8 +685,10 @@
   %typemap(newfree) WsXmlDocH &quot;ws_xml_destroy_doc($1);&quot;;
   /*
    * Create a new fault XmlDoc based on Status information
+   *
    * call-seq:
    *   status.generate_fault(xml_doc) -&gt; XmlDoc
+   *
    */
   WsXmlDocH generate_fault(WsXmlDocH doc) {
     return wsman_generate_fault( doc, $self-&gt;fault_code, $self-&gt;fault_detail_code, $self-&gt;fault_msg);
@@ -695,10 +720,8 @@
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Create a new fault XmlDoc based on Status information
-*</pre>
+          <p>Create a new fault XmlDoc based on <a href="Status.html">Status</a>
+information</p>
           
           
 
@@ -734,10 +757,7 @@
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Get the fault message
-*</pre>
+          <p>Get the fault message</p>
           
           
 
@@ -750,8 +770,10 @@
   %typemap(newfree) WsXmlDocH &quot;ws_xml_destroy_doc($1);&quot;;
   /*
    * Create a new fault XmlDoc based on Status information
+   *
    * call-seq:
    *   status.generate_fault(xml_doc) -&gt; XmlDoc
+   *
    */
   WsXmlDocH generate_fault(WsXmlDocH doc) {
     return wsman_generate_fault( doc, $self-&gt;fault_code, $self-&gt;fault_detail_code, $self-&gt;fault_msg);
@@ -783,10 +805,7 @@
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* Set the fault message
-*</pre>
+          <p>Set the fault message</p>
           
           
 
@@ -802,8 +821,10 @@
   }
   /*
    * Get the fault message
+   *
    * call-seq:
    *   status.msg -&gt; String
+   *
    */
   const char *msg() {
     return $self-&gt;fault_msg;
@@ -812,8 +833,10 @@
   %typemap(newfree) WsXmlDocH &quot;ws_xml_destroy_doc($1);&quot;;
   /*
    * Create a new fault XmlDoc based on Status information
+   *
    * call-seq:
    *   status.generate_fault(xml_doc) -&gt; XmlDoc
+   *
    */
   WsXmlDocH generate_fault(WsXmlDocH doc) {
     return wsman_generate_fault( doc, $self-&gt;fault_code, $self-&gt;fault_detail_code, $self-&gt;fault_msg);
@@ -845,10 +868,7 @@
 
         <div class="method-description">
           
-          <p>/*</p>
-
-<pre>* String representation (returns the fault message)
-*</pre>
+          <p>String representation (returns the fault message)</p>
           
           
 
@@ -862,14 +882,18 @@
 
   /*
    * Set the fault code
+   *
    * call-seq:
    *   status.code = 1
+   *
    */
   void set_code(int code) { $self-&gt;fault_code = code; }
   /*
    * Get the fault code
+   *
    * call-seq:
    *   status.code -&gt; Integer
+   *
    */
   int code() {
     return $self-&gt;fault_code;
@@ -879,8 +903,10 @@
 
   /*
    * Set the fault detail code
+   *
    * call-seq:
    *   status.detail = 42
+   *
    */
   void set_detail(int detail) {
     if (detail &lt; 0
@@ -894,8 +920,10 @@
   }
   /*
    * Get the fault detail code
+   *
    * call-seq:
    *   status.detail -&gt; Integer
+   *
    */
   int detail() {
     return $self-&gt;fault_detail_code;
@@ -905,8 +933,10 @@
 
   /*
    * Set the fault message
+   *
    * call-seq:
    *   status.msg = &quot;This is a fault message&quot;
+   *
    */
   void set_msg(const char *msg) {
     if ($self-&gt;fault_msg)
@@ -918,8 +948,10 @@
   }
   /*
    * Get the fault message
+   *
    * call-seq:
    *   status.msg -&gt; String
+   *
    */
   const char *msg() {
     return $self-&gt;fault_msg;
@@ -928,8 +960,10 @@
   %typemap(newfree) WsXmlDocH &quot;ws_xml_destroy_doc($1);&quot;;
   /*
    * Create a new fault XmlDoc based on Status information
+   *
    * call-seq:
    *   status.generate_fault(xml_doc) -&gt; XmlDoc
+   *
    */
   WsXmlDocH generate_fault(WsXmlDocH doc) {
     return wsman_generate_fault( doc, $self-&gt;fault_code, $self-&gt;fault_detail_code, $self-&gt;fault_msg);
