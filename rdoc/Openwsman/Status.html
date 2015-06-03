@@ -6,19 +6,16 @@
 
 <title>class Openwsman::Status - Openwsman - WS-Management for all</title>
 
-<link href="../fonts.css" rel="stylesheet">
-<link href="../rdoc.css" rel="stylesheet">
-
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
 </script>
 
 <script src="../js/jquery.js"></script>
-<script src="../js/navigation.js"></script>
-<script src="../js/search_index.js"></script>
-<script src="../js/search.js"></script>
-<script src="../js/searcher.js"></script>
 <script src="../js/darkfish.js"></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
 
 
 <body id="top" role="document" class="class">
@@ -73,8 +70,6 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-c-new">::new</a>
-    
     <li ><a href="#method-i-code">#code</a>
     
     <li ><a href="#method-i-code-3D">#code=</a>
@@ -125,190 +120,6 @@ to the calling client.</p>
     
 
     
-     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
-       <header>
-         <h3>Public Class Methods</h3>
-       </header>
-
-    
-      <div id="method-c-new" class="method-detail ">
-        
-        
-        <div class="method-heading">
-          <span class="method-callseq">
-            Openwsman::Status.new # create &#39;good&#39; status
-          </span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-        <div class="method-heading">
-          <span class="method-callseq">
-            Openwsman::Status.new error_code
-          </span>
-          
-        </div>
-        
-        <div class="method-heading">
-          <span class="method-callseq">
-            Openwsman::Status.new error_code, error_detail
-          </span>
-          
-        </div>
-        
-        <div class="method-heading">
-          <span class="method-callseq">
-            Openwsman::Status.new error_code, error_detail, &quot;Error message&quot;
-          </span>
-          
-        </div>
-        
-        
-
-        <div class="method-description">
-          
-          <p>Create a new <a href="Status.html">Status</a> object</p>
-          
-          
-
-          
-          <div class="method-source-code" id="new-source">
-            <pre>(int code = 0, int detail = 0, const char *msg = NULL) {
-    WsmanStatus *s = (WsmanStatus *)malloc(sizeof(WsmanStatus));
-    wsman_status_init(s);
-    if (code)
-      s-&gt;fault_code = code;
-    if (msg)
-      s-&gt;fault_msg = strdup(msg);
-    if (detail &lt; 0
-        || detail &gt; OWSMAN_SYSTEM_ERROR) {
-      SWIG_exception( SWIG_ValueError, &quot;Bad fault detail&quot; );
-    }
-    else {
-      s-&gt;fault_detail_code = detail;
-    }
-
-    return s;
-  }
-  ~_WsmanStatus() {
-    if ($self-&gt;fault_msg) free($self-&gt;fault_msg);
-    free($self);
-  }
-  /*
-   * String representation (returns the fault message)
-   *
-   * call-seq:
-   *   status.to_s -&gt; String
-   *
-   */
-  const char *to_s() {
-    return $self-&gt;fault_msg;
-  }
-
-  %rename(&quot;code=&quot;) set_code(int code);
-
-  /*
-   * Set the fault code
-   *
-   * call-seq:
-   *   status.code = 1
-   *
-   */
-  void set_code(int code) { $self-&gt;fault_code = code; }
-  /*
-   * Get the fault code
-   *
-   * call-seq:
-   *   status.code -&gt; Integer
-   *
-   */
-  int code() {
-    return $self-&gt;fault_code;
-  }
-
-  %rename(&quot;detail=&quot;) set_detail(int detail);
-
-  /*
-   * Set the fault detail code
-   *
-   * call-seq:
-   *   status.detail = 42
-   *
-   */
-  void set_detail(int detail) {
-    if (detail &lt; 0
-        || detail &gt; OWSMAN_SYSTEM_ERROR) {
-      SWIG_exception( SWIG_ValueError, &quot;Bad fault detail&quot; );
-    }
-    else {
-      $self-&gt;fault_detail_code = detail;
-    }
-
-  }
-  /*
-   * Get the fault detail code
-   *
-   * call-seq:
-   *   status.detail -&gt; Integer
-   *
-   */
-  int detail() {
-    return $self-&gt;fault_detail_code;
-  }
-
-  %rename(&quot;msg=&quot;) set_msg(const char *msg);
-
-  /*
-   * Set the fault message
-   *
-   * call-seq:
-   *   status.msg = &quot;This is a fault message&quot;
-   *
-   */
-  void set_msg(const char *msg) {
-    if ($self-&gt;fault_msg)
-      free($self-&gt;fault_msg);
-    if (msg)
-      $self-&gt;fault_msg = strdup(msg);
-    else
-      $self-&gt;fault_msg = NULL;
-  }
-  /*
-   * Get the fault message
-   *
-   * call-seq:
-   *   status.msg -&gt; String
-   *
-   */
-  const char *msg() {
-    return $self-&gt;fault_msg;
-  }
-
-  %typemap(newfree) WsXmlDocH &quot;ws_xml_destroy_doc($1);&quot;;
-  /*
-   * Create a new fault XmlDoc based on Status information
-   *
-   * call-seq:
-   *   status.generate_fault(xml_doc) -&gt; XmlDoc
-   *
-   */
-  WsXmlDocH generate_fault(WsXmlDocH doc) {
-    return wsman_generate_fault( doc, $self-&gt;fault_code, $self-&gt;fault_detail_code, $self-&gt;fault_msg);
-  }
-}</pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-    </section>
-  
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Instance Methods</h3>
@@ -987,7 +798,7 @@ information</p>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.0.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

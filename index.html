@@ -41,7 +41,7 @@ protocol for managing (create, enumerate, access, change, destroy)
 resources.<br/>
 </p>
 
-<h3>Features</h3>
+<h4>Features</h4>
 <ul>
 <li>Full server and client implementation
 </li><li>Perl, Python, Java and Ruby bindings
@@ -57,7 +57,7 @@ AMT</a>
 </ul>
 
 
-<h2>Supported Standards</h2>
+<h4>Supported Standards</h4>
 <ul>
 
 <li><a
@@ -71,7 +71,7 @@ href="http://dmtf.org/sites/default/files/standards/documents/DSP0230_1.1.0.pdf"
  1.1.0 - WS-CIM Mapping Specification</li>
 </ul>
 
-<h2>Documentation</h2>
+<h3>Documentation</h3>
 
 The <a href="https://github.com/Openwsman/openwsman/wiki">OpenWSMAN
 wiki</a> is the primary documentation site.
@@ -80,19 +80,19 @@ There is also online documentation for the <a
 href="http://openwsman.github.io/rdoc">Ruby client
 bindings</a>
 
-<h2>Getting help</h2>
+<h3>Getting help</h3>
 
 If your question is not covered in the <a href="https://github.com/Openwsman/openwsman/wiki">OpenWSMAN
 wiki</a>, please <a href="https://lists.sourceforge.net/lists/listinfo/openwsman-devel">subscribe
 to the openwsman-devel</a> mailing list and <a href="mailto:openwsman-devel@lists.sourceforge.net">ask there</a>.
 
-<h2>Reporting bugs</h2>
+<h3>Reporting bugs</h3>
 
 Bugs should be reported via the <a
 href="https://github.com/Openwsman/openwsman/issues">github issue
 tracker</a>.
 
-<h2>Related projects</h2>
+<h3>Related projects</h3>
 
 There are a couple of related projects hosted under the <a
 href="https://github.com/Openwsman">Openwsman github account</a>:
@@ -106,33 +106,42 @@ Openwsman command line client</li>
 Apache module for Openwsman (unmaintained)</li>
 </ul>
 
-<h2>Supported platforms</h2>
+<h3>Supported platforms</h3>
 
 Openwsman is primarily developed on Linux but is known to run on
 Windows and MacOS as well.
 
-<h2><b>Downloading OpenWSMAN</b></h2>
+<h3><b>Downloading OpenWSMAN</b></h3>
 
-<h3>Source code</h3>
+<h4>Source code</h4>
 
 Tarballs of releases are distributed via <a
 href="https://github.com/Openwsman/openwsman/releases">GitHub</a>.<br/>
 The latest release is <a
-href="https://github.com/Openwsman/openwsman/releases/tag/v2.4.12">2.4.12</a>
+href="https://github.com/Openwsman/openwsman/releases/tag/v2.5.2">2.5.2</a>
 (<a
-href="https://github.com/Openwsman/openwsman/blob/v2.4.12/ChangeLog">Changelog</a>)
+href="https://github.com/Openwsman/openwsman/blob/v2.5.2/ChangeLog">Changelog</a>)
 
-<h3>Git</h3>
+<h4>Git</h4>
 
 The git repo for Openwsman is <a
 href="https://github.com/Openwsman/openwsman">hosted on GitHub</a>.
 
-<h3>RPM packages</h3>
+<h4>RPM packages</h4>
 RPM binaries for Linux are available via <a
 href="https://build.opensuse.org/project/show?project=Openwsman">the
 openSUSE Build Service</a>
 
-<h3>Other formats</h3>
+<h4>Python package</h4>
+To build and install a Python package, you should be able to do:
+<pre>
+cd bindings/python/pywsman
+python setup.py sdist # Make a python source distribution
+cd dist
+pip install pywsman-*.tar.gz # Build and install the python package
+</pre>
+
+<h4>Other formats</h4>
 
 Other formats (i.e. Debian .deb files) would need a maintainer. Please
 contact <a href="mailto:kkaempf@suse.com">me</a> if you're interested

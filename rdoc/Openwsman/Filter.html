@@ -6,19 +6,16 @@
 
 <title>class Openwsman::Filter - Openwsman - WS-Management for all</title>
 
-<link href="../fonts.css" rel="stylesheet">
-<link href="../rdoc.css" rel="stylesheet">
-
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
 </script>
 
 <script src="../js/jquery.js"></script>
-<script src="../js/navigation.js"></script>
-<script src="../js/search_index.js"></script>
-<script src="../js/search.js"></script>
-<script src="../js/searcher.js"></script>
 <script src="../js/darkfish.js"></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
 
 
 <body id="top" role="document" class="class">
@@ -75,11 +72,7 @@
     
     <li ><a href="#method-c-new">::new</a>
     
-    <li ><a href="#method-i-associators">#associators</a>
-    
     <li ><a href="#method-i-cql">#cql</a>
-    
-    <li ><a href="#method-i-references">#references</a>
     
     <li ><a href="#method-i-simple">#simple</a>
     
@@ -249,95 +242,6 @@ languages thus depends on the used CIMOM.</p>
        </header>
 
     
-      <div id="method-i-associators" class="method-detail ">
-        
-        
-        <div class="method-heading">
-          <span class="method-callseq">
-            associators(end_point_reference, assoc_class_name, result_class_name, role, result_role, result_prop[], prop_num)
-          </span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-        
-
-        <div class="method-description">
-          
-          <p>Set associators filter</p>
-          
-          
-
-          
-          <div class="method-source-code" id="associators-source">
-            <pre>int associators( VALUE epr_v = Qnil, VALUE assocClass_v = Qnil, VALUE resultClass_v = Qnil, VALUE role_v = Qnil, VALUE resultRole_v = Qnil, VALUE resultProp_v = Qnil, VALUE propNum_v = Qnil)
-  {
-    return associators_references( $self, 0, epr_v, assocClass_v, resultClass_v, role_v, resultRole_v, resultProp_v, propNum_v);
-  }
-
-
-  /*
-   * Set references filter
-   *
-   * call-seq:
-   *   filter.references(end_point_reference, assoc_class_name, result_class_name, role, result_role, result_prop[], prop_num)
-   *
-   */
-  int references( VALUE epr_v = Qnil, VALUE assocClass_v = Qnil, VALUE resultClass_v = Qnil, VALUE role_v = Qnil, VALUE resultRole_v = Qnil, VALUE resultProp_v = Qnil, VALUE propNum_v = Qnil)
-  {
-    return associators_references( $self, 1, epr_v, assocClass_v, resultClass_v, role_v, resultRole_v, resultProp_v, propNum_v);
-  }
-
-
-  /*
-   * Set simple dialect/query filter
-   * call-seq:
-   *   filter.simple(dialect, query)
-   *
-   */
-  int simple(const char *dialect, const char *query) {
-    return filter_set_simple($self, dialect, query );
-  }
-  /*
-   * Set XPath filter
-   * call-seq:
-   *   filter.xpath(query)
-   *
-   */
-  int xpath(const char *query) {
-    return filter_set_simple($self, WSM_XPATH_FILTER_DIALECT, query );
-  }
-  /*
-   * Set CQL (CIM query language) filter
-   * call-seq:
-   *   filter.cql(query)
-   *
-   */
-  int cql(const char *query) {
-    return filter_set_simple($self, WSM_CQL_FILTER_DIALECT, query );
-  }
-  /*
-   * Set WQL (WS-Management query language) filter
-   * call-seq:
-   *   filter.wql(query)
-   *
-   */
-  int wql(const char *query) {
-    return filter_set_simple($self, WSM_WQL_FILTER_DIALECT, query );
-  }
-
-}</pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
       <div id="method-i-cql" class="method-detail ">
         
         
@@ -361,82 +265,6 @@ languages thus depends on the used CIMOM.</p>
           
           <div class="method-source-code" id="cql-source">
             <pre>int cql(const char *query) {
-    return filter_set_simple($self, WSM_CQL_FILTER_DIALECT, query );
-  }
-  /*
-   * Set WQL (WS-Management query language) filter
-   * call-seq:
-   *   filter.wql(query)
-   *
-   */
-  int wql(const char *query) {
-    return filter_set_simple($self, WSM_WQL_FILTER_DIALECT, query );
-  }
-
-}</pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-references" class="method-detail ">
-        
-        
-        <div class="method-heading">
-          <span class="method-callseq">
-            references(end_point_reference, assoc_class_name, result_class_name, role, result_role, result_prop[], prop_num)
-          </span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-        
-
-        <div class="method-description">
-          
-          <p>Set references filter</p>
-          
-          
-
-          
-          <div class="method-source-code" id="references-source">
-            <pre>int references( VALUE epr_v = Qnil, VALUE assocClass_v = Qnil, VALUE resultClass_v = Qnil, VALUE role_v = Qnil, VALUE resultRole_v = Qnil, VALUE resultProp_v = Qnil, VALUE propNum_v = Qnil)
-  {
-    return associators_references( $self, 1, epr_v, assocClass_v, resultClass_v, role_v, resultRole_v, resultProp_v, propNum_v);
-  }
-
-
-  /*
-   * Set simple dialect/query filter
-   * call-seq:
-   *   filter.simple(dialect, query)
-   *
-   */
-  int simple(const char *dialect, const char *query) {
-    return filter_set_simple($self, dialect, query );
-  }
-  /*
-   * Set XPath filter
-   * call-seq:
-   *   filter.xpath(query)
-   *
-   */
-  int xpath(const char *query) {
-    return filter_set_simple($self, WSM_XPATH_FILTER_DIALECT, query );
-  }
-  /*
-   * Set CQL (CIM query language) filter
-   * call-seq:
-   *   filter.cql(query)
-   *
-   */
-  int cql(const char *query) {
     return filter_set_simple($self, WSM_CQL_FILTER_DIALECT, query );
   }
   /*
@@ -624,7 +452,7 @@ languages thus depends on the used CIMOM.</p>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.0.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

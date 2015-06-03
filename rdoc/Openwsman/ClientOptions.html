@@ -6,19 +6,16 @@
 
 <title>class Openwsman::ClientOptions - Openwsman - WS-Management for all</title>
 
-<link href="../fonts.css" rel="stylesheet">
-<link href="../rdoc.css" rel="stylesheet">
-
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
 </script>
 
 <script src="../js/jquery.js"></script>
-<script src="../js/navigation.js"></script>
-<script src="../js/search_index.js"></script>
-<script src="../js/search.js"></script>
-<script src="../js/searcher.js"></script>
 <script src="../js/darkfish.js"></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
 
 
 <body id="top" role="document" class="class">
@@ -169,6 +166,8 @@ operations is adding selectors - key/value pairs added to the request URL.</p>
 <p>For WS-CIM operations, selectors define the key attributes for the selected
 CIM class to address a specific instance of the class.</p>
 
+<p><a href="ClientOptions.html">ClientOptions</a></p>
+
   </section>
 
   
@@ -260,38 +259,30 @@ etc.) in Ruby use CGI::escapeHTML()</p>
    * Add a selector as key/value pair
    *
    * NOTE:
-   * the value must be properly escaped (replace &amp; with &amp;amp;, etc.)
+   * the string value must be properly escaped (replace &amp; with &amp;amp;, etc.)
    * in Ruby use CGI::escapeHTML()
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_selector &quot;Key&quot;, end_point_reference
    *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
-
-    wsmc_add_selector($self, key, value);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_selector_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_selector($self, key, value);
+    }
   }
 
 
-  %rename( &quot;selectors=&quot; ) set_selectors(VALUE hash);
-  /*
-   * Set selectors from Hash
-   *
-   * NOTE:
-   * the values must be properly escaped (replace &amp; with &amp;amp;, etc.)
-   * in Ruby use CGI::escapeHTML()
-   *
-   * call-seq:
-   *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
-   *
-   */
-  void set_selectors(VALUE hash)
-  {
-    $self-&gt;selectors = value2hash(NULL, hash, 0);
-  }
 
   %rename( &quot;selectors&quot; ) get_selectors(void);
   /*
@@ -303,7 +294,7 @@ etc.) in Ruby use CGI::escapeHTML()</p>
    */
   VALUE get_selectors(void)
   {
-    return hash2value($self-&gt;selectors);
+    return kv_list_to_hash($self-&gt;selectors);
   }
 
 
@@ -337,20 +328,6 @@ etc.) in Ruby use CGI::escapeHTML()</p>
 
   
 
-  %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
-  /*
-   * Set properties from Hash
-   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
-   *
-   * call-seq:
-   *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
-   *
-   */
-  void set_properties(VALUE hash)
-  {
-    $self-&gt;properties = value2hash(NULL, hash, 0);
-  }
-
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
@@ -362,7 +339,7 @@ etc.) in Ruby use CGI::escapeHTML()</p>
    */
   VALUE get_properties(void)
   {
-    return hash2value($self-&gt;properties);
+    return kv_list_to_hash($self-&gt;properties);
   }
 
 
@@ -569,20 +546,6 @@ ClientOption properties</p>
 
   
 
-  %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
-  /*
-   * Set properties from Hash
-   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
-   *
-   * call-seq:
-   *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
-   *
-   */
-  void set_properties(VALUE hash)
-  {
-    $self-&gt;properties = value2hash(NULL, hash, 0);
-  }
-
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
@@ -594,7 +557,7 @@ ClientOption properties</p>
    */
   VALUE get_properties(void)
   {
-    return hash2value($self-&gt;properties);
+    return kv_list_to_hash($self-&gt;properties);
   }
 
 
@@ -758,14 +721,21 @@ ClientOption properties</p>
           
         </div>
         
+        <div class="method-heading">
+          <span class="method-callseq">
+            add_selector &quot;Key&quot;, end_point_reference
+          </span>
+          
+        </div>
+        
         
 
         <div class="method-description">
           
           <p>Add a selector as key/value pair</p>
 
-<p>NOTE: the value must be properly escaped (replace &amp; with &amp;amp;,
-etc.) in Ruby use CGI::escapeHTML()</p>
+<p>NOTE: the string value must be properly escaped (replace &amp; with
+&amp;amp;, etc.) in Ruby use CGI::escapeHTML()</p>
           
           
 
@@ -774,28 +744,19 @@ etc.) in Ruby use CGI::escapeHTML()</p>
             <pre>void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
-
-    wsmc_add_selector($self, key, value);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_selector_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_selector($self, key, value);
+    }
   }
 
 
-  %rename( &quot;selectors=&quot; ) set_selectors(VALUE hash);
-  /*
-   * Set selectors from Hash
-   *
-   * NOTE:
-   * the values must be properly escaped (replace &amp; with &amp;amp;, etc.)
-   * in Ruby use CGI::escapeHTML()
-   *
-   * call-seq:
-   *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
-   *
-   */
-  void set_selectors(VALUE hash)
-  {
-    $self-&gt;selectors = value2hash(NULL, hash, 0);
-  }
 
   %rename( &quot;selectors&quot; ) get_selectors(void);
   /*
@@ -807,7 +768,7 @@ etc.) in Ruby use CGI::escapeHTML()</p>
    */
   VALUE get_selectors(void)
   {
-    return hash2value($self-&gt;selectors);
+    return kv_list_to_hash($self-&gt;selectors);
   }
 
 
@@ -841,20 +802,6 @@ etc.) in Ruby use CGI::escapeHTML()</p>
 
   
 
-  %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
-  /*
-   * Set properties from Hash
-   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
-   *
-   * call-seq:
-   *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
-   *
-   */
-  void set_properties(VALUE hash)
-  {
-    $self-&gt;properties = value2hash(NULL, hash, 0);
-  }
-
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
@@ -866,7 +813,7 @@ etc.) in Ruby use CGI::escapeHTML()</p>
    */
   VALUE get_properties(void)
   {
-    return hash2value($self-&gt;properties);
+    return kv_list_to_hash($self-&gt;properties);
   }
 
 
@@ -1038,7 +985,8 @@ etc.) in Ruby use CGI::escapeHTML()</p>
 Microsoft WinRM set the resource namespace by attaching it to the resource
 URI</p>
 
-<p>See also: Openwsman.epr_prefix_for</p>
+<p>See also: <a
+href="../Openwsman.html#method-c-epr_prefix_for">Openwsman.epr_prefix_for</a></p>
           
           
 
@@ -1135,38 +1083,30 @@ URI</p>
    * Add a selector as key/value pair
    *
    * NOTE:
-   * the value must be properly escaped (replace &amp; with &amp;amp;, etc.)
+   * the string value must be properly escaped (replace &amp; with &amp;amp;, etc.)
    * in Ruby use CGI::escapeHTML()
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_selector &quot;Key&quot;, end_point_reference
    *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
-
-    wsmc_add_selector($self, key, value);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_selector_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_selector($self, key, value);
+    }
   }
 
 
-  %rename( &quot;selectors=&quot; ) set_selectors(VALUE hash);
-  /*
-   * Set selectors from Hash
-   *
-   * NOTE:
-   * the values must be properly escaped (replace &amp; with &amp;amp;, etc.)
-   * in Ruby use CGI::escapeHTML()
-   *
-   * call-seq:
-   *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
-   *
-   */
-  void set_selectors(VALUE hash)
-  {
-    $self-&gt;selectors = value2hash(NULL, hash, 0);
-  }
 
   %rename( &quot;selectors&quot; ) get_selectors(void);
   /*
@@ -1178,7 +1118,7 @@ URI</p>
    */
   VALUE get_selectors(void)
   {
-    return hash2value($self-&gt;selectors);
+    return kv_list_to_hash($self-&gt;selectors);
   }
 
 
@@ -1212,20 +1152,6 @@ URI</p>
 
   
 
-  %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
-  /*
-   * Set properties from Hash
-   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
-   *
-   * call-seq:
-   *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
-   *
-   */
-  void set_properties(VALUE hash)
-  {
-    $self-&gt;properties = value2hash(NULL, hash, 0);
-  }
-
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
@@ -1237,7 +1163,7 @@ URI</p>
    */
   VALUE get_properties(void)
   {
-    return hash2value($self-&gt;properties);
+    return kv_list_to_hash($self-&gt;properties);
   }
 
 
@@ -1409,7 +1335,8 @@ URI</p>
 root/cimv2) Note: Microsoft WinRM set the resource namespace by attaching
 it to the resource URI</p>
 
-<p>See also: Openwsman.epr_prefix_for</p>
+<p>See also: <a
+href="../Openwsman.html#method-c-epr_prefix_for">Openwsman.epr_prefix_for</a></p>
           
           
 
@@ -1525,38 +1452,30 @@ it to the resource URI</p>
    * Add a selector as key/value pair
    *
    * NOTE:
-   * the value must be properly escaped (replace &amp; with &amp;amp;, etc.)
+   * the string value must be properly escaped (replace &amp; with &amp;amp;, etc.)
    * in Ruby use CGI::escapeHTML()
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_selector &quot;Key&quot;, end_point_reference
    *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
-
-    wsmc_add_selector($self, key, value);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_selector_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_selector($self, key, value);
+    }
   }
 
 
-  %rename( &quot;selectors=&quot; ) set_selectors(VALUE hash);
-  /*
-   * Set selectors from Hash
-   *
-   * NOTE:
-   * the values must be properly escaped (replace &amp; with &amp;amp;, etc.)
-   * in Ruby use CGI::escapeHTML()
-   *
-   * call-seq:
-   *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
-   *
-   */
-  void set_selectors(VALUE hash)
-  {
-    $self-&gt;selectors = value2hash(NULL, hash, 0);
-  }
 
   %rename( &quot;selectors&quot; ) get_selectors(void);
   /*
@@ -1568,7 +1487,7 @@ it to the resource URI</p>
    */
   VALUE get_selectors(void)
   {
-    return hash2value($self-&gt;selectors);
+    return kv_list_to_hash($self-&gt;selectors);
   }
 
 
@@ -1602,20 +1521,6 @@ it to the resource URI</p>
 
   
 
-  %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
-  /*
-   * Set properties from Hash
-   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
-   *
-   * call-seq:
-   *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
-   *
-   */
-  void set_properties(VALUE hash)
-  {
-    $self-&gt;properties = value2hash(NULL, hash, 0);
-  }
-
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
@@ -1627,7 +1532,7 @@ it to the resource URI</p>
    */
   VALUE get_properties(void)
   {
-    return hash2value($self-&gt;properties);
+    return kv_list_to_hash($self-&gt;properties);
   }
 
 
@@ -2111,38 +2016,30 @@ href="ClientOptions.html#method-i-set_dump_request">#set_dump_request</a></p>
    * Add a selector as key/value pair
    *
    * NOTE:
-   * the value must be properly escaped (replace &amp; with &amp;amp;, etc.)
+   * the string value must be properly escaped (replace &amp; with &amp;amp;, etc.)
    * in Ruby use CGI::escapeHTML()
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_selector &quot;Key&quot;, end_point_reference
    *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
-
-    wsmc_add_selector($self, key, value);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_selector_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_selector($self, key, value);
+    }
   }
 
 
-  %rename( &quot;selectors=&quot; ) set_selectors(VALUE hash);
-  /*
-   * Set selectors from Hash
-   *
-   * NOTE:
-   * the values must be properly escaped (replace &amp; with &amp;amp;, etc.)
-   * in Ruby use CGI::escapeHTML()
-   *
-   * call-seq:
-   *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
-   *
-   */
-  void set_selectors(VALUE hash)
-  {
-    $self-&gt;selectors = value2hash(NULL, hash, 0);
-  }
 
   %rename( &quot;selectors&quot; ) get_selectors(void);
   /*
@@ -2154,7 +2051,7 @@ href="ClientOptions.html#method-i-set_dump_request">#set_dump_request</a></p>
    */
   VALUE get_selectors(void)
   {
-    return hash2value($self-&gt;selectors);
+    return kv_list_to_hash($self-&gt;selectors);
   }
 
 
@@ -2188,20 +2085,6 @@ href="ClientOptions.html#method-i-set_dump_request">#set_dump_request</a></p>
 
   
 
-  %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
-  /*
-   * Set properties from Hash
-   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
-   *
-   * call-seq:
-   *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
-   *
-   */
-  void set_properties(VALUE hash)
-  {
-    $self-&gt;properties = value2hash(NULL, hash, 0);
-  }
-
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
@@ -2213,7 +2096,7 @@ href="ClientOptions.html#method-i-set_dump_request">#set_dump_request</a></p>
    */
   VALUE get_properties(void)
   {
-    return hash2value($self-&gt;properties);
+    return kv_list_to_hash($self-&gt;properties);
   }
 
 
@@ -2649,38 +2532,30 @@ href="ClientOptions.html#method-i-set_dump_request">#set_dump_request</a></p>
    * Add a selector as key/value pair
    *
    * NOTE:
-   * the value must be properly escaped (replace &amp; with &amp;amp;, etc.)
+   * the string value must be properly escaped (replace &amp; with &amp;amp;, etc.)
    * in Ruby use CGI::escapeHTML()
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_selector &quot;Key&quot;, end_point_reference
    *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
-
-    wsmc_add_selector($self, key, value);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_selector_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_selector($self, key, value);
+    }
   }
 
 
-  %rename( &quot;selectors=&quot; ) set_selectors(VALUE hash);
-  /*
-   * Set selectors from Hash
-   *
-   * NOTE:
-   * the values must be properly escaped (replace &amp; with &amp;amp;, etc.)
-   * in Ruby use CGI::escapeHTML()
-   *
-   * call-seq:
-   *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
-   *
-   */
-  void set_selectors(VALUE hash)
-  {
-    $self-&gt;selectors = value2hash(NULL, hash, 0);
-  }
 
   %rename( &quot;selectors&quot; ) get_selectors(void);
   /*
@@ -2692,7 +2567,7 @@ href="ClientOptions.html#method-i-set_dump_request">#set_dump_request</a></p>
    */
   VALUE get_selectors(void)
   {
-    return hash2value($self-&gt;selectors);
+    return kv_list_to_hash($self-&gt;selectors);
   }
 
 
@@ -2726,20 +2601,6 @@ href="ClientOptions.html#method-i-set_dump_request">#set_dump_request</a></p>
 
   
 
-  %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
-  /*
-   * Set properties from Hash
-   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
-   *
-   * call-seq:
-   *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
-   *
-   */
-  void set_properties(VALUE hash)
-  {
-    $self-&gt;properties = value2hash(NULL, hash, 0);
-  }
-
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
@@ -2751,7 +2612,7 @@ href="ClientOptions.html#method-i-set_dump_request">#set_dump_request</a></p>
    */
   VALUE get_properties(void)
   {
-    return hash2value($self-&gt;properties);
+    return kv_list_to_hash($self-&gt;properties);
   }
 
 
@@ -3756,38 +3617,30 @@ kerberos, https mutual spnego kerberos)</p>
    * Add a selector as key/value pair
    *
    * NOTE:
-   * the value must be properly escaped (replace &amp; with &amp;amp;, etc.)
+   * the string value must be properly escaped (replace &amp; with &amp;amp;, etc.)
    * in Ruby use CGI::escapeHTML()
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_selector &quot;Key&quot;, end_point_reference
    *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
-
-    wsmc_add_selector($self, key, value);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_selector_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_selector($self, key, value);
+    }
   }
 
 
-  %rename( &quot;selectors=&quot; ) set_selectors(VALUE hash);
-  /*
-   * Set selectors from Hash
-   *
-   * NOTE:
-   * the values must be properly escaped (replace &amp; with &amp;amp;, etc.)
-   * in Ruby use CGI::escapeHTML()
-   *
-   * call-seq:
-   *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
-   *
-   */
-  void set_selectors(VALUE hash)
-  {
-    $self-&gt;selectors = value2hash(NULL, hash, 0);
-  }
 
   %rename( &quot;selectors&quot; ) get_selectors(void);
   /*
@@ -3799,7 +3652,7 @@ kerberos, https mutual spnego kerberos)</p>
    */
   VALUE get_selectors(void)
   {
-    return hash2value($self-&gt;selectors);
+    return kv_list_to_hash($self-&gt;selectors);
   }
 
 
@@ -3833,20 +3686,6 @@ kerberos, https mutual spnego kerberos)</p>
 
   
 
-  %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
-  /*
-   * Set properties from Hash
-   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
-   *
-   * call-seq:
-   *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
-   *
-   */
-  void set_properties(VALUE hash)
-  {
-    $self-&gt;properties = value2hash(NULL, hash, 0);
-  }
-
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
@@ -3858,7 +3697,7 @@ kerberos, https mutual spnego kerberos)</p>
    */
   VALUE get_properties(void)
   {
-    return hash2value($self-&gt;properties);
+    return kv_list_to_hash($self-&gt;properties);
   }
 
 
@@ -4323,38 +4162,30 @@ kerberos, https mutual spnego kerberos)</p>
    * Add a selector as key/value pair
    *
    * NOTE:
-   * the value must be properly escaped (replace &amp; with &amp;amp;, etc.)
+   * the string value must be properly escaped (replace &amp; with &amp;amp;, etc.)
    * in Ruby use CGI::escapeHTML()
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_selector &quot;Key&quot;, end_point_reference
    *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
-
-    wsmc_add_selector($self, key, value);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_selector_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_selector($self, key, value);
+    }
   }
 
 
-  %rename( &quot;selectors=&quot; ) set_selectors(VALUE hash);
-  /*
-   * Set selectors from Hash
-   *
-   * NOTE:
-   * the values must be properly escaped (replace &amp; with &amp;amp;, etc.)
-   * in Ruby use CGI::escapeHTML()
-   *
-   * call-seq:
-   *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
-   *
-   */
-  void set_selectors(VALUE hash)
-  {
-    $self-&gt;selectors = value2hash(NULL, hash, 0);
-  }
 
   %rename( &quot;selectors&quot; ) get_selectors(void);
   /*
@@ -4366,7 +4197,7 @@ kerberos, https mutual spnego kerberos)</p>
    */
   VALUE get_selectors(void)
   {
-    return hash2value($self-&gt;selectors);
+    return kv_list_to_hash($self-&gt;selectors);
   }
 
 
@@ -4400,20 +4231,6 @@ kerberos, https mutual spnego kerberos)</p>
 
   
 
-  %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
-  /*
-   * Set properties from Hash
-   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
-   *
-   * call-seq:
-   *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
-   *
-   */
-  void set_properties(VALUE hash)
-  {
-    $self-&gt;properties = value2hash(NULL, hash, 0);
-  }
-
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
@@ -4425,7 +4242,7 @@ kerberos, https mutual spnego kerberos)</p>
    */
   VALUE get_properties(void)
   {
-    return hash2value($self-&gt;properties);
+    return kv_list_to_hash($self-&gt;properties);
   }
 
 
@@ -4729,38 +4546,30 @@ kerberos, https mutual spnego kerberos)</p>
    * Add a selector as key/value pair
    *
    * NOTE:
-   * the value must be properly escaped (replace &amp; with &amp;amp;, etc.)
+   * the string value must be properly escaped (replace &amp; with &amp;amp;, etc.)
    * in Ruby use CGI::escapeHTML()
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_selector &quot;Key&quot;, end_point_reference
    *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
-
-    wsmc_add_selector($self, key, value);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_selector_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_selector($self, key, value);
+    }
   }
 
 
-  %rename( &quot;selectors=&quot; ) set_selectors(VALUE hash);
-  /*
-   * Set selectors from Hash
-   *
-   * NOTE:
-   * the values must be properly escaped (replace &amp; with &amp;amp;, etc.)
-   * in Ruby use CGI::escapeHTML()
-   *
-   * call-seq:
-   *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
-   *
-   */
-  void set_selectors(VALUE hash)
-  {
-    $self-&gt;selectors = value2hash(NULL, hash, 0);
-  }
 
   %rename( &quot;selectors&quot; ) get_selectors(void);
   /*
@@ -4772,7 +4581,7 @@ kerberos, https mutual spnego kerberos)</p>
    */
   VALUE get_selectors(void)
   {
-    return hash2value($self-&gt;selectors);
+    return kv_list_to_hash($self-&gt;selectors);
   }
 
 
@@ -4806,20 +4615,6 @@ kerberos, https mutual spnego kerberos)</p>
 
   
 
-  %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
-  /*
-   * Set properties from Hash
-   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
-   *
-   * call-seq:
-   *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
-   *
-   */
-  void set_properties(VALUE hash)
-  {
-    $self-&gt;properties = value2hash(NULL, hash, 0);
-  }
-
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
@@ -4831,7 +4626,7 @@ kerberos, https mutual spnego kerberos)</p>
    */
   VALUE get_properties(void)
   {
-    return hash2value($self-&gt;properties);
+    return kv_list_to_hash($self-&gt;properties);
   }
 
 
@@ -5150,38 +4945,30 @@ kerberos, https mutual spnego kerberos)</p>
    * Add a selector as key/value pair
    *
    * NOTE:
-   * the value must be properly escaped (replace &amp; with &amp;amp;, etc.)
+   * the string value must be properly escaped (replace &amp; with &amp;amp;, etc.)
    * in Ruby use CGI::escapeHTML()
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_selector &quot;Key&quot;, end_point_reference
    *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
-
-    wsmc_add_selector($self, key, value);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_selector_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_selector($self, key, value);
+    }
   }
 
 
-  %rename( &quot;selectors=&quot; ) set_selectors(VALUE hash);
-  /*
-   * Set selectors from Hash
-   *
-   * NOTE:
-   * the values must be properly escaped (replace &amp; with &amp;amp;, etc.)
-   * in Ruby use CGI::escapeHTML()
-   *
-   * call-seq:
-   *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
-   *
-   */
-  void set_selectors(VALUE hash)
-  {
-    $self-&gt;selectors = value2hash(NULL, hash, 0);
-  }
 
   %rename( &quot;selectors&quot; ) get_selectors(void);
   /*
@@ -5193,7 +4980,7 @@ kerberos, https mutual spnego kerberos)</p>
    */
   VALUE get_selectors(void)
   {
-    return hash2value($self-&gt;selectors);
+    return kv_list_to_hash($self-&gt;selectors);
   }
 
 
@@ -5227,20 +5014,6 @@ kerberos, https mutual spnego kerberos)</p>
 
   
 
-  %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
-  /*
-   * Set properties from Hash
-   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
-   *
-   * call-seq:
-   *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
-   *
-   */
-  void set_properties(VALUE hash)
-  {
-    $self-&gt;properties = value2hash(NULL, hash, 0);
-  }
-
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
@@ -5252,7 +5025,7 @@ kerberos, https mutual spnego kerberos)</p>
    */
   VALUE get_properties(void)
   {
-    return hash2value($self-&gt;properties);
+    return kv_list_to_hash($self-&gt;properties);
   }
 
 
@@ -5826,38 +5599,30 @@ kerberos, https mutual spnego kerberos)</p>
    * Add a selector as key/value pair
    *
    * NOTE:
-   * the value must be properly escaped (replace &amp; with &amp;amp;, etc.)
+   * the string value must be properly escaped (replace &amp; with &amp;amp;, etc.)
    * in Ruby use CGI::escapeHTML()
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_selector &quot;Key&quot;, end_point_reference
    *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
-
-    wsmc_add_selector($self, key, value);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_selector_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_selector($self, key, value);
+    }
   }
 
 
-  %rename( &quot;selectors=&quot; ) set_selectors(VALUE hash);
-  /*
-   * Set selectors from Hash
-   *
-   * NOTE:
-   * the values must be properly escaped (replace &amp; with &amp;amp;, etc.)
-   * in Ruby use CGI::escapeHTML()
-   *
-   * call-seq:
-   *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
-   *
-   */
-  void set_selectors(VALUE hash)
-  {
-    $self-&gt;selectors = value2hash(NULL, hash, 0);
-  }
 
   %rename( &quot;selectors&quot; ) get_selectors(void);
   /*
@@ -5869,7 +5634,7 @@ kerberos, https mutual spnego kerberos)</p>
    */
   VALUE get_selectors(void)
   {
-    return hash2value($self-&gt;selectors);
+    return kv_list_to_hash($self-&gt;selectors);
   }
 
 
@@ -5903,20 +5668,6 @@ kerberos, https mutual spnego kerberos)</p>
 
   
 
-  %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
-  /*
-   * Set properties from Hash
-   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
-   *
-   * call-seq:
-   *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
-   *
-   */
-  void set_properties(VALUE hash)
-  {
-    $self-&gt;properties = value2hash(NULL, hash, 0);
-  }
-
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
@@ -5928,7 +5679,7 @@ kerberos, https mutual spnego kerberos)</p>
    */
   VALUE get_properties(void)
   {
-    return hash2value($self-&gt;properties);
+    return kv_list_to_hash($self-&gt;properties);
   }
 
 
@@ -6307,38 +6058,30 @@ kerberos, https mutual spnego kerberos)</p>
    * Add a selector as key/value pair
    *
    * NOTE:
-   * the value must be properly escaped (replace &amp; with &amp;amp;, etc.)
+   * the string value must be properly escaped (replace &amp; with &amp;amp;, etc.)
    * in Ruby use CGI::escapeHTML()
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_selector &quot;Key&quot;, end_point_reference
    *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
-
-    wsmc_add_selector($self, key, value);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_selector_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_selector($self, key, value);
+    }
   }
 
 
-  %rename( &quot;selectors=&quot; ) set_selectors(VALUE hash);
-  /*
-   * Set selectors from Hash
-   *
-   * NOTE:
-   * the values must be properly escaped (replace &amp; with &amp;amp;, etc.)
-   * in Ruby use CGI::escapeHTML()
-   *
-   * call-seq:
-   *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
-   *
-   */
-  void set_selectors(VALUE hash)
-  {
-    $self-&gt;selectors = value2hash(NULL, hash, 0);
-  }
 
   %rename( &quot;selectors&quot; ) get_selectors(void);
   /*
@@ -6350,7 +6093,7 @@ kerberos, https mutual spnego kerberos)</p>
    */
   VALUE get_selectors(void)
   {
-    return hash2value($self-&gt;selectors);
+    return kv_list_to_hash($self-&gt;selectors);
   }
 
 
@@ -6384,20 +6127,6 @@ kerberos, https mutual spnego kerberos)</p>
 
   
 
-  %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
-  /*
-   * Set properties from Hash
-   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
-   *
-   * call-seq:
-   *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
-   *
-   */
-  void set_properties(VALUE hash)
-  {
-    $self-&gt;properties = value2hash(NULL, hash, 0);
-  }
-
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
@@ -6409,7 +6138,7 @@ kerberos, https mutual spnego kerberos)</p>
    */
   VALUE get_properties(void)
   {
-    return hash2value($self-&gt;properties);
+    return kv_list_to_hash($self-&gt;properties);
   }
 
 
@@ -6802,38 +6531,30 @@ kerberos, https mutual spnego kerberos)</p>
    * Add a selector as key/value pair
    *
    * NOTE:
-   * the value must be properly escaped (replace &amp; with &amp;amp;, etc.)
+   * the string value must be properly escaped (replace &amp; with &amp;amp;, etc.)
    * in Ruby use CGI::escapeHTML()
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_selector &quot;Key&quot;, end_point_reference
    *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
-
-    wsmc_add_selector($self, key, value);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_selector_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_selector($self, key, value);
+    }
   }
 
 
-  %rename( &quot;selectors=&quot; ) set_selectors(VALUE hash);
-  /*
-   * Set selectors from Hash
-   *
-   * NOTE:
-   * the values must be properly escaped (replace &amp; with &amp;amp;, etc.)
-   * in Ruby use CGI::escapeHTML()
-   *
-   * call-seq:
-   *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
-   *
-   */
-  void set_selectors(VALUE hash)
-  {
-    $self-&gt;selectors = value2hash(NULL, hash, 0);
-  }
 
   %rename( &quot;selectors&quot; ) get_selectors(void);
   /*
@@ -6845,7 +6566,7 @@ kerberos, https mutual spnego kerberos)</p>
    */
   VALUE get_selectors(void)
   {
-    return hash2value($self-&gt;selectors);
+    return kv_list_to_hash($self-&gt;selectors);
   }
 
 
@@ -6879,20 +6600,6 @@ kerberos, https mutual spnego kerberos)</p>
 
   
 
-  %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
-  /*
-   * Set properties from Hash
-   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
-   *
-   * call-seq:
-   *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
-   *
-   */
-  void set_properties(VALUE hash)
-  {
-    $self-&gt;properties = value2hash(NULL, hash, 0);
-  }
-
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
@@ -6904,7 +6611,7 @@ kerberos, https mutual spnego kerberos)</p>
    */
   VALUE get_properties(void)
   {
-    return hash2value($self-&gt;properties);
+    return kv_list_to_hash($self-&gt;properties);
   }
 
 
@@ -7311,38 +7018,30 @@ kerberos, https mutual spnego kerberos)</p>
    * Add a selector as key/value pair
    *
    * NOTE:
-   * the value must be properly escaped (replace &amp; with &amp;amp;, etc.)
+   * the string value must be properly escaped (replace &amp; with &amp;amp;, etc.)
    * in Ruby use CGI::escapeHTML()
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_selector &quot;Key&quot;, end_point_reference
    *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
-
-    wsmc_add_selector($self, key, value);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_selector_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_selector($self, key, value);
+    }
   }
 
 
-  %rename( &quot;selectors=&quot; ) set_selectors(VALUE hash);
-  /*
-   * Set selectors from Hash
-   *
-   * NOTE:
-   * the values must be properly escaped (replace &amp; with &amp;amp;, etc.)
-   * in Ruby use CGI::escapeHTML()
-   *
-   * call-seq:
-   *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
-   *
-   */
-  void set_selectors(VALUE hash)
-  {
-    $self-&gt;selectors = value2hash(NULL, hash, 0);
-  }
 
   %rename( &quot;selectors&quot; ) get_selectors(void);
   /*
@@ -7354,7 +7053,7 @@ kerberos, https mutual spnego kerberos)</p>
    */
   VALUE get_selectors(void)
   {
-    return hash2value($self-&gt;selectors);
+    return kv_list_to_hash($self-&gt;selectors);
   }
 
 
@@ -7388,20 +7087,6 @@ kerberos, https mutual spnego kerberos)</p>
 
   
 
-  %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
-  /*
-   * Set properties from Hash
-   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
-   *
-   * call-seq:
-   *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
-   *
-   */
-  void set_properties(VALUE hash)
-  {
-    $self-&gt;properties = value2hash(NULL, hash, 0);
-  }
-
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
@@ -7413,7 +7098,7 @@ kerberos, https mutual spnego kerberos)</p>
    */
   VALUE get_properties(void)
   {
-    return hash2value($self-&gt;properties);
+    return kv_list_to_hash($self-&gt;properties);
   }
 
 
@@ -7598,38 +7283,30 @@ kerberos, https mutual spnego kerberos)</p>
    * Add a selector as key/value pair
    *
    * NOTE:
-   * the value must be properly escaped (replace &amp; with &amp;amp;, etc.)
+   * the string value must be properly escaped (replace &amp; with &amp;amp;, etc.)
    * in Ruby use CGI::escapeHTML()
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_selector &quot;Key&quot;, end_point_reference
    *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
-
-    wsmc_add_selector($self, key, value);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_selector_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_selector($self, key, value);
+    }
   }
 
 
-  %rename( &quot;selectors=&quot; ) set_selectors(VALUE hash);
-  /*
-   * Set selectors from Hash
-   *
-   * NOTE:
-   * the values must be properly escaped (replace &amp; with &amp;amp;, etc.)
-   * in Ruby use CGI::escapeHTML()
-   *
-   * call-seq:
-   *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
-   *
-   */
-  void set_selectors(VALUE hash)
-  {
-    $self-&gt;selectors = value2hash(NULL, hash, 0);
-  }
 
   %rename( &quot;selectors&quot; ) get_selectors(void);
   /*
@@ -7641,7 +7318,7 @@ kerberos, https mutual spnego kerberos)</p>
    */
   VALUE get_selectors(void)
   {
-    return hash2value($self-&gt;selectors);
+    return kv_list_to_hash($self-&gt;selectors);
   }
 
 
@@ -7675,20 +7352,6 @@ kerberos, https mutual spnego kerberos)</p>
 
   
 
-  %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
-  /*
-   * Set properties from Hash
-   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
-   *
-   * call-seq:
-   *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
-   *
-   */
-  void set_properties(VALUE hash)
-  {
-    $self-&gt;properties = value2hash(NULL, hash, 0);
-  }
-
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
@@ -7700,7 +7363,7 @@ kerberos, https mutual spnego kerberos)</p>
    */
   VALUE get_properties(void)
   {
-    return hash2value($self-&gt;properties);
+    return kv_list_to_hash($self-&gt;properties);
   }
 
 
@@ -7901,38 +7564,30 @@ etc.) in Ruby use CGI::escapeHTML()</p>
    * Add a selector as key/value pair
    *
    * NOTE:
-   * the value must be properly escaped (replace &amp; with &amp;amp;, etc.)
+   * the string value must be properly escaped (replace &amp; with &amp;amp;, etc.)
    * in Ruby use CGI::escapeHTML()
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_selector &quot;Key&quot;, end_point_reference
    *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
-
-    wsmc_add_selector($self, key, value);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_selector_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_selector($self, key, value);
+    }
   }
 
 
-  %rename( &quot;selectors=&quot; ) set_selectors(VALUE hash);
-  /*
-   * Set selectors from Hash
-   *
-   * NOTE:
-   * the values must be properly escaped (replace &amp; with &amp;amp;, etc.)
-   * in Ruby use CGI::escapeHTML()
-   *
-   * call-seq:
-   *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
-   *
-   */
-  void set_selectors(VALUE hash)
-  {
-    $self-&gt;selectors = value2hash(NULL, hash, 0);
-  }
 
   %rename( &quot;selectors&quot; ) get_selectors(void);
   /*
@@ -7944,7 +7599,7 @@ etc.) in Ruby use CGI::escapeHTML()</p>
    */
   VALUE get_selectors(void)
   {
-    return hash2value($self-&gt;selectors);
+    return kv_list_to_hash($self-&gt;selectors);
   }
 
 
@@ -7978,20 +7633,6 @@ etc.) in Ruby use CGI::escapeHTML()</p>
 
   
 
-  %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
-  /*
-   * Set properties from Hash
-   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
-   *
-   * call-seq:
-   *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
-   *
-   */
-  void set_properties(VALUE hash)
-  {
-    $self-&gt;properties = value2hash(NULL, hash, 0);
-  }
-
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
@@ -8003,7 +7644,7 @@ etc.) in Ruby use CGI::escapeHTML()</p>
    */
   VALUE get_properties(void)
   {
-    return hash2value($self-&gt;properties);
+    return kv_list_to_hash($self-&gt;properties);
   }
 
 
@@ -8183,7 +7824,7 @@ ClientOption properties</p>
           <div class="method-source-code" id="properties-source">
             <pre>VALUE get_properties(void)
   {
-    return hash2value($self-&gt;properties);
+    return kv_list_to_hash($self-&gt;properties);
   }
 
 
@@ -8337,188 +7978,29 @@ ClientOption properties</p>
     
       <div id="method-i-properties-3D" class="method-detail ">
         
-        
         <div class="method-heading">
-          <span class="method-callseq">
-            properties = { &quot;Key&quot; &rarr; &quot;Value&quot;, ...}
-          </span>
+          <span class="method-name">properties=</span><span
+            class="method-args">(value)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
         </div>
         
-        
 
         <div class="method-description">
           
-          <p>Set properties from Hash</p>
-<ul><li>
-<p>Input parameters to &#39;invoke&#39;d methods are represented as
-ClientOption properties</p>
-</li></ul>
+          <p>assign hash to properties</p>
           
           
 
           
           <div class="method-source-code" id="properties-3D-source">
-            <pre>void set_properties(VALUE hash)
-  {
-    $self-&gt;properties = value2hash(NULL, hash, 0);
-  }
-
-  %rename( &quot;properties&quot; ) get_properties(void);
-  /*
-   * Get properties as Hash
-   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
-   *
-   * call-seq:
-   *   options.properties -&gt; Hash
-   *
-   */
-  VALUE get_properties(void)
-  {
-    return hash2value($self-&gt;properties);
-  }
-
-
-
-  %rename( &quot;delivery_uri=&quot; ) set_delivery_uri(const char *delivery_uri);
-
-  /*
-   * Set delivery uri
-   *
-   * call-seq:
-   *   options.delivery_uri = &quot;http://...&quot;
-   *
-   */
-  void set_delivery_uri( const char *delivery_uri ) {
-    wsmc_set_delivery_uri(delivery_uri, $self);
-  }
-
-  /*
-   * Get delivery uri
-   *
-   * call-seq:
-   *   options.delivery_uri -&gt; String
-   *
-   */
-  const char *delivery_uri() {
-    return $self-&gt;delivery_uri;
-  }
-
-
-  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(unsigned int event_subscription_expire);
-
-  /*
-   * Set subscription expiry timeout (in seconds)
-   *
-   * call-seq:
-   *   options.sub_expiry = 600 # 10 mins
-   *
-   */
-  void set_sub_expiry(unsigned int event_subscription_expire) {
-        wsmc_set_sub_expiry(event_subscription_expire, $self);
-  }
-
-  /*
-   * Get subscription expiry timeout (in seconds)
-   *
-   * call-seq:
-   *   options.sub_expiry -&gt; Integer
-   *
-   */
-  int sub_expiry() {
-    return $self-&gt;expires;
-  }
-
-
-  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(unsigned int heartbeat_interval);
-
-  /*
-   * Set subscription heartbeat interval (in seconds)
-   *
-   * call-seq:
-   *   options.heartbeat_interval = 60 # every minute
-   *
-   */
-  void set_heartbeat_interval(unsigned int heartbeat_interval) {
-        wsmc_set_heartbeat_interval(heartbeat_interval, $self);
-  }
-
-  /*
-   * Get subscription heartbeat interval (in seconds)
-   *
-   * call-seq:
-   *   options.heartbeat_interval -&gt; Integer
-   *
-   */
-  int heartbeat_interval() {
-    return $self-&gt;heartbeat_interval;
-  }
-
-
-  %rename( &quot;delivery_mode=&quot; ) set_delivery_mode(unsigned int delivery_mode);
-
-  /*
-   * Set subscription delivery mode (push, pushwithack,events,pull)
-   *
-   * call-seq:
-   *   options.delivery_mode = Openwsman::WSMAN_DELIVERY_PUSH
-   *
-   */
-  void set_delivery_mode(unsigned int delivery_mode) {
-    if (delivery_mode &gt; WSMAN_DELIVERY_PULL)
-      SWIG_exception( SWIG_ValueError, &quot;Bad delivery mode&quot; );
-        
-    wsmc_set_delivery_mode(delivery_mode, $self);
-
-  }
-
-  /*
-   * Get subscription delivery mode (push, pushwithack,events,pull)
-   *
-   * call-seq:
-   *   options.delivery_mode -&gt; Integer
-   *
-   */
-  int delivery_mode() {
-    return $self-&gt;delivery_mode;
-  }
-
-
-  %rename( &quot;delivery_security_mode=&quot; ) set_delivery_security_mode(unsigned int delivery_mode);
-
-  /*
-   * Set subscription delivery security mode
-   *
-   * (auto, http basic, http digest, https basic, https digest,
-   * https mutual, https mutual basic, https mutual digest,
-   * http spnego kerberos, https spnego kerberos,
-   * https mutual spnego kerberos)
-   *
-   * call-seq:
-   *   options.delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
-   *
-   */
-  void set_delivery_security_mode(unsigned int delivery_sec_mode) {
-    if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
-      SWIG_exception( SWIG_ValueError, &quot;Bad delivery security mode&quot; );
-    wsmc_set_delivery_security_mode(delivery_sec_mode, $self);
-
-  }
-  
-  /*
-   * Get subscription delivery security mode
-   *
-   * call-seq:
-   *   options.delivery_security_mode -&gt; Integer
-   *
-   */
-  int delivery_sec_mode() {
-    return $self-&gt;delivery_sec_mode;
-  }
-
-}</pre>
+            <pre><span class="ruby-comment"># File openwsman/openwsman.rb, line 46</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">properties=</span> <span class="ruby-identifier">value</span>
+  <span class="ruby-identifier">value</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">add_property</span> <span class="ruby-identifier">k</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">v</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -8613,38 +8095,30 @@ a valid XML document</p>
    * Add a selector as key/value pair
    *
    * NOTE:
-   * the value must be properly escaped (replace &amp; with &amp;amp;, etc.)
+   * the string value must be properly escaped (replace &amp; with &amp;amp;, etc.)
    * in Ruby use CGI::escapeHTML()
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_selector &quot;Key&quot;, end_point_reference
    *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
-
-    wsmc_add_selector($self, key, value);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_selector_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_selector($self, key, value);
+    }
   }
 
 
-  %rename( &quot;selectors=&quot; ) set_selectors(VALUE hash);
-  /*
-   * Set selectors from Hash
-   *
-   * NOTE:
-   * the values must be properly escaped (replace &amp; with &amp;amp;, etc.)
-   * in Ruby use CGI::escapeHTML()
-   *
-   * call-seq:
-   *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
-   *
-   */
-  void set_selectors(VALUE hash)
-  {
-    $self-&gt;selectors = value2hash(NULL, hash, 0);
-  }
 
   %rename( &quot;selectors&quot; ) get_selectors(void);
   /*
@@ -8656,7 +8130,7 @@ a valid XML document</p>
    */
   VALUE get_selectors(void)
   {
-    return hash2value($self-&gt;selectors);
+    return kv_list_to_hash($self-&gt;selectors);
   }
 
 
@@ -8690,20 +8164,6 @@ a valid XML document</p>
 
   
 
-  %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
-  /*
-   * Set properties from Hash
-   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
-   *
-   * call-seq:
-   *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
-   *
-   */
-  void set_properties(VALUE hash)
-  {
-    $self-&gt;properties = value2hash(NULL, hash, 0);
-  }
-
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
@@ -8715,7 +8175,7 @@ a valid XML document</p>
    */
   VALUE get_properties(void)
   {
-    return hash2value($self-&gt;properties);
+    return kv_list_to_hash($self-&gt;properties);
   }
 
 
@@ -8966,38 +8426,30 @@ representation of a valid XML document</p>
    * Add a selector as key/value pair
    *
    * NOTE:
-   * the value must be properly escaped (replace &amp; with &amp;amp;, etc.)
+   * the string value must be properly escaped (replace &amp; with &amp;amp;, etc.)
    * in Ruby use CGI::escapeHTML()
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_selector &quot;Key&quot;, end_point_reference
    *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
-
-    wsmc_add_selector($self, key, value);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_selector_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_selector($self, key, value);
+    }
   }
 
 
-  %rename( &quot;selectors=&quot; ) set_selectors(VALUE hash);
-  /*
-   * Set selectors from Hash
-   *
-   * NOTE:
-   * the values must be properly escaped (replace &amp; with &amp;amp;, etc.)
-   * in Ruby use CGI::escapeHTML()
-   *
-   * call-seq:
-   *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
-   *
-   */
-  void set_selectors(VALUE hash)
-  {
-    $self-&gt;selectors = value2hash(NULL, hash, 0);
-  }
 
   %rename( &quot;selectors&quot; ) get_selectors(void);
   /*
@@ -9009,7 +8461,7 @@ representation of a valid XML document</p>
    */
   VALUE get_selectors(void)
   {
-    return hash2value($self-&gt;selectors);
+    return kv_list_to_hash($self-&gt;selectors);
   }
 
 
@@ -9043,20 +8495,6 @@ representation of a valid XML document</p>
 
   
 
-  %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
-  /*
-   * Set properties from Hash
-   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
-   *
-   * call-seq:
-   *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
-   *
-   */
-  void set_properties(VALUE hash)
-  {
-    $self-&gt;properties = value2hash(NULL, hash, 0);
-  }
-
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
@@ -9068,7 +8506,7 @@ representation of a valid XML document</p>
    */
   VALUE get_properties(void)
   {
-    return hash2value($self-&gt;properties);
+    return kv_list_to_hash($self-&gt;properties);
   }
 
 
@@ -9491,38 +8929,30 @@ representation of a valid XML document</p>
    * Add a selector as key/value pair
    *
    * NOTE:
-   * the value must be properly escaped (replace &amp; with &amp;amp;, etc.)
+   * the string value must be properly escaped (replace &amp; with &amp;amp;, etc.)
    * in Ruby use CGI::escapeHTML()
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_selector &quot;Key&quot;, end_point_reference
    *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
-
-    wsmc_add_selector($self, key, value);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_selector_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_selector($self, key, value);
+    }
   }
 
 
-  %rename( &quot;selectors=&quot; ) set_selectors(VALUE hash);
-  /*
-   * Set selectors from Hash
-   *
-   * NOTE:
-   * the values must be properly escaped (replace &amp; with &amp;amp;, etc.)
-   * in Ruby use CGI::escapeHTML()
-   *
-   * call-seq:
-   *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
-   *
-   */
-  void set_selectors(VALUE hash)
-  {
-    $self-&gt;selectors = value2hash(NULL, hash, 0);
-  }
 
   %rename( &quot;selectors&quot; ) get_selectors(void);
   /*
@@ -9534,7 +8964,7 @@ representation of a valid XML document</p>
    */
   VALUE get_selectors(void)
   {
-    return hash2value($self-&gt;selectors);
+    return kv_list_to_hash($self-&gt;selectors);
   }
 
 
@@ -9568,20 +8998,6 @@ representation of a valid XML document</p>
 
   
 
-  %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
-  /*
-   * Set properties from Hash
-   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
-   *
-   * call-seq:
-   *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
-   *
-   */
-  void set_properties(VALUE hash)
-  {
-    $self-&gt;properties = value2hash(NULL, hash, 0);
-  }
-
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
@@ -9593,7 +9009,7 @@ representation of a valid XML document</p>
    */
   VALUE get_properties(void)
   {
-    return hash2value($self-&gt;properties);
+    return kv_list_to_hash($self-&gt;properties);
   }
 
 
@@ -9769,7 +9185,7 @@ representation of a valid XML document</p>
           <div class="method-source-code" id="selectors-source">
             <pre>VALUE get_selectors(void)
   {
-    return hash2value($self-&gt;selectors);
+    return kv_list_to_hash($self-&gt;selectors);
   }
 
 
@@ -9803,20 +9219,6 @@ representation of a valid XML document</p>
 
   
 
-  %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
-  /*
-   * Set properties from Hash
-   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
-   *
-   * call-seq:
-   *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
-   *
-   */
-  void set_properties(VALUE hash)
-  {
-    $self-&gt;properties = value2hash(NULL, hash, 0);
-  }
-
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
@@ -9828,7 +9230,7 @@ representation of a valid XML document</p>
    */
   VALUE get_properties(void)
   {
-    return hash2value($self-&gt;properties);
+    return kv_list_to_hash($self-&gt;properties);
   }
 
 
@@ -9982,245 +9384,29 @@ representation of a valid XML document</p>
     
       <div id="method-i-selectors-3D" class="method-detail ">
         
-        
         <div class="method-heading">
-          <span class="method-callseq">
-            selectors = { &quot;Key&quot; &rarr; &quot;Value&quot;, ... }
-          </span>
+          <span class="method-name">selectors=</span><span
+            class="method-args">(value)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
         </div>
         
-        
 
         <div class="method-description">
           
-          <p>Set selectors from Hash</p>
-
-<p>NOTE: the values must be properly escaped (replace &amp; with &amp;amp;,
-etc.) in Ruby use CGI::escapeHTML()</p>
+          <p>assign hash to selectors</p>
           
           
 
           
           <div class="method-source-code" id="selectors-3D-source">
-            <pre>void set_selectors(VALUE hash)
-  {
-    $self-&gt;selectors = value2hash(NULL, hash, 0);
-  }
-
-  %rename( &quot;selectors&quot; ) get_selectors(void);
-  /*
-   * Get selectors as Hash
-   *
-   * call-seq:
-   *   options.selectors -&gt; Hash
-   *
-   */
-  VALUE get_selectors(void)
-  {
-    return hash2value($self-&gt;selectors);
-  }
-
-
-
-  /*
-   * Add a property as key/value pair
-   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
-   * * Key is evaluated as String
-   * * Value is evaluated as String or EndPointReference
-   *
-   * call-seq:
-   *   options.add_property &quot;Key&quot;, &quot;Value&quot;
-   *   options.add_property &quot;Key&quot;, EndPointReference.new(...)
-   *
-   */
-  void add_property(VALUE k, VALUE v)
-  {
-    const char *key = as_string(k);
-    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
-
-    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
-      const epr_t *epr;
-      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
-      wsmc_add_property_epr($self, key, epr);
-    }
-    else {
-      const char *value = as_string(v);
-      wsmc_add_property($self, key, value);
-    }
-  }
-
-  
-
-  %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
-  /*
-   * Set properties from Hash
-   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
-   *
-   * call-seq:
-   *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
-   *
-   */
-  void set_properties(VALUE hash)
-  {
-    $self-&gt;properties = value2hash(NULL, hash, 0);
-  }
-
-  %rename( &quot;properties&quot; ) get_properties(void);
-  /*
-   * Get properties as Hash
-   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
-   *
-   * call-seq:
-   *   options.properties -&gt; Hash
-   *
-   */
-  VALUE get_properties(void)
-  {
-    return hash2value($self-&gt;properties);
-  }
-
-
-
-  %rename( &quot;delivery_uri=&quot; ) set_delivery_uri(const char *delivery_uri);
-
-  /*
-   * Set delivery uri
-   *
-   * call-seq:
-   *   options.delivery_uri = &quot;http://...&quot;
-   *
-   */
-  void set_delivery_uri( const char *delivery_uri ) {
-    wsmc_set_delivery_uri(delivery_uri, $self);
-  }
-
-  /*
-   * Get delivery uri
-   *
-   * call-seq:
-   *   options.delivery_uri -&gt; String
-   *
-   */
-  const char *delivery_uri() {
-    return $self-&gt;delivery_uri;
-  }
-
-
-  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(unsigned int event_subscription_expire);
-
-  /*
-   * Set subscription expiry timeout (in seconds)
-   *
-   * call-seq:
-   *   options.sub_expiry = 600 # 10 mins
-   *
-   */
-  void set_sub_expiry(unsigned int event_subscription_expire) {
-        wsmc_set_sub_expiry(event_subscription_expire, $self);
-  }
-
-  /*
-   * Get subscription expiry timeout (in seconds)
-   *
-   * call-seq:
-   *   options.sub_expiry -&gt; Integer
-   *
-   */
-  int sub_expiry() {
-    return $self-&gt;expires;
-  }
-
-
-  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(unsigned int heartbeat_interval);
-
-  /*
-   * Set subscription heartbeat interval (in seconds)
-   *
-   * call-seq:
-   *   options.heartbeat_interval = 60 # every minute
-   *
-   */
-  void set_heartbeat_interval(unsigned int heartbeat_interval) {
-        wsmc_set_heartbeat_interval(heartbeat_interval, $self);
-  }
-
-  /*
-   * Get subscription heartbeat interval (in seconds)
-   *
-   * call-seq:
-   *   options.heartbeat_interval -&gt; Integer
-   *
-   */
-  int heartbeat_interval() {
-    return $self-&gt;heartbeat_interval;
-  }
-
-
-  %rename( &quot;delivery_mode=&quot; ) set_delivery_mode(unsigned int delivery_mode);
-
-  /*
-   * Set subscription delivery mode (push, pushwithack,events,pull)
-   *
-   * call-seq:
-   *   options.delivery_mode = Openwsman::WSMAN_DELIVERY_PUSH
-   *
-   */
-  void set_delivery_mode(unsigned int delivery_mode) {
-    if (delivery_mode &gt; WSMAN_DELIVERY_PULL)
-      SWIG_exception( SWIG_ValueError, &quot;Bad delivery mode&quot; );
-        
-    wsmc_set_delivery_mode(delivery_mode, $self);
-
-  }
-
-  /*
-   * Get subscription delivery mode (push, pushwithack,events,pull)
-   *
-   * call-seq:
-   *   options.delivery_mode -&gt; Integer
-   *
-   */
-  int delivery_mode() {
-    return $self-&gt;delivery_mode;
-  }
-
-
-  %rename( &quot;delivery_security_mode=&quot; ) set_delivery_security_mode(unsigned int delivery_mode);
-
-  /*
-   * Set subscription delivery security mode
-   *
-   * (auto, http basic, http digest, https basic, https digest,
-   * https mutual, https mutual basic, https mutual digest,
-   * http spnego kerberos, https spnego kerberos,
-   * https mutual spnego kerberos)
-   *
-   * call-seq:
-   *   options.delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
-   *
-   */
-  void set_delivery_security_mode(unsigned int delivery_sec_mode) {
-    if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
-      SWIG_exception( SWIG_ValueError, &quot;Bad delivery security mode&quot; );
-    wsmc_set_delivery_security_mode(delivery_sec_mode, $self);
-
-  }
-  
-  /*
-   * Get subscription delivery security mode
-   *
-   * call-seq:
-   *   options.delivery_security_mode -&gt; Integer
-   *
-   */
-  int delivery_sec_mode() {
-    return $self-&gt;delivery_sec_mode;
-  }
-
-}</pre>
+            <pre><span class="ruby-comment"># File openwsman/openwsman.rb, line 52</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">selectors=</span> <span class="ruby-identifier">value</span>
+  <span class="ruby-identifier">value</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">add_selector</span> <span class="ruby-identifier">k</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">v</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -10578,38 +9764,30 @@ href="ClientOptions.html#method-i-clear_dump_request">#clear_dump_request</a></p
    * Add a selector as key/value pair
    *
    * NOTE:
-   * the value must be properly escaped (replace &amp; with &amp;amp;, etc.)
+   * the string value must be properly escaped (replace &amp; with &amp;amp;, etc.)
    * in Ruby use CGI::escapeHTML()
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_selector &quot;Key&quot;, end_point_reference
    *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
-
-    wsmc_add_selector($self, key, value);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_selector_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_selector($self, key, value);
+    }
   }
 
 
-  %rename( &quot;selectors=&quot; ) set_selectors(VALUE hash);
-  /*
-   * Set selectors from Hash
-   *
-   * NOTE:
-   * the values must be properly escaped (replace &amp; with &amp;amp;, etc.)
-   * in Ruby use CGI::escapeHTML()
-   *
-   * call-seq:
-   *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
-   *
-   */
-  void set_selectors(VALUE hash)
-  {
-    $self-&gt;selectors = value2hash(NULL, hash, 0);
-  }
 
   %rename( &quot;selectors&quot; ) get_selectors(void);
   /*
@@ -10621,7 +9799,7 @@ href="ClientOptions.html#method-i-clear_dump_request">#clear_dump_request</a></p
    */
   VALUE get_selectors(void)
   {
-    return hash2value($self-&gt;selectors);
+    return kv_list_to_hash($self-&gt;selectors);
   }
 
 
@@ -10655,20 +9833,6 @@ href="ClientOptions.html#method-i-clear_dump_request">#clear_dump_request</a></p
 
   
 
-  %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
-  /*
-   * Set properties from Hash
-   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
-   *
-   * call-seq:
-   *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
-   *
-   */
-  void set_properties(VALUE hash)
-  {
-    $self-&gt;properties = value2hash(NULL, hash, 0);
-  }
-
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
@@ -10680,7 +9844,7 @@ href="ClientOptions.html#method-i-clear_dump_request">#clear_dump_request</a></p
    */
   VALUE get_properties(void)
   {
-    return hash2value($self-&gt;properties);
+    return kv_list_to_hash($self-&gt;properties);
   }
 
 
@@ -11276,38 +10440,30 @@ transport timeout</p>
    * Add a selector as key/value pair
    *
    * NOTE:
-   * the value must be properly escaped (replace &amp; with &amp;amp;, etc.)
+   * the string value must be properly escaped (replace &amp; with &amp;amp;, etc.)
    * in Ruby use CGI::escapeHTML()
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_selector &quot;Key&quot;, end_point_reference
    *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
-
-    wsmc_add_selector($self, key, value);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_selector_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_selector($self, key, value);
+    }
   }
 
 
-  %rename( &quot;selectors=&quot; ) set_selectors(VALUE hash);
-  /*
-   * Set selectors from Hash
-   *
-   * NOTE:
-   * the values must be properly escaped (replace &amp; with &amp;amp;, etc.)
-   * in Ruby use CGI::escapeHTML()
-   *
-   * call-seq:
-   *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
-   *
-   */
-  void set_selectors(VALUE hash)
-  {
-    $self-&gt;selectors = value2hash(NULL, hash, 0);
-  }
 
   %rename( &quot;selectors&quot; ) get_selectors(void);
   /*
@@ -11319,7 +10475,7 @@ transport timeout</p>
    */
   VALUE get_selectors(void)
   {
-    return hash2value($self-&gt;selectors);
+    return kv_list_to_hash($self-&gt;selectors);
   }
 
 
@@ -11353,20 +10509,6 @@ transport timeout</p>
 
   
 
-  %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
-  /*
-   * Set properties from Hash
-   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
-   *
-   * call-seq:
-   *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
-   *
-   */
-  void set_properties(VALUE hash)
-  {
-    $self-&gt;properties = value2hash(NULL, hash, 0);
-  }
-
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
@@ -11378,7 +10520,7 @@ transport timeout</p>
    */
   VALUE get_properties(void)
   {
-    return hash2value($self-&gt;properties);
+    return kv_list_to_hash($self-&gt;properties);
   }
 
 
@@ -11730,38 +10872,30 @@ transport timeout</p>
    * Add a selector as key/value pair
    *
    * NOTE:
-   * the value must be properly escaped (replace &amp; with &amp;amp;, etc.)
+   * the string value must be properly escaped (replace &amp; with &amp;amp;, etc.)
    * in Ruby use CGI::escapeHTML()
    *
    * call-seq:
    *   options.add_selector &quot;Key&quot;, &quot;Value&quot;
+   *   options.add_selector &quot;Key&quot;, end_point_reference
    *
    */
   void add_selector(VALUE k, VALUE v)
   {
     const char *key = as_string(k);
-    const char *value = as_string(v);
-
-    wsmc_add_selector($self, key, value);
+    KLASS_DECL(SwigClassEndPointReference,SWIGTYPE_p_epr_t);
+    if (CLASS_OF(v) == KLASS_OF(SwigClassEndPointReference)) {
+      epr_t *epr;
+      SWIG_ConvertPtr(v, (void **)&amp;epr, SWIGTYPE_p_epr_t, 0);
+      wsmc_add_selector_epr($self, key, epr);
+    }
+    else {
+      const char *value = as_string(v);
+      wsmc_add_selector($self, key, value);
+    }
   }
 
 
-  %rename( &quot;selectors=&quot; ) set_selectors(VALUE hash);
-  /*
-   * Set selectors from Hash
-   *
-   * NOTE:
-   * the values must be properly escaped (replace &amp; with &amp;amp;, etc.)
-   * in Ruby use CGI::escapeHTML()
-   *
-   * call-seq:
-   *   options.selectors = { &quot;Key&quot; =&gt; &quot;Value&quot;, ... }
-   *
-   */
-  void set_selectors(VALUE hash)
-  {
-    $self-&gt;selectors = value2hash(NULL, hash, 0);
-  }
 
   %rename( &quot;selectors&quot; ) get_selectors(void);
   /*
@@ -11773,7 +10907,7 @@ transport timeout</p>
    */
   VALUE get_selectors(void)
   {
-    return hash2value($self-&gt;selectors);
+    return kv_list_to_hash($self-&gt;selectors);
   }
 
 
@@ -11807,20 +10941,6 @@ transport timeout</p>
 
   
 
-  %rename( &quot;properties=&quot; ) set_properties(VALUE hash);
-  /*
-   * Set properties from Hash
-   * * Input parameters to &#39;invoke&#39;d methods are represented as ClientOption properties
-   *
-   * call-seq:
-   *   options.properties = { &quot;Key&quot; =&gt; &quot;Value&quot;, ...}
-   *
-   */
-  void set_properties(VALUE hash)
-  {
-    $self-&gt;properties = value2hash(NULL, hash, 0);
-  }
-
   %rename( &quot;properties&quot; ) get_properties(void);
   /*
    * Get properties as Hash
@@ -11832,7 +10952,7 @@ transport timeout</p>
    */
   VALUE get_properties(void)
   {
-    return hash2value($self-&gt;properties);
+    return kv_list_to_hash($self-&gt;properties);
   }
 
 
@@ -11992,7 +11112,7 @@ transport timeout</p>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.0.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

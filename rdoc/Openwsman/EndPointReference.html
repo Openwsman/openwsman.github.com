@@ -6,19 +6,16 @@
 
 <title>class Openwsman::EndPointReference - Openwsman - WS-Management for all</title>
 
-<link href="../fonts.css" rel="stylesheet">
-<link href="../rdoc.css" rel="stylesheet">
-
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
 </script>
 
 <script src="../js/jquery.js"></script>
-<script src="../js/navigation.js"></script>
-<script src="../js/search_index.js"></script>
-<script src="../js/search.js"></script>
-<script src="../js/searcher.js"></script>
 <script src="../js/darkfish.js"></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
 
 
 <body id="top" role="document" class="class">
@@ -73,8 +70,6 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-c-new">::new</a>
-    
     <li ><a href="#method-i-add_selector">#add_selector</a>
     
     <li ><a href="#method-i-classname">#classname</a>
@@ -101,8 +96,6 @@
     
     <li ><a href="#method-i-to_s">#to_s</a>
     
-    <li ><a href="#method-i-to_xml">#to_xml</a>
-    
   </ul>
 </div>
 
@@ -122,6 +115,8 @@ proxy server-side operations</p>
 <p>Each WS-Management operation (Get, Enumerate, Invoke, …) has an associated
 end point reference, providing the actual implementation of the operation.</p>
 
+<p><a href="EndPointReference.html">EndPointReference</a></p>
+
   </section>
 
   
@@ -137,286 +132,6 @@ end point reference, providing the actual implementation of the operation.</p>
     
 
     
-     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
-       <header>
-         <h3>Public Class Methods</h3>
-       </header>
-
-    
-      <div id="method-c-new" class="method-detail ">
-        
-        
-        <div class="method-heading">
-          <span class="method-callseq">
-            new(uri, address, { key&rarr;value, ...})
-          </span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-        <div class="method-heading">
-          <span class="method-callseq">
-            new(uri)
-          </span>
-          
-        </div>
-        
-        <div class="method-heading">
-          <span class="method-callseq">
-            new(xml)
-          </span>
-          
-        </div>
-        
-        
-
-        <div class="method-description">
-          
-          <p>Create <a href="EndPointReference.html">EndPointReference</a> from URI
-(String) or XML (XmlNode or XmlDoc)</p>
-          
-          
-
-          
-          <div class="method-source-code" id="new-source">
-            <pre>( VALUE uri, VALUE address = Qnil, VALUE selectors = Qnil) {
-    KLASS_DECL(SwigClassXmlNode,SWIGTYPE_p___WsXmlNode);
-    KLASS_DECL(SwigClassXmlDoc,SWIGTYPE_p__WsXmlDoc);
-    if (!NIL_P(address) || !NIL_P(selectors)) {
-      const char *uri_s = as_string(uri);
-      const char *address_s = as_string(address);
-      return epr_create(uri_s, value2hash(NULL,selectors,1), address_s);
-    }
-    else if (CLASS_OF(uri) == KLASS_OF(SwigClassXmlNode)) {
-      WsXmlNodeH node;
-      SWIG_ConvertPtr(uri, (void **)&amp;node, SWIGTYPE_p___WsXmlNode, 0);
-      return my_epr_deserialize(node);
-    }
-    else if (CLASS_OF(uri) == KLASS_OF(SwigClassXmlDoc)) {
-      WsXmlDocH doc;
-      WsXmlNodeH node;
-      SWIG_ConvertPtr(uri, (void **)&amp;doc, SWIGTYPE_p__WsXmlDoc, 0);
-      node = ws_xml_get_soap_body(doc);
-      if (node == NULL)
-        node = ws_xml_get_doc_root(doc);
-      return my_epr_deserialize(node);
-    }
-    else {
-      return epr_from_string(as_string(uri));
-    }
-  }
-
-
-  ~epr_t() {
-    epr_destroy( $self );
-  }
-
-
-  %newobject clone;
-  /*
-   * clone the EndPointReference instance
-   *
-   */
-  epr_t *clone(const epr_t *epr) {
-    return epr_copy(epr);
-  }
-
-
-  /*
-   * Add selector as key/value pair
-   *
-   */
-  void add_selector(const char *name, const char *text) {
-    epr_add_selector_text($self, name, text);
-  }
-
-  /*
-   * Serialization
-   *
-   * XML-serialize EndPointReference as child (with namespace and name) of node
-   *
-   */
-  int serialize( WsXmlNodeH node, const char *ns, const char *epr_node_name, int embedded) {
-    return epr_serialize(node, ns, epr_node_name, $self, embedded);
-  }
-  
-
-  %alias cmp &quot;==&quot;;
-  %typemap(out) int cmp
-    &quot;$result = ($1 == 0) ? Qtrue : Qfalse;&quot;;
-
-  /*
-   * Compare two EndPointReferences
-   *
-   */
-  int cmp(const epr_t *epr2) {
-    return epr_cmp($self, epr2);
-  }
-  
-  /*
-   * String representation (XML syntax)
-   *
-   */
-  char *to_xml( const char *ns = NULL, const char *epr_node_name = NULL) {
-    return epr_to_txt($self, ns?ns:XML_NS_ADDRESSING, epr_node_name?epr_node_name:WSA_EPR);
-  }
-
-
-
-  %rename(&quot;to_s&quot;) string();
-
-  %newobject string;
-  /*
-   * String representation (&lt;uri&gt;?&lt;selector&gt;,&lt;selector&gt;,...)
-   *
-   */
-  char *string() {
-    return epr_to_string($self);
-  }
-
-  /*
-   * Number of selectors
-   */
-  int selector_count(void) {
-    return epr_selector_count($self);
-  }
-
-  /*
-   * The resource URI associated to this EndPointReference
-   *
-   */
-  char *resource_uri(void) {
-    return epr_get_resource_uri($self);
-  }
-  
-
-  /*
-   * Get value of selector by name
-   * epr#selector converts any value passed to String
-   *
-   * ==== Shortcut
-   * epr.selector(&quot;name&quot;) can also be abbreviated as epr.name
-   *
-   * ==== Examples
-   *   epr.selector(&quot;name&quot;)
-   *   epr.selector(value)
-   *   epr.name
-   */
-  char *selector(VALUE v) {
-    const char *name = as_string(v);
-
-    return wsman_epr_selector_by_name($self, name);
-  }
-
-
-  /*
-   * Return list of selector names
-   */
-  VALUE selector_names(void) {
-    int i;
-    VALUE ary = rb_ary_new2($self-&gt;refparams.selectorset.count);
-    Selector *p = $self-&gt;refparams.selectorset.selectors;
-    for (i = 0; i &lt; $self-&gt;refparams.selectorset.count; i++) {
-      rb_ary_store(ary, i, SWIG_FromCharPtr(p-&gt;name));
-      ++p;
-    }
-    return ary;
-  }
-
-
-
-  /*
-   * enumerate over selectors as key,value pairs
-   *
-   * call-seq:
-   *   epr.each { |key,value| ... }
-   *
-   */
-  void each() {
-    int i;
-    Selector *p = NULL;
-    VALUE value, ary;
-    p = $self-&gt;refparams.selectorset.selectors;
-    for (i = 0; i &lt; $self-&gt;refparams.selectorset.count; i++) {
-      ary = rb_ary_new2(2);
-      rb_ary_store(ary, 0, SWIG_FromCharPtr(p-&gt;name));
-      if (p-&gt;type == 0) {
-        value = SWIG_FromCharPtr(p-&gt;value);
-      } else {
-        char *epr_value = epr_to_string((const epr_t *)p-&gt;value);
-        value = SWIG_FromCharPtr(epr_value);
-        u_free(epr_value);
-      }
-      rb_ary_store(ary, 1, value);
-      rb_yield(ary);
-      p++;
-    }
-  }
-
-
-  %newobject classname;
-  /*
-   * Classname of EPR
-   */
-  char *classname(void) {
-    return uri_classname($self-&gt;refparams.uri);
-  }
- 
-  %newobject namespace;
-  /*
-   * Namespace of EPR
-   */
-  char *namespace(void) {
-    char *classname;
-    int classnamelen, namespacelen;
-    const char *prefix;
-    const char *uri;
-
-    /* try to get namespace from selectors (WS-Management style) */
-    char *ns = get_cimnamespace_from_selectorset(&amp;($self-&gt;refparams.selectorset));
-    if (ns) {
-      return strdup(ns);
-    }
-    /* WMI style? - extract namespace from uri */
-
-    uri = $self-&gt;refparams.uri;
-    prefix = epr_prefix(uri);
-    if (prefix == NULL) {
-      return NULL; /* bad classname in URI */
-    }
-    classname = uri_classname(uri);
-    if (classname == NULL)
-      return NULL; /* bad URI */
-    classnamelen = strlen(classname);
-    free(classname);
-    namespacelen = strlen(uri) - classnamelen - strlen(prefix) - 2; /* drop enclosing slashes */
-    if (namespacelen &lt;= 0)
-      return strdup(&quot;&quot;);
-    /* copy after prefix slash (+ 1) */
-    return strndup(uri + strlen(prefix) + 1, namespacelen);
-  }
-  
-  %newobject prefix;
-  /*
-   * Prefix of EPR
-   */
-  char *prefix(void) {
-    return epr_prefix($self-&gt;refparams.uri);
-  }
-}</pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-    </section>
-  
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Instance Methods</h3>
@@ -524,21 +239,27 @@ end point reference, providing the actual implementation of the operation.</p>
     return wsman_epr_selector_by_name($self, name);
   }
 
-
+#if !defined(SWIGJAVA) /* Target_* undefined for Java in openwsman.i */
   /*
    * Return list of selector names
    */
+
   VALUE selector_names(void) {
+
+
+
     int i;
-    VALUE ary = rb_ary_new2($self-&gt;refparams.selectorset.count);
-    Selector *p = $self-&gt;refparams.selectorset.selectors;
+    Target_Type ary = Target_SizedArray($self-&gt;refparams.selectorset.count);
+    key_value_t *p = $self-&gt;refparams.selectorset.selectors;
     for (i = 0; i &lt; $self-&gt;refparams.selectorset.count; i++) {
-      rb_ary_store(ary, i, SWIG_FromCharPtr(p-&gt;name));
+      Target_ListSet(ary, i, SWIG_FromCharPtr(p-&gt;key));
       ++p;
     }
-    return ary;
-  }
 
+    return ary;
+
+  }
+#endif
 
 
   /*
@@ -550,18 +271,16 @@ end point reference, providing the actual implementation of the operation.</p>
    */
   void each() {
     int i;
-    Selector *p = NULL;
+    key_value_t *p = NULL;
     VALUE value, ary;
     p = $self-&gt;refparams.selectorset.selectors;
     for (i = 0; i &lt; $self-&gt;refparams.selectorset.count; i++) {
       ary = rb_ary_new2(2);
-      rb_ary_store(ary, 0, SWIG_FromCharPtr(p-&gt;name));
+      rb_ary_store(ary, 0, SWIG_FromCharPtr(p-&gt;key));
       if (p-&gt;type == 0) {
-        value = SWIG_FromCharPtr(p-&gt;value);
+        value = SWIG_FromCharPtr(p-&gt;v.text);
       } else {
-        char *epr_value = epr_to_string((const epr_t *)p-&gt;value);
-        value = SWIG_FromCharPtr(epr_value);
-        u_free(epr_value);
+        value = SWIG_NewPointerObj((void*) p-&gt;v.epr, SWIGTYPE_p_epr_t, 0);
       }
       rb_ary_store(ary, 1, value);
       rb_yield(ary);
@@ -815,21 +534,27 @@ end point reference, providing the actual implementation of the operation.</p>
     return wsman_epr_selector_by_name($self, name);
   }
 
-
+#if !defined(SWIGJAVA) /* Target_* undefined for Java in openwsman.i */
   /*
    * Return list of selector names
    */
+
   VALUE selector_names(void) {
+
+
+
     int i;
-    VALUE ary = rb_ary_new2($self-&gt;refparams.selectorset.count);
-    Selector *p = $self-&gt;refparams.selectorset.selectors;
+    Target_Type ary = Target_SizedArray($self-&gt;refparams.selectorset.count);
+    key_value_t *p = $self-&gt;refparams.selectorset.selectors;
     for (i = 0; i &lt; $self-&gt;refparams.selectorset.count; i++) {
-      rb_ary_store(ary, i, SWIG_FromCharPtr(p-&gt;name));
+      Target_ListSet(ary, i, SWIG_FromCharPtr(p-&gt;key));
       ++p;
     }
-    return ary;
-  }
 
+    return ary;
+
+  }
+#endif
 
 
   /*
@@ -841,18 +566,16 @@ end point reference, providing the actual implementation of the operation.</p>
    */
   void each() {
     int i;
-    Selector *p = NULL;
+    key_value_t *p = NULL;
     VALUE value, ary;
     p = $self-&gt;refparams.selectorset.selectors;
     for (i = 0; i &lt; $self-&gt;refparams.selectorset.count; i++) {
       ary = rb_ary_new2(2);
-      rb_ary_store(ary, 0, SWIG_FromCharPtr(p-&gt;name));
+      rb_ary_store(ary, 0, SWIG_FromCharPtr(p-&gt;key));
       if (p-&gt;type == 0) {
-        value = SWIG_FromCharPtr(p-&gt;value);
+        value = SWIG_FromCharPtr(p-&gt;v.text);
       } else {
-        char *epr_value = epr_to_string((const epr_t *)p-&gt;value);
-        value = SWIG_FromCharPtr(epr_value);
-        u_free(epr_value);
+        value = SWIG_NewPointerObj((void*) p-&gt;v.epr, SWIGTYPE_p_epr_t, 0);
       }
       rb_ary_store(ary, 1, value);
       rb_yield(ary);
@@ -999,21 +722,27 @@ end point reference, providing the actual implementation of the operation.</p>
     return wsman_epr_selector_by_name($self, name);
   }
 
-
+#if !defined(SWIGJAVA) /* Target_* undefined for Java in openwsman.i */
   /*
    * Return list of selector names
    */
+
   VALUE selector_names(void) {
+
+
+
     int i;
-    VALUE ary = rb_ary_new2($self-&gt;refparams.selectorset.count);
-    Selector *p = $self-&gt;refparams.selectorset.selectors;
+    Target_Type ary = Target_SizedArray($self-&gt;refparams.selectorset.count);
+    key_value_t *p = $self-&gt;refparams.selectorset.selectors;
     for (i = 0; i &lt; $self-&gt;refparams.selectorset.count; i++) {
-      rb_ary_store(ary, i, SWIG_FromCharPtr(p-&gt;name));
+      Target_ListSet(ary, i, SWIG_FromCharPtr(p-&gt;key));
       ++p;
     }
-    return ary;
-  }
 
+    return ary;
+
+  }
+#endif
 
 
   /*
@@ -1025,18 +754,16 @@ end point reference, providing the actual implementation of the operation.</p>
    */
   void each() {
     int i;
-    Selector *p = NULL;
+    key_value_t *p = NULL;
     VALUE value, ary;
     p = $self-&gt;refparams.selectorset.selectors;
     for (i = 0; i &lt; $self-&gt;refparams.selectorset.count; i++) {
       ary = rb_ary_new2(2);
-      rb_ary_store(ary, 0, SWIG_FromCharPtr(p-&gt;name));
+      rb_ary_store(ary, 0, SWIG_FromCharPtr(p-&gt;key));
       if (p-&gt;type == 0) {
-        value = SWIG_FromCharPtr(p-&gt;value);
+        value = SWIG_FromCharPtr(p-&gt;v.text);
       } else {
-        char *epr_value = epr_to_string((const epr_t *)p-&gt;value);
-        value = SWIG_FromCharPtr(epr_value);
-        u_free(epr_value);
+        value = SWIG_NewPointerObj((void*) p-&gt;v.epr, SWIGTYPE_p_epr_t, 0);
       }
       rb_ary_store(ary, 1, value);
       rb_yield(ary);
@@ -1129,18 +856,16 @@ end point reference, providing the actual implementation of the operation.</p>
           <div class="method-source-code" id="each-source">
             <pre>void each() {
     int i;
-    Selector *p = NULL;
+    key_value_t *p = NULL;
     VALUE value, ary;
     p = $self-&gt;refparams.selectorset.selectors;
     for (i = 0; i &lt; $self-&gt;refparams.selectorset.count; i++) {
       ary = rb_ary_new2(2);
-      rb_ary_store(ary, 0, SWIG_FromCharPtr(p-&gt;name));
+      rb_ary_store(ary, 0, SWIG_FromCharPtr(p-&gt;key));
       if (p-&gt;type == 0) {
-        value = SWIG_FromCharPtr(p-&gt;value);
+        value = SWIG_FromCharPtr(p-&gt;v.text);
       } else {
-        char *epr_value = epr_to_string((const epr_t *)p-&gt;value);
-        value = SWIG_FromCharPtr(epr_value);
-        u_free(epr_value);
+        value = SWIG_NewPointerObj((void*) p-&gt;v.epr, SWIGTYPE_p_epr_t, 0);
       }
       rb_ary_store(ary, 1, value);
       rb_yield(ary);
@@ -1352,21 +1077,27 @@ href="EndPointReference.html">EndPointReference</a></p>
     return wsman_epr_selector_by_name($self, name);
   }
 
-
+#if !defined(SWIGJAVA) /* Target_* undefined for Java in openwsman.i */
   /*
    * Return list of selector names
    */
+
   VALUE selector_names(void) {
+
+
+
     int i;
-    VALUE ary = rb_ary_new2($self-&gt;refparams.selectorset.count);
-    Selector *p = $self-&gt;refparams.selectorset.selectors;
+    Target_Type ary = Target_SizedArray($self-&gt;refparams.selectorset.count);
+    key_value_t *p = $self-&gt;refparams.selectorset.selectors;
     for (i = 0; i &lt; $self-&gt;refparams.selectorset.count; i++) {
-      rb_ary_store(ary, i, SWIG_FromCharPtr(p-&gt;name));
+      Target_ListSet(ary, i, SWIG_FromCharPtr(p-&gt;key));
       ++p;
     }
-    return ary;
-  }
 
+    return ary;
+
+  }
+#endif
 
 
   /*
@@ -1378,18 +1109,16 @@ href="EndPointReference.html">EndPointReference</a></p>
    */
   void each() {
     int i;
-    Selector *p = NULL;
+    key_value_t *p = NULL;
     VALUE value, ary;
     p = $self-&gt;refparams.selectorset.selectors;
     for (i = 0; i &lt; $self-&gt;refparams.selectorset.count; i++) {
       ary = rb_ary_new2(2);
-      rb_ary_store(ary, 0, SWIG_FromCharPtr(p-&gt;name));
+      rb_ary_store(ary, 0, SWIG_FromCharPtr(p-&gt;key));
       if (p-&gt;type == 0) {
-        value = SWIG_FromCharPtr(p-&gt;value);
+        value = SWIG_FromCharPtr(p-&gt;v.text);
       } else {
-        char *epr_value = epr_to_string((const epr_t *)p-&gt;value);
-        value = SWIG_FromCharPtr(epr_value);
-        u_free(epr_value);
+        value = SWIG_NewPointerObj((void*) p-&gt;v.epr, SWIGTYPE_p_epr_t, 0);
       }
       rb_ary_store(ary, 1, value);
       rb_yield(ary);
@@ -1474,15 +1203,16 @@ href="EndPointReference.html">EndPointReference</a></p>
           <p>Get value of selector by name epr#selector converts any value passed to
 String</p>
 
-<h4 id="method-i-selector-label-Shortcut">Shortcut<span><a href="#method-i-selector-label-Shortcut">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+<h4 id="method-i-selector-label-Shortcut">Shortcut<span><a href="#method-i-selector-label-Shortcut">&para;</a> <a href="#top">&uarr;</a></span></h4>
 
 <p>epr.selector(“name”) can also be abbreviated as epr.name</p>
 
-<h4 id="method-i-selector-label-Examples">Examples<span><a href="#method-i-selector-label-Examples">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+<h4 id="method-i-selector-label-Examples">Examples<span><a href="#method-i-selector-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h4>
 
-<pre>epr.selector(&quot;name&quot;)
-epr.selector(value)
-epr.name</pre>
+<pre class="ruby"><span class="ruby-identifier">epr</span>.<span class="ruby-identifier">selector</span>(<span class="ruby-string">&quot;name&quot;</span>)
+<span class="ruby-identifier">epr</span>.<span class="ruby-identifier">selector</span>(<span class="ruby-identifier">value</span>)
+<span class="ruby-identifier">epr</span>.<span class="ruby-identifier">name</span>
+</pre>
           
           
 
@@ -1494,21 +1224,27 @@ epr.name</pre>
     return wsman_epr_selector_by_name($self, name);
   }
 
-
+#if !defined(SWIGJAVA) /* Target_* undefined for Java in openwsman.i */
   /*
    * Return list of selector names
    */
+
   VALUE selector_names(void) {
+
+
+
     int i;
-    VALUE ary = rb_ary_new2($self-&gt;refparams.selectorset.count);
-    Selector *p = $self-&gt;refparams.selectorset.selectors;
+    Target_Type ary = Target_SizedArray($self-&gt;refparams.selectorset.count);
+    key_value_t *p = $self-&gt;refparams.selectorset.selectors;
     for (i = 0; i &lt; $self-&gt;refparams.selectorset.count; i++) {
-      rb_ary_store(ary, i, SWIG_FromCharPtr(p-&gt;name));
+      Target_ListSet(ary, i, SWIG_FromCharPtr(p-&gt;key));
       ++p;
     }
-    return ary;
-  }
 
+    return ary;
+
+  }
+#endif
 
 
   /*
@@ -1520,18 +1256,16 @@ epr.name</pre>
    */
   void each() {
     int i;
-    Selector *p = NULL;
+    key_value_t *p = NULL;
     VALUE value, ary;
     p = $self-&gt;refparams.selectorset.selectors;
     for (i = 0; i &lt; $self-&gt;refparams.selectorset.count; i++) {
       ary = rb_ary_new2(2);
-      rb_ary_store(ary, 0, SWIG_FromCharPtr(p-&gt;name));
+      rb_ary_store(ary, 0, SWIG_FromCharPtr(p-&gt;key));
       if (p-&gt;type == 0) {
-        value = SWIG_FromCharPtr(p-&gt;value);
+        value = SWIG_FromCharPtr(p-&gt;v.text);
       } else {
-        char *epr_value = epr_to_string((const epr_t *)p-&gt;value);
-        value = SWIG_FromCharPtr(epr_value);
-        u_free(epr_value);
+        value = SWIG_NewPointerObj((void*) p-&gt;v.epr, SWIGTYPE_p_epr_t, 0);
       }
       rb_ary_store(ary, 1, value);
       rb_yield(ary);
@@ -1650,21 +1384,27 @@ epr.name</pre>
     return wsman_epr_selector_by_name($self, name);
   }
 
-
+#if !defined(SWIGJAVA) /* Target_* undefined for Java in openwsman.i */
   /*
    * Return list of selector names
    */
+
   VALUE selector_names(void) {
+
+
+
     int i;
-    VALUE ary = rb_ary_new2($self-&gt;refparams.selectorset.count);
-    Selector *p = $self-&gt;refparams.selectorset.selectors;
+    Target_Type ary = Target_SizedArray($self-&gt;refparams.selectorset.count);
+    key_value_t *p = $self-&gt;refparams.selectorset.selectors;
     for (i = 0; i &lt; $self-&gt;refparams.selectorset.count; i++) {
-      rb_ary_store(ary, i, SWIG_FromCharPtr(p-&gt;name));
+      Target_ListSet(ary, i, SWIG_FromCharPtr(p-&gt;key));
       ++p;
     }
-    return ary;
-  }
 
+    return ary;
+
+  }
+#endif
 
 
   /*
@@ -1676,18 +1416,16 @@ epr.name</pre>
    */
   void each() {
     int i;
-    Selector *p = NULL;
+    key_value_t *p = NULL;
     VALUE value, ary;
     p = $self-&gt;refparams.selectorset.selectors;
     for (i = 0; i &lt; $self-&gt;refparams.selectorset.count; i++) {
       ary = rb_ary_new2(2);
-      rb_ary_store(ary, 0, SWIG_FromCharPtr(p-&gt;name));
+      rb_ary_store(ary, 0, SWIG_FromCharPtr(p-&gt;key));
       if (p-&gt;type == 0) {
-        value = SWIG_FromCharPtr(p-&gt;value);
+        value = SWIG_FromCharPtr(p-&gt;v.text);
       } else {
-        char *epr_value = epr_to_string((const epr_t *)p-&gt;value);
-        value = SWIG_FromCharPtr(epr_value);
-        u_free(epr_value);
+        value = SWIG_NewPointerObj((void*) p-&gt;v.epr, SWIGTYPE_p_epr_t, 0);
       }
       rb_ary_store(ary, 1, value);
       rb_yield(ary);
@@ -1776,16 +1514,21 @@ epr.name</pre>
           
           <div class="method-source-code" id="selector_names-source">
             <pre>VALUE selector_names(void) {
+
+
+
     int i;
-    VALUE ary = rb_ary_new2($self-&gt;refparams.selectorset.count);
-    Selector *p = $self-&gt;refparams.selectorset.selectors;
+    Target_Type ary = Target_SizedArray($self-&gt;refparams.selectorset.count);
+    key_value_t *p = $self-&gt;refparams.selectorset.selectors;
     for (i = 0; i &lt; $self-&gt;refparams.selectorset.count; i++) {
-      rb_ary_store(ary, i, SWIG_FromCharPtr(p-&gt;name));
+      Target_ListSet(ary, i, SWIG_FromCharPtr(p-&gt;key));
       ++p;
     }
-    return ary;
-  }
 
+    return ary;
+
+  }
+#endif
 
 
   /*
@@ -1797,18 +1540,16 @@ epr.name</pre>
    */
   void each() {
     int i;
-    Selector *p = NULL;
+    key_value_t *p = NULL;
     VALUE value, ary;
     p = $self-&gt;refparams.selectorset.selectors;
     for (i = 0; i &lt; $self-&gt;refparams.selectorset.count; i++) {
       ary = rb_ary_new2(2);
-      rb_ary_store(ary, 0, SWIG_FromCharPtr(p-&gt;name));
+      rb_ary_store(ary, 0, SWIG_FromCharPtr(p-&gt;key));
       if (p-&gt;type == 0) {
-        value = SWIG_FromCharPtr(p-&gt;value);
+        value = SWIG_FromCharPtr(p-&gt;v.text);
       } else {
-        char *epr_value = epr_to_string((const epr_t *)p-&gt;value);
-        value = SWIG_FromCharPtr(epr_value);
-        u_free(epr_value);
+        value = SWIG_NewPointerObj((void*) p-&gt;v.epr, SWIGTYPE_p_epr_t, 0);
       }
       rb_ary_store(ary, 1, value);
       rb_yield(ary);
@@ -1971,21 +1712,27 @@ child (with namespace and name) of node</p>
     return wsman_epr_selector_by_name($self, name);
   }
 
-
+#if !defined(SWIGJAVA) /* Target_* undefined for Java in openwsman.i */
   /*
    * Return list of selector names
    */
+
   VALUE selector_names(void) {
+
+
+
     int i;
-    VALUE ary = rb_ary_new2($self-&gt;refparams.selectorset.count);
-    Selector *p = $self-&gt;refparams.selectorset.selectors;
+    Target_Type ary = Target_SizedArray($self-&gt;refparams.selectorset.count);
+    key_value_t *p = $self-&gt;refparams.selectorset.selectors;
     for (i = 0; i &lt; $self-&gt;refparams.selectorset.count; i++) {
-      rb_ary_store(ary, i, SWIG_FromCharPtr(p-&gt;name));
+      Target_ListSet(ary, i, SWIG_FromCharPtr(p-&gt;key));
       ++p;
     }
-    return ary;
-  }
 
+    return ary;
+
+  }
+#endif
 
 
   /*
@@ -1997,18 +1744,16 @@ child (with namespace and name) of node</p>
    */
   void each() {
     int i;
-    Selector *p = NULL;
+    key_value_t *p = NULL;
     VALUE value, ary;
     p = $self-&gt;refparams.selectorset.selectors;
     for (i = 0; i &lt; $self-&gt;refparams.selectorset.count; i++) {
       ary = rb_ary_new2(2);
-      rb_ary_store(ary, 0, SWIG_FromCharPtr(p-&gt;name));
+      rb_ary_store(ary, 0, SWIG_FromCharPtr(p-&gt;key));
       if (p-&gt;type == 0) {
-        value = SWIG_FromCharPtr(p-&gt;value);
+        value = SWIG_FromCharPtr(p-&gt;v.text);
       } else {
-        char *epr_value = epr_to_string((const epr_t *)p-&gt;value);
-        value = SWIG_FromCharPtr(epr_value);
-        u_free(epr_value);
+        value = SWIG_NewPointerObj((void*) p-&gt;v.epr, SWIGTYPE_p_epr_t, 0);
       }
       rb_ary_store(ary, 1, value);
       rb_yield(ary);
@@ -2134,21 +1879,27 @@ child (with namespace and name) of node</p>
     return wsman_epr_selector_by_name($self, name);
   }
 
-
+#if !defined(SWIGJAVA) /* Target_* undefined for Java in openwsman.i */
   /*
    * Return list of selector names
    */
+
   VALUE selector_names(void) {
+
+
+
     int i;
-    VALUE ary = rb_ary_new2($self-&gt;refparams.selectorset.count);
-    Selector *p = $self-&gt;refparams.selectorset.selectors;
+    Target_Type ary = Target_SizedArray($self-&gt;refparams.selectorset.count);
+    key_value_t *p = $self-&gt;refparams.selectorset.selectors;
     for (i = 0; i &lt; $self-&gt;refparams.selectorset.count; i++) {
-      rb_ary_store(ary, i, SWIG_FromCharPtr(p-&gt;name));
+      Target_ListSet(ary, i, SWIG_FromCharPtr(p-&gt;key));
       ++p;
     }
-    return ary;
-  }
 
+    return ary;
+
+  }
+#endif
 
 
   /*
@@ -2160,194 +1911,16 @@ child (with namespace and name) of node</p>
    */
   void each() {
     int i;
-    Selector *p = NULL;
+    key_value_t *p = NULL;
     VALUE value, ary;
     p = $self-&gt;refparams.selectorset.selectors;
     for (i = 0; i &lt; $self-&gt;refparams.selectorset.count; i++) {
       ary = rb_ary_new2(2);
-      rb_ary_store(ary, 0, SWIG_FromCharPtr(p-&gt;name));
+      rb_ary_store(ary, 0, SWIG_FromCharPtr(p-&gt;key));
       if (p-&gt;type == 0) {
-        value = SWIG_FromCharPtr(p-&gt;value);
+        value = SWIG_FromCharPtr(p-&gt;v.text);
       } else {
-        char *epr_value = epr_to_string((const epr_t *)p-&gt;value);
-        value = SWIG_FromCharPtr(epr_value);
-        u_free(epr_value);
-      }
-      rb_ary_store(ary, 1, value);
-      rb_yield(ary);
-      p++;
-    }
-  }
-
-
-  %newobject classname;
-  /*
-   * Classname of EPR
-   */
-  char *classname(void) {
-    return uri_classname($self-&gt;refparams.uri);
-  }
- 
-  %newobject namespace;
-  /*
-   * Namespace of EPR
-   */
-  char *namespace(void) {
-    char *classname;
-    int classnamelen, namespacelen;
-    const char *prefix;
-    const char *uri;
-
-    /* try to get namespace from selectors (WS-Management style) */
-    char *ns = get_cimnamespace_from_selectorset(&amp;($self-&gt;refparams.selectorset));
-    if (ns) {
-      return strdup(ns);
-    }
-    /* WMI style? - extract namespace from uri */
-
-    uri = $self-&gt;refparams.uri;
-    prefix = epr_prefix(uri);
-    if (prefix == NULL) {
-      return NULL; /* bad classname in URI */
-    }
-    classname = uri_classname(uri);
-    if (classname == NULL)
-      return NULL; /* bad URI */
-    classnamelen = strlen(classname);
-    free(classname);
-    namespacelen = strlen(uri) - classnamelen - strlen(prefix) - 2; /* drop enclosing slashes */
-    if (namespacelen &lt;= 0)
-      return strdup(&quot;&quot;);
-    /* copy after prefix slash (+ 1) */
-    return strndup(uri + strlen(prefix) + 1, namespacelen);
-  }
-  
-  %newobject prefix;
-  /*
-   * Prefix of EPR
-   */
-  char *prefix(void) {
-    return epr_prefix($self-&gt;refparams.uri);
-  }
-}</pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-to_xml" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">to_xml</span><span
-            class="method-args">(p1, p2)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>String representation (XML syntax)</p>
-          
-          
-
-          
-          <div class="method-source-code" id="to_xml-source">
-            <pre>char *to_xml( const char *ns = NULL, const char *epr_node_name = NULL) {
-    return epr_to_txt($self, ns?ns:XML_NS_ADDRESSING, epr_node_name?epr_node_name:WSA_EPR);
-  }
-
-
-
-  %rename(&quot;to_s&quot;) string();
-
-  %newobject string;
-  /*
-   * String representation (&lt;uri&gt;?&lt;selector&gt;,&lt;selector&gt;,...)
-   *
-   */
-  char *string() {
-    return epr_to_string($self);
-  }
-
-  /*
-   * Number of selectors
-   */
-  int selector_count(void) {
-    return epr_selector_count($self);
-  }
-
-  /*
-   * The resource URI associated to this EndPointReference
-   *
-   */
-  char *resource_uri(void) {
-    return epr_get_resource_uri($self);
-  }
-  
-
-  /*
-   * Get value of selector by name
-   * epr#selector converts any value passed to String
-   *
-   * ==== Shortcut
-   * epr.selector(&quot;name&quot;) can also be abbreviated as epr.name
-   *
-   * ==== Examples
-   *   epr.selector(&quot;name&quot;)
-   *   epr.selector(value)
-   *   epr.name
-   */
-  char *selector(VALUE v) {
-    const char *name = as_string(v);
-
-    return wsman_epr_selector_by_name($self, name);
-  }
-
-
-  /*
-   * Return list of selector names
-   */
-  VALUE selector_names(void) {
-    int i;
-    VALUE ary = rb_ary_new2($self-&gt;refparams.selectorset.count);
-    Selector *p = $self-&gt;refparams.selectorset.selectors;
-    for (i = 0; i &lt; $self-&gt;refparams.selectorset.count; i++) {
-      rb_ary_store(ary, i, SWIG_FromCharPtr(p-&gt;name));
-      ++p;
-    }
-    return ary;
-  }
-
-
-
-  /*
-   * enumerate over selectors as key,value pairs
-   *
-   * call-seq:
-   *   epr.each { |key,value| ... }
-   *
-   */
-  void each() {
-    int i;
-    Selector *p = NULL;
-    VALUE value, ary;
-    p = $self-&gt;refparams.selectorset.selectors;
-    for (i = 0; i &lt; $self-&gt;refparams.selectorset.count; i++) {
-      ary = rb_ary_new2(2);
-      rb_ary_store(ary, 0, SWIG_FromCharPtr(p-&gt;name));
-      if (p-&gt;type == 0) {
-        value = SWIG_FromCharPtr(p-&gt;value);
-      } else {
-        char *epr_value = epr_to_string((const epr_t *)p-&gt;value);
-        value = SWIG_FromCharPtr(epr_value);
-        u_free(epr_value);
+        value = SWIG_NewPointerObj((void*) p-&gt;v.epr, SWIGTYPE_p_epr_t, 0);
       }
       rb_ary_store(ary, 1, value);
       rb_yield(ary);
@@ -2424,7 +1997,7 @@ child (with namespace and name) of node</p>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.0.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

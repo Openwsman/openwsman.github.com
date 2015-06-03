@@ -6,19 +6,16 @@
 
 <title>class Openwsman::Context - Openwsman - WS-Management for all</title>
 
-<link href="../fonts.css" rel="stylesheet">
-<link href="../rdoc.css" rel="stylesheet">
-
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
 </script>
 
 <script src="../js/jquery.js"></script>
-<script src="../js/navigation.js"></script>
-<script src="../js/search_index.js"></script>
-<script src="../js/search.js"></script>
-<script src="../js/searcher.js"></script>
 <script src="../js/darkfish.js"></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
 
 
 <body id="top" role="document" class="class">
@@ -73,19 +70,11 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-i-action">#action</a>
-    
     <li ><a href="#method-i-classname">#classname</a>
     
     <li ><a href="#method-i-enum_idle_timeout-3D">#enum_idle_timeout=</a>
     
-    <li ><a href="#method-i-fragment_string">#fragment_string</a>
-    
     <li ><a href="#method-i-indoc">#indoc</a>
-    
-    <li ><a href="#method-i-max_elements">#max_elements</a>
-    
-    <li ><a href="#method-i-max_envelope_size">#max_envelope_size</a>
     
     <li ><a href="#method-i-method">#method</a>
     
@@ -95,17 +84,11 @@
     
     <li ><a href="#method-i-parse_enum_request">#parse_enum_request</a>
     
-    <li ><a href="#method-i-resource_uri">#resource_uri</a>
-    
     <li ><a href="#method-i-runtime">#runtime</a>
     
     <li ><a href="#method-i-selector">#selector</a>
     
-    <li ><a href="#method-i-selectors">#selectors</a>
-    
     <li ><a href="#method-i-selectors_from_epr">#selectors_from_epr</a>
-    
-    <li ><a href="#method-i-selectors_from_filter">#selectors_from_filter</a>
     
   </ul>
 </div>
@@ -145,81 +128,6 @@ Soap.context to get the current one.</p>
        <header>
          <h3>Public Instance Methods</h3>
        </header>
-
-    
-      <div id="method-i-action" class="method-detail ">
-        
-        
-        <div class="method-heading">
-          <span class="method-callseq">
-            action &rarr; String
-          </span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-        <div class="method-heading">
-          <span class="method-callseq">
-            action(xml_doc) &rarr; String
-          </span>
-          
-        </div>
-        
-        
-
-        <div class="method-description">
-          
-          <p>The action</p>
-          
-          
-
-          
-          <div class="method-source-code" id="action-source">
-            <pre>const char *action(WsXmlDocH doc = NULL) {
-    return wsman_get_action($self, doc);
-  }
-  /*
-   * The resource uri
-   * call-seq:
-   *   context.resource_uri -&gt; String
-   *   context.resource_uri(xml_doc) -&gt; String
-   *
-   */
-  const char *resource_uri(WsXmlDocH doc = NULL) {
-    return wsman_get_resource_uri($self, doc);
-  }
-  /*
-   * The option set
-   * call-seq:
-   *   context.option_set(xml_doc, &quot;op&quot;) -&gt; String
-   *
-   */
-  const char *option_set(WsXmlDocH doc, const char *op) {
-    return wsman_get_option_set($self, doc, op);
-  }
-  /*
-   * Parse enumeration request
-   * call-seq:
-   *   context.parse_enum_request(enumerate_info) -&gt; Integer
-   *
-   */
-  int parse_enum_request(WsEnumerateInfo *enumInfo) {
-    WsmanStatus status;
-    wsman_status_init(&amp;status);
-    return wsman_parse_enum_request( $self, enumInfo, &amp;status);
-    /* FIXME: return status */
-  }
-  
-}</pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
 
     
       <div id="method-i-classname" class="method-detail ">
@@ -559,129 +467,6 @@ Soap.context to get the current one.</p>
       </div>
 
     
-      <div id="method-i-fragment_string" class="method-detail ">
-        
-        
-        <div class="method-heading">
-          <span class="method-callseq">
-            fragment_string &rarr; String
-          </span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-        <div class="method-heading">
-          <span class="method-callseq">
-            fragment_string(xmldoc) &rarr; String
-          </span>
-          
-        </div>
-        
-        
-
-        <div class="method-description">
-          
-          <p>The fragment of the document</p>
-          
-          
-
-          
-          <div class="method-source-code" id="fragment_string-source">
-            <pre>const char *fragment_string(WsXmlDocH doc = NULL) {
-    return wsman_get_fragment_string($self, doc);
-  }
-  /*
-   * The selector for an element
-   * call-seq:
-   *   context.selector(xml_doc, &quot;Name&quot;, 1) -&gt; String
-   *
-   */
-  const char *selector(WsXmlDocH doc, const char *name, int index) {
-    return wsman_get_selector($self, doc, name, index);
-  }
-  /*
-   * The selectors from an endpoint reference
-   * call-seq:
-   *   context.selectors_from_epr(epr_node_as_xml_doc) -&gt; Hash
-   *
-   */
-  hash_t *selectors_from_epr(WsXmlNodeH epr_node) {
-    return wsman_get_selectors_from_epr($self, epr_node);
-  }
-  /*
-   * The selectors for a document
-   * call-seq:
-   *   context.selectors -&gt; Hash
-   *   context.selectors(xml_doc) -&gt; Hash
-   *
-   */
-  hash_t *selectors(WsXmlDocH doc = NULL) {
-    return wsman_get_selector_list($self, doc);
-  }
-  /*
-   * The selectors from a filter
-   * call-seq:
-   *   context.selectors_from_filter -&gt; Hash
-   *   context.selectors_from_filter(xml_doc) -&gt; Hash
-   *
-   */
-  hash_t *selectors_from_filter(WsXmlDocH doc = NULL) {
-    return wsman_get_selector_list_from_filter($self, doc);
-  }
-  /*
-   * The action
-   * call-seq:
-   *   context.action -&gt; String
-   *   context.action(xml_doc) -&gt; String
-   *
-   */
-  const char *action(WsXmlDocH doc = NULL) {
-    return wsman_get_action($self, doc);
-  }
-  /*
-   * The resource uri
-   * call-seq:
-   *   context.resource_uri -&gt; String
-   *   context.resource_uri(xml_doc) -&gt; String
-   *
-   */
-  const char *resource_uri(WsXmlDocH doc = NULL) {
-    return wsman_get_resource_uri($self, doc);
-  }
-  /*
-   * The option set
-   * call-seq:
-   *   context.option_set(xml_doc, &quot;op&quot;) -&gt; String
-   *
-   */
-  const char *option_set(WsXmlDocH doc, const char *op) {
-    return wsman_get_option_set($self, doc, op);
-  }
-  /*
-   * Parse enumeration request
-   * call-seq:
-   *   context.parse_enum_request(enumerate_info) -&gt; Integer
-   *
-   */
-  int parse_enum_request(WsEnumerateInfo *enumInfo) {
-    WsmanStatus status;
-    wsman_status_init(&amp;status);
-    return wsman_parse_enum_request( $self, enumInfo, &amp;status);
-    /* FIXME: return status */
-  }
-  
-}</pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
       <div id="method-i-indoc" class="method-detail ">
         
         
@@ -773,282 +558,6 @@ Soap.context to get the current one.</p>
    *
    */
   unsigned long max_envelope_size(WsXmlDocH doc = NULL) {
-    return wsman_get_max_envelope_size($self, doc);
-  }
-  /*
-   * The fragment of the document
-   * call-seq:
-   *   context.fragment_string -&gt; String
-   *   context.fragment_string(xmldoc) -&gt; String
-   *
-   */
-  const char *fragment_string(WsXmlDocH doc = NULL) {
-    return wsman_get_fragment_string($self, doc);
-  }
-  /*
-   * The selector for an element
-   * call-seq:
-   *   context.selector(xml_doc, &quot;Name&quot;, 1) -&gt; String
-   *
-   */
-  const char *selector(WsXmlDocH doc, const char *name, int index) {
-    return wsman_get_selector($self, doc, name, index);
-  }
-  /*
-   * The selectors from an endpoint reference
-   * call-seq:
-   *   context.selectors_from_epr(epr_node_as_xml_doc) -&gt; Hash
-   *
-   */
-  hash_t *selectors_from_epr(WsXmlNodeH epr_node) {
-    return wsman_get_selectors_from_epr($self, epr_node);
-  }
-  /*
-   * The selectors for a document
-   * call-seq:
-   *   context.selectors -&gt; Hash
-   *   context.selectors(xml_doc) -&gt; Hash
-   *
-   */
-  hash_t *selectors(WsXmlDocH doc = NULL) {
-    return wsman_get_selector_list($self, doc);
-  }
-  /*
-   * The selectors from a filter
-   * call-seq:
-   *   context.selectors_from_filter -&gt; Hash
-   *   context.selectors_from_filter(xml_doc) -&gt; Hash
-   *
-   */
-  hash_t *selectors_from_filter(WsXmlDocH doc = NULL) {
-    return wsman_get_selector_list_from_filter($self, doc);
-  }
-  /*
-   * The action
-   * call-seq:
-   *   context.action -&gt; String
-   *   context.action(xml_doc) -&gt; String
-   *
-   */
-  const char *action(WsXmlDocH doc = NULL) {
-    return wsman_get_action($self, doc);
-  }
-  /*
-   * The resource uri
-   * call-seq:
-   *   context.resource_uri -&gt; String
-   *   context.resource_uri(xml_doc) -&gt; String
-   *
-   */
-  const char *resource_uri(WsXmlDocH doc = NULL) {
-    return wsman_get_resource_uri($self, doc);
-  }
-  /*
-   * The option set
-   * call-seq:
-   *   context.option_set(xml_doc, &quot;op&quot;) -&gt; String
-   *
-   */
-  const char *option_set(WsXmlDocH doc, const char *op) {
-    return wsman_get_option_set($self, doc, op);
-  }
-  /*
-   * Parse enumeration request
-   * call-seq:
-   *   context.parse_enum_request(enumerate_info) -&gt; Integer
-   *
-   */
-  int parse_enum_request(WsEnumerateInfo *enumInfo) {
-    WsmanStatus status;
-    wsman_status_init(&amp;status);
-    return wsman_parse_enum_request( $self, enumInfo, &amp;status);
-    /* FIXME: return status */
-  }
-  
-}</pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-max_elements" class="method-detail ">
-        
-        
-        <div class="method-heading">
-          <span class="method-callseq">
-            max_elements &rarr; Integer
-          </span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-        <div class="method-heading">
-          <span class="method-callseq">
-            max_elements(xmldoc) &rarr; Integer
-          </span>
-          
-        </div>
-        
-        
-
-        <div class="method-description">
-          
-          <p>The maximum elements of the document</p>
-          
-          
-
-          
-          <div class="method-source-code" id="max_elements-source">
-            <pre>int max_elements(WsXmlDocH doc = NULL) {
-    return wsman_get_max_elements($self, doc);
-  }
-  /*
-   * The maximum envelope size of the document
-   * call-seq:
-   *   context.max_envelope_size -&gt; Integer
-   *   context.max_envelope_size(xmldoc) -&gt; Integer
-   *
-   */
-  unsigned long max_envelope_size(WsXmlDocH doc = NULL) {
-    return wsman_get_max_envelope_size($self, doc);
-  }
-  /*
-   * The fragment of the document
-   * call-seq:
-   *   context.fragment_string -&gt; String
-   *   context.fragment_string(xmldoc) -&gt; String
-   *
-   */
-  const char *fragment_string(WsXmlDocH doc = NULL) {
-    return wsman_get_fragment_string($self, doc);
-  }
-  /*
-   * The selector for an element
-   * call-seq:
-   *   context.selector(xml_doc, &quot;Name&quot;, 1) -&gt; String
-   *
-   */
-  const char *selector(WsXmlDocH doc, const char *name, int index) {
-    return wsman_get_selector($self, doc, name, index);
-  }
-  /*
-   * The selectors from an endpoint reference
-   * call-seq:
-   *   context.selectors_from_epr(epr_node_as_xml_doc) -&gt; Hash
-   *
-   */
-  hash_t *selectors_from_epr(WsXmlNodeH epr_node) {
-    return wsman_get_selectors_from_epr($self, epr_node);
-  }
-  /*
-   * The selectors for a document
-   * call-seq:
-   *   context.selectors -&gt; Hash
-   *   context.selectors(xml_doc) -&gt; Hash
-   *
-   */
-  hash_t *selectors(WsXmlDocH doc = NULL) {
-    return wsman_get_selector_list($self, doc);
-  }
-  /*
-   * The selectors from a filter
-   * call-seq:
-   *   context.selectors_from_filter -&gt; Hash
-   *   context.selectors_from_filter(xml_doc) -&gt; Hash
-   *
-   */
-  hash_t *selectors_from_filter(WsXmlDocH doc = NULL) {
-    return wsman_get_selector_list_from_filter($self, doc);
-  }
-  /*
-   * The action
-   * call-seq:
-   *   context.action -&gt; String
-   *   context.action(xml_doc) -&gt; String
-   *
-   */
-  const char *action(WsXmlDocH doc = NULL) {
-    return wsman_get_action($self, doc);
-  }
-  /*
-   * The resource uri
-   * call-seq:
-   *   context.resource_uri -&gt; String
-   *   context.resource_uri(xml_doc) -&gt; String
-   *
-   */
-  const char *resource_uri(WsXmlDocH doc = NULL) {
-    return wsman_get_resource_uri($self, doc);
-  }
-  /*
-   * The option set
-   * call-seq:
-   *   context.option_set(xml_doc, &quot;op&quot;) -&gt; String
-   *
-   */
-  const char *option_set(WsXmlDocH doc, const char *op) {
-    return wsman_get_option_set($self, doc, op);
-  }
-  /*
-   * Parse enumeration request
-   * call-seq:
-   *   context.parse_enum_request(enumerate_info) -&gt; Integer
-   *
-   */
-  int parse_enum_request(WsEnumerateInfo *enumInfo) {
-    WsmanStatus status;
-    wsman_status_init(&amp;status);
-    return wsman_parse_enum_request( $self, enumInfo, &amp;status);
-    /* FIXME: return status */
-  }
-  
-}</pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-max_envelope_size" class="method-detail ">
-        
-        
-        <div class="method-heading">
-          <span class="method-callseq">
-            max_envelope_size &rarr; Integer
-          </span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-        <div class="method-heading">
-          <span class="method-callseq">
-            max_envelope_size(xmldoc) &rarr; Integer
-          </span>
-          
-        </div>
-        
-        
-
-        <div class="method-description">
-          
-          <p>The maximum envelope size of the document</p>
-          
-          
-
-          
-          <div class="method-source-code" id="max_envelope_size-source">
-            <pre>unsigned long max_envelope_size(WsXmlDocH doc = NULL) {
     return wsman_get_max_envelope_size($self, doc);
   }
   /*
@@ -1542,71 +1051,6 @@ Soap.context to get the current one.</p>
       </div>
 
     
-      <div id="method-i-resource_uri" class="method-detail ">
-        
-        
-        <div class="method-heading">
-          <span class="method-callseq">
-            resource_uri &rarr; String
-          </span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-        <div class="method-heading">
-          <span class="method-callseq">
-            resource_uri(xml_doc) &rarr; String
-          </span>
-          
-        </div>
-        
-        
-
-        <div class="method-description">
-          
-          <p>The resource uri</p>
-          
-          
-
-          
-          <div class="method-source-code" id="resource_uri-source">
-            <pre>const char *resource_uri(WsXmlDocH doc = NULL) {
-    return wsman_get_resource_uri($self, doc);
-  }
-  /*
-   * The option set
-   * call-seq:
-   *   context.option_set(xml_doc, &quot;op&quot;) -&gt; String
-   *
-   */
-  const char *option_set(WsXmlDocH doc, const char *op) {
-    return wsman_get_option_set($self, doc, op);
-  }
-  /*
-   * Parse enumeration request
-   * call-seq:
-   *   context.parse_enum_request(enumerate_info) -&gt; Integer
-   *
-   */
-  int parse_enum_request(WsEnumerateInfo *enumInfo) {
-    WsmanStatus status;
-    wsman_status_init(&amp;status);
-    return wsman_parse_enum_request( $self, enumInfo, &amp;status);
-    /* FIXME: return status */
-  }
-  
-}</pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
       <div id="method-i-runtime" class="method-detail ">
         
         
@@ -1899,101 +1343,6 @@ Soap.context to get the current one.</p>
       </div>
 
     
-      <div id="method-i-selectors" class="method-detail ">
-        
-        
-        <div class="method-heading">
-          <span class="method-callseq">
-            selectors &rarr; Hash
-          </span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-        <div class="method-heading">
-          <span class="method-callseq">
-            selectors(xml_doc) &rarr; Hash
-          </span>
-          
-        </div>
-        
-        
-
-        <div class="method-description">
-          
-          <p>The selectors for a document</p>
-          
-          
-
-          
-          <div class="method-source-code" id="selectors-source">
-            <pre>hash_t *selectors(WsXmlDocH doc = NULL) {
-    return wsman_get_selector_list($self, doc);
-  }
-  /*
-   * The selectors from a filter
-   * call-seq:
-   *   context.selectors_from_filter -&gt; Hash
-   *   context.selectors_from_filter(xml_doc) -&gt; Hash
-   *
-   */
-  hash_t *selectors_from_filter(WsXmlDocH doc = NULL) {
-    return wsman_get_selector_list_from_filter($self, doc);
-  }
-  /*
-   * The action
-   * call-seq:
-   *   context.action -&gt; String
-   *   context.action(xml_doc) -&gt; String
-   *
-   */
-  const char *action(WsXmlDocH doc = NULL) {
-    return wsman_get_action($self, doc);
-  }
-  /*
-   * The resource uri
-   * call-seq:
-   *   context.resource_uri -&gt; String
-   *   context.resource_uri(xml_doc) -&gt; String
-   *
-   */
-  const char *resource_uri(WsXmlDocH doc = NULL) {
-    return wsman_get_resource_uri($self, doc);
-  }
-  /*
-   * The option set
-   * call-seq:
-   *   context.option_set(xml_doc, &quot;op&quot;) -&gt; String
-   *
-   */
-  const char *option_set(WsXmlDocH doc, const char *op) {
-    return wsman_get_option_set($self, doc, op);
-  }
-  /*
-   * Parse enumeration request
-   * call-seq:
-   *   context.parse_enum_request(enumerate_info) -&gt; Integer
-   *
-   */
-  int parse_enum_request(WsEnumerateInfo *enumInfo) {
-    WsmanStatus status;
-    wsman_status_init(&amp;status);
-    return wsman_parse_enum_request( $self, enumInfo, &amp;status);
-    /* FIXME: return status */
-  }
-  
-}</pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
       <div id="method-i-selectors_from_epr" class="method-detail ">
         
         
@@ -2092,91 +1441,6 @@ Soap.context to get the current one.</p>
       </div>
 
     
-      <div id="method-i-selectors_from_filter" class="method-detail ">
-        
-        
-        <div class="method-heading">
-          <span class="method-callseq">
-            selectors_from_filter &rarr; Hash
-          </span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-        <div class="method-heading">
-          <span class="method-callseq">
-            selectors_from_filter(xml_doc) &rarr; Hash
-          </span>
-          
-        </div>
-        
-        
-
-        <div class="method-description">
-          
-          <p>The selectors from a filter</p>
-          
-          
-
-          
-          <div class="method-source-code" id="selectors_from_filter-source">
-            <pre>hash_t *selectors_from_filter(WsXmlDocH doc = NULL) {
-    return wsman_get_selector_list_from_filter($self, doc);
-  }
-  /*
-   * The action
-   * call-seq:
-   *   context.action -&gt; String
-   *   context.action(xml_doc) -&gt; String
-   *
-   */
-  const char *action(WsXmlDocH doc = NULL) {
-    return wsman_get_action($self, doc);
-  }
-  /*
-   * The resource uri
-   * call-seq:
-   *   context.resource_uri -&gt; String
-   *   context.resource_uri(xml_doc) -&gt; String
-   *
-   */
-  const char *resource_uri(WsXmlDocH doc = NULL) {
-    return wsman_get_resource_uri($self, doc);
-  }
-  /*
-   * The option set
-   * call-seq:
-   *   context.option_set(xml_doc, &quot;op&quot;) -&gt; String
-   *
-   */
-  const char *option_set(WsXmlDocH doc, const char *op) {
-    return wsman_get_option_set($self, doc, op);
-  }
-  /*
-   * Parse enumeration request
-   * call-seq:
-   *   context.parse_enum_request(enumerate_info) -&gt; Integer
-   *
-   */
-  int parse_enum_request(WsEnumerateInfo *enumInfo) {
-    WsmanStatus status;
-    wsman_status_init(&amp;status);
-    return wsman_parse_enum_request( $self, enumInfo, &amp;status);
-    /* FIXME: return status */
-  }
-  
-}</pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
     </section>
   
   </section>
@@ -2185,7 +1449,7 @@ Soap.context to get the current one.</p>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.0.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

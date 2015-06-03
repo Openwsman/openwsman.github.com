@@ -6,19 +6,16 @@
 
 <title>class Openwsman::Client - Openwsman - WS-Management for all</title>
 
-<link href="../fonts.css" rel="stylesheet">
-<link href="../rdoc.css" rel="stylesheet">
-
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
 </script>
 
 <script src="../js/jquery.js"></script>
-<script src="../js/navigation.js"></script>
-<script src="../js/search_index.js"></script>
-<script src="../js/search.js"></script>
-<script src="../js/searcher.js"></script>
 <script src="../js/darkfish.js"></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
 
 
 <body id="top" role="document" class="class">
@@ -77,8 +74,6 @@
     
     <li ><a href="#method-i-build_envelope_from_response">#build_envelope_from_response</a>
     
-    <li ><a href="#method-i-create">#create</a>
-    
     <li ><a href="#method-i-delete">#delete</a>
     
     <li ><a href="#method-i-delete_from_epr">#delete_from_epr</a>
@@ -101,8 +96,6 @@
     
     <li ><a href="#method-i-identify">#identify</a>
     
-    <li ><a href="#method-i-invoke">#invoke</a>
-    
     <li ><a href="#method-i-last_error">#last_error</a>
     
     <li ><a href="#method-i-password">#password</a>
@@ -112,8 +105,6 @@
     <li ><a href="#method-i-port">#port</a>
     
     <li ><a href="#method-i-pull">#pull</a>
-    
-    <li ><a href="#method-i-put">#put</a>
     
     <li ><a href="#method-i-release">#release</a>
     
@@ -278,6 +269,7 @@ passing all client parameters separately</p>
     return wsmc_get_response_code( $self );
   }
 
+  %newobject scheme;
   /*
    * String representation of the transport scheme
    *
@@ -289,6 +281,7 @@ passing all client parameters separately</p>
     return wsmc_get_scheme( $self );
   }
 
+  %newobject host;
   /*
    * The host part of the client URL
    *
@@ -305,6 +298,7 @@ passing all client parameters separately</p>
     return wsmc_get_port( $self );
   }
 
+  %newobject path;
   /*
    * The path of the clien URL
    *
@@ -313,6 +307,7 @@ passing all client parameters separately</p>
     return wsmc_get_path( $self );
   }
 
+  %newobject user;
   /*
    * The user name used for authentication
    *
@@ -321,6 +316,7 @@ passing all client parameters separately</p>
     return wsmc_get_user( $self );
   }
 
+  %newobject password;
   /*
    * The password used for authentication
    *
@@ -403,7 +399,11 @@ passing all client parameters separately</p>
     wsmc_action_args_t args;
     args.client = $self;
     args.options = options;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_identify_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_identify_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_identify( $self, options );
 #endif
@@ -424,7 +424,11 @@ passing all client parameters separately</p>
     args.client = $self;
     args.options = options;
     args.epr = epr;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_get_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_get_from_epr( $self, epr, options);
 #endif
@@ -445,7 +449,11 @@ passing all client parameters separately</p>
     args.client = $self;
     args.options = options;
     args.epr = epr;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete_from_epr( $self, epr, options);
 #endif
@@ -477,7 +485,11 @@ passing all client parameters separately</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_enumerate_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_enumerate_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_enumerate( $self, resource_uri, options, filter);
 #endif
@@ -500,7 +512,11 @@ passing all client parameters separately</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_pull( $self, resource_uri, options, filter, context);
 #endif
@@ -524,7 +540,11 @@ passing all client parameters separately</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_create_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -548,7 +568,11 @@ passing all client parameters separately</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_put_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -570,7 +594,11 @@ passing all client parameters separately</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_release( $self, resource_uri, options, context);
 #endif
@@ -591,7 +619,11 @@ passing all client parameters separately</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_get( $self, resource_uri, options);
 #endif
@@ -612,7 +644,11 @@ passing all client parameters separately</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete( $self, resource_uri, options);
 #endif
@@ -636,7 +672,11 @@ passing all client parameters separately</p>
     args.resource_uri = resource_uri;
     args.method = method;
     args.method_args = data;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_invoke( $self, resource_uri, options, method, data);
 #endif
@@ -658,7 +698,11 @@ passing all client parameters separately</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_subscribe($self,  resource_uri, options, filter);
 #endif
@@ -681,7 +725,11 @@ passing all client parameters separately</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_unsubscribe($self, resource_uri, options, identifier);
 #endif
@@ -703,7 +751,11 @@ passing all client parameters separately</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_renew($self, resource_uri, options, identifier);
 #endif
@@ -817,7 +869,11 @@ passing all client parameters separately</p>
     wsmc_action_args_t args;
     args.client = $self;
     args.options = options;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_identify_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_identify_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_identify( $self, options );
 #endif
@@ -838,7 +894,11 @@ passing all client parameters separately</p>
     args.client = $self;
     args.options = options;
     args.epr = epr;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_get_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_get_from_epr( $self, epr, options);
 #endif
@@ -859,7 +919,11 @@ passing all client parameters separately</p>
     args.client = $self;
     args.options = options;
     args.epr = epr;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete_from_epr( $self, epr, options);
 #endif
@@ -891,7 +955,11 @@ passing all client parameters separately</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_enumerate_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_enumerate_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_enumerate( $self, resource_uri, options, filter);
 #endif
@@ -914,7 +982,11 @@ passing all client parameters separately</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_pull( $self, resource_uri, options, filter, context);
 #endif
@@ -938,7 +1010,11 @@ passing all client parameters separately</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_create_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -962,7 +1038,11 @@ passing all client parameters separately</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_put_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -984,7 +1064,11 @@ passing all client parameters separately</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_release( $self, resource_uri, options, context);
 #endif
@@ -1005,7 +1089,11 @@ passing all client parameters separately</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_get( $self, resource_uri, options);
 #endif
@@ -1026,7 +1114,11 @@ passing all client parameters separately</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete( $self, resource_uri, options);
 #endif
@@ -1050,7 +1142,11 @@ passing all client parameters separately</p>
     args.resource_uri = resource_uri;
     args.method = method;
     args.method_args = data;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_invoke( $self, resource_uri, options, method, data);
 #endif
@@ -1072,7 +1168,11 @@ passing all client parameters separately</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_subscribe($self,  resource_uri, options, filter);
 #endif
@@ -1095,7 +1195,11 @@ passing all client parameters separately</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_unsubscribe($self, resource_uri, options, identifier);
 #endif
@@ -1117,257 +1221,11 @@ passing all client parameters separately</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
-#else
-    return wsmc_action_renew($self, resource_uri, options, identifier);
 #endif
-  }
-
-  /*
-   * Get a string representation of the last fault
-   *
-   * call-seq:
-   *   client.fault_string -&gt; String
-   *
-   */
-  char *fault_string() {
-    return wsmc_get_fault_string($self);
-  }
-  
-  /*
-   * Get a numeric representation of the last fault
-   *
-   * call-seq:
-   *   client.last_error -&gt; Integer
-   *
-   */
-   int last_error() {
-     return wsmc_get_last_error($self);
-   }
-}</pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-create" class="method-detail ">
-        
-        
-        <div class="method-heading">
-          <span class="method-callseq">
-            create(options, uri, xml, xml.size, &quot;utf-8&quot;) &rarr; XmlDoc
-          </span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-        
-
-        <div class="method-description">
-          
-          <p>WS-Create</p>
-
-<p>create: Create a resource</p>
-          
-          
-
-          
-          <div class="method-source-code" id="create-source">
-            <pre>WsXmlDocH create( client_opt_t *options, const char *resource_uri, const char *data, size_t size, const char *encoding = &quot;utf-8&quot;) {
-#if RUBY_VERSION &gt; 18 /* YARV */
-    wsmc_action_args_t args;
-    args.client = $self;
-    args.options = options;
-    args.resource_uri = resource_uri;
-    args.data = data;
-    args.size = size;
-    args.encoding = encoding;
-    return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
-#else
-    return wsmc_action_create_fromtext( $self, resource_uri, options, data, size, encoding);
-#endif
-  }
-
-  /*
-   * WS-Transport
-   *
-   * put: Change a resource
-   *
-   * call-seq:
-   *   client.put(options, uri, xml, xml.size, &quot;utf-8&quot;) -&gt; XmlDoc
-   *
-   */
-  WsXmlDocH put( client_opt_t *options, const char *resource_uri, const char *data, size_t size, const char *encoding = &quot;utf-8&quot;) {
-#if RUBY_VERSION &gt; 18 /* YARV */
-    wsmc_action_args_t args;
-    args.client = $self;
-    args.options = options;
-    args.resource_uri = resource_uri;
-    args.data = data;
-    args.size = size;
-    args.encoding = encoding;
-    return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
-#else
-    return wsmc_action_put_fromtext( $self, resource_uri, options, data, size, encoding);
-#endif
-  }
-
-  /*
-   * WS-Release
-   *
-   * release: Release enumeration context
-   *
-   * call-seq:
-   *   client.release(options, uri, context) -&gt; XmlDoc
-   *
-   */
-  WsXmlDocH release( client_opt_t *options, const char *resource_uri, const char *context) {
-#if RUBY_VERSION &gt; 18 /* YARV */
-    wsmc_action_args_t args;
-    args.client = $self;
-    args.options = options;
-    args.resource_uri = resource_uri;
-    args.context = context;
-    return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
-#else
-    return wsmc_action_release( $self, resource_uri, options, context);
-#endif
-  }
-
-  /*
-   * WS-Transport
-   *
-   * get: Get a resource
-   *
-   * call-seq:
-   *   client.get(options, uri) -&gt; XmlDoc
-   *
-   */
-  WsXmlDocH get( client_opt_t *options, const char *resource_uri) {
-#if RUBY_VERSION &gt; 18 /* YARV */
-    wsmc_action_args_t args;
-    args.client = $self;
-    args.options = options;
-    args.resource_uri = resource_uri;
-    return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
-#else
-    return wsmc_action_get( $self, resource_uri, options);
-#endif
-  }
-
-  /*
-   * WS-Transport
-   *
-   * delete: Delete a resource
-   *
-   * call-seq:
-   *   client.delete(options, uri) -&gt; XmlDoc
-   *
-   */
-  WsXmlDocH delete( client_opt_t *options, const char *resource_uri) {
-#if RUBY_VERSION &gt; 18 /* YARV */
-    wsmc_action_args_t args;
-    args.client = $self;
-    args.options = options;
-    args.resource_uri = resource_uri;
-    return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
-#else
-    return wsmc_action_delete( $self, resource_uri, options);
-#endif
-  }
-
-  /*
-   * WS-Invoke
-   *
-   * invoke: Invoke a resource function
-   *
-   * call-seq:
-   *   client.invoke(options, uri, &quot;method-name&quot;) -&gt; XmlDoc
-   *   client.invoke(options, uri, &quot;method-name&quot;, xml_doc) -&gt; XmlDoc
-   *
-   */
-  WsXmlDocH invoke( client_opt_t *options, const char *resource_uri, const char *method, WsXmlDocH data = NULL) {
-#if RUBY_VERSION &gt; 18 /* YARV */
-    wsmc_action_args_t args;
-    args.client = $self;
-    args.options = options;
-    args.resource_uri = resource_uri;
-    args.method = method;
-    args.method_args = data;
-    return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
-#else
-    return wsmc_action_invoke( $self, resource_uri, options, method, data);
-#endif
-  }
-
-  /*
-   * WS-Eventing
-   *
-   * subscribe: Subscribe a listener to events
-   *
-   * call-seq:
-   *   client.subscribe(options, filter, uri) -&gt; XmlDoc
-   *
-   */
-  WsXmlDocH subscribe(client_opt_t *options, filter_t *filter, const char *resource_uri) {
-#if RUBY_VERSION &gt; 18 /* YARV */
-    wsmc_action_args_t args;
-    args.client = $self;
-    args.options = options;
-    args.filter = filter;
-    args.resource_uri = resource_uri;
-    return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
-#else
-    return wsmc_action_subscribe($self,  resource_uri, options, filter);
-#endif
-  }
-
-  /*
-   * WS-Eventing
-   *
-   * unsubscribe: Remove a listener from events
-   *
-   * call-seq:
-   *   client.unsubscribe(options, filter, uri, identifier) -&gt; XmlDoc
-   *
-   */
-  WsXmlDocH unsubscribe(client_opt_t *options, filter_t *filter, const char *resource_uri, const char *identifier) {
-#if RUBY_VERSION &gt; 18 /* YARV */
-    wsmc_action_args_t args;
-    args.client = $self;
-    args.options = options;
-    args.filter = filter;
-    args.resource_uri = resource_uri;
-    args.identifier = identifier;
-    return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
-#else
-    return wsmc_action_unsubscribe($self, resource_uri, options, identifier);
-#endif
-  }
-
-  /*
-   * WS-Eventing
-   *
-   * renew: Renew a subscription
-   *
-   * call-seq:
-   *   client.renew(options, uri, identifier) -&gt; XmlDoc
-   *
-   */
-  WsXmlDocH renew(client_opt_t *options , char *resource_uri, char *identifier) {
-#if RUBY_VERSION &gt; 18 /* YARV */
-    wsmc_action_args_t args;
-    args.client = $self;
-    args.options = options;
-    args.resource_uri = resource_uri;
-    args.identifier = identifier;
-    return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
 #else
     return wsmc_action_renew($self, resource_uri, options, identifier);
 #endif
@@ -1435,7 +1293,11 @@ passing all client parameters separately</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete( $self, resource_uri, options);
 #endif
@@ -1459,7 +1321,11 @@ passing all client parameters separately</p>
     args.resource_uri = resource_uri;
     args.method = method;
     args.method_args = data;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_invoke( $self, resource_uri, options, method, data);
 #endif
@@ -1481,7 +1347,11 @@ passing all client parameters separately</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_subscribe($self,  resource_uri, options, filter);
 #endif
@@ -1504,7 +1374,11 @@ passing all client parameters separately</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_unsubscribe($self, resource_uri, options, identifier);
 #endif
@@ -1526,7 +1400,11 @@ passing all client parameters separately</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_renew($self, resource_uri, options, identifier);
 #endif
@@ -1595,7 +1473,11 @@ a resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.epr = epr;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete_from_epr( $self, epr, options);
 #endif
@@ -1627,7 +1509,11 @@ a resource via an endpoint reference</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_enumerate_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_enumerate_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_enumerate( $self, resource_uri, options, filter);
 #endif
@@ -1650,7 +1536,11 @@ a resource via an endpoint reference</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_pull( $self, resource_uri, options, filter, context);
 #endif
@@ -1674,7 +1564,11 @@ a resource via an endpoint reference</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_create_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -1698,7 +1592,11 @@ a resource via an endpoint reference</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_put_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -1720,7 +1618,11 @@ a resource via an endpoint reference</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_release( $self, resource_uri, options, context);
 #endif
@@ -1741,7 +1643,11 @@ a resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_get( $self, resource_uri, options);
 #endif
@@ -1762,7 +1668,11 @@ a resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete( $self, resource_uri, options);
 #endif
@@ -1786,7 +1696,11 @@ a resource via an endpoint reference</p>
     args.resource_uri = resource_uri;
     args.method = method;
     args.method_args = data;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_invoke( $self, resource_uri, options, method, data);
 #endif
@@ -1808,7 +1722,11 @@ a resource via an endpoint reference</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_subscribe($self,  resource_uri, options, filter);
 #endif
@@ -1831,7 +1749,11 @@ a resource via an endpoint reference</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_unsubscribe($self, resource_uri, options, identifier);
 #endif
@@ -1853,7 +1775,11 @@ a resource via an endpoint reference</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_renew($self, resource_uri, options, identifier);
 #endif
@@ -1928,6 +1854,7 @@ a resource via an endpoint reference</p>
     return wsmc_get_response_code( $self );
   }
 
+  %newobject scheme;
   /*
    * String representation of the transport scheme
    *
@@ -1939,6 +1866,7 @@ a resource via an endpoint reference</p>
     return wsmc_get_scheme( $self );
   }
 
+  %newobject host;
   /*
    * The host part of the client URL
    *
@@ -1955,6 +1883,7 @@ a resource via an endpoint reference</p>
     return wsmc_get_port( $self );
   }
 
+  %newobject path;
   /*
    * The path of the clien URL
    *
@@ -1963,6 +1892,7 @@ a resource via an endpoint reference</p>
     return wsmc_get_path( $self );
   }
 
+  %newobject user;
   /*
    * The user name used for authentication
    *
@@ -1971,6 +1901,7 @@ a resource via an endpoint reference</p>
     return wsmc_get_user( $self );
   }
 
+  %newobject password;
   /*
    * The password used for authentication
    *
@@ -2053,7 +1984,11 @@ a resource via an endpoint reference</p>
     wsmc_action_args_t args;
     args.client = $self;
     args.options = options;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_identify_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_identify_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_identify( $self, options );
 #endif
@@ -2074,7 +2009,11 @@ a resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.epr = epr;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_get_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_get_from_epr( $self, epr, options);
 #endif
@@ -2095,7 +2034,11 @@ a resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.epr = epr;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete_from_epr( $self, epr, options);
 #endif
@@ -2127,7 +2070,11 @@ a resource via an endpoint reference</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_enumerate_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_enumerate_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_enumerate( $self, resource_uri, options, filter);
 #endif
@@ -2150,7 +2097,11 @@ a resource via an endpoint reference</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_pull( $self, resource_uri, options, filter, context);
 #endif
@@ -2174,7 +2125,11 @@ a resource via an endpoint reference</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_create_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -2198,7 +2153,11 @@ a resource via an endpoint reference</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_put_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -2220,7 +2179,11 @@ a resource via an endpoint reference</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_release( $self, resource_uri, options, context);
 #endif
@@ -2241,7 +2204,11 @@ a resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_get( $self, resource_uri, options);
 #endif
@@ -2262,7 +2229,11 @@ a resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete( $self, resource_uri, options);
 #endif
@@ -2286,7 +2257,11 @@ a resource via an endpoint reference</p>
     args.resource_uri = resource_uri;
     args.method = method;
     args.method_args = data;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_invoke( $self, resource_uri, options, method, data);
 #endif
@@ -2308,7 +2283,11 @@ a resource via an endpoint reference</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_subscribe($self,  resource_uri, options, filter);
 #endif
@@ -2331,7 +2310,11 @@ a resource via an endpoint reference</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_unsubscribe($self, resource_uri, options, identifier);
 #endif
@@ -2353,7 +2336,11 @@ a resource via an endpoint reference</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_renew($self, resource_uri, options, identifier);
 #endif
@@ -2448,7 +2435,11 @@ a resource via an endpoint reference</p>
     wsmc_action_args_t args;
     args.client = $self;
     args.options = options;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_identify_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_identify_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_identify( $self, options );
 #endif
@@ -2469,7 +2460,11 @@ a resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.epr = epr;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_get_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_get_from_epr( $self, epr, options);
 #endif
@@ -2490,7 +2485,11 @@ a resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.epr = epr;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete_from_epr( $self, epr, options);
 #endif
@@ -2522,7 +2521,11 @@ a resource via an endpoint reference</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_enumerate_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_enumerate_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_enumerate( $self, resource_uri, options, filter);
 #endif
@@ -2545,7 +2548,11 @@ a resource via an endpoint reference</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_pull( $self, resource_uri, options, filter, context);
 #endif
@@ -2569,7 +2576,11 @@ a resource via an endpoint reference</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_create_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -2593,7 +2604,11 @@ a resource via an endpoint reference</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_put_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -2615,7 +2630,11 @@ a resource via an endpoint reference</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_release( $self, resource_uri, options, context);
 #endif
@@ -2636,7 +2655,11 @@ a resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_get( $self, resource_uri, options);
 #endif
@@ -2657,7 +2680,11 @@ a resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete( $self, resource_uri, options);
 #endif
@@ -2681,7 +2708,11 @@ a resource via an endpoint reference</p>
     args.resource_uri = resource_uri;
     args.method = method;
     args.method_args = data;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_invoke( $self, resource_uri, options, method, data);
 #endif
@@ -2703,7 +2734,11 @@ a resource via an endpoint reference</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_subscribe($self,  resource_uri, options, filter);
 #endif
@@ -2726,7 +2761,11 @@ a resource via an endpoint reference</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_unsubscribe($self, resource_uri, options, identifier);
 #endif
@@ -2748,7 +2787,11 @@ a resource via an endpoint reference</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_renew($self, resource_uri, options, identifier);
 #endif
@@ -2829,7 +2872,11 @@ a resource via an endpoint reference</p>
     wsmc_action_args_t args;
     args.client = $self;
     args.options = options;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_identify_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_identify_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_identify( $self, options );
 #endif
@@ -2850,7 +2897,11 @@ a resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.epr = epr;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_get_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_get_from_epr( $self, epr, options);
 #endif
@@ -2871,7 +2922,11 @@ a resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.epr = epr;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete_from_epr( $self, epr, options);
 #endif
@@ -2903,7 +2958,11 @@ a resource via an endpoint reference</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_enumerate_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_enumerate_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_enumerate( $self, resource_uri, options, filter);
 #endif
@@ -2926,7 +2985,11 @@ a resource via an endpoint reference</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_pull( $self, resource_uri, options, filter, context);
 #endif
@@ -2950,7 +3013,11 @@ a resource via an endpoint reference</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_create_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -2974,7 +3041,11 @@ a resource via an endpoint reference</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_put_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -2996,7 +3067,11 @@ a resource via an endpoint reference</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_release( $self, resource_uri, options, context);
 #endif
@@ -3017,7 +3092,11 @@ a resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_get( $self, resource_uri, options);
 #endif
@@ -3038,7 +3117,11 @@ a resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete( $self, resource_uri, options);
 #endif
@@ -3062,7 +3145,11 @@ a resource via an endpoint reference</p>
     args.resource_uri = resource_uri;
     args.method = method;
     args.method_args = data;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_invoke( $self, resource_uri, options, method, data);
 #endif
@@ -3084,7 +3171,11 @@ a resource via an endpoint reference</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_subscribe($self,  resource_uri, options, filter);
 #endif
@@ -3107,7 +3198,11 @@ a resource via an endpoint reference</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_unsubscribe($self, resource_uri, options, identifier);
 #endif
@@ -3129,7 +3224,11 @@ a resource via an endpoint reference</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_renew($self, resource_uri, options, identifier);
 #endif
@@ -3190,8 +3289,9 @@ a resource via an endpoint reference</p>
 <p>It is highly recommended to do an optimized enumeration by setting the
 client options</p>
 
-<pre>options.flags = Openwsman::FLAG_ENUMERATION_OPTIMIZATION
-options.max_elements = 999</pre>
+<pre class="ruby"><span class="ruby-identifier">options</span>.<span class="ruby-identifier">flags</span> = <span class="ruby-constant">Openwsman</span><span class="ruby-operator">::</span><span class="ruby-constant">FLAG_ENUMERATION_OPTIMIZATION</span>
+<span class="ruby-identifier">options</span>.<span class="ruby-identifier">max_elements</span> = <span class="ruby-value">999</span>
+</pre>
 
 <p>to get the enumeration result as part of the http request.</p>
 
@@ -3210,7 +3310,11 @@ performance.</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_enumerate_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_enumerate_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_enumerate( $self, resource_uri, options, filter);
 #endif
@@ -3233,7 +3337,11 @@ performance.</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_pull( $self, resource_uri, options, filter, context);
 #endif
@@ -3257,7 +3365,11 @@ performance.</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_create_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -3281,7 +3393,11 @@ performance.</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_put_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -3303,7 +3419,11 @@ performance.</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_release( $self, resource_uri, options, context);
 #endif
@@ -3324,7 +3444,11 @@ performance.</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_get( $self, resource_uri, options);
 #endif
@@ -3345,7 +3469,11 @@ performance.</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete( $self, resource_uri, options);
 #endif
@@ -3369,7 +3497,11 @@ performance.</p>
     args.resource_uri = resource_uri;
     args.method = method;
     args.method_args = data;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_invoke( $self, resource_uri, options, method, data);
 #endif
@@ -3391,7 +3523,11 @@ performance.</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_subscribe($self,  resource_uri, options, filter);
 #endif
@@ -3414,7 +3550,11 @@ performance.</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_unsubscribe($self, resource_uri, options, identifier);
 #endif
@@ -3436,7 +3576,11 @@ performance.</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_renew($self, resource_uri, options, identifier);
 #endif
@@ -3551,7 +3695,11 @@ performance.</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_get( $self, resource_uri, options);
 #endif
@@ -3572,7 +3720,11 @@ performance.</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete( $self, resource_uri, options);
 #endif
@@ -3596,7 +3748,11 @@ performance.</p>
     args.resource_uri = resource_uri;
     args.method = method;
     args.method_args = data;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_invoke( $self, resource_uri, options, method, data);
 #endif
@@ -3618,7 +3774,11 @@ performance.</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_subscribe($self,  resource_uri, options, filter);
 #endif
@@ -3641,7 +3801,11 @@ performance.</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_unsubscribe($self, resource_uri, options, identifier);
 #endif
@@ -3663,7 +3827,11 @@ performance.</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_renew($self, resource_uri, options, identifier);
 #endif
@@ -3732,7 +3900,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.epr = epr;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_get_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_get_from_epr( $self, epr, options);
 #endif
@@ -3753,7 +3925,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.epr = epr;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete_from_epr( $self, epr, options);
 #endif
@@ -3785,7 +3961,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_enumerate_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_enumerate_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_enumerate( $self, resource_uri, options, filter);
 #endif
@@ -3808,7 +3988,11 @@ resource via an endpoint reference</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_pull( $self, resource_uri, options, filter, context);
 #endif
@@ -3832,7 +4016,11 @@ resource via an endpoint reference</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_create_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -3856,7 +4044,11 @@ resource via an endpoint reference</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_put_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -3878,7 +4070,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_release( $self, resource_uri, options, context);
 #endif
@@ -3899,7 +4095,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_get( $self, resource_uri, options);
 #endif
@@ -3920,7 +4120,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete( $self, resource_uri, options);
 #endif
@@ -3944,7 +4148,11 @@ resource via an endpoint reference</p>
     args.resource_uri = resource_uri;
     args.method = method;
     args.method_args = data;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_invoke( $self, resource_uri, options, method, data);
 #endif
@@ -3966,7 +4174,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_subscribe($self,  resource_uri, options, filter);
 #endif
@@ -3989,7 +4201,11 @@ resource via an endpoint reference</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_unsubscribe($self, resource_uri, options, identifier);
 #endif
@@ -4011,7 +4227,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_renew($self, resource_uri, options, identifier);
 #endif
@@ -4080,6 +4300,7 @@ resource via an endpoint reference</p>
     return wsmc_get_port( $self );
   }
 
+  %newobject path;
   /*
    * The path of the clien URL
    *
@@ -4088,6 +4309,7 @@ resource via an endpoint reference</p>
     return wsmc_get_path( $self );
   }
 
+  %newobject user;
   /*
    * The user name used for authentication
    *
@@ -4096,6 +4318,7 @@ resource via an endpoint reference</p>
     return wsmc_get_user( $self );
   }
 
+  %newobject password;
   /*
    * The password used for authentication
    *
@@ -4178,7 +4401,11 @@ resource via an endpoint reference</p>
     wsmc_action_args_t args;
     args.client = $self;
     args.options = options;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_identify_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_identify_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_identify( $self, options );
 #endif
@@ -4199,7 +4426,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.epr = epr;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_get_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_get_from_epr( $self, epr, options);
 #endif
@@ -4220,7 +4451,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.epr = epr;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete_from_epr( $self, epr, options);
 #endif
@@ -4252,7 +4487,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_enumerate_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_enumerate_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_enumerate( $self, resource_uri, options, filter);
 #endif
@@ -4275,7 +4514,11 @@ resource via an endpoint reference</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_pull( $self, resource_uri, options, filter, context);
 #endif
@@ -4299,7 +4542,11 @@ resource via an endpoint reference</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_create_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -4323,7 +4570,11 @@ resource via an endpoint reference</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_put_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -4345,7 +4596,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_release( $self, resource_uri, options, context);
 #endif
@@ -4366,7 +4621,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_get( $self, resource_uri, options);
 #endif
@@ -4387,7 +4646,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete( $self, resource_uri, options);
 #endif
@@ -4411,7 +4674,11 @@ resource via an endpoint reference</p>
     args.resource_uri = resource_uri;
     args.method = method;
     args.method_args = data;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_invoke( $self, resource_uri, options, method, data);
 #endif
@@ -4433,7 +4700,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_subscribe($self,  resource_uri, options, filter);
 #endif
@@ -4456,7 +4727,11 @@ resource via an endpoint reference</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_unsubscribe($self, resource_uri, options, identifier);
 #endif
@@ -4478,7 +4753,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_renew($self, resource_uri, options, identifier);
 #endif
@@ -4545,7 +4824,11 @@ resource via an endpoint reference</p>
     wsmc_action_args_t args;
     args.client = $self;
     args.options = options;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_identify_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_identify_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_identify( $self, options );
 #endif
@@ -4566,7 +4849,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.epr = epr;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_get_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_get_from_epr( $self, epr, options);
 #endif
@@ -4587,7 +4874,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.epr = epr;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete_from_epr( $self, epr, options);
 #endif
@@ -4619,7 +4910,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_enumerate_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_enumerate_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_enumerate( $self, resource_uri, options, filter);
 #endif
@@ -4642,7 +4937,11 @@ resource via an endpoint reference</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_pull( $self, resource_uri, options, filter, context);
 #endif
@@ -4666,7 +4965,11 @@ resource via an endpoint reference</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_create_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -4690,7 +4993,11 @@ resource via an endpoint reference</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_put_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -4712,7 +5019,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_release( $self, resource_uri, options, context);
 #endif
@@ -4733,7 +5044,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_get( $self, resource_uri, options);
 #endif
@@ -4754,7 +5069,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete( $self, resource_uri, options);
 #endif
@@ -4778,7 +5097,11 @@ resource via an endpoint reference</p>
     args.resource_uri = resource_uri;
     args.method = method;
     args.method_args = data;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_invoke( $self, resource_uri, options, method, data);
 #endif
@@ -4800,7 +5123,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_subscribe($self,  resource_uri, options, filter);
 #endif
@@ -4823,7 +5150,11 @@ resource via an endpoint reference</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_unsubscribe($self, resource_uri, options, identifier);
 #endif
@@ -4845,151 +5176,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
-#else
-    return wsmc_action_renew($self, resource_uri, options, identifier);
 #endif
-  }
-
-  /*
-   * Get a string representation of the last fault
-   *
-   * call-seq:
-   *   client.fault_string -&gt; String
-   *
-   */
-  char *fault_string() {
-    return wsmc_get_fault_string($self);
-  }
-  
-  /*
-   * Get a numeric representation of the last fault
-   *
-   * call-seq:
-   *   client.last_error -&gt; Integer
-   *
-   */
-   int last_error() {
-     return wsmc_get_last_error($self);
-   }
-}</pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-invoke" class="method-detail ">
-        
-        
-        <div class="method-heading">
-          <span class="method-callseq">
-            invoke(options, uri, &quot;method-name&quot;) &rarr; XmlDoc
-          </span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-        <div class="method-heading">
-          <span class="method-callseq">
-            invoke(options, uri, &quot;method-name&quot;, xml_doc) &rarr; XmlDoc
-          </span>
-          
-        </div>
-        
-        
-
-        <div class="method-description">
-          
-          <p>WS-Invoke</p>
-
-<p>invoke: Invoke a resource function</p>
-          
-          
-
-          
-          <div class="method-source-code" id="invoke-source">
-            <pre>WsXmlDocH invoke( client_opt_t *options, const char *resource_uri, const char *method, WsXmlDocH data = NULL) {
-#if RUBY_VERSION &gt; 18 /* YARV */
-    wsmc_action_args_t args;
-    args.client = $self;
-    args.options = options;
-    args.resource_uri = resource_uri;
-    args.method = method;
-    args.method_args = data;
-    return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
-#else
-    return wsmc_action_invoke( $self, resource_uri, options, method, data);
-#endif
-  }
-
-  /*
-   * WS-Eventing
-   *
-   * subscribe: Subscribe a listener to events
-   *
-   * call-seq:
-   *   client.subscribe(options, filter, uri) -&gt; XmlDoc
-   *
-   */
-  WsXmlDocH subscribe(client_opt_t *options, filter_t *filter, const char *resource_uri) {
-#if RUBY_VERSION &gt; 18 /* YARV */
-    wsmc_action_args_t args;
-    args.client = $self;
-    args.options = options;
-    args.filter = filter;
-    args.resource_uri = resource_uri;
-    return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
-#else
-    return wsmc_action_subscribe($self,  resource_uri, options, filter);
-#endif
-  }
-
-  /*
-   * WS-Eventing
-   *
-   * unsubscribe: Remove a listener from events
-   *
-   * call-seq:
-   *   client.unsubscribe(options, filter, uri, identifier) -&gt; XmlDoc
-   *
-   */
-  WsXmlDocH unsubscribe(client_opt_t *options, filter_t *filter, const char *resource_uri, const char *identifier) {
-#if RUBY_VERSION &gt; 18 /* YARV */
-    wsmc_action_args_t args;
-    args.client = $self;
-    args.options = options;
-    args.filter = filter;
-    args.resource_uri = resource_uri;
-    args.identifier = identifier;
-    return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
-#else
-    return wsmc_action_unsubscribe($self, resource_uri, options, identifier);
-#endif
-  }
-
-  /*
-   * WS-Eventing
-   *
-   * renew: Renew a subscription
-   *
-   * call-seq:
-   *   client.renew(options, uri, identifier) -&gt; XmlDoc
-   *
-   */
-  WsXmlDocH renew(client_opt_t *options , char *resource_uri, char *identifier) {
-#if RUBY_VERSION &gt; 18 /* YARV */
-    wsmc_action_args_t args;
-    args.client = $self;
-    args.options = options;
-    args.resource_uri = resource_uri;
-    args.identifier = identifier;
-    return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
 #else
     return wsmc_action_renew($self, resource_uri, options, identifier);
 #endif
@@ -5160,7 +5351,11 @@ resource via an endpoint reference</p>
     wsmc_action_args_t args;
     args.client = $self;
     args.options = options;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_identify_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_identify_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_identify( $self, options );
 #endif
@@ -5181,7 +5376,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.epr = epr;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_get_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_get_from_epr( $self, epr, options);
 #endif
@@ -5202,7 +5401,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.epr = epr;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete_from_epr( $self, epr, options);
 #endif
@@ -5234,7 +5437,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_enumerate_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_enumerate_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_enumerate( $self, resource_uri, options, filter);
 #endif
@@ -5257,7 +5464,11 @@ resource via an endpoint reference</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_pull( $self, resource_uri, options, filter, context);
 #endif
@@ -5281,7 +5492,11 @@ resource via an endpoint reference</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_create_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -5305,7 +5520,11 @@ resource via an endpoint reference</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_put_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -5327,7 +5546,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_release( $self, resource_uri, options, context);
 #endif
@@ -5348,7 +5571,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_get( $self, resource_uri, options);
 #endif
@@ -5369,7 +5596,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete( $self, resource_uri, options);
 #endif
@@ -5393,7 +5624,11 @@ resource via an endpoint reference</p>
     args.resource_uri = resource_uri;
     args.method = method;
     args.method_args = data;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_invoke( $self, resource_uri, options, method, data);
 #endif
@@ -5415,7 +5650,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_subscribe($self,  resource_uri, options, filter);
 #endif
@@ -5438,7 +5677,11 @@ resource via an endpoint reference</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_unsubscribe($self, resource_uri, options, identifier);
 #endif
@@ -5460,7 +5703,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_renew($self, resource_uri, options, identifier);
 #endif
@@ -5521,6 +5768,7 @@ resource via an endpoint reference</p>
     return wsmc_get_path( $self );
   }
 
+  %newobject user;
   /*
    * The user name used for authentication
    *
@@ -5529,6 +5777,7 @@ resource via an endpoint reference</p>
     return wsmc_get_user( $self );
   }
 
+  %newobject password;
   /*
    * The password used for authentication
    *
@@ -5611,7 +5860,11 @@ resource via an endpoint reference</p>
     wsmc_action_args_t args;
     args.client = $self;
     args.options = options;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_identify_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_identify_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_identify( $self, options );
 #endif
@@ -5632,7 +5885,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.epr = epr;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_get_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_get_from_epr( $self, epr, options);
 #endif
@@ -5653,7 +5910,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.epr = epr;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete_from_epr( $self, epr, options);
 #endif
@@ -5685,7 +5946,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_enumerate_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_enumerate_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_enumerate( $self, resource_uri, options, filter);
 #endif
@@ -5708,7 +5973,11 @@ resource via an endpoint reference</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_pull( $self, resource_uri, options, filter, context);
 #endif
@@ -5732,7 +6001,11 @@ resource via an endpoint reference</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_create_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -5756,7 +6029,11 @@ resource via an endpoint reference</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_put_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -5778,7 +6055,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_release( $self, resource_uri, options, context);
 #endif
@@ -5799,7 +6080,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_get( $self, resource_uri, options);
 #endif
@@ -5820,7 +6105,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete( $self, resource_uri, options);
 #endif
@@ -5844,7 +6133,11 @@ resource via an endpoint reference</p>
     args.resource_uri = resource_uri;
     args.method = method;
     args.method_args = data;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_invoke( $self, resource_uri, options, method, data);
 #endif
@@ -5866,7 +6159,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_subscribe($self,  resource_uri, options, filter);
 #endif
@@ -5889,7 +6186,11 @@ resource via an endpoint reference</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_unsubscribe($self, resource_uri, options, identifier);
 #endif
@@ -5911,7 +6212,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_renew($self, resource_uri, options, identifier);
 #endif
@@ -5972,6 +6277,7 @@ resource via an endpoint reference</p>
     return wsmc_get_port( $self );
   }
 
+  %newobject path;
   /*
    * The path of the clien URL
    *
@@ -5980,6 +6286,7 @@ resource via an endpoint reference</p>
     return wsmc_get_path( $self );
   }
 
+  %newobject user;
   /*
    * The user name used for authentication
    *
@@ -5988,6 +6295,7 @@ resource via an endpoint reference</p>
     return wsmc_get_user( $self );
   }
 
+  %newobject password;
   /*
    * The password used for authentication
    *
@@ -6070,7 +6378,11 @@ resource via an endpoint reference</p>
     wsmc_action_args_t args;
     args.client = $self;
     args.options = options;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_identify_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_identify_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_identify( $self, options );
 #endif
@@ -6091,7 +6403,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.epr = epr;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_get_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_get_from_epr( $self, epr, options);
 #endif
@@ -6112,7 +6428,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.epr = epr;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete_from_epr( $self, epr, options);
 #endif
@@ -6144,7 +6464,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_enumerate_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_enumerate_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_enumerate( $self, resource_uri, options, filter);
 #endif
@@ -6167,7 +6491,11 @@ resource via an endpoint reference</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_pull( $self, resource_uri, options, filter, context);
 #endif
@@ -6191,7 +6519,11 @@ resource via an endpoint reference</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_create_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -6215,7 +6547,11 @@ resource via an endpoint reference</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_put_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -6237,7 +6573,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_release( $self, resource_uri, options, context);
 #endif
@@ -6258,7 +6598,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_get( $self, resource_uri, options);
 #endif
@@ -6279,7 +6623,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete( $self, resource_uri, options);
 #endif
@@ -6303,7 +6651,11 @@ resource via an endpoint reference</p>
     args.resource_uri = resource_uri;
     args.method = method;
     args.method_args = data;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_invoke( $self, resource_uri, options, method, data);
 #endif
@@ -6325,7 +6677,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_subscribe($self,  resource_uri, options, filter);
 #endif
@@ -6348,7 +6704,11 @@ resource via an endpoint reference</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_unsubscribe($self, resource_uri, options, identifier);
 #endif
@@ -6370,7 +6730,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_renew($self, resource_uri, options, identifier);
 #endif
@@ -6440,7 +6804,11 @@ resource via an endpoint reference</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_pull( $self, resource_uri, options, filter, context);
 #endif
@@ -6464,7 +6832,11 @@ resource via an endpoint reference</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_create_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -6488,7 +6860,11 @@ resource via an endpoint reference</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_put_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -6510,7 +6886,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_release( $self, resource_uri, options, context);
 #endif
@@ -6531,7 +6911,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_get( $self, resource_uri, options);
 #endif
@@ -6552,7 +6936,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete( $self, resource_uri, options);
 #endif
@@ -6576,7 +6964,11 @@ resource via an endpoint reference</p>
     args.resource_uri = resource_uri;
     args.method = method;
     args.method_args = data;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_invoke( $self, resource_uri, options, method, data);
 #endif
@@ -6598,7 +6990,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_subscribe($self,  resource_uri, options, filter);
 #endif
@@ -6621,7 +7017,11 @@ resource via an endpoint reference</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_unsubscribe($self, resource_uri, options, identifier);
 #endif
@@ -6643,233 +7043,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
-#else
-    return wsmc_action_renew($self, resource_uri, options, identifier);
 #endif
-  }
-
-  /*
-   * Get a string representation of the last fault
-   *
-   * call-seq:
-   *   client.fault_string -&gt; String
-   *
-   */
-  char *fault_string() {
-    return wsmc_get_fault_string($self);
-  }
-  
-  /*
-   * Get a numeric representation of the last fault
-   *
-   * call-seq:
-   *   client.last_error -&gt; Integer
-   *
-   */
-   int last_error() {
-     return wsmc_get_last_error($self);
-   }
-}</pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-put" class="method-detail ">
-        
-        
-        <div class="method-heading">
-          <span class="method-callseq">
-            put(options, uri, xml, xml.size, &quot;utf-8&quot;) &rarr; XmlDoc
-          </span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-        
-
-        <div class="method-description">
-          
-          <p>WS-Transport</p>
-
-<p>put: Change a resource</p>
-          
-          
-
-          
-          <div class="method-source-code" id="put-source">
-            <pre>WsXmlDocH put( client_opt_t *options, const char *resource_uri, const char *data, size_t size, const char *encoding = &quot;utf-8&quot;) {
-#if RUBY_VERSION &gt; 18 /* YARV */
-    wsmc_action_args_t args;
-    args.client = $self;
-    args.options = options;
-    args.resource_uri = resource_uri;
-    args.data = data;
-    args.size = size;
-    args.encoding = encoding;
-    return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
-#else
-    return wsmc_action_put_fromtext( $self, resource_uri, options, data, size, encoding);
-#endif
-  }
-
-  /*
-   * WS-Release
-   *
-   * release: Release enumeration context
-   *
-   * call-seq:
-   *   client.release(options, uri, context) -&gt; XmlDoc
-   *
-   */
-  WsXmlDocH release( client_opt_t *options, const char *resource_uri, const char *context) {
-#if RUBY_VERSION &gt; 18 /* YARV */
-    wsmc_action_args_t args;
-    args.client = $self;
-    args.options = options;
-    args.resource_uri = resource_uri;
-    args.context = context;
-    return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
-#else
-    return wsmc_action_release( $self, resource_uri, options, context);
-#endif
-  }
-
-  /*
-   * WS-Transport
-   *
-   * get: Get a resource
-   *
-   * call-seq:
-   *   client.get(options, uri) -&gt; XmlDoc
-   *
-   */
-  WsXmlDocH get( client_opt_t *options, const char *resource_uri) {
-#if RUBY_VERSION &gt; 18 /* YARV */
-    wsmc_action_args_t args;
-    args.client = $self;
-    args.options = options;
-    args.resource_uri = resource_uri;
-    return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
-#else
-    return wsmc_action_get( $self, resource_uri, options);
-#endif
-  }
-
-  /*
-   * WS-Transport
-   *
-   * delete: Delete a resource
-   *
-   * call-seq:
-   *   client.delete(options, uri) -&gt; XmlDoc
-   *
-   */
-  WsXmlDocH delete( client_opt_t *options, const char *resource_uri) {
-#if RUBY_VERSION &gt; 18 /* YARV */
-    wsmc_action_args_t args;
-    args.client = $self;
-    args.options = options;
-    args.resource_uri = resource_uri;
-    return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
-#else
-    return wsmc_action_delete( $self, resource_uri, options);
-#endif
-  }
-
-  /*
-   * WS-Invoke
-   *
-   * invoke: Invoke a resource function
-   *
-   * call-seq:
-   *   client.invoke(options, uri, &quot;method-name&quot;) -&gt; XmlDoc
-   *   client.invoke(options, uri, &quot;method-name&quot;, xml_doc) -&gt; XmlDoc
-   *
-   */
-  WsXmlDocH invoke( client_opt_t *options, const char *resource_uri, const char *method, WsXmlDocH data = NULL) {
-#if RUBY_VERSION &gt; 18 /* YARV */
-    wsmc_action_args_t args;
-    args.client = $self;
-    args.options = options;
-    args.resource_uri = resource_uri;
-    args.method = method;
-    args.method_args = data;
-    return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
-#else
-    return wsmc_action_invoke( $self, resource_uri, options, method, data);
-#endif
-  }
-
-  /*
-   * WS-Eventing
-   *
-   * subscribe: Subscribe a listener to events
-   *
-   * call-seq:
-   *   client.subscribe(options, filter, uri) -&gt; XmlDoc
-   *
-   */
-  WsXmlDocH subscribe(client_opt_t *options, filter_t *filter, const char *resource_uri) {
-#if RUBY_VERSION &gt; 18 /* YARV */
-    wsmc_action_args_t args;
-    args.client = $self;
-    args.options = options;
-    args.filter = filter;
-    args.resource_uri = resource_uri;
-    return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
-#else
-    return wsmc_action_subscribe($self,  resource_uri, options, filter);
-#endif
-  }
-
-  /*
-   * WS-Eventing
-   *
-   * unsubscribe: Remove a listener from events
-   *
-   * call-seq:
-   *   client.unsubscribe(options, filter, uri, identifier) -&gt; XmlDoc
-   *
-   */
-  WsXmlDocH unsubscribe(client_opt_t *options, filter_t *filter, const char *resource_uri, const char *identifier) {
-#if RUBY_VERSION &gt; 18 /* YARV */
-    wsmc_action_args_t args;
-    args.client = $self;
-    args.options = options;
-    args.filter = filter;
-    args.resource_uri = resource_uri;
-    args.identifier = identifier;
-    return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
-#else
-    return wsmc_action_unsubscribe($self, resource_uri, options, identifier);
-#endif
-  }
-
-  /*
-   * WS-Eventing
-   *
-   * renew: Renew a subscription
-   *
-   * call-seq:
-   *   client.renew(options, uri, identifier) -&gt; XmlDoc
-   *
-   */
-  WsXmlDocH renew(client_opt_t *options , char *resource_uri, char *identifier) {
-#if RUBY_VERSION &gt; 18 /* YARV */
-    wsmc_action_args_t args;
-    args.client = $self;
-    args.options = options;
-    args.resource_uri = resource_uri;
-    args.identifier = identifier;
-    return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
 #else
     return wsmc_action_renew($self, resource_uri, options, identifier);
 #endif
@@ -6938,7 +7116,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_release( $self, resource_uri, options, context);
 #endif
@@ -6959,7 +7141,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_get( $self, resource_uri, options);
 #endif
@@ -6980,7 +7166,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete( $self, resource_uri, options);
 #endif
@@ -7004,7 +7194,11 @@ resource via an endpoint reference</p>
     args.resource_uri = resource_uri;
     args.method = method;
     args.method_args = data;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_invoke( $self, resource_uri, options, method, data);
 #endif
@@ -7026,7 +7220,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_subscribe($self,  resource_uri, options, filter);
 #endif
@@ -7049,7 +7247,11 @@ resource via an endpoint reference</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_unsubscribe($self, resource_uri, options, identifier);
 #endif
@@ -7071,7 +7273,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_renew($self, resource_uri, options, identifier);
 #endif
@@ -7140,7 +7346,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_renew($self, resource_uri, options, identifier);
 #endif
@@ -7204,6 +7414,7 @@ resource via an endpoint reference</p>
     return wsmc_get_response_code( $self );
   }
 
+  %newobject scheme;
   /*
    * String representation of the transport scheme
    *
@@ -7215,6 +7426,7 @@ resource via an endpoint reference</p>
     return wsmc_get_scheme( $self );
   }
 
+  %newobject host;
   /*
    * The host part of the client URL
    *
@@ -7231,6 +7443,7 @@ resource via an endpoint reference</p>
     return wsmc_get_port( $self );
   }
 
+  %newobject path;
   /*
    * The path of the clien URL
    *
@@ -7239,6 +7452,7 @@ resource via an endpoint reference</p>
     return wsmc_get_path( $self );
   }
 
+  %newobject user;
   /*
    * The user name used for authentication
    *
@@ -7247,6 +7461,7 @@ resource via an endpoint reference</p>
     return wsmc_get_user( $self );
   }
 
+  %newobject password;
   /*
    * The password used for authentication
    *
@@ -7329,7 +7544,11 @@ resource via an endpoint reference</p>
     wsmc_action_args_t args;
     args.client = $self;
     args.options = options;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_identify_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_identify_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_identify( $self, options );
 #endif
@@ -7350,7 +7569,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.epr = epr;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_get_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_get_from_epr( $self, epr, options);
 #endif
@@ -7371,7 +7594,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.epr = epr;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete_from_epr( $self, epr, options);
 #endif
@@ -7403,7 +7630,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_enumerate_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_enumerate_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_enumerate( $self, resource_uri, options, filter);
 #endif
@@ -7426,7 +7657,11 @@ resource via an endpoint reference</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_pull( $self, resource_uri, options, filter, context);
 #endif
@@ -7450,7 +7685,11 @@ resource via an endpoint reference</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_create_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -7474,7 +7713,11 @@ resource via an endpoint reference</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_put_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -7496,7 +7739,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_release( $self, resource_uri, options, context);
 #endif
@@ -7517,7 +7764,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_get( $self, resource_uri, options);
 #endif
@@ -7538,7 +7789,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete( $self, resource_uri, options);
 #endif
@@ -7562,7 +7817,11 @@ resource via an endpoint reference</p>
     args.resource_uri = resource_uri;
     args.method = method;
     args.method_args = data;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_invoke( $self, resource_uri, options, method, data);
 #endif
@@ -7584,7 +7843,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_subscribe($self,  resource_uri, options, filter);
 #endif
@@ -7607,7 +7870,11 @@ resource via an endpoint reference</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_unsubscribe($self, resource_uri, options, identifier);
 #endif
@@ -7629,7 +7896,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_renew($self, resource_uri, options, identifier);
 #endif
@@ -7693,6 +7964,7 @@ resource via an endpoint reference</p>
     return wsmc_get_scheme( $self );
   }
 
+  %newobject host;
   /*
    * The host part of the client URL
    *
@@ -7709,6 +7981,7 @@ resource via an endpoint reference</p>
     return wsmc_get_port( $self );
   }
 
+  %newobject path;
   /*
    * The path of the clien URL
    *
@@ -7717,6 +7990,7 @@ resource via an endpoint reference</p>
     return wsmc_get_path( $self );
   }
 
+  %newobject user;
   /*
    * The user name used for authentication
    *
@@ -7725,6 +7999,7 @@ resource via an endpoint reference</p>
     return wsmc_get_user( $self );
   }
 
+  %newobject password;
   /*
    * The password used for authentication
    *
@@ -7807,7 +8082,11 @@ resource via an endpoint reference</p>
     wsmc_action_args_t args;
     args.client = $self;
     args.options = options;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_identify_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_identify_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_identify( $self, options );
 #endif
@@ -7828,7 +8107,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.epr = epr;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_get_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_get_from_epr( $self, epr, options);
 #endif
@@ -7849,7 +8132,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.epr = epr;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete_from_epr( $self, epr, options);
 #endif
@@ -7881,7 +8168,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_enumerate_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_enumerate_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_enumerate( $self, resource_uri, options, filter);
 #endif
@@ -7904,7 +8195,11 @@ resource via an endpoint reference</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_pull( $self, resource_uri, options, filter, context);
 #endif
@@ -7928,7 +8223,11 @@ resource via an endpoint reference</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_create_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -7952,7 +8251,11 @@ resource via an endpoint reference</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_put_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -7974,7 +8277,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_release( $self, resource_uri, options, context);
 #endif
@@ -7995,7 +8302,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_get( $self, resource_uri, options);
 #endif
@@ -8016,7 +8327,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete( $self, resource_uri, options);
 #endif
@@ -8040,7 +8355,11 @@ resource via an endpoint reference</p>
     args.resource_uri = resource_uri;
     args.method = method;
     args.method_args = data;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_invoke( $self, resource_uri, options, method, data);
 #endif
@@ -8062,7 +8381,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_subscribe($self,  resource_uri, options, filter);
 #endif
@@ -8085,7 +8408,11 @@ resource via an endpoint reference</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_unsubscribe($self, resource_uri, options, identifier);
 #endif
@@ -8107,7 +8434,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_renew($self, resource_uri, options, identifier);
 #endif
@@ -8224,7 +8555,11 @@ resource via an endpoint reference</p>
     wsmc_action_args_t args;
     args.client = $self;
     args.options = options;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_identify_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_identify_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_identify( $self, options );
 #endif
@@ -8245,7 +8580,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.epr = epr;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_get_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_get_from_epr( $self, epr, options);
 #endif
@@ -8266,7 +8605,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.epr = epr;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete_from_epr( $self, epr, options);
 #endif
@@ -8298,7 +8641,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_enumerate_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_enumerate_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_enumerate( $self, resource_uri, options, filter);
 #endif
@@ -8321,7 +8668,11 @@ resource via an endpoint reference</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_pull( $self, resource_uri, options, filter, context);
 #endif
@@ -8345,7 +8696,11 @@ resource via an endpoint reference</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_create_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -8369,7 +8724,11 @@ resource via an endpoint reference</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_put_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -8391,7 +8750,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_release( $self, resource_uri, options, context);
 #endif
@@ -8412,7 +8775,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_get( $self, resource_uri, options);
 #endif
@@ -8433,7 +8800,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete( $self, resource_uri, options);
 #endif
@@ -8457,7 +8828,11 @@ resource via an endpoint reference</p>
     args.resource_uri = resource_uri;
     args.method = method;
     args.method_args = data;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_invoke( $self, resource_uri, options, method, data);
 #endif
@@ -8479,7 +8854,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_subscribe($self,  resource_uri, options, filter);
 #endif
@@ -8502,7 +8881,11 @@ resource via an endpoint reference</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_unsubscribe($self, resource_uri, options, identifier);
 #endif
@@ -8524,7 +8907,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_renew($self, resource_uri, options, identifier);
 #endif
@@ -8593,7 +8980,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_subscribe($self,  resource_uri, options, filter);
 #endif
@@ -8616,7 +9007,11 @@ resource via an endpoint reference</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_unsubscribe($self, resource_uri, options, identifier);
 #endif
@@ -8638,7 +9033,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_renew($self, resource_uri, options, identifier);
 #endif
@@ -8766,7 +9165,11 @@ resource via an endpoint reference</p>
     wsmc_action_args_t args;
     args.client = $self;
     args.options = options;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_identify_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_identify_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_identify( $self, options );
 #endif
@@ -8787,7 +9190,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.epr = epr;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_get_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_get_from_epr( $self, epr, options);
 #endif
@@ -8808,7 +9215,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.epr = epr;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete_from_epr( $self, epr, options);
 #endif
@@ -8840,7 +9251,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_enumerate_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_enumerate_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_enumerate( $self, resource_uri, options, filter);
 #endif
@@ -8863,7 +9278,11 @@ resource via an endpoint reference</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_pull( $self, resource_uri, options, filter, context);
 #endif
@@ -8887,7 +9306,11 @@ resource via an endpoint reference</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_create_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -8911,7 +9334,11 @@ resource via an endpoint reference</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_put_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -8933,7 +9360,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_release( $self, resource_uri, options, context);
 #endif
@@ -8954,7 +9385,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_get( $self, resource_uri, options);
 #endif
@@ -8975,7 +9410,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete( $self, resource_uri, options);
 #endif
@@ -8999,7 +9438,11 @@ resource via an endpoint reference</p>
     args.resource_uri = resource_uri;
     args.method = method;
     args.method_args = data;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_invoke( $self, resource_uri, options, method, data);
 #endif
@@ -9021,7 +9464,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_subscribe($self,  resource_uri, options, filter);
 #endif
@@ -9044,7 +9491,11 @@ resource via an endpoint reference</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_unsubscribe($self, resource_uri, options, identifier);
 #endif
@@ -9066,7 +9517,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_renew($self, resource_uri, options, identifier);
 #endif
@@ -9136,7 +9591,11 @@ resource via an endpoint reference</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_unsubscribe($self, resource_uri, options, identifier);
 #endif
@@ -9158,7 +9617,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_renew($self, resource_uri, options, identifier);
 #endif
@@ -9219,6 +9682,7 @@ resource via an endpoint reference</p>
     return wsmc_get_user( $self );
   }
 
+  %newobject password;
   /*
    * The password used for authentication
    *
@@ -9301,7 +9765,11 @@ resource via an endpoint reference</p>
     wsmc_action_args_t args;
     args.client = $self;
     args.options = options;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_identify_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_identify_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_identify( $self, options );
 #endif
@@ -9322,7 +9790,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.epr = epr;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_get_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_get_from_epr( $self, epr, options);
 #endif
@@ -9343,7 +9815,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.epr = epr;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_from_epr_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete_from_epr( $self, epr, options);
 #endif
@@ -9375,7 +9851,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_enumerate_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_enumerate_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_enumerate( $self, resource_uri, options, filter);
 #endif
@@ -9398,7 +9878,11 @@ resource via an endpoint reference</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_pull_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_pull( $self, resource_uri, options, filter, context);
 #endif
@@ -9422,7 +9906,11 @@ resource via an endpoint reference</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_create_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_create_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -9446,7 +9934,11 @@ resource via an endpoint reference</p>
     args.data = data;
     args.size = size;
     args.encoding = encoding;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_put_fromtext_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_put_fromtext( $self, resource_uri, options, data, size, encoding);
 #endif
@@ -9468,7 +9960,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.context = context;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_release_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_release( $self, resource_uri, options, context);
 #endif
@@ -9489,7 +9985,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_get_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_get( $self, resource_uri, options);
 #endif
@@ -9510,7 +10010,11 @@ resource via an endpoint reference</p>
     args.client = $self;
     args.options = options;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_delete_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_delete( $self, resource_uri, options);
 #endif
@@ -9534,7 +10038,11 @@ resource via an endpoint reference</p>
     args.resource_uri = resource_uri;
     args.method = method;
     args.method_args = data;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_invoke_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_invoke( $self, resource_uri, options, method, data);
 #endif
@@ -9556,7 +10064,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.filter = filter;
     args.resource_uri = resource_uri;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_subscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_subscribe($self,  resource_uri, options, filter);
 #endif
@@ -9579,7 +10091,11 @@ resource via an endpoint reference</p>
     args.filter = filter;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_unsubscribe_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_unsubscribe($self, resource_uri, options, identifier);
 #endif
@@ -9601,7 +10117,11 @@ resource via an endpoint reference</p>
     args.options = options;
     args.resource_uri = resource_uri;
     args.identifier = identifier;
+#if RUBY_VERSION &gt; 20 /* New threading model */
+    return (WsXmlDocH)rb_thread_call_without_gvl((void * (*)(void *))ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#else
     return (WsXmlDocH)rb_thread_blocking_region((rb_blocking_function_t*)ruby_renew_thread, &amp;args, RUBY_UBF_IO, 0);
+#endif
 #else
     return wsmc_action_renew($self, resource_uri, options, identifier);
 #endif
@@ -9647,7 +10167,7 @@ resource via an endpoint reference</p>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.0.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

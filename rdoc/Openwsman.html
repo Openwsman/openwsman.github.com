@@ -6,19 +6,16 @@
 
 <title>module Openwsman - Openwsman - WS-Management for all</title>
 
-<link href="./fonts.css" rel="stylesheet">
-<link href="./rdoc.css" rel="stylesheet">
-
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
 </script>
 
 <script src="./js/jquery.js"></script>
-<script src="./js/navigation.js"></script>
-<script src="./js/search_index.js"></script>
-<script src="./js/search.js"></script>
-<script src="./js/searcher.js"></script>
 <script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
 
 
 <body id="top" role="document" class="module">
@@ -92,7 +89,7 @@
 
   <section class="description">
     
-<h1 id="module-Openwsman-label-About+openwsman">About openwsman<span><a href="#module-Openwsman-label-About+openwsman">&para;</a> <a href="#documentation">&uarr;</a></span></h1>
+<h1 id="module-Openwsman-label-About+openwsman">About openwsman<span><a href="#module-Openwsman-label-About+openwsman">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
 <p><a href="Openwsman.html">Openwsman</a> (<a
 href="http://www.openwsman.org">www.openwsman.org</a>) is a project
@@ -103,7 +100,7 @@ WS-Management is based on a suite of web services specifications and usage
 requirements that exposes a set of operations focused on and covers all
 system management aspects.</p>
 
-<h1 id="module-Openwsman-label-Using+the+bindings">Using the bindings<span><a href="#module-Openwsman-label-Using+the+bindings">&para;</a> <a href="#documentation">&uarr;</a></span></h1>
+<h1 id="module-Openwsman-label-Using+the+bindings">Using the bindings<span><a href="#module-Openwsman-label-Using+the+bindings">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
 <p>The bindings provide access to the client-side API of openwsman. You start
 by creating a Client instance and set up ClientOptions to control the
@@ -159,19 +156,18 @@ format)</p>
 embeds the namespace in the EPR</p>
 </li></ul>
 
-<h4 id="method-c-epr_prefix_for-label-Examples">Examples<span><a href="#method-c-epr_prefix_for-label-Examples">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+<h4 id="method-c-epr_prefix_for-label-Examples">Examples<span><a href="#method-c-epr_prefix_for-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h4>
 
-<pre class="ruby"><span class="ruby-identifier">prefix</span> = <span class="ruby-constant">Openwsman</span>.<span class="ruby-identifier">epr_prefix_for</span> <span class="ruby-string">&quot;CIM_Managed_Element&quot;</span>
-=<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2&quot;</span>
-<span class="ruby-identifier">prefix</span> = <span class="ruby-constant">Openwsman</span>.<span class="ruby-identifier">epr_prefix_for</span> <span class="ruby-string">&quot;Win32_Foo&quot;</span>, <span class="ruby-string">&quot;root/cimv2&quot;</span>
-=<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;http://schemas.microsoft.com/wbem/wsman/1/wmi/root/cimv2&quot;</span>
-</pre>
+<pre>prefix = Openwsman.epr_prefix_for &quot;CIM_Managed_Element&quot;
+=&gt; &quot;http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2&quot;
+prefix = Openwsman.epr_prefix_for &quot;Win32_Foo&quot;, &quot;root/cimv2&quot;
+=&gt; &quot;http://schemas.microsoft.com/wbem/wsman/1/wmi/root/cimv2&quot;</pre>
           
           
 
           
           <div class="method-source-code" id="epr_prefix_for-source">
-            <pre><span class="ruby-comment"># File openwsman/openwsman.rb, line 61</span>
+            <pre><span class="ruby-comment"># File openwsman/openwsman.rb, line 81</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">epr_prefix_for</span> <span class="ruby-identifier">classname</span>, <span class="ruby-identifier">namespace</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">prefix</span> = <span class="ruby-constant">Openwsman</span><span class="ruby-operator">::</span><span class="ruby-identifier">uri_prefix</span> <span class="ruby-identifier">classname</span>
   <span class="ruby-identifier">prefix</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;/#{namespace}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">namespace</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">namespace</span>.<span class="ruby-identifier">empty?</span>
@@ -209,17 +205,16 @@ format)</p>
 embeds the namespace in the EPR</p>
 </li></ul>
 
-<h4 id="method-c-epr_uri_for-label-Examples">Examples<span><a href="#method-c-epr_uri_for-label-Examples">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+<h4 id="method-c-epr_uri_for-label-Examples">Examples<span><a href="#method-c-epr_uri_for-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h4>
 
-<pre class="ruby"><span class="ruby-constant">Openwsman</span>.<span class="ruby-identifier">epr_uri_for</span> <span class="ruby-string">&quot;root/cimv2&quot;</span>, <span class="ruby-string">&quot;Win32_Foo&quot;</span>
-=<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;http://schemas.microsoft.com/wbem/wsman/1/wmi/root/cimv2/Win32_Foo&quot;</span>
-</pre>
+<pre>Openwsman.epr_uri_for &quot;root/cimv2&quot;, &quot;Win32_Foo&quot;
+=&gt; &quot;http://schemas.microsoft.com/wbem/wsman/1/wmi/root/cimv2/Win32_Foo&quot;</pre>
           
           
 
           
           <div class="method-source-code" id="epr_uri_for-source">
-            <pre><span class="ruby-comment"># File openwsman/openwsman.rb, line 75</span>
+            <pre><span class="ruby-comment"># File openwsman/openwsman.rb, line 95</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">epr_uri_for</span> <span class="ruby-identifier">namespace</span>, <span class="ruby-identifier">classname</span>
   <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Namespace must not be nil&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">namespace</span>
   <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Classname must not be nil&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">classname</span>
@@ -243,7 +238,7 @@ embeds the namespace in the EPR</p>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.0.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 
