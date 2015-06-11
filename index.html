@@ -1,63 +1,101 @@
 <html>
 <head>
-    <link
-href="https://github.global.ssl.fastly.net/assets/github-00c0e7652fb6f0fde282f6efba767cc4127f7149.css"
-media="all" rel="stylesheet" type="text/css" />
-    <link
-href="https://github.global.ssl.fastly.net/assets/github2-599048231308405a57ed982f74ba5e249891263a.css"
-media="all" rel="stylesheet" type="text/css" />
-
-<title>OpenWSMAN - WS-Management for all</title>
+  <meta charset="utf-8">
+  <title>OpenWSMAN - WS-Management for all</title>
+  <style>
+  html {
+    font: 16px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: 5%;
+  }
+  pre {
+    background-color: #222;
+    color: white;
+    padding: 10px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+  }
+  pre:before {
+    content: "$ ";
+    color: #999;
+  }
+  .content {
+    width: 560px;
+    margin: 0 auto;
+    padding-top: 80px;
+    color: #444;
+  }
+  a, a:visited {
+    color: #c00;
+  }
+  .content p {
+    font-weight: 200;
+  }
+  .left-table {
+    vertical-align: top;
+    font-weight: 100;
+    font-size: 120%;
+    padding: 0 10px 0 0;
+  }
+  </style>                      
 </head>
-<body class="logged_in vis-public env-production" style>
-<div class="wrapper">
-<div class="site" itemscope itemtype="http://schema.org/WebPage">
-<div class="container">
-<div id="wiki-wrapper" class="page">
-<div id="wiki-content">
-  <div class="wrap">
-    <div id="wiki-body" class="gollum-markdown-content instapaper_body">
-        <div class="markdown-body">
+<body>
+<a href="https://github.com/Openwsman?tab=repositories"><img style="position: absolute; top:
+0; right: 0; border: 0;"
+src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67"
+alt="Fork me on GitHub"
+data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"></a>
+
         <h1>OpenWSMAN - WS-Management for all</h1>
-
-<h2><b>About OpenWSMAN</b></h2>
-
-Openwsman is an open source implementation of WS-Management; enabling the
+<table>
+<tr><td class="left-table">
+About OpenWSMAN
+</td><td>
+Openwsman is an open source implementation of <a
+href="http://en.wikipedia.org/wiki/WS-Management">WS-Management</a>; enabling the
 in-band management of Linux/uni*/Windows platforms.<br/>
 Openwsman supports the generic WS-Management protocol as well as
 specific protocol extensions for the <a
 href="http://dmtf.org/standards/cim">Common Information Model (CIM)</a>
+</td></tr>
 
-<h4><b>About WS-Management</b></h4>
-<p>
+<tr><td class="left-table">
+About WS-Management
+</td><td>
 Web Services for Management (WS-Management, WS-MAN) is a <a
 href="http://dmtf.org/standards/wsman">specification for managing
 computer systems</a> using Web services standards.<br/>
-</p>
-<p>
+<p></p>
 WS-Management is a <a
 href="http://en.wikipedia.org/wiki/SOAP">SOAP</a> based transport
 protocol for managing (create, enumerate, access, change, destroy)
 resources.<br/>
-</p>
+</td></tr>
 
-<h4>Features</h4>
+<tr><td class="left-table">
+Features
+</td><td>
 <ul>
-<li>Full server and client implementation
+<li>Full <a href="https://github.com/Openwsman/openwsman">server</a>
+and <a href="https://github.com/Openwsman/wsmancli">client</a> implementation
 </li><li>Perl, Python, Java and Ruby bindings
 </li><li>Fast and small (~10 MB runtime)
 </li><li>DMTF standards-compliant (WS-Management 1.1.0 + WS-CIM 1.1.0) 
 </li><li>Interoperable with <a
 href="http://en.wikipedia.org/wiki/Windows_Management_Instrumentation">Windows
-WMI</a> and <a
+WMI/WINRM</a>, <a
 href="http://en.wikipedia.org/wiki/Intel_Active_Management_Technology">Intel
-AMT</a>
+AMT</a>, <a
+href="http://en.wikipedia.org/wiki/Dell_DRAC">Dell DRAC</a>
 </li>
 <li>Scriptable plugins</li>
 </ul>
+</td></tr>
 
 
-<h4>Supported Standards</h4>
+<tr><td class="left-table">
+Supported Standards
+</td><td>
 <ul>
 
 <li><a
@@ -70,30 +108,38 @@ href="http://dmtf.org/sites/default/files/standards/documents/DSP0227_1.2.0.pdf"
 href="http://dmtf.org/sites/default/files/standards/documents/DSP0230_1.1.0.pdf">DSP0230</a>
  1.1.0 - WS-CIM Mapping Specification</li>
 </ul>
+</td></tr>
 
-<h3>Documentation</h3>
-
+<tr><td class="left-table">
+Documentation
+</td><td>
 The <a href="https://github.com/Openwsman/openwsman/wiki">OpenWSMAN
 wiki</a> is the primary documentation site.
-
+<p></p>
 There is also online documentation for the <a
 href="http://openwsman.github.io/rdoc">Ruby client
 bindings</a>
+</td></tr>
 
-<h3>Getting help</h3>
-
+<tr><td class="left-table">
+Getting help
+</td><td>
 If your question is not covered in the <a href="https://github.com/Openwsman/openwsman/wiki">OpenWSMAN
 wiki</a>, please <a href="https://lists.sourceforge.net/lists/listinfo/openwsman-devel">subscribe
 to the openwsman-devel</a> mailing list and <a href="mailto:openwsman-devel@lists.sourceforge.net">ask there</a>.
+</td></tr>
 
-<h3>Reporting bugs</h3>
-
+<tr><td class="left-table">
+Reporting bugs
+</td><td>
 Bugs should be reported via the <a
 href="https://github.com/Openwsman/openwsman/issues">github issue
 tracker</a>.
+</td></tr>
 
-<h3>Related projects</h3>
-
+<tr><td class="left-table">
+Related projects
+</td><td>
 There are a couple of related projects hosted under the <a
 href="https://github.com/Openwsman">Openwsman github account</a>:
 
@@ -105,34 +151,59 @@ Openwsman command line client</li>
 <li><a href="https://github.com/Openwsman/mod_wsman">mod_wsman</a> -
 Apache module for Openwsman (unmaintained)</li>
 </ul>
+</td></tr>
 
-<h3>Supported platforms</h3>
-
+<tr><td class="left-table">
+Supported platforms
+</td><td>
 Openwsman is primarily developed on Linux but is known to run on
 Windows and MacOS as well.
+</td></tr>
 
-<h3><b>Downloading OpenWSMAN</b></h3>
 
-<h4>Source code</h4>
-
+<tr><td class="left-table">
+<br/>
+Downloading OpenWSMAN
+</td><td>
+</td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr><td class="left-table">
+Source code
+</td><td>
 Tarballs of releases are distributed via <a
 href="https://github.com/Openwsman/openwsman/releases">GitHub</a>.<br/>
 The latest release is <a
 href="https://github.com/Openwsman/openwsman/releases/tag/v2.5.2">2.5.2</a>
 (<a
 href="https://github.com/Openwsman/openwsman/blob/v2.5.2/ChangeLog">Changelog</a>)
+</td></tr>
 
-<h4>Git</h4>
-
+<tr><td class="left-table">
+Git
+</td><td>
 The git repo for Openwsman is <a
 href="https://github.com/Openwsman/openwsman">hosted on GitHub</a>.
+</td></tr>
 
-<h4>RPM packages</h4>
+<tr><td class="left-table">
+RPM packages
+</td><td>
 RPM binaries for Linux are available via <a
 href="https://build.opensuse.org/project/show?project=Openwsman">the
 openSUSE Build Service</a>
+</td></tr>
 
-<h4>Python package</h4>
+<tr><td class="left-table">
+Ruby gem
+</td><td>
+A Ruby GEM is available at <a
+href="https://rubygems.org/gems/openwsman">rubygems.org</a>
+</td></tr>
+
+
+<tr><td class="left-table">
+Python package
+</td><td>
 To build and install a Python package, you should be able to do:
 <pre>
 cd bindings/python/pywsman
@@ -140,11 +211,16 @@ python setup.py sdist # Make a python source distribution
 cd dist
 pip install pywsman-*.tar.gz # Build and install the python package
 </pre>
+</td></tr>
 
-<h4>Other formats</h4>
-
+<tr><td class="left-table">
+Other formats
+</td><td>
 Other formats (i.e. Debian .deb files) would need a maintainer. Please
 contact <a href="mailto:kkaempf@suse.com">me</a> if you're interested
 in maintaining other formats.
+</td></tr>
+
+</table>
    </body>
 </html>
