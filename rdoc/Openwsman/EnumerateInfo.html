@@ -8,14 +8,17 @@
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
 </script>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/darkfish.js"></script>
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
 
 <link href="../css/fonts.css" rel="stylesheet">
 <link href="../css/rdoc.css" rel="stylesheet">
-
 
 
 <body id="top" role="document" class="class">
@@ -54,48 +57,34 @@
 
   <div id="class-metadata">
     
-    <div id="parent-class-section" class="nav-section">
+    
+<div id="parent-class-section" class="nav-section">
   <h3>Parent</h3>
 
-  
   <p class="link">Object
-  
 </div>
 
     
     
-    <!-- Method Quickref -->
+    
+<!-- Method Quickref -->
 <div id="method-list-section" class="nav-section">
   <h3>Methods</h3>
 
   <ul class="link-list" role="directory">
-    
     <li ><a href="#method-i-encoding">#encoding</a>
-    
     <li ><a href="#method-i-epr_to">#epr_to</a>
-    
     <li ><a href="#method-i-epr_uri">#epr_uri</a>
-    
     <li ><a href="#method-i-filter">#filter</a>
-    
     <li ><a href="#method-i-flags">#flags</a>
-    
     <li ><a href="#method-i-index">#index</a>
-    
     <li ><a href="#method-i-index-3D">#index=</a>
-    
     <li ><a href="#method-i-max_items">#max_items</a>
-    
     <li ><a href="#method-i-max_items-3D">#max_items=</a>
-    
     <li ><a href="#method-i-pull_result">#pull_result</a>
-    
     <li ><a href="#method-i-pull_result-3D">#pull_result=</a>
-    
     <li ><a href="#method-i-total_items">#total_items</a>
-    
     <li ><a href="#method-i-total_items-3D">#total_items=</a>
-    
   </ul>
 </div>
 
@@ -109,55 +98,34 @@
 
   <section class="description">
     
-<p><a href="EnumerateInfo.html">EnumerateInfo</a> contains all information
-related to an enumeration request.</p>
+<p><a href="EnumerateInfo.html"><code>EnumerateInfo</code></a> contains all information related to an enumeration request.</p>
 
-<p>The initial client.enumerate operation only returns a <code>context</code>
-(String) which can be used to <code>pull</code> the next enumeration item.
-This item contains the next context in the chain.</p>
+<p>The initial client.enumerate operation only returns a <code>context</code> (String) which can be used to <code>pull</code> the next enumeration item. This item contains the next context in the chain.</p>
 
   </section>
 
-  
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
-    
 
-    
 
-    
 
-    
 
-    
+
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Instance Methods</h3>
        </header>
 
-    
       <div id="method-i-encoding" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             encoding &rarr; String
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
-          <p>The current encoding (defaults to &#39;utf-8&#39;)</p>
-          
-          
+          <p>The current encoding (defaults to ‘utf-8’)</p>
 
-          
           <div class="method-source-code" id="encoding-source">
             <pre>const char *encoding() {
     return $self-&gt;encoding;
@@ -241,36 +209,22 @@ This item contains the next context in the chain.</p>
   }
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-epr_to" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             epr_to &rarr; String
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>The URL of the endpoint receiving the enumeration</p>
-          
-          
 
-          
           <div class="method-source-code" id="epr_to-source">
             <pre>const char *epr_to() {
     return $self-&gt;epr_to;
@@ -372,36 +326,22 @@ This item contains the next context in the chain.</p>
   }
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-epr_uri" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             epr_uri &rarr; String
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>The URI of the end point reference</p>
-          
-          
 
-          
           <div class="method-source-code" id="epr_uri-source">
             <pre>const char *epr_uri() {
     return $self-&gt;epr_uri;
@@ -494,36 +434,22 @@ This item contains the next context in the chain.</p>
   }
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-filter" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             filter &rarr; Openwsman::Filter
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>The Filter for this enumeration</p>
-          
-          
 
-          
           <div class="method-source-code" id="filter-source">
             <pre>const filter_t *filter() {
     return $self-&gt;filter;
@@ -598,36 +524,22 @@ This item contains the next context in the chain.</p>
   }
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-flags" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             flags &rarr; Integer
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>enumeration flags</p>
-          
-          
 
-          
           <div class="method-source-code" id="flags-source">
             <pre>int flags() {
     return $self-&gt;flags;
@@ -739,36 +651,22 @@ This item contains the next context in the chain.</p>
   }
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-index" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             index &rarr; Integer
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>The current index (number of the last returned item)</p>
-          
-          
 
-          
           <div class="method-source-code" id="index-source">
             <pre>int index() {
     return $self-&gt;index;
@@ -834,36 +732,22 @@ This item contains the next context in the chain.</p>
   }
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-index-3D" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             index = 42
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Set a specific index (used to skip ahead)</p>
-          
-          
 
-          
           <div class="method-source-code" id="index-3D-source">
             <pre>void set_index(int i) {
     $self-&gt;index = i;
@@ -917,37 +801,22 @@ This item contains the next context in the chain.</p>
   }
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-max_items" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             max_items &rarr; Integer
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
-          <p>Return the maximum number of items that will be returned by this
-enumeration</p>
-          
-          
+          <p>Return the maximum number of items that will be returned by this enumeration</p>
 
-          
           <div class="method-source-code" id="max_items-source">
             <pre>int max_items() { return $self-&gt;maxItems; }
 
@@ -1077,36 +946,22 @@ enumeration</p>
   }
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-max_items-3D" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             max_items = 100
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Set the maximum number of items returned by this enumeration</p>
-          
-          
 
-          
           <div class="method-source-code" id="max_items-3D-source">
             <pre>void set_max_items(int mi) { $self-&gt;maxItems = mi; }
 
@@ -1226,36 +1081,22 @@ enumeration</p>
   }
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-pull_result" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             pull_result &rarr; Openwsman::XmlDoc
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>XmlDoc representing the result pulled last</p>
-          
-          
 
-          
           <div class="method-source-code" id="pull_result-source">
             <pre>WsXmlDocH pull_result() {
     return (WsXmlDocH)$self-&gt;pullResultPtr;
@@ -1276,76 +1117,48 @@ enumeration</p>
   }
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-pull_result-3D" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             pull_result = xml_doc
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Set the pull result (XmlDoc)</p>
 
 <p>Used for server-side plugin extensions</p>
-          
-          
 
-          
           <div class="method-source-code" id="pull_result-3D-source">
             <pre>void set_pull_result(WsXmlDocH result) {
     $self-&gt;pullResultPtr = (void *)result;
   }
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-total_items" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             total_items &rarr; Integer
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>The total number of items in this enumeration</p>
 
 <p>index is the number already returned, this is the total number</p>
-          
-          
 
-          
           <div class="method-source-code" id="total_items-source">
             <pre>int total_items() {
     return $self-&gt;totalItems;
@@ -1388,36 +1201,22 @@ enumeration</p>
   }
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-total_items-3D" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             total_items = 10
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Set the total number of items in this enumeration</p>
-          
-          
 
-          
           <div class="method-source-code" id="total_items-3D-source">
             <pre>void set_total_items(int i) {
     $self-&gt;totalItems = i;
@@ -1448,24 +1247,20 @@ enumeration</p>
   }
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
     </section>
-  
+
   </section>
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.4.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

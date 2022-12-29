@@ -1,14 +1,14 @@
-Thu, 21 May 2015 09:48:18 +0200
-README.rdoc	Fri, 08 May 2015 10:55:32 +0200
-../openwsman.i	Thu, 21 May 2015 09:45:38 +0200
-../wsman-client.i	Fri, 08 May 2015 10:55:32 +0200
-../wsman-client_opt.i	Thu, 21 May 2015 09:45:38 +0200
-../wsman-epr.i	Thu, 21 May 2015 09:45:38 +0200
-../wsman-filter.i	Fri, 08 May 2015 10:55:32 +0200
-../wsman-names.i	Fri, 08 May 2015 10:55:32 +0200
-../wsman-soap.i	Fri, 08 May 2015 10:55:32 +0200
-../wsman-transport.i	Fri, 08 May 2015 10:55:32 +0200
-../wsman-xml.i	Fri, 08 May 2015 10:55:32 +0200
-openwsman/openwsman.rb	Thu, 21 May 2015 09:45:38 +0200
-openwsman/xmldoc.rb	Fri, 08 May 2015 10:55:32 +0200
-openwsman/xmlnode.rb	Fri, 08 May 2015 10:55:32 +0200
+Wed, 28 Dec 2022 15:14:37 +0100
+README.rdoc	Wed, 12 Oct 2022 16:19:05 +0200
+../openwsman.i	Sat, 15 Oct 2022 21:00:36 +0200
+../wsman-client.i	Wed, 12 Oct 2022 16:19:05 +0200
+../wsman-client_opt.i	Wed, 12 Oct 2022 16:19:05 +0200
+../wsman-epr.i	Wed, 12 Oct 2022 16:19:05 +0200
+../wsman-filter.i	Wed, 12 Oct 2022 16:19:05 +0200
+../wsman-names.i	Wed, 12 Oct 2022 16:19:05 +0200
+../wsman-soap.i	Wed, 12 Oct 2022 16:19:05 +0200
+../wsman-transport.i	Wed, 12 Oct 2022 16:19:05 +0200
+../wsman-xml.i	Wed, 28 Dec 2022 12:18:28 +0100
+openwsman/openwsman.rb	Sat, 15 Oct 2022 21:00:36 +0200
+openwsman/xmldoc.rb	Wed, 12 Oct 2022 16:19:05 +0200
+openwsman/xmlnode.rb	Wed, 12 Oct 2022 16:19:05 +0200

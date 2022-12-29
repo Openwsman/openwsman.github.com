@@ -8,14 +8,17 @@
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
+  var index_rel_prefix = "./";
 </script>
 
-<script src="./js/jquery.js"></script>
-<script src="./js/darkfish.js"></script>
+<script src="./js/navigation.js" defer></script>
+<script src="./js/search.js" defer></script>
+<script src="./js/search_index.js" defer></script>
+<script src="./js/searcher.js" defer></script>
+<script src="./js/darkfish.js" defer></script>
 
 <link href="./css/fonts.css" rel="stylesheet">
 <link href="./css/rdoc.css" rel="stylesheet">
-
 
 
 <body id="top" role="document" class="file">
@@ -52,13 +55,12 @@
   </div>
 
   <div id="project-metadata">
-    <div id="fileindex-section" class="nav-section">
+    
+<div id="fileindex-section" class="nav-section">
   <h3>Pages</h3>
 
   <ul class="link-list">
-  
     <li><a href="./README_rdoc.html">README</a>
-  
   </ul>
 </div>
 
@@ -66,39 +68,22 @@
   <h3>Class and Module Index</h3>
 
   <ul class="link-list">
-  
     <li><a href="./Openwsman.html">Openwsman</a>
-  
     <li><a href="./Openwsman.html">Openwsman</a>
-  
     <li><a href="./Openwsman/Client.html">Openwsman::Client</a>
-  
     <li><a href="./Openwsman/ClientOptions.html">Openwsman::ClientOptions</a>
-  
     <li><a href="./Openwsman/Context.html">Openwsman::Context</a>
-  
     <li><a href="./Openwsman/EndPointReference.html">Openwsman::EndPointReference</a>
-  
     <li><a href="./Openwsman/EnumerateInfo.html">Openwsman::EnumerateInfo</a>
-  
     <li><a href="./Openwsman/Fault.html">Openwsman::Fault</a>
-  
     <li><a href="./Openwsman/Filter.html">Openwsman::Filter</a>
-  
     <li><a href="./Openwsman/Soap.html">Openwsman::Soap</a>
-  
     <li><a href="./Openwsman/SoapOp.html">Openwsman::SoapOp</a>
-  
     <li><a href="./Openwsman/Status.html">Openwsman::Status</a>
-  
     <li><a href="./Openwsman/Transport.html">Openwsman::Transport</a>
-  
     <li><a href="./Openwsman/XmlAttr.html">Openwsman::XmlAttr</a>
-  
     <li><a href="./Openwsman/XmlDoc.html">Openwsman::XmlDoc</a>
-  
     <li><a href="./Openwsman/XmlNode.html">Openwsman::XmlNode</a>
-  
   </ul>
 </div>
 
@@ -114,91 +99,60 @@
 <p><a href="http://openwsman.github.io">openwsman.github.io</a></p>
 </dd><dt>wiki 
 <dd>
-<p><a
-href="https://github.com/Openwsman/openwsman/wiki">github.com/Openwsman/openwsman/wiki</a></p>
+<p><a href="https://github.com/Openwsman/openwsman/wiki">github.com/Openwsman/openwsman/wiki</a></p>
 </dd><dt>mailing list 
 <dd>
-<p><a
-href="mailto:openwsman-devel@lists.sourceforge.net">openwsman-devel@lists.sourceforge.net</a></p>
+<p><a href="mailto:openwsman-devel@lists.sourceforge.net">openwsman-devel@lists.sourceforge.net</a></p>
 </dd><dt>source 
 <dd>
-<p><a
-href="https://github.com/Openwsman/openwsman">github.com/Openwsman/openwsman</a></p>
+<p><a href="https://github.com/Openwsman/openwsman">github.com/Openwsman/openwsman</a></p>
 </dd><dt>rdoc 
 <dd>
 <p><a href="http://openwsman.github.io/rdoc">openwsman.github.io/rdoc</a></p>
 </dd><dt>bugs 
 <dd>
-<p><a
-href="https://github.com/Openwsman/openwsman/issues">github.com/Openwsman/openwsman/issues</a></p>
+<p><a href="https://github.com/Openwsman/openwsman/issues">github.com/Openwsman/openwsman/issues</a></p>
 </dd><dt>code climate 
 <dd>
-<p><a href="https://codeclimate.com/github/Openwsman/openwsman"><img
-src="https://codeclimate.com/github/Openwsman/openwsman.png"></a></p>
+<p><a href="https://codeclimate.com/github/Openwsman/openwsman"><img src="https://codeclimate.com/github/Openwsman/openwsman.png"></a></p>
 </dd></dl>
 
 <h2 id="label-Description">Description<span><a href="#label-Description">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p><a href="Openwsman.html">Openwsman</a> is an open source implementation of
-WS-Management; enabling the in-band management of Linux/uni*/Windows
-platforms. <a href="Openwsman.html">Openwsman</a> supports the generic
-WS-Management protocol as well as specific protocol extensions for the  <a
-href="http://www.dmtf.org/standards/cim">Common Information Model</a> (CIM)</p>
+<p><a href="Openwsman.html"><code>Openwsman</code></a> is an open source implementation of WS-Management; enabling the in-band management of Linux/uni*/Windows platforms. <a href="Openwsman.html"><code>Openwsman</code></a> supports the generic WS-Management protocol as well as specific protocol extensions for the  <a href="http://www.dmtf.org/standards/cim">Common Information Model</a> (CIM)</p>
 
-<p><a href="Openwsman.html">Openwsman</a> provides &#39;C&#39; language API by
-default and a &#39;C++&#39; API in an &#39;alpha&#39; state. For other
-languages, see the bindings.</p>
+<p><a href="Openwsman.html"><code>Openwsman</code></a> provides ‘C’ language API by default and a ‘C++’ API in an ‘alpha’ state. For other languages, see the bindings.</p>
 
 <h2 id="label-About+the+bindings">About the bindings<span><a href="#label-About+the+bindings">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p>The bindings provide the simplest way to perform WS-Management operations
-with <a href="Openwsman.html">Openwsman</a>.</p>
+<p>The bindings provide the simplest way to perform WS-Management operations with <a href="Openwsman.html"><code>Openwsman</code></a>.</p>
 
-<p>Bindings exist for <a
-href="https://github.com/Openwsman/openwsman/tree/master/bindings/ruby">Ruby</a>,
-<a
-href="https://github.com/Openwsman/openwsman/tree/master/bindings/python">Python</a>,
-<a
-href="https://github.com/Openwsman/openwsman/tree/master/bindings/perl">Perl</a>,
-and <a
-href="https://github.com/Openwsman/openwsman/tree/master/bindings/java">Java</a>.
-with plenty of examples in the respective &#39;tests&#39; directories.</p>
+<p>Bindings exist for <a href="https://github.com/Openwsman/openwsman/tree/master/bindings/ruby">Ruby</a>, <a href="https://github.com/Openwsman/openwsman/tree/master/bindings/python">Python</a>, <a href="https://github.com/Openwsman/openwsman/tree/master/bindings/perl">Perl</a>, and <a href="https://github.com/Openwsman/openwsman/tree/master/bindings/java">Java</a>. with plenty of examples in the respective ‘tests’ directories.</p>
 
-<p>The Ruby bindings are fully maintained an considered &#39;production&#39;
-quality.</p>
+<p>The Ruby bindings are fully maintained an considered ‘production’ quality.</p>
 
 <h2 id="label-Bugs">Bugs<span><a href="#label-Bugs">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p>If you have problems using <a href="Openwsman.html">Openwsman</a>, report
-to the <a href="mailto:openwsman-devel@lists.sourceforge.net">mailing
-list</a> first.</p>
+<p>If you have problems using <a href="Openwsman.html"><code>Openwsman</code></a>, report to the <a href="mailto:openwsman-devel@lists.sourceforge.net">mailing list</a> first.</p>
 
-<p>If you are sure to have found a bug, please report it via the <a
-href="https://github.com/Openwsman/openwsman/issues">Github issue
-tracker</a></p>
+<p>If you are sure to have found a bug, please report it via the <a href="https://github.com/Openwsman/openwsman/issues">Github issue tracker</a></p>
 
 <h2 id="label-License">License<span><a href="#label-License">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p><a href="Openwsman.html">Openwsman</a> is copyright (C) 2004-2006 by Intel
-Corp, 2006-2013 by SUSE Linux Products GmbH.</p>
+<p><a href="Openwsman.html"><code>Openwsman</code></a> is copyright © 2004-2006 by Intel Corp, 2006-2013 by SUSE Linux Products GmbH.</p>
 
-<p><a href="Openwsman.html">Openwsman</a> is free software, and may be
-redistributed under the terms of the <a
-href="https://github.com/Openwsman/openwsman/blob/master/COPYING">BSD-3-Clause</a>
-license.</p>
+<p><a href="Openwsman.html"><code>Openwsman</code></a> is free software, and may be redistributed under the terms of the <a href="https://github.com/Openwsman/openwsman/blob/master/COPYING">BSD-3-Clause</a> license.</p>
 
 <h2 id="label-Warranty">Warranty<span><a href="#label-Warranty">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p>This software is provided “as is” and without any express or implied
-warranties, including, without limitation, the implied warranties of
-merchantability and fitness for a particular purpose.</p>
+<p>This software is provided “as is” and without any express or implied warranties, including, without limitation, the implied warranties of merchantability and fitness for a particular purpose.</p>
+
 </main>
 
 
-
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.4.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

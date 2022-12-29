@@ -8,14 +8,17 @@
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
 </script>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/darkfish.js"></script>
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
 
 <link href="../css/fonts.css" rel="stylesheet">
 <link href="../css/rdoc.css" rel="stylesheet">
-
 
 
 <body id="top" role="document" class="class">
@@ -54,32 +57,26 @@
 
   <div id="class-metadata">
     
-    <div id="parent-class-section" class="nav-section">
+    
+<div id="parent-class-section" class="nav-section">
   <h3>Parent</h3>
 
-  
   <p class="link">Object
-  
 </div>
 
     
     
-    <!-- Method Quickref -->
+    
+<!-- Method Quickref -->
 <div id="method-list-section" class="nav-section">
   <h3>Methods</h3>
 
   <ul class="link-list" role="directory">
-    
     <li ><a href="#method-c-new">::new</a>
-    
     <li ><a href="#method-i-cql">#cql</a>
-    
     <li ><a href="#method-i-simple">#simple</a>
-    
     <li ><a href="#method-i-wql">#wql</a>
-    
     <li ><a href="#method-i-xpath">#xpath</a>
-    
   </ul>
 </div>
 
@@ -93,8 +90,7 @@
 
   <section class="description">
     
-<p><a href="Filter.html">Filter</a> are evaluated on the server side and help
-to reduce the amount of processing and information transport.</p>
+<p><a href="Filter.html"><code>Filter</code></a> are evaluated on the server side and help to reduce the amount of processing and information transport.</p>
 
 <p>There are five basic ways to filter</p>
 <ul><li>
@@ -109,49 +105,31 @@ to reduce the amount of processing and information transport.</p>
 <p>WQL (WS-Management query language)</p>
 </li></ul>
 
-<p><a href="../Openwsman.html">Openwsman</a> does not do any filter processing
-by itself but passes it to the backend CIMOM. Support for filters and query
-languages thus depends on the used CIMOM.</p>
+<p><a href="../Openwsman.html"><code>Openwsman</code></a> does not do any filter processing by itself but passes it to the backend CIMOM. Support for filters and query languages thus depends on the used CIMOM.</p>
 
   </section>
 
-  
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
-    
 
-    
 
-    
 
-    
 
-    
+
      <section id="public-class-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Class Methods</h3>
        </header>
 
-    
       <div id="method-c-new" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">new</span><span
             class="method-args">(p1)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Create empty filter</p>
-          
-          
 
-          
           <div class="method-source-code" id="new-source">
             <pre>() {
     return filter_initialize();
@@ -225,44 +203,29 @@ languages thus depends on the used CIMOM.</p>
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
     </section>
-  
+
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Instance Methods</h3>
        </header>
 
-    
       <div id="method-i-cql" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             cql(query)
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Set CQL (CIM query language) filter</p>
-          
-          
 
-          
           <div class="method-source-code" id="cql-source">
             <pre>int cql(const char *query) {
     return filter_set_simple($self, WSM_CQL_FILTER_DIALECT, query );
@@ -279,36 +242,22 @@ languages thus depends on the used CIMOM.</p>
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-simple" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             simple(dialect, query)
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Set simple dialect/query filter</p>
-          
-          
 
-          
           <div class="method-source-code" id="simple-source">
             <pre>int simple(const char *dialect, const char *query) {
     return filter_set_simple($self, dialect, query );
@@ -343,36 +292,22 @@ languages thus depends on the used CIMOM.</p>
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-wql" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             wql(query)
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Set WQL (WS-Management query language) filter</p>
-          
-          
 
-          
           <div class="method-source-code" id="wql-source">
             <pre>int wql(const char *query) {
     return filter_set_simple($self, WSM_WQL_FILTER_DIALECT, query );
@@ -380,36 +315,22 @@ languages thus depends on the used CIMOM.</p>
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-xpath" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             xpath(query)
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Set XPath filter</p>
-          
-          
 
-          
           <div class="method-source-code" id="xpath-source">
             <pre>int xpath(const char *query) {
     return filter_set_simple($self, WSM_XPATH_FILTER_DIALECT, query );
@@ -435,24 +356,20 @@ languages thus depends on the used CIMOM.</p>
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
     </section>
-  
+
   </section>
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.4.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

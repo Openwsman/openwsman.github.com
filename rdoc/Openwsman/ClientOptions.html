@@ -8,14 +8,17 @@
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
 </script>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/darkfish.js"></script>
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
 
 <link href="../css/fonts.css" rel="stylesheet">
 <link href="../css/rdoc.css" rel="stylesheet">
-
 
 
 <body id="top" role="document" class="class">
@@ -54,96 +57,60 @@
 
   <div id="class-metadata">
     
-    <div id="parent-class-section" class="nav-section">
+    
+<div id="parent-class-section" class="nav-section">
   <h3>Parent</h3>
 
-  
   <p class="link">Object
-  
 </div>
 
     
     
-    <!-- Method Quickref -->
+    
+<!-- Method Quickref -->
 <div id="method-list-section" class="nav-section">
   <h3>Methods</h3>
 
   <ul class="link-list" role="directory">
-    
     <li ><a href="#method-i-add_option">#add_option</a>
-    
     <li ><a href="#method-i-add_property">#add_property</a>
-    
     <li ><a href="#method-i-add_selector">#add_selector</a>
-    
     <li ><a href="#method-i-cim_namespace">#cim_namespace</a>
-    
     <li ><a href="#method-i-cim_namespace-3D">#cim_namespace=</a>
-    
     <li ><a href="#method-i-clear_dump_request">#clear_dump_request</a>
-    
     <li ><a href="#method-i-clear_flags">#clear_flags</a>
-    
     <li ><a href="#method-i-delivery_mode">#delivery_mode</a>
-    
     <li ><a href="#method-i-delivery_mode-3D">#delivery_mode=</a>
-    
     <li ><a href="#method-i-delivery_sec_mode">#delivery_sec_mode</a>
-    
     <li ><a href="#method-i-delivery_security_mode-3D">#delivery_security_mode=</a>
-    
     <li ><a href="#method-i-delivery_uri">#delivery_uri</a>
-    
     <li ><a href="#method-i-delivery_uri-3D">#delivery_uri=</a>
-    
     <li ><a href="#method-i-flags">#flags</a>
-    
     <li ><a href="#method-i-flags-3D">#flags=</a>
-    
     <li ><a href="#method-i-fragment">#fragment</a>
-    
     <li ><a href="#method-i-fragment-3D">#fragment=</a>
-    
     <li ><a href="#method-i-heartbeat_interval">#heartbeat_interval</a>
-    
     <li ><a href="#method-i-heartbeat_interval-3D">#heartbeat_interval=</a>
-    
+    <li ><a href="#method-i-locale">#locale</a>
+    <li ><a href="#method-i-locale-3D">#locale=</a>
     <li ><a href="#method-i-max_elements">#max_elements</a>
-    
     <li ><a href="#method-i-max_elements-3D">#max_elements=</a>
-    
     <li ><a href="#method-i-max_envelope_size">#max_envelope_size</a>
-    
     <li ><a href="#method-i-max_envelope_size-3D">#max_envelope_size=</a>
-    
     <li ><a href="#method-i-options">#options</a>
-    
     <li ><a href="#method-i-options-3D">#options=</a>
-    
     <li ><a href="#method-i-properties">#properties</a>
-    
     <li ><a href="#method-i-properties-3D">#properties=</a>
-    
     <li ><a href="#method-i-reference">#reference</a>
-    
     <li ><a href="#method-i-reference-3D">#reference=</a>
-    
     <li ><a href="#method-i-reset_flags">#reset_flags</a>
-    
     <li ><a href="#method-i-selectors">#selectors</a>
-    
     <li ><a href="#method-i-selectors-3D">#selectors=</a>
-    
     <li ><a href="#method-i-set_dump_request">#set_dump_request</a>
-    
     <li ><a href="#method-i-sub_expiry">#sub_expiry</a>
-    
     <li ><a href="#method-i-sub_expiry-3D">#sub_expiry=</a>
-    
     <li ><a href="#method-i-timeout">#timeout</a>
-    
     <li ><a href="#method-i-timeout-3D">#timeout=</a>
-    
   </ul>
 </div>
 
@@ -157,62 +124,40 @@
 
   <section class="description">
     
-<p><a href="ClientOptions.html">ClientOptions</a> control the behaviour of the
-Client connection</p>
+<p><a href="ClientOptions.html"><code>ClientOptions</code></a> control the behaviour of the Client connection</p>
 
-<p>The primary use of <a href="ClientOptions.html">ClientOptions</a> in normal
-operations is adding selectors - key/value pairs added to the request URL.</p>
+<p>The primary use of <a href="ClientOptions.html"><code>ClientOptions</code></a> in normal operations is adding selectors - key/value pairs added to the request URL.</p>
 
-<p>For WS-CIM operations, selectors define the key attributes for the selected
-CIM class to address a specific instance of the class.</p>
+<p>For WS-CIM operations, selectors define the key attributes for the selected CIM class to address a specific instance of the class.</p>
 
-<p><a href="ClientOptions.html">ClientOptions</a></p>
+<p><a href="ClientOptions.html"><code>ClientOptions</code></a></p>
 
   </section>
 
-  
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
-    
 
-    
 
-    
 
-    
 
-    
+
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Instance Methods</h3>
        </header>
 
-    
       <div id="method-i-add_option" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             add_option &quot;Name&quot;, &quot;Value&quot;
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Add an option (for OptionSet) as key/value pair</p>
 
-<p>NOTE: the value must be properly escaped (replace &amp; with &amp;amp;,
-etc.) in Ruby use CGI::escapeHTML()</p>
-          
-          
+<p>NOTE: the value must be properly escaped (replace &amp; with &amp;amp;, etc.) in Ruby use CGI::escapeHTML()</p>
 
-          
           <div class="method-source-code" id="add_option-source">
             <pre>void add_option(VALUE k, VALUE v)
   {
@@ -369,16 +314,16 @@ etc.) in Ruby use CGI::escapeHTML()</p>
   }
 
 
-  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(unsigned int event_subscription_expire);
+  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(float event_subscription_expire);
 
   /*
-   * Set subscription expiry timeout (in seconds)
+   * Set subscription expiry timeout (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
    *
    */
-  void set_sub_expiry(unsigned int event_subscription_expire) {
+  void set_sub_expiry(float event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
   }
 
@@ -386,24 +331,24 @@ etc.) in Ruby use CGI::escapeHTML()</p>
    * Get subscription expiry timeout (in seconds)
    *
    * call-seq:
-   *   options.sub_expiry -&gt; Integer
+   *   options.sub_expiry -&gt; Float
    *
    */
-  int sub_expiry() {
+  float sub_expiry() {
     return $self-&gt;expires;
   }
 
 
-  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(unsigned int heartbeat_interval);
+  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(float heartbeat_interval);
 
   /*
-   * Set subscription heartbeat interval (in seconds)
+   * Set subscription heartbeat interval (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
    *
    */
-  void set_heartbeat_interval(unsigned int heartbeat_interval) {
+  void set_heartbeat_interval(float heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
   }
 
@@ -411,10 +356,10 @@ etc.) in Ruby use CGI::escapeHTML()</p>
    * Get subscription heartbeat interval (in seconds)
    *
    * call-seq:
-   *   options.heartbeat_interval -&gt; Integer
+   *   options.heartbeat_interval -&gt; Float
    *
    */
-  int heartbeat_interval() {
+  float heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
   }
 
@@ -480,53 +425,61 @@ etc.) in Ruby use CGI::escapeHTML()</p>
     return $self-&gt;delivery_sec_mode;
   }
 
+
+  %rename(&quot;locale=&quot;) set_locale(const char *locale);
+
+  /*
+   * Set request locale
+   *
+   * call-seq:
+   *   options.locale = &quot;en_us&quot;
+   *
+   */
+  void set_locale(const char *locale) {
+        wsmc_set_locale($self, locale);
+  }
+
+  /*
+   * Get locales
+   *
+   * call-seq:
+   *   options.locale -&gt; String
+   *
+   */
+  const char *locale() {
+    return $self-&gt;locale;
+  }
+
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-add_property" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             add_property &quot;Key&quot;, &quot;Value&quot;
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
         <div class="method-heading">
           <span class="method-callseq">
             add_property &quot;Key&quot;, EndPointReference.new(...)
           </span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Add a property as key/value pair</p>
 <ul><li>
-<p>Input parameters to &#39;invoke&#39;d methods are represented as
-ClientOption properties</p>
+<p>Input parameters to ‘invoke’d methods are represented as ClientOption properties</p>
 </li><li>
 <p>Key is evaluated as String</p>
 </li><li>
 <p>Value is evaluated as String or EndPointReference</p>
 </li></ul>
-          
-          
 
-          
           <div class="method-source-code" id="add_property-source">
             <pre>void add_property(VALUE k, VALUE v)
   {
@@ -587,16 +540,16 @@ ClientOption properties</p>
   }
 
 
-  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(unsigned int event_subscription_expire);
+  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(float event_subscription_expire);
 
   /*
-   * Set subscription expiry timeout (in seconds)
+   * Set subscription expiry timeout (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
    *
    */
-  void set_sub_expiry(unsigned int event_subscription_expire) {
+  void set_sub_expiry(float event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
   }
 
@@ -604,24 +557,24 @@ ClientOption properties</p>
    * Get subscription expiry timeout (in seconds)
    *
    * call-seq:
-   *   options.sub_expiry -&gt; Integer
+   *   options.sub_expiry -&gt; Float
    *
    */
-  int sub_expiry() {
+  float sub_expiry() {
     return $self-&gt;expires;
   }
 
 
-  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(unsigned int heartbeat_interval);
+  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(float heartbeat_interval);
 
   /*
-   * Set subscription heartbeat interval (in seconds)
+   * Set subscription heartbeat interval (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
    *
    */
-  void set_heartbeat_interval(unsigned int heartbeat_interval) {
+  void set_heartbeat_interval(float heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
   }
 
@@ -629,10 +582,10 @@ ClientOption properties</p>
    * Get subscription heartbeat interval (in seconds)
    *
    * call-seq:
-   *   options.heartbeat_interval -&gt; Integer
+   *   options.heartbeat_interval -&gt; Float
    *
    */
-  int heartbeat_interval() {
+  float heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
   }
 
@@ -698,48 +651,56 @@ ClientOption properties</p>
     return $self-&gt;delivery_sec_mode;
   }
 
+
+  %rename(&quot;locale=&quot;) set_locale(const char *locale);
+
+  /*
+   * Set request locale
+   *
+   * call-seq:
+   *   options.locale = &quot;en_us&quot;
+   *
+   */
+  void set_locale(const char *locale) {
+        wsmc_set_locale($self, locale);
+  }
+
+  /*
+   * Get locales
+   *
+   * call-seq:
+   *   options.locale -&gt; String
+   *
+   */
+  const char *locale() {
+    return $self-&gt;locale;
+  }
+
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-add_selector" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             add_selector &quot;Key&quot;, &quot;Value&quot;
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
         <div class="method-heading">
           <span class="method-callseq">
             add_selector &quot;Key&quot;, end_point_reference
           </span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Add a selector as key/value pair</p>
 
-<p>NOTE: the string value must be properly escaped (replace &amp; with
-&amp;amp;, etc.) in Ruby use CGI::escapeHTML()</p>
-          
-          
+<p>NOTE: the string value must be properly escaped (replace &amp; with &amp;amp;, etc.) in Ruby use CGI::escapeHTML()</p>
 
-          
           <div class="method-source-code" id="add_selector-source">
             <pre>void add_selector(VALUE k, VALUE v)
   {
@@ -843,16 +804,16 @@ ClientOption properties</p>
   }
 
 
-  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(unsigned int event_subscription_expire);
+  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(float event_subscription_expire);
 
   /*
-   * Set subscription expiry timeout (in seconds)
+   * Set subscription expiry timeout (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
    *
    */
-  void set_sub_expiry(unsigned int event_subscription_expire) {
+  void set_sub_expiry(float event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
   }
 
@@ -860,24 +821,24 @@ ClientOption properties</p>
    * Get subscription expiry timeout (in seconds)
    *
    * call-seq:
-   *   options.sub_expiry -&gt; Integer
+   *   options.sub_expiry -&gt; Float
    *
    */
-  int sub_expiry() {
+  float sub_expiry() {
     return $self-&gt;expires;
   }
 
 
-  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(unsigned int heartbeat_interval);
+  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(float heartbeat_interval);
 
   /*
-   * Set subscription heartbeat interval (in seconds)
+   * Set subscription heartbeat interval (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
    *
    */
-  void set_heartbeat_interval(unsigned int heartbeat_interval) {
+  void set_heartbeat_interval(float heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
   }
 
@@ -885,10 +846,10 @@ ClientOption properties</p>
    * Get subscription heartbeat interval (in seconds)
    *
    * call-seq:
-   *   options.heartbeat_interval -&gt; Integer
+   *   options.heartbeat_interval -&gt; Float
    *
    */
-  int heartbeat_interval() {
+  float heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
   }
 
@@ -954,43 +915,51 @@ ClientOption properties</p>
     return $self-&gt;delivery_sec_mode;
   }
 
+
+  %rename(&quot;locale=&quot;) set_locale(const char *locale);
+
+  /*
+   * Set request locale
+   *
+   * call-seq:
+   *   options.locale = &quot;en_us&quot;
+   *
+   */
+  void set_locale(const char *locale) {
+        wsmc_set_locale($self, locale);
+  }
+
+  /*
+   * Get locales
+   *
+   * call-seq:
+   *   options.locale -&gt; String
+   *
+   */
+  const char *locale() {
+    return $self-&gt;locale;
+  }
+
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-cim_namespace" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             cim_namespace &rarr; String
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
-          <p>Get CIM Namespace for <a href="../Openwsman.html">Openwsman</a> Note:
-Microsoft WinRM set the resource namespace by attaching it to the resource
-URI</p>
+          <p>Get CIM Namespace for <a href="../Openwsman.html"><code>Openwsman</code></a> Note: Microsoft WinRM set the resource namespace by attaching it to the resource URI</p>
 
-<p>See also: <a
-href="../Openwsman.html#method-c-epr_prefix_for">Openwsman.epr_prefix_for</a></p>
-          
-          
+<p>See also: <a href="../Openwsman.html#method-c-epr_prefix_for"><code>Openwsman.epr_prefix_for</code></a></p>
 
-          
           <div class="method-source-code" id="cim_namespace-source">
             <pre>const char *get_cim_namespace() {
     return $self-&gt;cim_ns;
@@ -1193,16 +1162,16 @@ href="../Openwsman.html#method-c-epr_prefix_for">Openwsman.epr_prefix_for</a></p
   }
 
 
-  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(unsigned int event_subscription_expire);
+  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(float event_subscription_expire);
 
   /*
-   * Set subscription expiry timeout (in seconds)
+   * Set subscription expiry timeout (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
    *
    */
-  void set_sub_expiry(unsigned int event_subscription_expire) {
+  void set_sub_expiry(float event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
   }
 
@@ -1210,24 +1179,24 @@ href="../Openwsman.html#method-c-epr_prefix_for">Openwsman.epr_prefix_for</a></p
    * Get subscription expiry timeout (in seconds)
    *
    * call-seq:
-   *   options.sub_expiry -&gt; Integer
+   *   options.sub_expiry -&gt; Float
    *
    */
-  int sub_expiry() {
+  float sub_expiry() {
     return $self-&gt;expires;
   }
 
 
-  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(unsigned int heartbeat_interval);
+  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(float heartbeat_interval);
 
   /*
-   * Set subscription heartbeat interval (in seconds)
+   * Set subscription heartbeat interval (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
    *
    */
-  void set_heartbeat_interval(unsigned int heartbeat_interval) {
+  void set_heartbeat_interval(float heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
   }
 
@@ -1235,10 +1204,10 @@ href="../Openwsman.html#method-c-epr_prefix_for">Openwsman.epr_prefix_for</a></p
    * Get subscription heartbeat interval (in seconds)
    *
    * call-seq:
-   *   options.heartbeat_interval -&gt; Integer
+   *   options.heartbeat_interval -&gt; Float
    *
    */
-  int heartbeat_interval() {
+  float heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
   }
 
@@ -1304,43 +1273,51 @@ href="../Openwsman.html#method-c-epr_prefix_for">Openwsman.epr_prefix_for</a></p
     return $self-&gt;delivery_sec_mode;
   }
 
+
+  %rename(&quot;locale=&quot;) set_locale(const char *locale);
+
+  /*
+   * Set request locale
+   *
+   * call-seq:
+   *   options.locale = &quot;en_us&quot;
+   *
+   */
+  void set_locale(const char *locale) {
+        wsmc_set_locale($self, locale);
+  }
+
+  /*
+   * Get locales
+   *
+   * call-seq:
+   *   options.locale -&gt; String
+   *
+   */
+  const char *locale() {
+    return $self-&gt;locale;
+  }
+
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-cim_namespace-3D" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             cim_namespace = &quot;root/interop&quot;
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
-          <p>Set CIM Namespace for <a href="../Openwsman.html">Openwsman</a> (default is
-root/cimv2) Note: Microsoft WinRM set the resource namespace by attaching
-it to the resource URI</p>
+          <p>Set CIM Namespace for <a href="../Openwsman.html"><code>Openwsman</code></a> (default is root/cimv2) Note: Microsoft WinRM set the resource namespace by attaching it to the resource URI</p>
 
-<p>See also: <a
-href="../Openwsman.html#method-c-epr_prefix_for">Openwsman.epr_prefix_for</a></p>
-          
-          
+<p>See also: <a href="../Openwsman.html#method-c-epr_prefix_for"><code>Openwsman.epr_prefix_for</code></a></p>
 
-          
           <div class="method-source-code" id="cim_namespace-3D-source">
             <pre>void set_cim_namespace(char *cim_namespace) {
     wsmc_set_cim_ns(cim_namespace, $self);
@@ -1562,16 +1539,16 @@ href="../Openwsman.html#method-c-epr_prefix_for">Openwsman.epr_prefix_for</a></p
   }
 
 
-  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(unsigned int event_subscription_expire);
+  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(float event_subscription_expire);
 
   /*
-   * Set subscription expiry timeout (in seconds)
+   * Set subscription expiry timeout (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
    *
    */
-  void set_sub_expiry(unsigned int event_subscription_expire) {
+  void set_sub_expiry(float event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
   }
 
@@ -1579,24 +1556,24 @@ href="../Openwsman.html#method-c-epr_prefix_for">Openwsman.epr_prefix_for</a></p
    * Get subscription expiry timeout (in seconds)
    *
    * call-seq:
-   *   options.sub_expiry -&gt; Integer
+   *   options.sub_expiry -&gt; Float
    *
    */
-  int sub_expiry() {
+  float sub_expiry() {
     return $self-&gt;expires;
   }
 
 
-  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(unsigned int heartbeat_interval);
+  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(float heartbeat_interval);
 
   /*
-   * Set subscription heartbeat interval (in seconds)
+   * Set subscription heartbeat interval (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
    *
    */
-  void set_heartbeat_interval(unsigned int heartbeat_interval) {
+  void set_heartbeat_interval(float heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
   }
 
@@ -1604,10 +1581,10 @@ href="../Openwsman.html#method-c-epr_prefix_for">Openwsman.epr_prefix_for</a></p
    * Get subscription heartbeat interval (in seconds)
    *
    * call-seq:
-   *   options.heartbeat_interval -&gt; Integer
+   *   options.heartbeat_interval -&gt; Float
    *
    */
-  int heartbeat_interval() {
+  float heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
   }
 
@@ -1673,50 +1650,60 @@ href="../Openwsman.html#method-c-epr_prefix_for">Openwsman.epr_prefix_for</a></p
     return $self-&gt;delivery_sec_mode;
   }
 
+
+  %rename(&quot;locale=&quot;) set_locale(const char *locale);
+
+  /*
+   * Set request locale
+   *
+   * call-seq:
+   *   options.locale = &quot;en_us&quot;
+   *
+   */
+  void set_locale(const char *locale) {
+        wsmc_set_locale($self, locale);
+  }
+
+  /*
+   * Get locales
+   *
+   * call-seq:
+   *   options.locale -&gt; String
+   *
+   */
+  const char *locale() {
+    return $self-&gt;locale;
+  }
+
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-clear_dump_request" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             clear_dump_request
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Reset dump all operations to the dumpfile</p>
 
 <p>Used for debugging on the wire-level</p>
 
-<p>See also: <a
-href="ClientOptions.html#method-i-set_dump_request">#set_dump_request</a></p>
-          
-          
+<p>See also: <a href="ClientOptions.html#method-i-set_dump_request"><code>set_dump_request</code></a></p>
 
-          
           <div class="method-source-code" id="clear_dump_request-source">
             <pre>void clear_dump_request(void) {
     wsmc_clear_action_option($self, FLAG_DUMP_REQUEST );
   }
 
 
-  %rename( &quot;flags=&quot; ) set_flags(int flags);
+  %rename( &quot;flags=&quot; ) set_flags(unsigned long flags);
 
   /*
    * set option flag(s)
@@ -1727,7 +1714,7 @@ href="ClientOptions.html#method-i-set_dump_request">#set_dump_request</a></p>
    *   options.flags = Openwsman::FLAG_ENUMERATION_OPTIMIZATION
    *
    */
-  void set_flags(int flags) {
+  void set_flags(unsigned long flags) {
     wsmc_set_action_option($self, flags);
   }
 
@@ -1743,7 +1730,7 @@ href="ClientOptions.html#method-i-set_dump_request">#set_dump_request</a></p>
    *   optins.flags -&gt; Integer
    *
    */
-  unsigned int get_flags() {
+  unsigned long get_flags() {
     return wsmc_get_action_option($self);
   }
 
@@ -1756,7 +1743,7 @@ href="ClientOptions.html#method-i-set_dump_request">#set_dump_request</a></p>
    *   options.clear_flags Openwsman::FLAG_ENUMERATION_OPTIMIZATION
    *
    */
-  void clear_flags(int flags) {
+  void clear_flags(unsigned long flags) {
     wsmc_clear_action_option($self, flags);
   }
 
@@ -2126,16 +2113,16 @@ href="ClientOptions.html#method-i-set_dump_request">#set_dump_request</a></p>
   }
 
 
-  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(unsigned int event_subscription_expire);
+  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(float event_subscription_expire);
 
   /*
-   * Set subscription expiry timeout (in seconds)
+   * Set subscription expiry timeout (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
    *
    */
-  void set_sub_expiry(unsigned int event_subscription_expire) {
+  void set_sub_expiry(float event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
   }
 
@@ -2143,24 +2130,24 @@ href="ClientOptions.html#method-i-set_dump_request">#set_dump_request</a></p>
    * Get subscription expiry timeout (in seconds)
    *
    * call-seq:
-   *   options.sub_expiry -&gt; Integer
+   *   options.sub_expiry -&gt; Float
    *
    */
-  int sub_expiry() {
+  float sub_expiry() {
     return $self-&gt;expires;
   }
 
 
-  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(unsigned int heartbeat_interval);
+  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(float heartbeat_interval);
 
   /*
-   * Set subscription heartbeat interval (in seconds)
+   * Set subscription heartbeat interval (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
    *
    */
-  void set_heartbeat_interval(unsigned int heartbeat_interval) {
+  void set_heartbeat_interval(float heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
   }
 
@@ -2168,10 +2155,10 @@ href="ClientOptions.html#method-i-set_dump_request">#set_dump_request</a></p>
    * Get subscription heartbeat interval (in seconds)
    *
    * call-seq:
-   *   options.heartbeat_interval -&gt; Integer
+   *   options.heartbeat_interval -&gt; Float
    *
    */
-  int heartbeat_interval() {
+  float heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
   }
 
@@ -2237,42 +2224,53 @@ href="ClientOptions.html#method-i-set_dump_request">#set_dump_request</a></p>
     return $self-&gt;delivery_sec_mode;
   }
 
+
+  %rename(&quot;locale=&quot;) set_locale(const char *locale);
+
+  /*
+   * Set request locale
+   *
+   * call-seq:
+   *   options.locale = &quot;en_us&quot;
+   *
+   */
+  void set_locale(const char *locale) {
+        wsmc_set_locale($self, locale);
+  }
+
+  /*
+   * Get locales
+   *
+   * call-seq:
+   *   options.locale -&gt; String
+   *
+   */
+  const char *locale() {
+    return $self-&gt;locale;
+  }
+
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-clear_flags" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             clear_flags Openwsman::FLAG_ENUMERATION_OPTIMIZATION
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>clear option flag(s)</p>
 
 <p>clears specific flag(s) from options</p>
-          
-          
 
-          
           <div class="method-source-code" id="clear_flags-source">
-            <pre>void clear_flags(int flags) {
+            <pre>void clear_flags(unsigned long flags) {
     wsmc_clear_action_option($self, flags);
   }
 
@@ -2642,16 +2640,16 @@ href="ClientOptions.html#method-i-set_dump_request">#set_dump_request</a></p>
   }
 
 
-  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(unsigned int event_subscription_expire);
+  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(float event_subscription_expire);
 
   /*
-   * Set subscription expiry timeout (in seconds)
+   * Set subscription expiry timeout (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
    *
    */
-  void set_sub_expiry(unsigned int event_subscription_expire) {
+  void set_sub_expiry(float event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
   }
 
@@ -2659,24 +2657,24 @@ href="ClientOptions.html#method-i-set_dump_request">#set_dump_request</a></p>
    * Get subscription expiry timeout (in seconds)
    *
    * call-seq:
-   *   options.sub_expiry -&gt; Integer
+   *   options.sub_expiry -&gt; Float
    *
    */
-  int sub_expiry() {
+  float sub_expiry() {
     return $self-&gt;expires;
   }
 
 
-  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(unsigned int heartbeat_interval);
+  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(float heartbeat_interval);
 
   /*
-   * Set subscription heartbeat interval (in seconds)
+   * Set subscription heartbeat interval (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
    *
    */
-  void set_heartbeat_interval(unsigned int heartbeat_interval) {
+  void set_heartbeat_interval(float heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
   }
 
@@ -2684,10 +2682,10 @@ href="ClientOptions.html#method-i-set_dump_request">#set_dump_request</a></p>
    * Get subscription heartbeat interval (in seconds)
    *
    * call-seq:
-   *   options.heartbeat_interval -&gt; Integer
+   *   options.heartbeat_interval -&gt; Float
    *
    */
-  int heartbeat_interval() {
+  float heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
   }
 
@@ -2753,38 +2751,49 @@ href="ClientOptions.html#method-i-set_dump_request">#set_dump_request</a></p>
     return $self-&gt;delivery_sec_mode;
   }
 
+
+  %rename(&quot;locale=&quot;) set_locale(const char *locale);
+
+  /*
+   * Set request locale
+   *
+   * call-seq:
+   *   options.locale = &quot;en_us&quot;
+   *
+   */
+  void set_locale(const char *locale) {
+        wsmc_set_locale($self, locale);
+  }
+
+  /*
+   * Get locales
+   *
+   * call-seq:
+   *   options.locale -&gt; String
+   *
+   */
+  const char *locale() {
+    return $self-&gt;locale;
+  }
+
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-delivery_mode" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             delivery_mode &rarr; Integer
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Get subscription delivery mode (push, pushwithack,events,pull)</p>
-          
-          
 
-          
           <div class="method-source-code" id="delivery_mode-source">
             <pre>int delivery_mode() {
     return $self-&gt;delivery_mode;
@@ -2823,38 +2832,49 @@ href="ClientOptions.html#method-i-set_dump_request">#set_dump_request</a></p>
     return $self-&gt;delivery_sec_mode;
   }
 
+
+  %rename(&quot;locale=&quot;) set_locale(const char *locale);
+
+  /*
+   * Set request locale
+   *
+   * call-seq:
+   *   options.locale = &quot;en_us&quot;
+   *
+   */
+  void set_locale(const char *locale) {
+        wsmc_set_locale($self, locale);
+  }
+
+  /*
+   * Get locales
+   *
+   * call-seq:
+   *   options.locale -&gt; String
+   *
+   */
+  const char *locale() {
+    return $self-&gt;locale;
+  }
+
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-delivery_mode-3D" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             delivery_mode = Openwsman::WSMAN_DELIVERY_PUSH
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Set subscription delivery mode (push, pushwithack,events,pull)</p>
-          
-          
 
-          
           <div class="method-source-code" id="delivery_mode-3D-source">
             <pre>void set_delivery_mode(unsigned int delivery_mode) {
     if (delivery_mode &gt; WSMAN_DELIVERY_PULL)
@@ -2908,79 +2928,99 @@ href="ClientOptions.html#method-i-set_dump_request">#set_dump_request</a></p>
     return $self-&gt;delivery_sec_mode;
   }
 
+
+  %rename(&quot;locale=&quot;) set_locale(const char *locale);
+
+  /*
+   * Set request locale
+   *
+   * call-seq:
+   *   options.locale = &quot;en_us&quot;
+   *
+   */
+  void set_locale(const char *locale) {
+        wsmc_set_locale($self, locale);
+  }
+
+  /*
+   * Get locales
+   *
+   * call-seq:
+   *   options.locale -&gt; String
+   *
+   */
+  const char *locale() {
+    return $self-&gt;locale;
+  }
+
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-delivery_sec_mode" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             delivery_security_mode &rarr; Integer
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Get subscription delivery security mode</p>
-          
-          
 
-          
           <div class="method-source-code" id="delivery_sec_mode-source">
             <pre>int delivery_sec_mode() {
     return $self-&gt;delivery_sec_mode;
   }
 
+
+  %rename(&quot;locale=&quot;) set_locale(const char *locale);
+
+  /*
+   * Set request locale
+   *
+   * call-seq:
+   *   options.locale = &quot;en_us&quot;
+   *
+   */
+  void set_locale(const char *locale) {
+        wsmc_set_locale($self, locale);
+  }
+
+  /*
+   * Get locales
+   *
+   * call-seq:
+   *   options.locale -&gt; String
+   *
+   */
+  const char *locale() {
+    return $self-&gt;locale;
+  }
+
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-delivery_security_mode-3D" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             delivery_security_mode = Openwsman::WSMAN_DELIVERY_SEC_HTTPS_BASIC
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Set subscription delivery security mode</p>
 
-<p>(auto, http basic, http digest, https basic, https digest, https mutual,
-https mutual basic, https mutual digest, http spnego kerberos, https spnego
-kerberos, https mutual spnego kerberos)</p>
-          
-          
+<p>(auto, http basic, http digest, https basic, https digest, https mutual, https mutual basic, https mutual digest, http spnego kerberos, https spnego kerberos, https mutual spnego kerberos)</p>
 
-          
           <div class="method-source-code" id="delivery_security_mode-3D-source">
             <pre>void set_delivery_security_mode(unsigned int delivery_sec_mode) {
     if (delivery_sec_mode &gt; WSMAN_DELIVERY_SEC_HTTP_SPNEGO_KERBEROS)
@@ -3000,54 +3040,65 @@ kerberos, https mutual spnego kerberos)</p>
     return $self-&gt;delivery_sec_mode;
   }
 
+
+  %rename(&quot;locale=&quot;) set_locale(const char *locale);
+
+  /*
+   * Set request locale
+   *
+   * call-seq:
+   *   options.locale = &quot;en_us&quot;
+   *
+   */
+  void set_locale(const char *locale) {
+        wsmc_set_locale($self, locale);
+  }
+
+  /*
+   * Get locales
+   *
+   * call-seq:
+   *   options.locale -&gt; String
+   *
+   */
+  const char *locale() {
+    return $self-&gt;locale;
+  }
+
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-delivery_uri" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             delivery_uri &rarr; String
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Get delivery uri</p>
-          
-          
 
-          
           <div class="method-source-code" id="delivery_uri-source">
             <pre>const char *delivery_uri() {
     return $self-&gt;delivery_uri;
   }
 
 
-  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(unsigned int event_subscription_expire);
+  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(float event_subscription_expire);
 
   /*
-   * Set subscription expiry timeout (in seconds)
+   * Set subscription expiry timeout (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
    *
    */
-  void set_sub_expiry(unsigned int event_subscription_expire) {
+  void set_sub_expiry(float event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
   }
 
@@ -3055,24 +3106,24 @@ kerberos, https mutual spnego kerberos)</p>
    * Get subscription expiry timeout (in seconds)
    *
    * call-seq:
-   *   options.sub_expiry -&gt; Integer
+   *   options.sub_expiry -&gt; Float
    *
    */
-  int sub_expiry() {
+  float sub_expiry() {
     return $self-&gt;expires;
   }
 
 
-  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(unsigned int heartbeat_interval);
+  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(float heartbeat_interval);
 
   /*
-   * Set subscription heartbeat interval (in seconds)
+   * Set subscription heartbeat interval (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
    *
    */
-  void set_heartbeat_interval(unsigned int heartbeat_interval) {
+  void set_heartbeat_interval(float heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
   }
 
@@ -3080,10 +3131,10 @@ kerberos, https mutual spnego kerberos)</p>
    * Get subscription heartbeat interval (in seconds)
    *
    * call-seq:
-   *   options.heartbeat_interval -&gt; Integer
+   *   options.heartbeat_interval -&gt; Float
    *
    */
-  int heartbeat_interval() {
+  float heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
   }
 
@@ -3149,38 +3200,49 @@ kerberos, https mutual spnego kerberos)</p>
     return $self-&gt;delivery_sec_mode;
   }
 
+
+  %rename(&quot;locale=&quot;) set_locale(const char *locale);
+
+  /*
+   * Set request locale
+   *
+   * call-seq:
+   *   options.locale = &quot;en_us&quot;
+   *
+   */
+  void set_locale(const char *locale) {
+        wsmc_set_locale($self, locale);
+  }
+
+  /*
+   * Get locales
+   *
+   * call-seq:
+   *   options.locale -&gt; String
+   *
+   */
+  const char *locale() {
+    return $self-&gt;locale;
+  }
+
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-delivery_uri-3D" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             delivery_uri = &quot;http://...&quot;
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Set delivery uri</p>
-          
-          
 
-          
           <div class="method-source-code" id="delivery_uri-3D-source">
             <pre>void set_delivery_uri( const char *delivery_uri ) {
     wsmc_set_delivery_uri(delivery_uri, $self);
@@ -3198,16 +3260,16 @@ kerberos, https mutual spnego kerberos)</p>
   }
 
 
-  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(unsigned int event_subscription_expire);
+  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(float event_subscription_expire);
 
   /*
-   * Set subscription expiry timeout (in seconds)
+   * Set subscription expiry timeout (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
    *
    */
-  void set_sub_expiry(unsigned int event_subscription_expire) {
+  void set_sub_expiry(float event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
   }
 
@@ -3215,24 +3277,24 @@ kerberos, https mutual spnego kerberos)</p>
    * Get subscription expiry timeout (in seconds)
    *
    * call-seq:
-   *   options.sub_expiry -&gt; Integer
+   *   options.sub_expiry -&gt; Float
    *
    */
-  int sub_expiry() {
+  float sub_expiry() {
     return $self-&gt;expires;
   }
 
 
-  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(unsigned int heartbeat_interval);
+  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(float heartbeat_interval);
 
   /*
-   * Set subscription heartbeat interval (in seconds)
+   * Set subscription heartbeat interval (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
    *
    */
-  void set_heartbeat_interval(unsigned int heartbeat_interval) {
+  void set_heartbeat_interval(float heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
   }
 
@@ -3240,10 +3302,10 @@ kerberos, https mutual spnego kerberos)</p>
    * Get subscription heartbeat interval (in seconds)
    *
    * call-seq:
-   *   options.heartbeat_interval -&gt; Integer
+   *   options.heartbeat_interval -&gt; Float
    *
    */
-  int heartbeat_interval() {
+  float heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
   }
 
@@ -3309,42 +3371,53 @@ kerberos, https mutual spnego kerberos)</p>
     return $self-&gt;delivery_sec_mode;
   }
 
+
+  %rename(&quot;locale=&quot;) set_locale(const char *locale);
+
+  /*
+   * Set request locale
+   *
+   * call-seq:
+   *   options.locale = &quot;en_us&quot;
+   *
+   */
+  void set_locale(const char *locale) {
+        wsmc_set_locale($self, locale);
+  }
+
+  /*
+   * Get locales
+   *
+   * call-seq:
+   *   options.locale -&gt; String
+   *
+   */
+  const char *locale() {
+    return $self-&gt;locale;
+  }
+
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-flags" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             flags &rarr; Integer
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>get option flag(s)</p>
 
 <p>return current flags bitmask</p>
-          
-          
 
-          
           <div class="method-source-code" id="flags-source">
-            <pre>unsigned int get_flags() {
+            <pre>unsigned long get_flags() {
     return wsmc_get_action_option($self);
   }
 
@@ -3357,7 +3430,7 @@ kerberos, https mutual spnego kerberos)</p>
    *   options.clear_flags Openwsman::FLAG_ENUMERATION_OPTIMIZATION
    *
    */
-  void clear_flags(int flags) {
+  void clear_flags(unsigned long flags) {
     wsmc_clear_action_option($self, flags);
   }
 
@@ -3727,16 +3800,16 @@ kerberos, https mutual spnego kerberos)</p>
   }
 
 
-  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(unsigned int event_subscription_expire);
+  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(float event_subscription_expire);
 
   /*
-   * Set subscription expiry timeout (in seconds)
+   * Set subscription expiry timeout (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
    *
    */
-  void set_sub_expiry(unsigned int event_subscription_expire) {
+  void set_sub_expiry(float event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
   }
 
@@ -3744,24 +3817,24 @@ kerberos, https mutual spnego kerberos)</p>
    * Get subscription expiry timeout (in seconds)
    *
    * call-seq:
-   *   options.sub_expiry -&gt; Integer
+   *   options.sub_expiry -&gt; Float
    *
    */
-  int sub_expiry() {
+  float sub_expiry() {
     return $self-&gt;expires;
   }
 
 
-  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(unsigned int heartbeat_interval);
+  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(float heartbeat_interval);
 
   /*
-   * Set subscription heartbeat interval (in seconds)
+   * Set subscription heartbeat interval (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
    *
    */
-  void set_heartbeat_interval(unsigned int heartbeat_interval) {
+  void set_heartbeat_interval(float heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
   }
 
@@ -3769,10 +3842,10 @@ kerberos, https mutual spnego kerberos)</p>
    * Get subscription heartbeat interval (in seconds)
    *
    * call-seq:
-   *   options.heartbeat_interval -&gt; Integer
+   *   options.heartbeat_interval -&gt; Float
    *
    */
-  int heartbeat_interval() {
+  float heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
   }
 
@@ -3838,42 +3911,53 @@ kerberos, https mutual spnego kerberos)</p>
     return $self-&gt;delivery_sec_mode;
   }
 
+
+  %rename(&quot;locale=&quot;) set_locale(const char *locale);
+
+  /*
+   * Set request locale
+   *
+   * call-seq:
+   *   options.locale = &quot;en_us&quot;
+   *
+   */
+  void set_locale(const char *locale) {
+        wsmc_set_locale($self, locale);
+  }
+
+  /*
+   * Get locales
+   *
+   * call-seq:
+   *   options.locale -&gt; String
+   *
+   */
+  const char *locale() {
+    return $self-&gt;locale;
+  }
+
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-flags-3D" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             flags = Openwsman::FLAG_ENUMERATION_OPTIMIZATION
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>set option flag(s)</p>
 
 <p>adds new flag(s) to options</p>
-          
-          
 
-          
           <div class="method-source-code" id="flags-3D-source">
-            <pre>void set_flags(int flags) {
+            <pre>void set_flags(unsigned long flags) {
     wsmc_set_action_option($self, flags);
   }
 
@@ -3889,7 +3973,7 @@ kerberos, https mutual spnego kerberos)</p>
    *   optins.flags -&gt; Integer
    *
    */
-  unsigned int get_flags() {
+  unsigned long get_flags() {
     return wsmc_get_action_option($self);
   }
 
@@ -3902,7 +3986,7 @@ kerberos, https mutual spnego kerberos)</p>
    *   options.clear_flags Openwsman::FLAG_ENUMERATION_OPTIMIZATION
    *
    */
-  void clear_flags(int flags) {
+  void clear_flags(unsigned long flags) {
     wsmc_clear_action_option($self, flags);
   }
 
@@ -4272,16 +4356,16 @@ kerberos, https mutual spnego kerberos)</p>
   }
 
 
-  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(unsigned int event_subscription_expire);
+  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(float event_subscription_expire);
 
   /*
-   * Set subscription expiry timeout (in seconds)
+   * Set subscription expiry timeout (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
    *
    */
-  void set_sub_expiry(unsigned int event_subscription_expire) {
+  void set_sub_expiry(float event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
   }
 
@@ -4289,24 +4373,24 @@ kerberos, https mutual spnego kerberos)</p>
    * Get subscription expiry timeout (in seconds)
    *
    * call-seq:
-   *   options.sub_expiry -&gt; Integer
+   *   options.sub_expiry -&gt; Float
    *
    */
-  int sub_expiry() {
+  float sub_expiry() {
     return $self-&gt;expires;
   }
 
 
-  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(unsigned int heartbeat_interval);
+  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(float heartbeat_interval);
 
   /*
-   * Set subscription heartbeat interval (in seconds)
+   * Set subscription heartbeat interval (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
    *
    */
-  void set_heartbeat_interval(unsigned int heartbeat_interval) {
+  void set_heartbeat_interval(float heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
   }
 
@@ -4314,10 +4398,10 @@ kerberos, https mutual spnego kerberos)</p>
    * Get subscription heartbeat interval (in seconds)
    *
    * call-seq:
-   *   options.heartbeat_interval -&gt; Integer
+   *   options.heartbeat_interval -&gt; Float
    *
    */
-  int heartbeat_interval() {
+  float heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
   }
 
@@ -4383,38 +4467,49 @@ kerberos, https mutual spnego kerberos)</p>
     return $self-&gt;delivery_sec_mode;
   }
 
+
+  %rename(&quot;locale=&quot;) set_locale(const char *locale);
+
+  /*
+   * Set request locale
+   *
+   * call-seq:
+   *   options.locale = &quot;en_us&quot;
+   *
+   */
+  void set_locale(const char *locale) {
+        wsmc_set_locale($self, locale);
+  }
+
+  /*
+   * Get locales
+   *
+   * call-seq:
+   *   options.locale -&gt; String
+   *
+   */
+  const char *locale() {
+    return $self-&gt;locale;
+  }
+
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-fragment" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             fragment &rarr; String
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Get fragment filter See DSP0226, section 7.7.</p>
-          
-          
 
-          
           <div class="method-source-code" id="fragment-source">
             <pre>const char *get_fragment() {
     return $self-&gt;fragment;
@@ -4656,16 +4751,16 @@ kerberos, https mutual spnego kerberos)</p>
   }
 
 
-  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(unsigned int event_subscription_expire);
+  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(float event_subscription_expire);
 
   /*
-   * Set subscription expiry timeout (in seconds)
+   * Set subscription expiry timeout (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
    *
    */
-  void set_sub_expiry(unsigned int event_subscription_expire) {
+  void set_sub_expiry(float event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
   }
 
@@ -4673,24 +4768,24 @@ kerberos, https mutual spnego kerberos)</p>
    * Get subscription expiry timeout (in seconds)
    *
    * call-seq:
-   *   options.sub_expiry -&gt; Integer
+   *   options.sub_expiry -&gt; Float
    *
    */
-  int sub_expiry() {
+  float sub_expiry() {
     return $self-&gt;expires;
   }
 
 
-  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(unsigned int heartbeat_interval);
+  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(float heartbeat_interval);
 
   /*
-   * Set subscription heartbeat interval (in seconds)
+   * Set subscription heartbeat interval (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
    *
    */
-  void set_heartbeat_interval(unsigned int heartbeat_interval) {
+  void set_heartbeat_interval(float heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
   }
 
@@ -4698,10 +4793,10 @@ kerberos, https mutual spnego kerberos)</p>
    * Get subscription heartbeat interval (in seconds)
    *
    * call-seq:
-   *   options.heartbeat_interval -&gt; Integer
+   *   options.heartbeat_interval -&gt; Float
    *
    */
-  int heartbeat_interval() {
+  float heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
   }
 
@@ -4767,38 +4862,49 @@ kerberos, https mutual spnego kerberos)</p>
     return $self-&gt;delivery_sec_mode;
   }
 
+
+  %rename(&quot;locale=&quot;) set_locale(const char *locale);
+
+  /*
+   * Set request locale
+   *
+   * call-seq:
+   *   options.locale = &quot;en_us&quot;
+   *
+   */
+  void set_locale(const char *locale) {
+        wsmc_set_locale($self, locale);
+  }
+
+  /*
+   * Get locales
+   *
+   * call-seq:
+   *   options.locale -&gt; String
+   *
+   */
+  const char *locale() {
+    return $self-&gt;locale;
+  }
+
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-fragment-3D" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             fragment = &quot;xpath/expression&quot;
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Set fragment filter See DSP0226, section 7.7. (Supported Dialects: XPATH)</p>
-          
-          
 
-          
           <div class="method-source-code" id="fragment-3D-source">
             <pre>void set_fragment(char *fragment) {
     wsmc_set_fragment(fragment, $self);
@@ -5055,16 +5161,16 @@ kerberos, https mutual spnego kerberos)</p>
   }
 
 
-  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(unsigned int event_subscription_expire);
+  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(float event_subscription_expire);
 
   /*
-   * Set subscription expiry timeout (in seconds)
+   * Set subscription expiry timeout (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
    *
    */
-  void set_sub_expiry(unsigned int event_subscription_expire) {
+  void set_sub_expiry(float event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
   }
 
@@ -5072,24 +5178,24 @@ kerberos, https mutual spnego kerberos)</p>
    * Get subscription expiry timeout (in seconds)
    *
    * call-seq:
-   *   options.sub_expiry -&gt; Integer
+   *   options.sub_expiry -&gt; Float
    *
    */
-  int sub_expiry() {
+  float sub_expiry() {
     return $self-&gt;expires;
   }
 
 
-  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(unsigned int heartbeat_interval);
+  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(float heartbeat_interval);
 
   /*
-   * Set subscription heartbeat interval (in seconds)
+   * Set subscription heartbeat interval (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
    *
    */
-  void set_heartbeat_interval(unsigned int heartbeat_interval) {
+  void set_heartbeat_interval(float heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
   }
 
@@ -5097,10 +5203,10 @@ kerberos, https mutual spnego kerberos)</p>
    * Get subscription heartbeat interval (in seconds)
    *
    * call-seq:
-   *   options.heartbeat_interval -&gt; Integer
+   *   options.heartbeat_interval -&gt; Float
    *
    */
-  int heartbeat_interval() {
+  float heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
   }
 
@@ -5166,40 +5272,51 @@ kerberos, https mutual spnego kerberos)</p>
     return $self-&gt;delivery_sec_mode;
   }
 
+
+  %rename(&quot;locale=&quot;) set_locale(const char *locale);
+
+  /*
+   * Set request locale
+   *
+   * call-seq:
+   *   options.locale = &quot;en_us&quot;
+   *
+   */
+  void set_locale(const char *locale) {
+        wsmc_set_locale($self, locale);
+  }
+
+  /*
+   * Get locales
+   *
+   * call-seq:
+   *   options.locale -&gt; String
+   *
+   */
+  const char *locale() {
+    return $self-&gt;locale;
+  }
+
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-heartbeat_interval" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
-            heartbeat_interval &rarr; Integer
+            heartbeat_interval &rarr; Float
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Get subscription heartbeat interval (in seconds)</p>
-          
-          
 
-          
           <div class="method-source-code" id="heartbeat_interval-source">
-            <pre>int heartbeat_interval() {
+            <pre>float heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
   }
 
@@ -5265,40 +5382,51 @@ kerberos, https mutual spnego kerberos)</p>
     return $self-&gt;delivery_sec_mode;
   }
 
+
+  %rename(&quot;locale=&quot;) set_locale(const char *locale);
+
+  /*
+   * Set request locale
+   *
+   * call-seq:
+   *   options.locale = &quot;en_us&quot;
+   *
+   */
+  void set_locale(const char *locale) {
+        wsmc_set_locale($self, locale);
+  }
+
+  /*
+   * Get locales
+   *
+   * call-seq:
+   *   options.locale -&gt; String
+   *
+   */
+  const char *locale() {
+    return $self-&gt;locale;
+  }
+
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-heartbeat_interval-3D" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             heartbeat_interval = 60 # every minute
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
-          <p>Set subscription heartbeat interval (in seconds)</p>
-          
-          
+          <p>Set subscription heartbeat interval (in seconds.milliseconds (float))</p>
 
-          
           <div class="method-source-code" id="heartbeat_interval-3D-source">
-            <pre>void set_heartbeat_interval(unsigned int heartbeat_interval) {
+            <pre>void set_heartbeat_interval(float heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
   }
 
@@ -5306,10 +5434,10 @@ kerberos, https mutual spnego kerberos)</p>
    * Get subscription heartbeat interval (in seconds)
    *
    * call-seq:
-   *   options.heartbeat_interval -&gt; Integer
+   *   options.heartbeat_interval -&gt; Float
    *
    */
-  int heartbeat_interval() {
+  float heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
   }
 
@@ -5375,38 +5503,106 @@ kerberos, https mutual spnego kerberos)</p>
     return $self-&gt;delivery_sec_mode;
   }
 
+
+  %rename(&quot;locale=&quot;) set_locale(const char *locale);
+
+  /*
+   * Set request locale
+   *
+   * call-seq:
+   *   options.locale = &quot;en_us&quot;
+   *
+   */
+  void set_locale(const char *locale) {
+        wsmc_set_locale($self, locale);
+  }
+
+  /*
+   * Get locales
+   *
+   * call-seq:
+   *   options.locale -&gt; String
+   *
+   */
+  const char *locale() {
+    return $self-&gt;locale;
+  }
+
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
+      <div id="method-i-locale" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-callseq">
+            locale &rarr; String
+          </span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Get locales</p>
+
+          <div class="method-source-code" id="locale-source">
+            <pre>const char *locale() {
+    return $self-&gt;locale;
+  }
+
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-locale-3D" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-callseq">
+            locale = &quot;en_us&quot;
+          </span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Set request locale</p>
+
+          <div class="method-source-code" id="locale-3D-source">
+            <pre>void set_locale(const char *locale) {
+        wsmc_set_locale($self, locale);
+  }
+
+  /*
+   * Get locales
+   *
+   * call-seq:
+   *   options.locale -&gt; String
+   *
+   */
+  const char *locale() {
+    return $self-&gt;locale;
+  }
+
+}</pre>
+          </div>
+        </div>
+
+
+      </div>
+
       <div id="method-i-max_elements" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             max_elements &rarr; Integer
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Return enumeration elements limit</p>
-          
-          
 
-          
           <div class="method-source-code" id="max_elements-source">
             <pre>int get_max_elements() {
     return $self-&gt;max_elements;
@@ -5709,16 +5905,16 @@ kerberos, https mutual spnego kerberos)</p>
   }
 
 
-  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(unsigned int event_subscription_expire);
+  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(float event_subscription_expire);
 
   /*
-   * Set subscription expiry timeout (in seconds)
+   * Set subscription expiry timeout (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
    *
    */
-  void set_sub_expiry(unsigned int event_subscription_expire) {
+  void set_sub_expiry(float event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
   }
 
@@ -5726,24 +5922,24 @@ kerberos, https mutual spnego kerberos)</p>
    * Get subscription expiry timeout (in seconds)
    *
    * call-seq:
-   *   options.sub_expiry -&gt; Integer
+   *   options.sub_expiry -&gt; Float
    *
    */
-  int sub_expiry() {
+  float sub_expiry() {
     return $self-&gt;expires;
   }
 
 
-  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(unsigned int heartbeat_interval);
+  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(float heartbeat_interval);
 
   /*
-   * Set subscription heartbeat interval (in seconds)
+   * Set subscription heartbeat interval (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
    *
    */
-  void set_heartbeat_interval(unsigned int heartbeat_interval) {
+  void set_heartbeat_interval(float heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
   }
 
@@ -5751,10 +5947,10 @@ kerberos, https mutual spnego kerberos)</p>
    * Get subscription heartbeat interval (in seconds)
    *
    * call-seq:
-   *   options.heartbeat_interval -&gt; Integer
+   *   options.heartbeat_interval -&gt; Float
    *
    */
-  int heartbeat_interval() {
+  float heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
   }
 
@@ -5820,38 +6016,49 @@ kerberos, https mutual spnego kerberos)</p>
     return $self-&gt;delivery_sec_mode;
   }
 
+
+  %rename(&quot;locale=&quot;) set_locale(const char *locale);
+
+  /*
+   * Set request locale
+   *
+   * call-seq:
+   *   options.locale = &quot;en_us&quot;
+   *
+   */
+  void set_locale(const char *locale) {
+        wsmc_set_locale($self, locale);
+  }
+
+  /*
+   * Get locales
+   *
+   * call-seq:
+   *   options.locale -&gt; String
+   *
+   */
+  const char *locale() {
+    return $self-&gt;locale;
+  }
+
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-max_elements-3D" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             max_elements = 42
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Limit number of elements returned by enumeration</p>
-          
-          
 
-          
           <div class="method-source-code" id="max_elements-3D-source">
             <pre>void set_max_elements(int elements) {
     $self-&gt;max_elements = elements;
@@ -6168,16 +6375,16 @@ kerberos, https mutual spnego kerberos)</p>
   }
 
 
-  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(unsigned int event_subscription_expire);
+  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(float event_subscription_expire);
 
   /*
-   * Set subscription expiry timeout (in seconds)
+   * Set subscription expiry timeout (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
    *
    */
-  void set_sub_expiry(unsigned int event_subscription_expire) {
+  void set_sub_expiry(float event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
   }
 
@@ -6185,24 +6392,24 @@ kerberos, https mutual spnego kerberos)</p>
    * Get subscription expiry timeout (in seconds)
    *
    * call-seq:
-   *   options.sub_expiry -&gt; Integer
+   *   options.sub_expiry -&gt; Float
    *
    */
-  int sub_expiry() {
+  float sub_expiry() {
     return $self-&gt;expires;
   }
 
 
-  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(unsigned int heartbeat_interval);
+  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(float heartbeat_interval);
 
   /*
-   * Set subscription heartbeat interval (in seconds)
+   * Set subscription heartbeat interval (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
    *
    */
-  void set_heartbeat_interval(unsigned int heartbeat_interval) {
+  void set_heartbeat_interval(float heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
   }
 
@@ -6210,10 +6417,10 @@ kerberos, https mutual spnego kerberos)</p>
    * Get subscription heartbeat interval (in seconds)
    *
    * call-seq:
-   *   options.heartbeat_interval -&gt; Integer
+   *   options.heartbeat_interval -&gt; Float
    *
    */
-  int heartbeat_interval() {
+  float heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
   }
 
@@ -6279,38 +6486,49 @@ kerberos, https mutual spnego kerberos)</p>
     return $self-&gt;delivery_sec_mode;
   }
 
+
+  %rename(&quot;locale=&quot;) set_locale(const char *locale);
+
+  /*
+   * Set request locale
+   *
+   * call-seq:
+   *   options.locale = &quot;en_us&quot;
+   *
+   */
+  void set_locale(const char *locale) {
+        wsmc_set_locale($self, locale);
+  }
+
+  /*
+   * Get locales
+   *
+   * call-seq:
+   *   options.locale -&gt; String
+   *
+   */
+  const char *locale() {
+    return $self-&gt;locale;
+  }
+
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-max_envelope_size" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             max_envelope_size &rarr; Integer
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Return size limit of result document</p>
-          
-          
 
-          
           <div class="method-source-code" id="max_envelope_size-source">
             <pre>unsigned long get_max_envelope_size() {
     return $self-&gt;max_envelope_size;
@@ -6641,16 +6859,16 @@ kerberos, https mutual spnego kerberos)</p>
   }
 
 
-  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(unsigned int event_subscription_expire);
+  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(float event_subscription_expire);
 
   /*
-   * Set subscription expiry timeout (in seconds)
+   * Set subscription expiry timeout (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
    *
    */
-  void set_sub_expiry(unsigned int event_subscription_expire) {
+  void set_sub_expiry(float event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
   }
 
@@ -6658,24 +6876,24 @@ kerberos, https mutual spnego kerberos)</p>
    * Get subscription expiry timeout (in seconds)
    *
    * call-seq:
-   *   options.sub_expiry -&gt; Integer
+   *   options.sub_expiry -&gt; Float
    *
    */
-  int sub_expiry() {
+  float sub_expiry() {
     return $self-&gt;expires;
   }
 
 
-  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(unsigned int heartbeat_interval);
+  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(float heartbeat_interval);
 
   /*
-   * Set subscription heartbeat interval (in seconds)
+   * Set subscription heartbeat interval (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
    *
    */
-  void set_heartbeat_interval(unsigned int heartbeat_interval) {
+  void set_heartbeat_interval(float heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
   }
 
@@ -6683,10 +6901,10 @@ kerberos, https mutual spnego kerberos)</p>
    * Get subscription heartbeat interval (in seconds)
    *
    * call-seq:
-   *   options.heartbeat_interval -&gt; Integer
+   *   options.heartbeat_interval -&gt; Float
    *
    */
-  int heartbeat_interval() {
+  float heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
   }
 
@@ -6752,38 +6970,49 @@ kerberos, https mutual spnego kerberos)</p>
     return $self-&gt;delivery_sec_mode;
   }
 
+
+  %rename(&quot;locale=&quot;) set_locale(const char *locale);
+
+  /*
+   * Set request locale
+   *
+   * call-seq:
+   *   options.locale = &quot;en_us&quot;
+   *
+   */
+  void set_locale(const char *locale) {
+        wsmc_set_locale($self, locale);
+  }
+
+  /*
+   * Get locales
+   *
+   * call-seq:
+   *   options.locale -&gt; String
+   *
+   */
+  const char *locale() {
+    return $self-&gt;locale;
+  }
+
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-max_envelope_size-3D" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             max_envelope_size = 10240
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Limit size of result document</p>
-          
-          
 
-          
           <div class="method-source-code" id="max_envelope_size-3D-source">
             <pre>void set_max_envelope_size(unsigned long size) {
     $self-&gt;max_envelope_size = size;
@@ -7128,16 +7357,16 @@ kerberos, https mutual spnego kerberos)</p>
   }
 
 
-  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(unsigned int event_subscription_expire);
+  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(float event_subscription_expire);
 
   /*
-   * Set subscription expiry timeout (in seconds)
+   * Set subscription expiry timeout (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
    *
    */
-  void set_sub_expiry(unsigned int event_subscription_expire) {
+  void set_sub_expiry(float event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
   }
 
@@ -7145,24 +7374,24 @@ kerberos, https mutual spnego kerberos)</p>
    * Get subscription expiry timeout (in seconds)
    *
    * call-seq:
-   *   options.sub_expiry -&gt; Integer
+   *   options.sub_expiry -&gt; Float
    *
    */
-  int sub_expiry() {
+  float sub_expiry() {
     return $self-&gt;expires;
   }
 
 
-  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(unsigned int heartbeat_interval);
+  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(float heartbeat_interval);
 
   /*
-   * Set subscription heartbeat interval (in seconds)
+   * Set subscription heartbeat interval (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
    *
    */
-  void set_heartbeat_interval(unsigned int heartbeat_interval) {
+  void set_heartbeat_interval(float heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
   }
 
@@ -7170,10 +7399,10 @@ kerberos, https mutual spnego kerberos)</p>
    * Get subscription heartbeat interval (in seconds)
    *
    * call-seq:
-   *   options.heartbeat_interval -&gt; Integer
+   *   options.heartbeat_interval -&gt; Float
    *
    */
-  int heartbeat_interval() {
+  float heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
   }
 
@@ -7239,38 +7468,49 @@ kerberos, https mutual spnego kerberos)</p>
     return $self-&gt;delivery_sec_mode;
   }
 
+
+  %rename(&quot;locale=&quot;) set_locale(const char *locale);
+
+  /*
+   * Set request locale
+   *
+   * call-seq:
+   *   options.locale = &quot;en_us&quot;
+   *
+   */
+  void set_locale(const char *locale) {
+        wsmc_set_locale($self, locale);
+  }
+
+  /*
+   * Get locales
+   *
+   * call-seq:
+   *   options.locale -&gt; String
+   *
+   */
+  const char *locale() {
+    return $self-&gt;locale;
+  }
+
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-options" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             options &rarr; Hash
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Get options (for OptionSet) as Hash</p>
-          
-          
 
-          
           <div class="method-source-code" id="options-source">
             <pre>VALUE get_options(void)
   {
@@ -7393,16 +7633,16 @@ kerberos, https mutual spnego kerberos)</p>
   }
 
 
-  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(unsigned int event_subscription_expire);
+  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(float event_subscription_expire);
 
   /*
-   * Set subscription expiry timeout (in seconds)
+   * Set subscription expiry timeout (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
    *
    */
-  void set_sub_expiry(unsigned int event_subscription_expire) {
+  void set_sub_expiry(float event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
   }
 
@@ -7410,24 +7650,24 @@ kerberos, https mutual spnego kerberos)</p>
    * Get subscription expiry timeout (in seconds)
    *
    * call-seq:
-   *   options.sub_expiry -&gt; Integer
+   *   options.sub_expiry -&gt; Float
    *
    */
-  int sub_expiry() {
+  float sub_expiry() {
     return $self-&gt;expires;
   }
 
 
-  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(unsigned int heartbeat_interval);
+  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(float heartbeat_interval);
 
   /*
-   * Set subscription heartbeat interval (in seconds)
+   * Set subscription heartbeat interval (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
    *
    */
-  void set_heartbeat_interval(unsigned int heartbeat_interval) {
+  void set_heartbeat_interval(float heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
   }
 
@@ -7435,10 +7675,10 @@ kerberos, https mutual spnego kerberos)</p>
    * Get subscription heartbeat interval (in seconds)
    *
    * call-seq:
-   *   options.heartbeat_interval -&gt; Integer
+   *   options.heartbeat_interval -&gt; Float
    *
    */
-  int heartbeat_interval() {
+  float heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
   }
 
@@ -7504,41 +7744,51 @@ kerberos, https mutual spnego kerberos)</p>
     return $self-&gt;delivery_sec_mode;
   }
 
+
+  %rename(&quot;locale=&quot;) set_locale(const char *locale);
+
+  /*
+   * Set request locale
+   *
+   * call-seq:
+   *   options.locale = &quot;en_us&quot;
+   *
+   */
+  void set_locale(const char *locale) {
+        wsmc_set_locale($self, locale);
+  }
+
+  /*
+   * Get locales
+   *
+   * call-seq:
+   *   options.locale -&gt; String
+   *
+   */
+  const char *locale() {
+    return $self-&gt;locale;
+  }
+
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-options-3D" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             options = { &quot;Name&quot; &rarr; &quot;Value&quot;, ... }
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Set options (for OptionSet) from Hash</p>
 
-<p>NOTE: the values must be properly escaped (replace &amp; with &amp;amp;,
-etc.) in Ruby use CGI::escapeHTML()</p>
-          
-          
+<p>NOTE: the values must be properly escaped (replace &amp; with &amp;amp;, etc.) in Ruby use CGI::escapeHTML()</p>
 
-          
           <div class="method-source-code" id="options-3D-source">
             <pre>void set_options(VALUE hash)
   {
@@ -7674,16 +7924,16 @@ etc.) in Ruby use CGI::escapeHTML()</p>
   }
 
 
-  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(unsigned int event_subscription_expire);
+  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(float event_subscription_expire);
 
   /*
-   * Set subscription expiry timeout (in seconds)
+   * Set subscription expiry timeout (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
    *
    */
-  void set_sub_expiry(unsigned int event_subscription_expire) {
+  void set_sub_expiry(float event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
   }
 
@@ -7691,24 +7941,24 @@ etc.) in Ruby use CGI::escapeHTML()</p>
    * Get subscription expiry timeout (in seconds)
    *
    * call-seq:
-   *   options.sub_expiry -&gt; Integer
+   *   options.sub_expiry -&gt; Float
    *
    */
-  int sub_expiry() {
+  float sub_expiry() {
     return $self-&gt;expires;
   }
 
 
-  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(unsigned int heartbeat_interval);
+  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(float heartbeat_interval);
 
   /*
-   * Set subscription heartbeat interval (in seconds)
+   * Set subscription heartbeat interval (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
    *
    */
-  void set_heartbeat_interval(unsigned int heartbeat_interval) {
+  void set_heartbeat_interval(float heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
   }
 
@@ -7716,10 +7966,10 @@ etc.) in Ruby use CGI::escapeHTML()</p>
    * Get subscription heartbeat interval (in seconds)
    *
    * call-seq:
-   *   options.heartbeat_interval -&gt; Integer
+   *   options.heartbeat_interval -&gt; Float
    *
    */
-  int heartbeat_interval() {
+  float heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
   }
 
@@ -7785,42 +8035,52 @@ etc.) in Ruby use CGI::escapeHTML()</p>
     return $self-&gt;delivery_sec_mode;
   }
 
+
+  %rename(&quot;locale=&quot;) set_locale(const char *locale);
+
+  /*
+   * Set request locale
+   *
+   * call-seq:
+   *   options.locale = &quot;en_us&quot;
+   *
+   */
+  void set_locale(const char *locale) {
+        wsmc_set_locale($self, locale);
+  }
+
+  /*
+   * Get locales
+   *
+   * call-seq:
+   *   options.locale -&gt; String
+   *
+   */
+  const char *locale() {
+    return $self-&gt;locale;
+  }
+
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-properties" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             properties &rarr; Hash
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Get properties as Hash</p>
 <ul><li>
-<p>Input parameters to &#39;invoke&#39;d methods are represented as
-ClientOption properties</p>
+<p>Input parameters to ‘invoke’d methods are represented as ClientOption properties</p>
 </li></ul>
-          
-          
 
-          
           <div class="method-source-code" id="properties-source">
             <pre>VALUE get_properties(void)
   {
@@ -7854,16 +8114,16 @@ ClientOption properties</p>
   }
 
 
-  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(unsigned int event_subscription_expire);
+  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(float event_subscription_expire);
 
   /*
-   * Set subscription expiry timeout (in seconds)
+   * Set subscription expiry timeout (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
    *
    */
-  void set_sub_expiry(unsigned int event_subscription_expire) {
+  void set_sub_expiry(float event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
   }
 
@@ -7871,24 +8131,24 @@ ClientOption properties</p>
    * Get subscription expiry timeout (in seconds)
    *
    * call-seq:
-   *   options.sub_expiry -&gt; Integer
+   *   options.sub_expiry -&gt; Float
    *
    */
-  int sub_expiry() {
+  float sub_expiry() {
     return $self-&gt;expires;
   }
 
 
-  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(unsigned int heartbeat_interval);
+  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(float heartbeat_interval);
 
   /*
-   * Set subscription heartbeat interval (in seconds)
+   * Set subscription heartbeat interval (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
    *
    */
-  void set_heartbeat_interval(unsigned int heartbeat_interval) {
+  void set_heartbeat_interval(float heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
   }
 
@@ -7896,10 +8156,10 @@ ClientOption properties</p>
    * Get subscription heartbeat interval (in seconds)
    *
    * call-seq:
-   *   options.heartbeat_interval -&gt; Integer
+   *   options.heartbeat_interval -&gt; Float
    *
    */
-  int heartbeat_interval() {
+  float heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
   }
 
@@ -7965,74 +8225,72 @@ ClientOption properties</p>
     return $self-&gt;delivery_sec_mode;
   }
 
+
+  %rename(&quot;locale=&quot;) set_locale(const char *locale);
+
+  /*
+   * Set request locale
+   *
+   * call-seq:
+   *   options.locale = &quot;en_us&quot;
+   *
+   */
+  void set_locale(const char *locale) {
+        wsmc_set_locale($self, locale);
+  }
+
+  /*
+   * Get locales
+   *
+   * call-seq:
+   *   options.locale -&gt; String
+   *
+   */
+  const char *locale() {
+    return $self-&gt;locale;
+  }
+
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-properties-3D" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">properties=</span><span
             class="method-args">(value)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>assign hash to properties</p>
-          
-          
 
-          
           <div class="method-source-code" id="properties-3D-source">
             <pre><span class="ruby-comment"># File openwsman/openwsman.rb, line 46</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">properties=</span> <span class="ruby-identifier">value</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">properties=</span> <span class="ruby-identifier">value</span>
   <span class="ruby-identifier">value</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">add_property</span> <span class="ruby-identifier">k</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">v</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-reference" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             reference &rarr; String
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
-          <p>Get WS-Addressing reference properties Returns the string representation of
-a valid XML document</p>
-          
-          
+          <p>Get WS-Addressing reference properties Returns the string representation of a valid XML document</p>
 
-          
           <div class="method-source-code" id="reference-source">
             <pre>const char *get_reference() {
     return $self-&gt;reference;
@@ -8205,16 +8463,16 @@ a valid XML document</p>
   }
 
 
-  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(unsigned int event_subscription_expire);
+  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(float event_subscription_expire);
 
   /*
-   * Set subscription expiry timeout (in seconds)
+   * Set subscription expiry timeout (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
    *
    */
-  void set_sub_expiry(unsigned int event_subscription_expire) {
+  void set_sub_expiry(float event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
   }
 
@@ -8222,24 +8480,24 @@ a valid XML document</p>
    * Get subscription expiry timeout (in seconds)
    *
    * call-seq:
-   *   options.sub_expiry -&gt; Integer
+   *   options.sub_expiry -&gt; Float
    *
    */
-  int sub_expiry() {
+  float sub_expiry() {
     return $self-&gt;expires;
   }
 
 
-  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(unsigned int heartbeat_interval);
+  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(float heartbeat_interval);
 
   /*
-   * Set subscription heartbeat interval (in seconds)
+   * Set subscription heartbeat interval (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
    *
    */
-  void set_heartbeat_interval(unsigned int heartbeat_interval) {
+  void set_heartbeat_interval(float heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
   }
 
@@ -8247,10 +8505,10 @@ a valid XML document</p>
    * Get subscription heartbeat interval (in seconds)
    *
    * call-seq:
-   *   options.heartbeat_interval -&gt; Integer
+   *   options.heartbeat_interval -&gt; Float
    *
    */
-  int heartbeat_interval() {
+  float heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
   }
 
@@ -8316,39 +8574,49 @@ a valid XML document</p>
     return $self-&gt;delivery_sec_mode;
   }
 
+
+  %rename(&quot;locale=&quot;) set_locale(const char *locale);
+
+  /*
+   * Set request locale
+   *
+   * call-seq:
+   *   options.locale = &quot;en_us&quot;
+   *
+   */
+  void set_locale(const char *locale) {
+        wsmc_set_locale($self, locale);
+  }
+
+  /*
+   * Get locales
+   *
+   * call-seq:
+   *   options.locale -&gt; String
+   *
+   */
+  const char *locale() {
+    return $self-&gt;locale;
+  }
+
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-reference-3D" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             reference = &quot;&lt;xml ...&gt;&quot;
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
-          <p>Set WS-Addressing reference properties Argument must the string
-representation of a valid XML document</p>
-          
-          
+          <p>Set WS-Addressing reference properties Argument must the string representation of a valid XML document</p>
 
-          
           <div class="method-source-code" id="reference-3D-source">
             <pre>void set_reference(const char *reference) {
     wsmc_set_reference(reference, $self);
@@ -8536,16 +8804,16 @@ representation of a valid XML document</p>
   }
 
 
-  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(unsigned int event_subscription_expire);
+  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(float event_subscription_expire);
 
   /*
-   * Set subscription expiry timeout (in seconds)
+   * Set subscription expiry timeout (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
    *
    */
-  void set_sub_expiry(unsigned int event_subscription_expire) {
+  void set_sub_expiry(float event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
   }
 
@@ -8553,24 +8821,24 @@ representation of a valid XML document</p>
    * Get subscription expiry timeout (in seconds)
    *
    * call-seq:
-   *   options.sub_expiry -&gt; Integer
+   *   options.sub_expiry -&gt; Float
    *
    */
-  int sub_expiry() {
+  float sub_expiry() {
     return $self-&gt;expires;
   }
 
 
-  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(unsigned int heartbeat_interval);
+  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(float heartbeat_interval);
 
   /*
-   * Set subscription heartbeat interval (in seconds)
+   * Set subscription heartbeat interval (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
    *
    */
-  void set_heartbeat_interval(unsigned int heartbeat_interval) {
+  void set_heartbeat_interval(float heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
   }
 
@@ -8578,10 +8846,10 @@ representation of a valid XML document</p>
    * Get subscription heartbeat interval (in seconds)
    *
    * call-seq:
-   *   options.heartbeat_interval -&gt; Integer
+   *   options.heartbeat_interval -&gt; Float
    *
    */
-  int heartbeat_interval() {
+  float heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
   }
 
@@ -8647,40 +8915,51 @@ representation of a valid XML document</p>
     return $self-&gt;delivery_sec_mode;
   }
 
+
+  %rename(&quot;locale=&quot;) set_locale(const char *locale);
+
+  /*
+   * Set request locale
+   *
+   * call-seq:
+   *   options.locale = &quot;en_us&quot;
+   *
+   */
+  void set_locale(const char *locale) {
+        wsmc_set_locale($self, locale);
+  }
+
+  /*
+   * Get locales
+   *
+   * call-seq:
+   *   options.locale -&gt; String
+   *
+   */
+  const char *locale() {
+    return $self-&gt;locale;
+  }
+
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-reset_flags" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             reset_flags
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>reset option flags</p>
 
 <p>sets option flags bitmask to FLAG_NONE</p>
-          
-          
 
-          
           <div class="method-source-code" id="reset_flags-source">
             <pre>void reset_flags() {
     wsmc_clear_action_option($self, ~FLAG_NONE);
@@ -9039,16 +9318,16 @@ representation of a valid XML document</p>
   }
 
 
-  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(unsigned int event_subscription_expire);
+  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(float event_subscription_expire);
 
   /*
-   * Set subscription expiry timeout (in seconds)
+   * Set subscription expiry timeout (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
    *
    */
-  void set_sub_expiry(unsigned int event_subscription_expire) {
+  void set_sub_expiry(float event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
   }
 
@@ -9056,24 +9335,24 @@ representation of a valid XML document</p>
    * Get subscription expiry timeout (in seconds)
    *
    * call-seq:
-   *   options.sub_expiry -&gt; Integer
+   *   options.sub_expiry -&gt; Float
    *
    */
-  int sub_expiry() {
+  float sub_expiry() {
     return $self-&gt;expires;
   }
 
 
-  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(unsigned int heartbeat_interval);
+  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(float heartbeat_interval);
 
   /*
-   * Set subscription heartbeat interval (in seconds)
+   * Set subscription heartbeat interval (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
    *
    */
-  void set_heartbeat_interval(unsigned int heartbeat_interval) {
+  void set_heartbeat_interval(float heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
   }
 
@@ -9081,10 +9360,10 @@ representation of a valid XML document</p>
    * Get subscription heartbeat interval (in seconds)
    *
    * call-seq:
-   *   options.heartbeat_interval -&gt; Integer
+   *   options.heartbeat_interval -&gt; Float
    *
    */
-  int heartbeat_interval() {
+  float heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
   }
 
@@ -9150,38 +9429,49 @@ representation of a valid XML document</p>
     return $self-&gt;delivery_sec_mode;
   }
 
+
+  %rename(&quot;locale=&quot;) set_locale(const char *locale);
+
+  /*
+   * Set request locale
+   *
+   * call-seq:
+   *   options.locale = &quot;en_us&quot;
+   *
+   */
+  void set_locale(const char *locale) {
+        wsmc_set_locale($self, locale);
+  }
+
+  /*
+   * Get locales
+   *
+   * call-seq:
+   *   options.locale -&gt; String
+   *
+   */
+  const char *locale() {
+    return $self-&gt;locale;
+  }
+
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-selectors" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             selectors &rarr; Hash
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Get selectors as Hash</p>
-          
-          
 
-          
           <div class="method-source-code" id="selectors-source">
             <pre>VALUE get_selectors(void)
   {
@@ -9260,16 +9550,16 @@ representation of a valid XML document</p>
   }
 
 
-  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(unsigned int event_subscription_expire);
+  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(float event_subscription_expire);
 
   /*
-   * Set subscription expiry timeout (in seconds)
+   * Set subscription expiry timeout (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
    *
    */
-  void set_sub_expiry(unsigned int event_subscription_expire) {
+  void set_sub_expiry(float event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
   }
 
@@ -9277,24 +9567,24 @@ representation of a valid XML document</p>
    * Get subscription expiry timeout (in seconds)
    *
    * call-seq:
-   *   options.sub_expiry -&gt; Integer
+   *   options.sub_expiry -&gt; Float
    *
    */
-  int sub_expiry() {
+  float sub_expiry() {
     return $self-&gt;expires;
   }
 
 
-  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(unsigned int heartbeat_interval);
+  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(float heartbeat_interval);
 
   /*
-   * Set subscription heartbeat interval (in seconds)
+   * Set subscription heartbeat interval (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
    *
    */
-  void set_heartbeat_interval(unsigned int heartbeat_interval) {
+  void set_heartbeat_interval(float heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
   }
 
@@ -9302,10 +9592,10 @@ representation of a valid XML document</p>
    * Get subscription heartbeat interval (in seconds)
    *
    * call-seq:
-   *   options.heartbeat_interval -&gt; Integer
+   *   options.heartbeat_interval -&gt; Float
    *
    */
-  int heartbeat_interval() {
+  float heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
   }
 
@@ -9371,78 +9661,76 @@ representation of a valid XML document</p>
     return $self-&gt;delivery_sec_mode;
   }
 
+
+  %rename(&quot;locale=&quot;) set_locale(const char *locale);
+
+  /*
+   * Set request locale
+   *
+   * call-seq:
+   *   options.locale = &quot;en_us&quot;
+   *
+   */
+  void set_locale(const char *locale) {
+        wsmc_set_locale($self, locale);
+  }
+
+  /*
+   * Get locales
+   *
+   * call-seq:
+   *   options.locale -&gt; String
+   *
+   */
+  const char *locale() {
+    return $self-&gt;locale;
+  }
+
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-selectors-3D" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">selectors=</span><span
             class="method-args">(value)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>assign hash to selectors</p>
-          
-          
 
-          
           <div class="method-source-code" id="selectors-3D-source">
             <pre><span class="ruby-comment"># File openwsman/openwsman.rb, line 52</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">selectors=</span> <span class="ruby-identifier">value</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">selectors=</span> <span class="ruby-identifier">value</span>
   <span class="ruby-identifier">value</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">add_selector</span> <span class="ruby-identifier">k</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">v</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-set_dump_request" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             set_dump_request
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Request to dump all operations to the dumpfile</p>
 
 <p>Used for debugging on the wire-level</p>
 
-<p>See also: <a
-href="ClientOptions.html#method-i-clear_dump_request">#clear_dump_request</a></p>
-          
-          
+<p>See also: <a href="ClientOptions.html#method-i-clear_dump_request"><code>clear_dump_request</code></a></p>
 
-          
           <div class="method-source-code" id="set_dump_request-source">
             <pre>void set_dump_request(void) {
     wsmc_set_action_option($self, FLAG_DUMP_REQUEST );
@@ -9464,7 +9752,7 @@ href="ClientOptions.html#method-i-clear_dump_request">#clear_dump_request</a></p
   }
 
 
-  %rename( &quot;flags=&quot; ) set_flags(int flags);
+  %rename( &quot;flags=&quot; ) set_flags(unsigned long flags);
 
   /*
    * set option flag(s)
@@ -9475,7 +9763,7 @@ href="ClientOptions.html#method-i-clear_dump_request">#clear_dump_request</a></p
    *   options.flags = Openwsman::FLAG_ENUMERATION_OPTIMIZATION
    *
    */
-  void set_flags(int flags) {
+  void set_flags(unsigned long flags) {
     wsmc_set_action_option($self, flags);
   }
 
@@ -9491,7 +9779,7 @@ href="ClientOptions.html#method-i-clear_dump_request">#clear_dump_request</a></p
    *   optins.flags -&gt; Integer
    *
    */
-  unsigned int get_flags() {
+  unsigned long get_flags() {
     return wsmc_get_action_option($self);
   }
 
@@ -9504,7 +9792,7 @@ href="ClientOptions.html#method-i-clear_dump_request">#clear_dump_request</a></p
    *   options.clear_flags Openwsman::FLAG_ENUMERATION_OPTIMIZATION
    *
    */
-  void clear_flags(int flags) {
+  void clear_flags(unsigned long flags) {
     wsmc_clear_action_option($self, flags);
   }
 
@@ -9874,16 +10162,16 @@ href="ClientOptions.html#method-i-clear_dump_request">#clear_dump_request</a></p
   }
 
 
-  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(unsigned int event_subscription_expire);
+  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(float event_subscription_expire);
 
   /*
-   * Set subscription expiry timeout (in seconds)
+   * Set subscription expiry timeout (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
    *
    */
-  void set_sub_expiry(unsigned int event_subscription_expire) {
+  void set_sub_expiry(float event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
   }
 
@@ -9891,24 +10179,24 @@ href="ClientOptions.html#method-i-clear_dump_request">#clear_dump_request</a></p
    * Get subscription expiry timeout (in seconds)
    *
    * call-seq:
-   *   options.sub_expiry -&gt; Integer
+   *   options.sub_expiry -&gt; Float
    *
    */
-  int sub_expiry() {
+  float sub_expiry() {
     return $self-&gt;expires;
   }
 
 
-  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(unsigned int heartbeat_interval);
+  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(float heartbeat_interval);
 
   /*
-   * Set subscription heartbeat interval (in seconds)
+   * Set subscription heartbeat interval (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
    *
    */
-  void set_heartbeat_interval(unsigned int heartbeat_interval) {
+  void set_heartbeat_interval(float heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
   }
 
@@ -9916,10 +10204,10 @@ href="ClientOptions.html#method-i-clear_dump_request">#clear_dump_request</a></p
    * Get subscription heartbeat interval (in seconds)
    *
    * call-seq:
-   *   options.heartbeat_interval -&gt; Integer
+   *   options.heartbeat_interval -&gt; Float
    *
    */
-  int heartbeat_interval() {
+  float heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
   }
 
@@ -9985,54 +10273,65 @@ href="ClientOptions.html#method-i-clear_dump_request">#clear_dump_request</a></p
     return $self-&gt;delivery_sec_mode;
   }
 
+
+  %rename(&quot;locale=&quot;) set_locale(const char *locale);
+
+  /*
+   * Set request locale
+   *
+   * call-seq:
+   *   options.locale = &quot;en_us&quot;
+   *
+   */
+  void set_locale(const char *locale) {
+        wsmc_set_locale($self, locale);
+  }
+
+  /*
+   * Get locales
+   *
+   * call-seq:
+   *   options.locale -&gt; String
+   *
+   */
+  const char *locale() {
+    return $self-&gt;locale;
+  }
+
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-sub_expiry" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
-            sub_expiry &rarr; Integer
+            sub_expiry &rarr; Float
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Get subscription expiry timeout (in seconds)</p>
-          
-          
 
-          
           <div class="method-source-code" id="sub_expiry-source">
-            <pre>int sub_expiry() {
+            <pre>float sub_expiry() {
     return $self-&gt;expires;
   }
 
 
-  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(unsigned int heartbeat_interval);
+  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(float heartbeat_interval);
 
   /*
-   * Set subscription heartbeat interval (in seconds)
+   * Set subscription heartbeat interval (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
    *
    */
-  void set_heartbeat_interval(unsigned int heartbeat_interval) {
+  void set_heartbeat_interval(float heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
   }
 
@@ -10040,10 +10339,10 @@ href="ClientOptions.html#method-i-clear_dump_request">#clear_dump_request</a></p
    * Get subscription heartbeat interval (in seconds)
    *
    * call-seq:
-   *   options.heartbeat_interval -&gt; Integer
+   *   options.heartbeat_interval -&gt; Float
    *
    */
-  int heartbeat_interval() {
+  float heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
   }
 
@@ -10109,40 +10408,51 @@ href="ClientOptions.html#method-i-clear_dump_request">#clear_dump_request</a></p
     return $self-&gt;delivery_sec_mode;
   }
 
+
+  %rename(&quot;locale=&quot;) set_locale(const char *locale);
+
+  /*
+   * Set request locale
+   *
+   * call-seq:
+   *   options.locale = &quot;en_us&quot;
+   *
+   */
+  void set_locale(const char *locale) {
+        wsmc_set_locale($self, locale);
+  }
+
+  /*
+   * Get locales
+   *
+   * call-seq:
+   *   options.locale -&gt; String
+   *
+   */
+  const char *locale() {
+    return $self-&gt;locale;
+  }
+
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-sub_expiry-3D" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             sub_expiry = 600 # 10 mins
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
-          <p>Set subscription expiry timeout (in seconds)</p>
-          
-          
+          <p>Set subscription expiry timeout (in seconds.milliseconds (float))</p>
 
-          
           <div class="method-source-code" id="sub_expiry-3D-source">
-            <pre>void set_sub_expiry(unsigned int event_subscription_expire) {
+            <pre>void set_sub_expiry(float event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
   }
 
@@ -10150,24 +10460,24 @@ href="ClientOptions.html#method-i-clear_dump_request">#clear_dump_request</a></p
    * Get subscription expiry timeout (in seconds)
    *
    * call-seq:
-   *   options.sub_expiry -&gt; Integer
+   *   options.sub_expiry -&gt; Float
    *
    */
-  int sub_expiry() {
+  float sub_expiry() {
     return $self-&gt;expires;
   }
 
 
-  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(unsigned int heartbeat_interval);
+  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(float heartbeat_interval);
 
   /*
-   * Set subscription heartbeat interval (in seconds)
+   * Set subscription heartbeat interval (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
    *
    */
-  void set_heartbeat_interval(unsigned int heartbeat_interval) {
+  void set_heartbeat_interval(float heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
   }
 
@@ -10175,10 +10485,10 @@ href="ClientOptions.html#method-i-clear_dump_request">#clear_dump_request</a></p
    * Get subscription heartbeat interval (in seconds)
    *
    * call-seq:
-   *   options.heartbeat_interval -&gt; Integer
+   *   options.heartbeat_interval -&gt; Float
    *
    */
-  int heartbeat_interval() {
+  float heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
   }
 
@@ -10244,40 +10554,49 @@ href="ClientOptions.html#method-i-clear_dump_request">#clear_dump_request</a></p
     return $self-&gt;delivery_sec_mode;
   }
 
+
+  %rename(&quot;locale=&quot;) set_locale(const char *locale);
+
+  /*
+   * Set request locale
+   *
+   * call-seq:
+   *   options.locale = &quot;en_us&quot;
+   *
+   */
+  void set_locale(const char *locale) {
+        wsmc_set_locale($self, locale);
+  }
+
+  /*
+   * Get locales
+   *
+   * call-seq:
+   *   options.locale -&gt; String
+   *
+   */
+  const char *locale() {
+    return $self-&gt;locale;
+  }
+
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-timeout" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             timeout &rarr; Integer
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
-          <p>Return operation timeout in milliseconds See <a
-href="Transport.html#method-i-timeout">Openwsman::Transport#timeout</a> for
-transport timeout</p>
-          
-          
+          <p>Return operation timeout in milliseconds See <a href="Transport.html#method-i-timeout"><code>Openwsman::Transport.timeout</code></a> for transport timeout</p>
 
-          
           <div class="method-source-code" id="timeout-source">
             <pre>unsigned long get_timeout() {
     return $self-&gt;timeout;
@@ -10550,16 +10869,16 @@ transport timeout</p>
   }
 
 
-  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(unsigned int event_subscription_expire);
+  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(float event_subscription_expire);
 
   /*
-   * Set subscription expiry timeout (in seconds)
+   * Set subscription expiry timeout (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
    *
    */
-  void set_sub_expiry(unsigned int event_subscription_expire) {
+  void set_sub_expiry(float event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
   }
 
@@ -10567,24 +10886,24 @@ transport timeout</p>
    * Get subscription expiry timeout (in seconds)
    *
    * call-seq:
-   *   options.sub_expiry -&gt; Integer
+   *   options.sub_expiry -&gt; Float
    *
    */
-  int sub_expiry() {
+  float sub_expiry() {
     return $self-&gt;expires;
   }
 
 
-  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(unsigned int heartbeat_interval);
+  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(float heartbeat_interval);
 
   /*
-   * Set subscription heartbeat interval (in seconds)
+   * Set subscription heartbeat interval (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
    *
    */
-  void set_heartbeat_interval(unsigned int heartbeat_interval) {
+  void set_heartbeat_interval(float heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
   }
 
@@ -10592,10 +10911,10 @@ transport timeout</p>
    * Get subscription heartbeat interval (in seconds)
    *
    * call-seq:
-   *   options.heartbeat_interval -&gt; Integer
+   *   options.heartbeat_interval -&gt; Float
    *
    */
-  int heartbeat_interval() {
+  float heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
   }
 
@@ -10661,40 +10980,49 @@ transport timeout</p>
     return $self-&gt;delivery_sec_mode;
   }
 
+
+  %rename(&quot;locale=&quot;) set_locale(const char *locale);
+
+  /*
+   * Set request locale
+   *
+   * call-seq:
+   *   options.locale = &quot;en_us&quot;
+   *
+   */
+  void set_locale(const char *locale) {
+        wsmc_set_locale($self, locale);
+  }
+
+  /*
+   * Get locales
+   *
+   * call-seq:
+   *   options.locale -&gt; String
+   *
+   */
+  const char *locale() {
+    return $self-&gt;locale;
+  }
+
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-timeout-3D" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             timeout = 60*1000 # 60 seconds
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
-          <p>Operation timeout in milliseconds See <a
-href="Transport.html#method-i-timeout">Openwsman::Transport#timeout</a> for
-transport timeout</p>
-          
-          
+          <p>Operation timeout in milliseconds See <a href="Transport.html#method-i-timeout"><code>Openwsman::Transport.timeout</code></a> for transport timeout</p>
 
-          
           <div class="method-source-code" id="timeout-3D-source">
             <pre>void set_timeout(unsigned long timeout) {
     $self-&gt;timeout = timeout;
@@ -10982,16 +11310,16 @@ transport timeout</p>
   }
 
 
-  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(unsigned int event_subscription_expire);
+  %rename( &quot;sub_expiry=&quot; ) set_sub_expiry(float event_subscription_expire);
 
   /*
-   * Set subscription expiry timeout (in seconds)
+   * Set subscription expiry timeout (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.sub_expiry = 600 # 10 mins
    *
    */
-  void set_sub_expiry(unsigned int event_subscription_expire) {
+  void set_sub_expiry(float event_subscription_expire) {
         wsmc_set_sub_expiry(event_subscription_expire, $self);
   }
 
@@ -10999,24 +11327,24 @@ transport timeout</p>
    * Get subscription expiry timeout (in seconds)
    *
    * call-seq:
-   *   options.sub_expiry -&gt; Integer
+   *   options.sub_expiry -&gt; Float
    *
    */
-  int sub_expiry() {
+  float sub_expiry() {
     return $self-&gt;expires;
   }
 
 
-  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(unsigned int heartbeat_interval);
+  %rename(&quot;heartbeat_interval=&quot;) set_heartbeat_interval(float heartbeat_interval);
 
   /*
-   * Set subscription heartbeat interval (in seconds)
+   * Set subscription heartbeat interval (in seconds.milliseconds (float))
    *
    * call-seq:
    *   options.heartbeat_interval = 60 # every minute
    *
    */
-  void set_heartbeat_interval(unsigned int heartbeat_interval) {
+  void set_heartbeat_interval(float heartbeat_interval) {
         wsmc_set_heartbeat_interval(heartbeat_interval, $self);
   }
 
@@ -11024,10 +11352,10 @@ transport timeout</p>
    * Get subscription heartbeat interval (in seconds)
    *
    * call-seq:
-   *   options.heartbeat_interval -&gt; Integer
+   *   options.heartbeat_interval -&gt; Float
    *
    */
-  int heartbeat_interval() {
+  float heartbeat_interval() {
     return $self-&gt;heartbeat_interval;
   }
 
@@ -11093,26 +11421,47 @@ transport timeout</p>
     return $self-&gt;delivery_sec_mode;
   }
 
+
+  %rename(&quot;locale=&quot;) set_locale(const char *locale);
+
+  /*
+   * Set request locale
+   *
+   * call-seq:
+   *   options.locale = &quot;en_us&quot;
+   *
+   */
+  void set_locale(const char *locale) {
+        wsmc_set_locale($self, locale);
+  }
+
+  /*
+   * Get locales
+   *
+   * call-seq:
+   *   options.locale -&gt; String
+   *
+   */
+  const char *locale() {
+    return $self-&gt;locale;
+  }
+
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
     </section>
-  
+
   </section>
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.4.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

@@ -8,14 +8,17 @@
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
 </script>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/darkfish.js"></script>
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
 
 <link href="../css/fonts.css" rel="stylesheet">
 <link href="../css/rdoc.css" rel="stylesheet">
-
 
 
 <body id="top" role="document" class="class">
@@ -54,106 +57,63 @@
 
   <div id="class-metadata">
     
-    <div id="parent-class-section" class="nav-section">
+    
+<div id="parent-class-section" class="nav-section">
   <h3>Parent</h3>
 
-  
   <p class="link">Object
-  
 </div>
 
     
     
-    <!-- Method Quickref -->
+    
+<!-- Method Quickref -->
 <div id="method-list-section" class="nav-section">
   <h3>Methods</h3>
 
   <ul class="link-list" role="directory">
-    
     <li ><a href="#method-c-auth_request_callback">::auth_request_callback</a>
-    
     <li ><a href="#method-i-agent">#agent</a>
-    
     <li ><a href="#method-i-agent-3D">#agent=</a>
-    
     <li ><a href="#method-i-auth_method">#auth_method</a>
-    
     <li ><a href="#method-i-auth_method-3D">#auth_method=</a>
-    
     <li ><a href="#method-i-auth_name">#auth_name</a>
-    
     <li ><a href="#method-i-auth_value">#auth_value</a>
-    
     <li ><a href="#method-i-cainfo">#cainfo</a>
-    
     <li ><a href="#method-i-cainfo-3D">#cainfo=</a>
-    
     <li ><a href="#method-i-calocal">#calocal</a>
-    
     <li ><a href="#method-i-calocal-3D">#calocal=</a>
-    
     <li ><a href="#method-i-caoid">#caoid</a>
-    
     <li ><a href="#method-i-caoid-3D">#caoid=</a>
-    
     <li ><a href="#method-i-capath">#capath</a>
-    
     <li ><a href="#method-i-capath-3D">#capath=</a>
-    
     <li ><a href="#method-i-cert">#cert</a>
-    
     <li ><a href="#method-i-cert-3D">#cert=</a>
-    
     <li ><a href="#method-i-certhumbprint">#certhumbprint</a>
-    
     <li ><a href="#method-i-certhumbprint-3D">#certhumbprint=</a>
-    
     <li ><a href="#method-i-close">#close</a>
-    
     <li ><a href="#method-i-error_string">#error_string</a>
-    
     <li ><a href="#method-i-is_auth_method">#is_auth_method</a>
-    
     <li ><a href="#method-i-key">#key</a>
-    
     <li ><a href="#method-i-key-3D">#key=</a>
-    
     <li ><a href="#method-i-password">#password</a>
-    
     <li ><a href="#method-i-password-3D">#password=</a>
-    
     <li ><a href="#method-i-proxy">#proxy</a>
-    
     <li ><a href="#method-i-proxy-3D">#proxy=</a>
-    
     <li ><a href="#method-i-proxy_password">#proxy_password</a>
-    
     <li ><a href="#method-i-proxy_password-3D">#proxy_password=</a>
-    
     <li ><a href="#method-i-proxy_username">#proxy_username</a>
-    
     <li ><a href="#method-i-proxy_username-3D">#proxy_username=</a>
-    
     <li ><a href="#method-i-proxyauth">#proxyauth</a>
-    
     <li ><a href="#method-i-proxyauth-3D">#proxyauth=</a>
-    
     <li ><a href="#method-i-timeout">#timeout</a>
-    
     <li ><a href="#method-i-timeout-3D">#timeout=</a>
-    
     <li ><a href="#method-i-username">#username</a>
-    
     <li ><a href="#method-i-username-3D">#username=</a>
-    
     <li ><a href="#method-i-verify_host">#verify_host</a>
-    
     <li ><a href="#method-i-verify_host-3D">#verify_host=</a>
-    
     <li ><a href="#method-i-verify_peer">#verify_peer</a>
-    
     <li ><a href="#method-i-verify_peer-3D">#verify_peer=</a>
-    
   </ul>
 </div>
 
@@ -167,96 +127,64 @@
 
   <section class="description">
     
-<p><a href="Transport.html">Transport</a> reflects details of the http(s)
-transport layer between client and server.</p>
+<p><a href="Transport.html"><code>Transport</code></a> reflects details of the http(s) transport layer between client and server.</p>
 
-<p><a href="Transport.html">Transport</a></p>
+<p><a href="Transport.html"><code>Transport</code></a></p>
 
   </section>
 
-  
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
-    
 
-    
 
-    
 
-    
 
-    
+
      <section id="public-class-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Class Methods</h3>
        </header>
 
-    
       <div id="method-c-auth_request_callback" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">auth_request_callback</span><span
             class="method-args">(client, auth_type)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>called when authentication credentials missing or wrong</p>
-          
-          
 
-          
           <div class="method-source-code" id="auth_request_callback-source">
             <pre><span class="ruby-comment"># File openwsman/openwsman.rb, line 63</span>
-<span class="ruby-keyword">def</span> <span class="ruby-constant">Transport</span>.<span class="ruby-identifier">auth_request_callback</span> <span class="ruby-identifier">client</span>, <span class="ruby-identifier">auth_type</span>
+<span class="ruby-keyword">def</span> <span class="ruby-constant">Transport</span>.<span class="ruby-identifier ruby-title">auth_request_callback</span> <span class="ruby-identifier">client</span>, <span class="ruby-identifier">auth_type</span>
   <span class="ruby-comment"># override in client code</span>
   <span class="ruby-comment"># return Array of [ username, password ]</span>
   <span class="ruby-comment"># return nil to abort authentication</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
     </section>
-  
+
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Instance Methods</h3>
        </header>
 
-    
       <div id="method-i-agent" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             agent &rarr; String
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Get the HTTP agent identifier string</p>
-          
-          
 
-          
           <div class="method-source-code" id="agent-source">
             <pre>char *agent() {
     return wsman_transport_get_agent ((WsManClient *)$self);
@@ -774,39 +702,24 @@ transport layer between client and server.</p>
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-agent-3D" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             agent = &quot;Client identifier&quot;
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Set the HTTP agent identifier (User-agent:) string</p>
 
-<p>This is how the client will show up in the servers http log. Defaults to
-“Openwsman”</p>
-          
-          
+<p>This is how the client will show up in the servers http log. Defaults to “Openwsman”</p>
 
-          
           <div class="method-source-code" id="agent-3D-source">
             <pre>void set_agent(const char *agent) {
     wsman_transport_set_agent((WsManClient *)$self, agent);
@@ -1335,36 +1248,22 @@ transport layer between client and server.</p>
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-auth_method" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             auth_method &rarr; String
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Set the authentication method</p>
-          
-          
 
-          
           <div class="method-source-code" id="auth_method-source">
             <pre>char *auth_method() {
     return wsman_transport_get_auth_method ((WsManClient *)$self);
@@ -1720,28 +1619,19 @@ transport layer between client and server.</p>
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-auth_method-3D" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">auth_method=</span><span
             class="method-args">(p1)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Set the authentication method</p>
 
 <p>Value must be one of:</p>
@@ -1758,10 +1648,7 @@ transport layer between client and server.</p>
 </li><li>
 <p>Openwsman::GSSNEGOTIATE_AUTH_STR</p>
 </li></ul>
-          
-          
 
-          
           <div class="method-source-code" id="auth_method-3D-source">
             <pre>void set_auth_method(const char *am) {
     wsman_transport_set_auth_method((WsManClient *)$self, am);
@@ -2128,33 +2015,21 @@ transport layer between client and server.</p>
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-auth_name" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             auth_name(Integer) &rarr; String
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
-          <p>Set the authentication method string corresponding to the given auth method
-id</p>
+          <p>Set the authentication method string corresponding to the given auth method id</p>
 
 <p>Value must be one of:</p>
 <ul><li>
@@ -2170,10 +2045,7 @@ id</p>
 </li><li>
 <p>Openwsman::GSSNEGOTIATE_AUTH</p>
 </li></ul>
-          
-          
 
-          
           <div class="method-source-code" id="auth_name-source">
             <pre>static const char *auth_name(int auth) {
     return wsmc_transport_get_auth_name(auth);
@@ -2509,33 +2381,21 @@ id</p>
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-auth_value" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">auth_value</span><span
             class="method-args">()</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Get the authentication method integer id</p>
-          
-          
 
-          
           <div class="method-source-code" id="auth_value-source">
             <pre>int auth_value() {
     return wsmc_transport_get_auth_value((WsManClient *)$self);
@@ -2864,36 +2724,22 @@ id</p>
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-cainfo" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             cainfo &rarr; String
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Get the certification authority (CAINFO)</p>
-          
-          
 
-          
           <div class="method-source-code" id="cainfo-source">
             <pre>char *cainfo() {
     return wsman_transport_get_cainfo((WsManClient *)$self);
@@ -3034,33 +2880,21 @@ id</p>
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-cainfo-3D" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">cainfo=</span><span
             class="method-args">(p1)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Set the certification authority (CAINFO)</p>
-          
-          
 
-          
           <div class="method-source-code" id="cainfo-3D-source">
             <pre>void set_cainfo(const char *cainfo) {
     wsman_transport_set_cainfo((WsManClient *)$self, cainfo);
@@ -3212,38 +3046,24 @@ id</p>
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-calocal" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             calocal &rarr; Boolean
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Windows client</p>
 
 <p>Use local CA ?</p>
-          
-          
 
-          
           <div class="method-source-code" id="calocal-source">
             <pre>BOOL calocal() {
     return wsman_transport_get_calocal((WsManClient *)$self);
@@ -3291,35 +3111,23 @@ id</p>
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-calocal-3D" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">calocal=</span><span
             class="method-args">(p1)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Windows client</p>
 
 <p>Use local CA ?</p>
-          
-          
 
-          
           <div class="method-source-code" id="calocal-3D-source">
             <pre>void set_calocal(BOOL local) {
     wsman_transport_set_calocal((WsManClient *)$self, local);
@@ -3379,35 +3187,23 @@ id</p>
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-caoid" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">caoid</span><span
             class="method-args">()</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Windows client</p>
 
 <p>Get the CA OID</p>
-          
-          
 
-          
           <div class="method-source-code" id="caoid-source">
             <pre>char *caoid() {
     return wsman_transport_get_caoid((WsManClient *)$self);
@@ -3481,40 +3277,27 @@ id</p>
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-caoid-3D" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">caoid=</span><span
             class="method-args">(p1)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Windows client</p>
 
 <p>Set the CA OID</p>
 
 <h6 id="method-i-caoid-3D-label-Reference">Reference<span><a href="#method-i-caoid-3D-label-Reference">&para;</a> <a href="#top">&uarr;</a></span></h6>
 
-<p><a
-href="http://support.microsoft.com/kb/287547">support.microsoft.com/kb/287547</a></p>
-          
-          
+<p><a href="http://support.microsoft.com/kb/287547">support.microsoft.com/kb/287547</a></p>
 
-          
           <div class="method-source-code" id="caoid-3D-source">
             <pre>void set_caoid(const char *oid) {
     wsman_transport_set_caoid((WsManClient *)$self, oid);
@@ -3598,33 +3381,21 @@ href="http://support.microsoft.com/kb/287547">support.microsoft.com/kb/287547</a
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-capath" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">capath</span><span
             class="method-args">()</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Get the path to the certification authority (CAINFO) store</p>
-          
-          
 
-          
           <div class="method-source-code" id="capath-source">
             <pre>char *capath() {
     return wsman_transport_get_capath((WsManClient *)$self);
@@ -3724,33 +3495,21 @@ href="http://support.microsoft.com/kb/287547">support.microsoft.com/kb/287547</a
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-capath-3D" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">capath=</span><span
             class="method-args">(p1)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Set the path to the certification authority (CAINFO) store</p>
-          
-          
 
-          
           <div class="method-source-code" id="capath-3D-source">
             <pre>void set_capath(const char *capath) {
     wsman_transport_set_capath((WsManClient *)$self, capath);
@@ -3858,33 +3617,21 @@ href="http://support.microsoft.com/kb/287547">support.microsoft.com/kb/287547</a
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-cert" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">cert</span><span
             class="method-args">()</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Get the certificate</p>
-          
-          
 
-          
           <div class="method-source-code" id="cert-source">
             <pre>char *cert() {
     return wsman_transport_get_cert((WsManClient *)$self);
@@ -3912,33 +3659,21 @@ href="http://support.microsoft.com/kb/287547">support.microsoft.com/kb/287547</a
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-cert-3D" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">cert=</span><span
             class="method-args">(p1)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Set the certificate</p>
-          
-          
 
-          
           <div class="method-source-code" id="cert-3D-source">
             <pre>void set_cert(const char *cert) {
     wsman_transport_set_cert((WsManClient *)$self, cert);
@@ -3974,36 +3709,22 @@ href="http://support.microsoft.com/kb/287547">support.microsoft.com/kb/287547</a
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-certhumbprint" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             certhumbprint &rarr; String
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Set the certification thumbprint</p>
-          
-          
 
-          
           <div class="method-source-code" id="certhumbprint-source">
             <pre>char *certhumbprint() {
     return wsman_transport_get_certhumbprint((WsManClient *)$self);
@@ -4122,33 +3843,21 @@ href="http://support.microsoft.com/kb/287547">support.microsoft.com/kb/287547</a
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-certhumbprint-3D" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">certhumbprint=</span><span
             class="method-args">(p1)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Set the certification thumbprint</p>
-          
-          
 
-          
           <div class="method-source-code" id="certhumbprint-3D-source">
             <pre>void set_certhumbprint(const char *arg) {
     wsman_transport_set_certhumbprint((WsManClient *)$self, arg);
@@ -4278,33 +3987,21 @@ href="http://support.microsoft.com/kb/287547">support.microsoft.com/kb/287547</a
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-close" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">close</span><span
             class="method-args">()</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Close the transport. No further communication possible.</p>
-          
-          
 
-          
           <div class="method-source-code" id="close-source">
             <pre>void close() {
     wsman_transport_close_transport((WsManClient *)$self);
@@ -4850,36 +4547,22 @@ href="http://support.microsoft.com/kb/287547">support.microsoft.com/kb/287547</a
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-error_string" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             error_string(Integer) &rarr; String
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Get string corresponding to given error code</p>
-          
-          
 
-          
           <div class="method-source-code" id="error_string-source">
             <pre>static char *error_string(int err) {
     return wsman_transport_get_last_error_string(err);
@@ -5198,36 +4881,22 @@ href="http://support.microsoft.com/kb/287547">support.microsoft.com/kb/287547</a
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-is_auth_method" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             auth_method?(Integer) &rarr; Boolean
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Check if the passed method id is valid for authentication</p>
-          
-          
 
-          
           <div class="method-source-code" id="is_auth_method-source">
             <pre>int is_auth_method(int method) {
     return wsman_is_auth_method((WsManClient *)$self, method);
@@ -5781,33 +5450,21 @@ href="http://support.microsoft.com/kb/287547">support.microsoft.com/kb/287547</a
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-key" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">key</span><span
             class="method-args">()</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Get the key</p>
-          
-          
 
-          
           <div class="method-source-code" id="key-source">
             <pre>char *key() {
     return wsman_transport_get_key((WsManClient *)$self);
@@ -5816,33 +5473,21 @@ href="http://support.microsoft.com/kb/287547">support.microsoft.com/kb/287547</a
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-key-3D" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">key=</span><span
             class="method-args">(p1)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Set the key</p>
-          
-          
 
-          
           <div class="method-source-code" id="key-3D-source">
             <pre>void set_key(const char *key) {
     wsman_transport_set_key((WsManClient *)$self, key);
@@ -5859,38 +5504,24 @@ href="http://support.microsoft.com/kb/287547">support.microsoft.com/kb/287547</a
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-password" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             password &rarr; String
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Server credentials</p>
 
 <p>Get the password part of the http transport credentials</p>
-          
-          
 
-          
           <div class="method-source-code" id="password-source">
             <pre>char *get_password() {
     return wsman_transport_get_password((WsManClient *)$self);
@@ -6358,38 +5989,24 @@ href="http://support.microsoft.com/kb/287547">support.microsoft.com/kb/287547</a
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-password-3D" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             password = &quot;Password&quot;
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Server credentials</p>
 
 <p>Set the password part of the http transport credentials</p>
-          
-          
 
-          
           <div class="method-source-code" id="password-3D-source">
             <pre>void set_password(char *password) {
     wsman_transport_set_password((WsManClient *)$self, password);
@@ -6841,33 +6458,21 @@ href="http://support.microsoft.com/kb/287547">support.microsoft.com/kb/287547</a
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-proxy" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">proxy</span><span
             class="method-args">()</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Get http proxy URL</p>
-          
-          
 
-          
           <div class="method-source-code" id="proxy-source">
             <pre>char *proxy() {
     return wsman_transport_get_proxy((WsManClient *)$self);
@@ -7059,28 +6664,19 @@ href="http://support.microsoft.com/kb/287547">support.microsoft.com/kb/287547</a
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-proxy-3D" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">proxy=</span><span
             class="method-args">(p1)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Set http proxy URL</p>
 
 <p>Pass nil to disable proxy communication</p>
@@ -7089,10 +6685,7 @@ href="http://support.microsoft.com/kb/287547">support.microsoft.com/kb/287547</a
 
 <pre class="ruby"><span class="ruby-identifier">transport</span>.<span class="ruby-identifier">proxy</span> = <span class="ruby-string">&quot;http://your.proxy.com:80&quot;</span>
 </pre>
-          
-          
 
-          
           <div class="method-source-code" id="proxy-3D-source">
             <pre>void set_proxy(const char *proxy) {
     wsman_transport_set_proxy((WsManClient *)$self, proxy);
@@ -7292,38 +6885,24 @@ href="http://support.microsoft.com/kb/287547">support.microsoft.com/kb/287547</a
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-proxy_password" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             proxy_password &rarr; String
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Windows clients: HTTP proxy credentials</p>
 
 <p>Get the password part of the http proxy credentials</p>
-          
-          
 
-          
           <div class="method-source-code" id="proxy_password-source">
             <pre>char *get_proxy_password() {
     return wsman_transport_get_proxy_password((WsManClient *)$self );
@@ -7725,38 +7304,24 @@ href="http://support.microsoft.com/kb/287547">support.microsoft.com/kb/287547</a
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-proxy_password-3D" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             proxy_password = &quot;proxy_password&quot;
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Windows clients: HTTP proxy credentials</p>
 
 <p>Set the password part of the http proxy credentials</p>
-          
-          
 
-          
           <div class="method-source-code" id="proxy_password-3D-source">
             <pre>void set_proxy_password(char *proxy_password) {
     wsman_transport_set_proxy_password((WsManClient *)$self, proxy_password );
@@ -8142,38 +7707,24 @@ href="http://support.microsoft.com/kb/287547">support.microsoft.com/kb/287547</a
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-proxy_username" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             proxy_username &rarr; String
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Windows clients: HTTP proxy credentials</p>
 
 <p>Get the username part of the http proxy credentials</p>
-          
-          
 
-          
           <div class="method-source-code" id="proxy_username-source">
             <pre>char *get_proxy_username() {
     return wsman_transport_get_proxy_username((WsManClient *)$self );
@@ -8608,38 +8159,24 @@ href="http://support.microsoft.com/kb/287547">support.microsoft.com/kb/287547</a
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-proxy_username-3D" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             proxy_username = &quot;proxy_username&quot;
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Windows clients: HTTP proxy credentials</p>
 
 <p>Set the username part of the http proxy credentials</p>
-          
-          
 
-          
           <div class="method-source-code" id="proxy_username-3D-source">
             <pre>void set_proxy_username(char *proxy_username) {
     wsman_transport_set_proxy_username((WsManClient *)$self, proxy_username );
@@ -9058,63 +8595,40 @@ href="http://support.microsoft.com/kb/287547">support.microsoft.com/kb/287547</a
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-proxyauth" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             proxyauth &rarr; String
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Linux clients: HTTP proxy credentials</p>
 
 <p>Get the proxy username and password as “username:password”</p>
-          
-          
 
-          
           <div class="method-source-code" id="proxyauth-source">
             <pre>char *proxyauth(){</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-proxyauth-3D" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">proxyauth=</span><span
             class="method-args">(p1)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Linux clients: HTTP proxy credentials</p>
 
 <p>Set the proxy username and password</p>
@@ -9123,10 +8637,7 @@ href="http://support.microsoft.com/kb/287547">support.microsoft.com/kb/287547</a
 
 <pre class="ruby"><span class="ruby-identifier">transport</span>.<span class="ruby-identifier">proxyauth</span> = <span class="ruby-string">&quot;username:password&quot;</span>
 </pre>
-          
-          
 
-          
           <div class="method-source-code" id="proxyauth-3D-source">
             <pre>void set_proxyauth(const char *pauth) {
     wsman_transport_set_proxyauth((WsManClient *)$self, pauth);
@@ -9302,36 +8813,22 @@ href="http://support.microsoft.com/kb/287547">support.microsoft.com/kb/287547</a
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-timeout" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             timeout &rarr; Integer
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Get the transport timeout in seconds</p>
-          
-          
 
-          
           <div class="method-source-code" id="timeout-source">
             <pre>unsigned long timeout() {
     return wsman_transport_get_timeout((WsManClient *)$self);
@@ -9625,39 +9122,25 @@ href="http://support.microsoft.com/kb/287547">support.microsoft.com/kb/287547</a
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-timeout-3D" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">timeout=</span><span
             class="method-args">(p1)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Set the transport timeout in seconds</p>
 
 <h6 id="method-i-timeout-3D-label-Note">Note<span><a href="#method-i-timeout-3D-label-Note">&para;</a> <a href="#top">&uarr;</a></span></h6>
 
-<p>This is the http layer timeout. Not to be confused with the WS-Management
-operation timeout set via <a
-href="ClientOptions.html#method-i-timeout">Openwsman::ClientOptions#timeout</a></p>
-          
-          
+<p>This is the http layer timeout. Not to be confused with the WS-Management operation timeout set via <a href="ClientOptions.html#method-i-timeout"><code>Openwsman::ClientOptions.timeout</code></a></p>
 
-          
           <div class="method-source-code" id="timeout-3D-source">
             <pre>void set_timeout(unsigned long timeout) {
     wsman_transport_set_timeout((WsManClient *)$self, timeout);
@@ -9961,38 +9444,24 @@ href="ClientOptions.html#method-i-timeout">Openwsman::ClientOptions#timeout</a><
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-username" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             username &rarr; String
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Server credentials</p>
 
 <p>Get the username part of the http transport credentials</p>
-          
-          
 
-          
           <div class="method-source-code" id="username-source">
             <pre>char *get_username() {
     return wsman_transport_get_userName((WsManClient *)$self);
@@ -10493,38 +9962,24 @@ href="ClientOptions.html#method-i-timeout">Openwsman::ClientOptions#timeout</a><
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-username-3D" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             username = &quot;Username&quot;
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Server credentials</p>
 
 <p>Set the username part of the http transport credentials</p>
-          
-          
 
-          
           <div class="method-source-code" id="username-3D-source">
             <pre>void set_username(char *user_name) {
     wsman_transport_set_userName((WsManClient *)$self, user_name);
@@ -11009,36 +10464,22 @@ href="ClientOptions.html#method-i-timeout">Openwsman::ClientOptions#timeout</a><
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-verify_host" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             verify_host? &rarr; Boolean
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Host to be verified ?</p>
-          
-          
 
-          
           <div class="method-source-code" id="verify_host-source">
             <pre>unsigned int verify_host() {
     return wsman_transport_get_verify_host((WsManClient *)$self);
@@ -11254,36 +10695,23 @@ href="ClientOptions.html#method-i-timeout">Openwsman::ClientOptions#timeout</a><
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-verify_host-3D" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">verify_host=</span><span
             class="method-args">(p1)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>verify the host in SSL communication ?</p>
 
-<p>If passed <code>false</code>, <code>nil</code>, or 0: disable peer
-verification else: enable peer verification</p>
-          
-          
+<p>If passed <code>false</code>, <code>nil</code>, or 0: disable peer verification else: enable peer verification</p>
 
-          
           <div class="method-source-code" id="verify_host-3D-source">
             <pre>void set_verify_host( VALUE rvalue ) {
     unsigned int value;
@@ -11525,36 +10953,22 @@ verification else: enable peer verification</p>
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-verify_peer" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             verify_peer? &rarr; Boolean
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Peer to be verified ?</p>
-          
-          
 
-          
           <div class="method-source-code" id="verify_peer-source">
             <pre>unsigned int verify_peer() {
     return wsman_transport_get_verify_peer((WsManClient *)$self);
@@ -11809,36 +11223,23 @@ verification else: enable peer verification</p>
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-verify_peer-3D" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">verify_peer=</span><span
             class="method-args">(p1)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>verify the peer in SSL communication ?</p>
 
-<p>If passed <code>false</code>, <code>nil</code>, or 0: disable peer
-verification else: enable peer verification</p>
-          
-          
+<p>If passed <code>false</code>, <code>nil</code>, or 0: disable peer verification else: enable peer verification</p>
 
-          
           <div class="method-source-code" id="verify_peer-3D-source">
             <pre>void set_verify_peer( VALUE rvalue ) {
     unsigned int value;
@@ -12119,24 +11520,20 @@ verification else: enable peer verification</p>
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
     </section>
-  
+
   </section>
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.4.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

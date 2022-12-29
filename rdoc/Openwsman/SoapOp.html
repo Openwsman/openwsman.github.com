@@ -8,14 +8,17 @@
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
 </script>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/darkfish.js"></script>
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
 
 <link href="../css/fonts.css" rel="stylesheet">
 <link href="../css/rdoc.css" rel="stylesheet">
-
 
 
 <body id="top" role="document" class="class">
@@ -54,36 +57,28 @@
 
   <div id="class-metadata">
     
-    <div id="parent-class-section" class="nav-section">
+    
+<div id="parent-class-section" class="nav-section">
   <h3>Parent</h3>
 
-  
   <p class="link">Object
-  
 </div>
 
     
     
-    <!-- Method Quickref -->
+    
+<!-- Method Quickref -->
 <div id="method-list-section" class="nav-section">
   <h3>Methods</h3>
 
   <ul class="link-list" role="directory">
-    
     <li ><a href="#method-i-indoc">#indoc</a>
-    
     <li ><a href="#method-i-indoc-3D">#indoc=</a>
-    
     <li ><a href="#method-i-maxsize">#maxsize</a>
-    
     <li ><a href="#method-i-msg">#msg</a>
-    
     <li ><a href="#method-i-outdoc">#outdoc</a>
-    
     <li ><a href="#method-i-outdoc-3D">#outdoc=</a>
-    
     <li ><a href="#method-i-soap">#soap</a>
-    
   </ul>
 </div>
 
@@ -97,50 +92,32 @@
 
   <section class="description">
     
-<p><a href="SoapOp.html">SoapOp</a> represents a SOAP operation</p>
+<p><a href="SoapOp.html"><code>SoapOp</code></a> represents a SOAP operation</p>
 
   </section>
 
-  
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
-    
 
-    
 
-    
 
-    
 
-    
+
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Instance Methods</h3>
        </header>
 
-    
       <div id="method-i-indoc" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             indoc &rarr; Openwsman::XmlDoc
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>The incoming XmlDoc</p>
-          
-          
 
-          
           <div class="method-source-code" id="indoc-source">
             <pre>WsXmlDocH indoc() {
     return soap_get_op_doc($self, 1);
@@ -207,36 +184,22 @@
   }
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-indoc-3D" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             indoc = xml_doc
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Set the incoming XmlDoc</p>
-          
-          
 
-          
           <div class="method-source-code" id="indoc-3D-source">
             <pre>void set_indoc( WsXmlDocH doc ) {
     soap_set_op_doc( $self, doc, 1 );
@@ -291,69 +254,41 @@
   }
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-maxsize" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             maxsize &rarr; Integer
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>The maximum size (on the wire) of this operation</p>
-          
-          
 
-          
           <div class="method-source-code" id="maxsize-source">
             <pre>unsigned long maxsize(){</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-msg" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             msg &rarr; Openwsman::Message
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>The raw (SOAP) message for this operation</p>
-          
-          
 
-          
           <div class="method-source-code" id="msg-source">
             <pre>WsmanMessage *msg() {
     return wsman_get_msg_from_op($self);
@@ -369,36 +304,22 @@
   }
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-outdoc" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             outdoc &rarr; Openwsman::XmlDoc
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>The outgoing XmlDoc</p>
-          
-          
 
-          
           <div class="method-source-code" id="outdoc-source">
             <pre>WsXmlDocH outdoc() {
     return soap_get_op_doc($self, 0);
@@ -444,36 +365,22 @@
   }
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-outdoc-3D" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             outdoc = xml_doc
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Set the outgoing XmlDoc</p>
-          
-          
 
-          
           <div class="method-source-code" id="outdoc-3D-source">
             <pre>void set_outdoc( WsXmlDocH doc ) {
     soap_set_op_doc( $self, doc, 0 );
@@ -507,36 +414,22 @@
   }
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-soap" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             soap &rarr; Openwsman::Soap
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>The Soap instance of this operation</p>
-          
-          
 
-          
           <div class="method-source-code" id="soap-source">
             <pre>struct __Soap *soap() {
     return soap_get_op_soap($self);
@@ -561,24 +454,20 @@
   }
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
     </section>
-  
+
   </section>
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.4.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

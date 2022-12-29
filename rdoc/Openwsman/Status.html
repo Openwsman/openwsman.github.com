@@ -8,14 +8,17 @@
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
 </script>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/darkfish.js"></script>
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
 
 <link href="../css/fonts.css" rel="stylesheet">
 <link href="../css/rdoc.css" rel="stylesheet">
-
 
 
 <body id="top" role="document" class="class">
@@ -54,38 +57,29 @@
 
   <div id="class-metadata">
     
-    <div id="parent-class-section" class="nav-section">
+    
+<div id="parent-class-section" class="nav-section">
   <h3>Parent</h3>
 
-  
   <p class="link">Object
-  
 </div>
 
     
     
-    <!-- Method Quickref -->
+    
+<!-- Method Quickref -->
 <div id="method-list-section" class="nav-section">
   <h3>Methods</h3>
 
   <ul class="link-list" role="directory">
-    
     <li ><a href="#method-i-code">#code</a>
-    
     <li ><a href="#method-i-code-3D">#code=</a>
-    
     <li ><a href="#method-i-detail">#detail</a>
-    
     <li ><a href="#method-i-detail-3D">#detail=</a>
-    
     <li ><a href="#method-i-generate_fault">#generate_fault</a>
-    
     <li ><a href="#method-i-msg">#msg</a>
-    
     <li ><a href="#method-i-msg-3D">#msg=</a>
-    
     <li ><a href="#method-i-to_s">#to_s</a>
-    
   </ul>
 </div>
 
@@ -99,54 +93,34 @@
 
   <section class="description">
     
-<p><a href="Status.html">Status</a> represents the detailed status of a
-(failed) WS-Management operation.</p>
+<p><a href="Status.html"><code>Status</code></a> represents the detailed status of a (failed) WS-Management operation.</p>
 
-<p>Its primarily used implementing server-side plugins to report a Fault back
-to the calling client.</p>
+<p>Its primarily used implementing server-side plugins to report a Fault back to the calling client.</p>
 
   </section>
 
-  
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
-    
 
-    
 
-    
 
-    
 
-    
+
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Instance Methods</h3>
        </header>
 
-    
       <div id="method-i-code" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             code &rarr; Integer
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Get the fault code</p>
-          
-          
 
-          
           <div class="method-source-code" id="code-source">
             <pre>int code() {
     return $self-&gt;fault_code;
@@ -223,36 +197,22 @@ to the calling client.</p>
   }
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-code-3D" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             code = 1
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Set the fault code</p>
-          
-          
 
-          
           <div class="method-source-code" id="code-3D-source">
             <pre>void set_code(int code) { $self-&gt;fault_code = code; }
   /*
@@ -337,36 +297,22 @@ to the calling client.</p>
   }
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-detail" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             detail &rarr; Integer
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Get the fault detail code</p>
-          
-          
 
-          
           <div class="method-source-code" id="detail-source">
             <pre>int detail() {
     return $self-&gt;fault_detail_code;
@@ -413,36 +359,22 @@ to the calling client.</p>
   }
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-detail-3D" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             detail = 42
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Set the fault detail code</p>
-          
-          
 
-          
           <div class="method-source-code" id="detail-3D-source">
             <pre>void set_detail(int detail) {
     if (detail &lt; 0
@@ -506,73 +438,44 @@ to the calling client.</p>
   }
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-generate_fault" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             generate_fault(xml_doc) &rarr; XmlDoc
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
-          <p>Create a new fault XmlDoc based on <a href="Status.html">Status</a>
-information</p>
-          
-          
+          <p>Create a new fault XmlDoc based on <a href="Status.html"><code>Status</code></a> information</p>
 
-          
           <div class="method-source-code" id="generate_fault-source">
             <pre>WsXmlDocH generate_fault(WsXmlDocH doc) {
     return wsman_generate_fault( doc, $self-&gt;fault_code, $self-&gt;fault_detail_code, $self-&gt;fault_msg);
   }
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-msg" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             msg &rarr; String
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Get the fault message</p>
-          
-          
 
-          
           <div class="method-source-code" id="msg-source">
             <pre>const char *msg() {
     return $self-&gt;fault_msg;
@@ -591,36 +494,22 @@ information</p>
   }
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-msg-3D" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             msg = &quot;This is a fault message&quot;
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Set the fault message</p>
-          
-          
 
-          
           <div class="method-source-code" id="msg-3D-source">
             <pre>void set_msg(const char *msg) {
     if ($self-&gt;fault_msg)
@@ -654,36 +543,22 @@ information</p>
   }
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-to_s" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             to_s &rarr; String
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>String representation (returns the fault message)</p>
-          
-          
 
-          
           <div class="method-source-code" id="to_s-source">
             <pre>const char *to_s() {
     return $self-&gt;fault_msg;
@@ -781,24 +656,20 @@ information</p>
   }
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
     </section>
-  
+
   </section>
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.4.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

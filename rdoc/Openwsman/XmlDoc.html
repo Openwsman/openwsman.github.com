@@ -8,14 +8,17 @@
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
 </script>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/darkfish.js"></script>
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
 
 <link href="../css/fonts.css" rel="stylesheet">
 <link href="../css/rdoc.css" rel="stylesheet">
-
 
 
 <body id="top" role="document" class="class">
@@ -54,46 +57,33 @@
 
   <div id="class-metadata">
     
-    <div id="parent-class-section" class="nav-section">
+    
+<div id="parent-class-section" class="nav-section">
   <h3>Parent</h3>
 
-  
   <p class="link">Object
-  
 </div>
 
     
     
-    <!-- Method Quickref -->
+    
+<!-- Method Quickref -->
 <div id="method-list-section" class="nav-section">
   <h3>Methods</h3>
 
   <ul class="link-list" role="directory">
-    
     <li ><a href="#method-i-body">#body</a>
-    
     <li ><a href="#method-i-context">#context</a>
-    
     <li ><a href="#method-i-dump_file">#dump_file</a>
-    
     <li ><a href="#method-i-element">#element</a>
-    
     <li ><a href="#method-i-envelope">#envelope</a>
-    
     <li ><a href="#method-i-fault">#fault</a>
-    
     <li ><a href="#method-i-generate_fault">#generate_fault</a>
-    
     <li ><a href="#method-i-header">#header</a>
-    
     <li ><a href="#method-i-is_end_of_sequence">#is_end_of_sequence</a>
-    
     <li ><a href="#method-i-is_fault">#is_fault</a>
-    
     <li ><a href="#method-i-root">#root</a>
-    
     <li ><a href="#method-i-string">#string</a>
-    
   </ul>
 </div>
 
@@ -107,14 +97,9 @@
 
   <section class="description">
     
-<p><a href="XmlDoc.html">XmlDoc</a> holds an XML document and thus represents
-the root of an XML tree. <a href="XmlDoc.html">XmlDoc</a> is optimized for
-SOAP type documents, giving accessors to the SOAP envelope, header and
-body.</p>
+<p><a href="XmlDoc.html"><code>XmlDoc</code></a> holds an XML document and thus represents the root of an XML tree. <a href="XmlDoc.html"><code>XmlDoc</code></a> is optimized for SOAP type documents, giving accessors to the SOAP envelope, header and body.</p>
 
-<p>Instances of the other XML related classes like XmlAttr and XmlNode can
-only be created with an associated <a href="XmlDoc.html">XmlDoc</a>
-instance.</p>
+<p>Instances of the other XML related classes like XmlAttr and XmlNode can only be created with an associated <a href="XmlDoc.html"><code>XmlDoc</code></a> instance.</p>
 
 <p>Main properties of the XML document are</p>
 <ul><li>
@@ -125,46 +110,28 @@ instance.</p>
 
   </section>
 
-  
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
-    
 
-    
 
-    
 
-    
 
-    
+
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Instance Methods</h3>
        </header>
 
-    
       <div id="method-i-body" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             body &rarr; XmlNode
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>get soap body node</p>
-          
-          
 
-          
           <div class="method-source-code" id="body-source">
             <pre>WsXmlNodeH body() {
     return ws_xml_get_soap_body( $self );
@@ -278,37 +245,22 @@ instance.</p>
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-context" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             context &rarr; String
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
-          <p>get enumeration context as string return nil if context not present or
-empty</p>
-          
-          
+          <p>get enumeration context as string return nil if context not present or empty</p>
 
-          
           <div class="method-source-code" id="context-source">
             <pre>const char *context() {
     char *c = wsmc_get_enum_context( $self );
@@ -399,36 +351,22 @@ empty</p>
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-dump_file" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             dump(IO) &rarr; nil
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>dump document to file</p>
-          
-          
 
-          
           <div class="method-source-code" id="dump_file-source">
             <pre>void dump_file(FILE *fp) {
     ws_xml_dump_doc( fp, $self );
@@ -578,37 +516,22 @@ empty</p>
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-element" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             element(String) &rarr; XmlNode
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
-          <p>get soap element node by name returns nil if no element with the name can
-be found</p>
-          
-          
+          <p>get soap element node by name returns nil if no element with the name can be found</p>
 
-          
           <div class="method-source-code" id="element-source">
             <pre>WsXmlNodeH element(const char *name) {
     return ws_xml_get_soap_element( $self, name );
@@ -711,36 +634,22 @@ be found</p>
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-envelope" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             envelope &rarr; XmlNode
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>get soap envelope node</p>
-          
-          
 
-          
           <div class="method-source-code" id="envelope-source">
             <pre>WsXmlNodeH envelope() {
     return ws_xml_get_soap_envelope( $self );
@@ -872,43 +781,27 @@ be found</p>
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-fault" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             fault(XmlDoc) &rarr; Openwsman::Fault
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
         <div class="method-heading">
           <span class="method-callseq">
             fault(XmlDoc) &rarr; nil # if XmlDoc is not a fault
           </span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>retrieve fault data</p>
-          
-          
 
-          
           <div class="method-source-code" id="fault-source">
             <pre>WsManFault *fault() {
     WsManFault *f = NULL;
@@ -951,39 +844,24 @@ be found</p>
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-generate_fault" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             generate_fault(Openwsman::Status) &rarr; XmlDoc
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Generate fault document based on given status</p>
 
-<p>This creates a new <a href="XmlDoc.html">XmlDoc</a> instance representing a
-fault</p>
-          
-          
+<p>This creates a new <a href="XmlDoc.html"><code>XmlDoc</code></a> instance representing a fault</p>
 
-          
           <div class="method-source-code" id="generate_fault-source">
             <pre>WsXmlDocH generate_fault(WsmanStatus *s) {
     return wsman_generate_fault( $self, s-&gt;fault_code, s-&gt;fault_detail_code, s-&gt;fault_msg);
@@ -1056,36 +934,22 @@ fault</p>
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-header" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             header &rarr; XmlNode
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>get soap header node</p>
-          
-          
 
-          
           <div class="method-source-code" id="header-source">
             <pre>WsXmlNodeH header() {
     return ws_xml_get_soap_header( $self );
@@ -1208,36 +1072,22 @@ fault</p>
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-is_end_of_sequence" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             is_end_of_sequence() &rarr; Boolean
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Check if document represents an end of sequence (last enumeration item)</p>
-          
-          
 
-          
           <div class="method-source-code" id="is_end_of_sequence-source">
             <pre>int is_end_of_sequence() {
     return NULL != ws_xml_find_in_tree( ws_xml_get_soap_body( $self ), XML_NS_ENUMERATION, WSENUM_END_OF_SEQUENCE, 1 );
@@ -1245,36 +1095,22 @@ fault</p>
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-is_fault" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             fault?(XmlDoc) &rarr; Boolean
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Check if document represents a fault</p>
-          
-          
 
-          
           <div class="method-source-code" id="is_fault-source">
             <pre>int is_fault() {
     return wsmc_check_for_fault( $self );
@@ -1330,36 +1166,22 @@ fault</p>
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-root" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             root &rarr; XmlNode
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>get root node of doc</p>
-          
-          
 
-          
           <div class="method-source-code" id="root-source">
             <pre>WsXmlNodeH root() {
     return ws_xml_get_doc_root( $self );
@@ -1500,47 +1322,29 @@ fault</p>
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-string" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             string &rarr; String
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
         <div class="method-heading">
           <span class="method-callseq">
             to_xml &rarr; String
           </span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
-          <p>generic (indented) string representation of the <a
-href="XmlDoc.html">XmlDoc</a> UTF-8 encoded. see encode for setting the
-encoding.</p>
+          <p>generic (indented) string representation of the <a href="XmlDoc.html"><code>XmlDoc</code></a> UTF-8 encoded. see encode for setting the encoding.</p>
 
 <p>alias: to_xml</p>
-          
-          
 
-          
           <div class="method-source-code" id="string-source">
             <pre>char *string() {
     int size;
@@ -1730,24 +1534,20 @@ encoding.</p>
 
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
     </section>
-  
+
   </section>
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.4.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

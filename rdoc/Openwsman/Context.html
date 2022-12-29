@@ -8,14 +8,17 @@
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
 </script>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/darkfish.js"></script>
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
 
 <link href="../css/fonts.css" rel="stylesheet">
 <link href="../css/rdoc.css" rel="stylesheet">
-
 
 
 <body id="top" role="document" class="class">
@@ -54,42 +57,31 @@
 
   <div id="class-metadata">
     
-    <div id="parent-class-section" class="nav-section">
+    
+<div id="parent-class-section" class="nav-section">
   <h3>Parent</h3>
 
-  
   <p class="link">Object
-  
 </div>
 
     
     
-    <!-- Method Quickref -->
+    
+<!-- Method Quickref -->
 <div id="method-list-section" class="nav-section">
   <h3>Methods</h3>
 
   <ul class="link-list" role="directory">
-    
     <li ><a href="#method-i-classname">#classname</a>
-    
     <li ><a href="#method-i-enum_idle_timeout-3D">#enum_idle_timeout=</a>
-    
     <li ><a href="#method-i-indoc">#indoc</a>
-    
     <li ><a href="#method-i-method">#method</a>
-    
     <li ><a href="#method-i-method_args">#method_args</a>
-    
     <li ><a href="#method-i-option_set">#option_set</a>
-    
     <li ><a href="#method-i-parse_enum_request">#parse_enum_request</a>
-    
     <li ><a href="#method-i-runtime">#runtime</a>
-    
     <li ><a href="#method-i-selector">#selector</a>
-    
     <li ><a href="#method-i-selectors_from_epr">#selectors_from_epr</a>
-    
   </ul>
 </div>
 
@@ -103,54 +95,34 @@
 
   <section class="description">
     
-<p><a href="Context.html">Context</a> contains all information of an ongoing
-SOAP operation</p>
+<p><a href="Context.html"><code>Context</code></a> contains all information of an ongoing SOAP operation</p>
 
-<p>There is no constructor for <a href="Context.html">Context</a>, use
-Soap.context to get the current one.</p>
+<p>There is no constructor for <a href="Context.html"><code>Context</code></a>, use Soap.context to get the current one.</p>
 
   </section>
 
-  
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
-    
 
-    
 
-    
 
-    
 
-    
+
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Instance Methods</h3>
        </header>
 
-    
       <div id="method-i-classname" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             classname &rarr; String
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>The class name</p>
-          
-          
 
-          
           <div class="method-source-code" id="classname-source">
             <pre>const char *classname() {
     return wsman_get_class_name($self);
@@ -285,36 +257,22 @@ Soap.context to get the current one.</p>
   
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-enum_idle_timeout-3D" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             enum_idle_timeout = 60
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Set the idle timeout for enumerations</p>
-          
-          
 
-          
           <div class="method-source-code" id="enum_idle_timeout-3D-source">
             <pre>void set_enumIdleTimeout(unsigned long timeout) {
     ws_set_context_enumIdleTimeout($self, timeout);
@@ -458,36 +416,22 @@ Soap.context to get the current one.</p>
   
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-indoc" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             indox &rarr; Openwsman::XmlDoc
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>The incoming XmlDoc</p>
-          
-          
 
-          
           <div class="method-source-code" id="indoc-source">
             <pre>WsXmlDocH indoc() {
     return $self-&gt;indoc;
@@ -652,36 +596,22 @@ Soap.context to get the current one.</p>
   
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-method" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             method &rarr; String
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>The method name</p>
-          
-          
 
-          
           <div class="method-source-code" id="method-source">
             <pre>const char *method() {
     return wsman_get_method_name($self);
@@ -807,36 +737,22 @@ Soap.context to get the current one.</p>
   
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-method_args" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             method &rarr; Hash
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>The method arguments</p>
-          
-          
 
-          
           <div class="method-source-code" id="method_args-source">
             <pre>hash_t *method_args(const char *resource_uri) {
     return wsman_get_method_args($self, resource_uri);
@@ -953,36 +869,22 @@ Soap.context to get the current one.</p>
   
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-option_set" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             option_set(xml_doc, &quot;op&quot;) &rarr; String
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>The option set</p>
-          
-          
 
-          
           <div class="method-source-code" id="option_set-source">
             <pre>const char *option_set(WsXmlDocH doc, const char *op) {
     return wsman_get_option_set($self, doc, op);
@@ -1002,36 +904,22 @@ Soap.context to get the current one.</p>
   
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-parse_enum_request" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             parse_enum_request(enumerate_info) &rarr; Integer
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Parse enumeration request</p>
-          
-          
 
-          
           <div class="method-source-code" id="parse_enum_request-source">
             <pre>int parse_enum_request(WsEnumerateInfo *enumInfo) {
     WsmanStatus status;
@@ -1042,36 +930,22 @@ Soap.context to get the current one.</p>
   
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-runtime" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             runtime &rarr; Openwsman::Soap
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>Get the Soap runtime environment</p>
-          
-          
 
-          
           <div class="method-source-code" id="runtime-source">
             <pre>struct __Soap *runtime() {
     return ws_context_get_runtime($self);
@@ -1227,36 +1101,22 @@ Soap.context to get the current one.</p>
   
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-selector" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             selector(xml_doc, &quot;Name&quot;, 1) &rarr; String
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>The selector for an element</p>
-          
-          
 
-          
           <div class="method-source-code" id="selector-source">
             <pre>const char *selector(WsXmlDocH doc, const char *name, int index) {
     return wsman_get_selector($self, doc, name, index);
@@ -1334,36 +1194,22 @@ Soap.context to get the current one.</p>
   
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-selectors_from_epr" class="method-detail ">
-        
-        
         <div class="method-heading">
           <span class="method-callseq">
             selectors_from_epr(epr_node_as_xml_doc) &rarr; Hash
           </span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
-        
 
         <div class="method-description">
-          
           <p>The selectors from an endpoint reference</p>
-          
-          
 
-          
           <div class="method-source-code" id="selectors_from_epr-source">
             <pre>hash_t *selectors_from_epr(WsXmlNodeH epr_node) {
     return wsman_get_selectors_from_epr($self, epr_node);
@@ -1432,24 +1278,20 @@ Soap.context to get the current one.</p>
   
 }</pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
     </section>
-  
+
   </section>
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.4.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 
